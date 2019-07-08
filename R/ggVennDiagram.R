@@ -1,16 +1,11 @@
 #' ggVennDiagram
 #'
 #' @param x list of items
+#' @param n.sides set how many points been generated for one ellipse, the more points, the better resolution.
+#' @param label select one from c("count","percent","both")
+#' @param ... Other arguments passed on to the polygon layer.
 #'
 #' @return A ggplot object
-#' @export
-#'
-
-#' @param x
-#'
-#' @param n.sides
-#' @param label select one from c("count","percent","both")
-#' @param ...
 #'
 #' @examples
 ggVennDiagram <- function(x, n.sides=3000,label=NULL,...){
@@ -22,8 +17,9 @@ ggVennDiagram <- function(x, n.sides=3000,label=NULL,...){
 
 #' draw 4d venn diagram
 #' @param x
-#'
 #' @param n.sides
+#' @param category.names
+#' @param label
 #'
 #' @importFrom ggtree theme_tree
 #' @import ggplot2
@@ -31,8 +27,8 @@ ggVennDiagram <- function(x, n.sides=3000,label=NULL,...){
 #'
 draw_4d_venn <- function(x, n.sides, category.names, label,...){
 
-  category <- data.frame(x = c(0.13, 0.82, 0.26, 0.71),
-                         y = c(0.77, 0.77, 0.86, 0.86),
+  category <- data.frame(x = c(0.13, 0.86, 0.26, 0.71),
+                         y = c(0.77, 0.77, 0.86, 0.85),
                          label = category.names)
 
   region_data <- four_dimension_ellipse_regions(n.sides)
