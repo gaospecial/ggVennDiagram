@@ -27,8 +27,8 @@ ggVennDiagram <- function(x, n.sides=3000,label=NULL,...){
 #'
 draw_4d_venn <- function(x, n.sides, category.names, label,...){
 
-  category <- data.frame(x = c(0.13, 0.86, 0.26, 0.71),
-                         y = c(0.77, 0.77, 0.86, 0.85),
+  category <- data.frame(x = c(0.13, 0.26, 0.71, 0.86),
+                         y = c(0.77, 0.86, 0.85, 0.77),
                          label = category.names)
 
   region_data <- four_dimension_ellipse_regions(n.sides)
@@ -115,10 +115,10 @@ four_dimension_region_values <- function(x){
 four_dimension_ellipse_regions <- function(n.sides){
 
   # ellipse
-  parameters <- list(c(0.65, 0.47, 0.35, 0.20,  45),
-                     c(0.35, 0.47, 0.35, 0.20, 135),
+  parameters <- list(c(0.35, 0.47, 0.35, 0.20, 135),
+                     c(0.50, 0.57, 0.35, 0.15, 135),
                      c(0.50, 0.57, 0.33, 0.15,  45),
-                     c(0.50, 0.57, 0.35, 0.15, 135))
+                     c(0.65, 0.47, 0.35, 0.20,  45))
   ellipses <- lapply(parameters,function(x){
     do.call(ell2poly,as.list(c(x,n.sides))) %>%
       data.frame() %>%
