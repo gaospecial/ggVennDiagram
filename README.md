@@ -47,3 +47,11 @@ ggVennDiagram(x,label="count",lty="dashed",color="grey") + scale_fill_gradient(l
 ```
 
 ![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+
+致谢
+====
+
+-   `VennDiagram`(<a href="https://github.com/cran/VennDiagram" class="uri">https://github.com/cran/VennDiagram</a>)
+-   `sf`(<a href="https://github.com/r-spatial/sf" class="uri">https://github.com/r-spatial/sf</a>)
+-   `ggtree`(<a href="https://github.com/GuangchuangYu/ggtree" class="uri">https://github.com/GuangchuangYu/ggtree</a>)
+-   FigureYa112venn（作者：李誉辉<四川大学在读研究生>；出品：小丫画图<微信 epigenomics>）
