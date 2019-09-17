@@ -10,8 +10,20 @@
 #' @examples
 ggVennDiagram <- function(x, n.sides=3000,label=NULL,...){
   dimension <- length(x)
-  if (dimension == 4){
+  if (dimension ==5){
+    draw_5d_venn(x, n.sides=n.sides,category.names=names(x),label = label,...)
+  }
+  else if (dimension == 4){
     draw_4d_venn(x, n.sides=n.sides,category.names=names(x),label = label,...)
+  }
+  else if (dimension == 3){
+    draw_3d_venn(x, n.sides=n.sides,category.names=names(x),label = label,...)
+  }
+  else if (dimension == 2){
+    draw_2d_venn(x, n.sides=n.sides,category.names=names(x),label = label,...)
+  }
+  else{
+    stop("Only support 2-5 dimension venn diagram.")
   }
 }
 
