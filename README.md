@@ -1,57 +1,101 @@
-`ggVennDiagram` 尝试使用符合 ggplot 的语法绘制韦恩图。
 
-安装软件包。
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# ggVennDiagram
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+The goal of ggVennDiagram is to draw venn diagram in ggplot style.
+
+## Installation
+
+You can install the released version of ggVennDiagram from
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
+install.packages("ggVennDiagram")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
 devtools::install_github("gaospecial/ggVennDiagram")
 ```
 
-目前仅支持 4 sets 韦恩图。参考下面的例子：
+## Example
+
+`ggVennDiagram` maps the fill color of each region to quantity, allowing
+us to visually observe the differences between different parts.
 
 ``` r
 library(ggVennDiagram)
 genes <- paste("gene",1:1000,sep="")
 set.seed(20190708)
 x <- list(A=sample(genes,300),B=sample(genes,525),C=sample(genes,440),D=sample(genes,350))
+
+# four dimension venn plot
 ggVennDiagram(x)
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-2-1.png)
+<img src="man/figures/README-example-1.png" width="100%" />
 
-`ggVennDiagram` 返回一个 `ggplot` 对象。这个对象是可以使用 `ggplot`
-的语法修改的。
+``` r
+
+# three dimension venn plot
+ggVennDiagram(x[1:3])
+```
+
+<img src="man/figures/README-example-2.png" width="100%" />
+
+``` r
+
+# two dimension venn plot
+ggVennDiagram(x[1:2])
+```
+
+<img src="man/figures/README-example-3.png" width="100%" />
+
+`ggVennDiagram` return a ggplot object, which can be further modified
+with `ggplot` functions.
 
 ``` r
 library(ggplot2)
-ggVennDiagram(x) + scale_fill_gradient(low="white",high = "red")
+ggVennDiagram(x) + scale_fill_gradient(low="blue",high = "red")
+#> Scale for 'fill' is already present. Adding another scale for 'fill',
+#> which will replace the existing scale.
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-3-1.png)
-
-`ggVennDiagram` 当前仅包含少数几个参数。
-
--   label：设置是否显示数据标签。
--   n.sides：相当于设置椭圆的分辨率，值越大，椭圆越平滑。
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 ``` r
-ggVennDiagram(x,label="count") + scale_fill_gradient(low="white",high = "red")
+
+ggVennDiagram(x,lty="dashed",color="black",size=2) + scale_fill_gradient(low="white",high = "red")
+#> Scale for 'fill' is already present. Adding another scale for 'fill',
+#> which will replace the existing scale.
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-4-1.png)
+<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
 
-不过，椭圆的线型、颜色等也可以使用 `ggplot` 通用方法设定（作用于 polygon
-图层）。
+`ggVennDiagram` now support 2-4 dimension venn plot. The generated
+figure is generally ready for publish. The main function
+`ggVennDiagram()` will check how many items in the first paramenter and
+call corresponding function automatically.
+
+The parameter `category.names` reprents set names. And the parameter
+`label` can label how many items are included in each parts.
 
 ``` r
-ggVennDiagram(x,label="count",lty="dashed",color="grey") + scale_fill_gradient(low="white",high = "red")
+ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"))
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
-致谢
-====
+``` r
 
--   `VennDiagram`(<a href="https://github.com/cran/VennDiagram" class="uri">https://github.com/cran/VennDiagram</a>)
--   `sf`(<a href="https://github.com/r-spatial/sf" class="uri">https://github.com/r-spatial/sf</a>)
--   `ggtree`(<a href="https://github.com/GuangchuangYu/ggtree" class="uri">https://github.com/GuangchuangYu/ggtree</a>)
--   FigureYa112venn（作者：李誉辉<四川大学在读研究生>；出品：小丫画图<微信 epigenomics>）
+ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = "both")
+```
+
+<img src="man/figures/README-unnamed-chunk-3-2.png" width="100%" />

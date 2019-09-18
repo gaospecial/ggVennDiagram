@@ -1,0 +1,75 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# ggVennDiagram
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of ggVennDiagram is to draw venn diagram in ggplot style.
+
+## Installation
+
+You can install the released version of ggVennDiagram from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("ggVennDiagram")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("gaospecial/ggVennDiagram")
+```
+## Example
+
+`ggVennDiagram` maps the fill color of each region to quantity, allowing us to visually observe the differences between different parts. 
+
+```{r example}
+library(ggVennDiagram)
+genes <- paste("gene",1:1000,sep="")
+set.seed(20190708)
+x <- list(A=sample(genes,300),B=sample(genes,525),C=sample(genes,440),D=sample(genes,350))
+
+# four dimension venn plot
+ggVennDiagram(x)
+
+# three dimension venn plot
+ggVennDiagram(x[1:3])
+
+# two dimension venn plot
+ggVennDiagram(x[1:2])
+```
+
+`ggVennDiagram` return a ggplot object, which can be further modified with `ggplot` functions.
+
+```{r}
+library(ggplot2)
+ggVennDiagram(x) + scale_fill_gradient(low="blue",high = "red")
+
+ggVennDiagram(x,lty="dashed",color="black",size=2) + scale_fill_gradient(low="white",high = "red")
+```
+
+`ggVennDiagram` now support 2-4 dimension venn plot. The generated figure is generally ready for publish. The main function `ggVennDiagram()` will check how many items in the first paramenter and call corresponding function automatically.
+
+The parameter `category.names` reprents set names. And the parameter `label` can label how many items are included in each parts.
+
+```{r}
+ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"))
+
+ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = "both")
+```
+
+
