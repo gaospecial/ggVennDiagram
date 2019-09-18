@@ -4,20 +4,29 @@
 \alias{ggVennDiagram}
 \title{ggVennDiagram}
 \usage{
-ggVennDiagram(x, n.sides = 3000, label = NULL, ...)
+ggVennDiagram(x, category.names = names(x), n.sides = 3000,
+  label = "both", lty = 1, color = "grey", ...)
 }
 \arguments{
 \item{x}{list of items}
 
+\item{category.names}{default is names(x)}
+
+\item{n.sides}{set how many points been generated for one ellipse, the more points, the better resolution.}
+
 \item{label}{select one from c("count","percent","both")}
 
-\item{...}{}
-
-\item{x}{}
+\item{...}{Other arguments passed on to the polygon layer.}
 }
 \value{
 A ggplot object
 }
 \description{
 ggVennDiagram
+}
+\examples{
+x <- list(A=1:5,B=2:7,C=3:6,D=4:9)
+ggVennDiagram(x)  # 4d venn
+ggVennDiagram(x[1:3])  # 3d venn
+ggVennDiagram(x[1:2])  # 2d venn
 }

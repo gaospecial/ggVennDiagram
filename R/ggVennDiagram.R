@@ -8,6 +8,8 @@
 #'
 #' @return A ggplot object
 #'
+#' @export
+#'
 #' @examples
 #' x <- list(A=1:5,B=2:7,C=3:6,D=4:9)
 #' ggVennDiagram(x)  # 4d venn
