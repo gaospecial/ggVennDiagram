@@ -1,6 +1,6 @@
 draw_3d_venn <- function(x, n.sides, category.names, label,...){
-  category <- data.frame(x = c(2, -4, 8),
-                         y = c(8.5, -4, -4),
+  category <- data.frame(x = c(2, -3.5, 7.5),
+                         y = c(8.5, -3.5, -3.5),
                          label = category.names)
 
   region_data <- three_dimension_circle_regions(n.sides)
