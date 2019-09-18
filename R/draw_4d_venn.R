@@ -1,12 +1,11 @@
-#' draw 4d venn diagram
-#' @param x
-#' @param n.sides
-#' @param category.names
-#' @param label
+#' draw 2d, 3d, and 4d venn diagram
 #'
-#' @import ggplot2
-#' @import dplyr
+#' @param x a list of items
+#' @param n.sides  resolution
+#' @param category.names default is names(x)
+#' @param label c("both","percent","count")
 #'
+#' @name draw_venn
 draw_4d_venn <- function(x, n.sides, category.names, label,...){
 
   category <- data.frame(x = c(0.13, 0.26, 0.71, 0.86),
@@ -27,9 +26,7 @@ draw_4d_venn <- function(x, n.sides, category.names, label,...){
 #'
 #' @param x a list of vector items.
 #'
-#' @return
-#'
-#' @examples
+#' @return data.frame
 four_dimension_region_values <- function(x){
 
   # values
@@ -64,12 +61,11 @@ four_dimension_region_values <- function(x){
 #'
 #' @param n.sides
 #'
-#' @return
 #'
 #' @importFrom VennDiagram ell2poly
 #' @importFrom sf st_polygon st_difference st_intersection st_centroid st_union
 #' @import dplyr
-#' @examples
+#'
 four_dimension_ellipse_regions <- function(n.sides){
 
   # ellipse

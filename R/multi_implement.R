@@ -1,11 +1,11 @@
 #' Perform geometric set intersection with more than two simple feature geometry collections
 #'
-#' @param ...
+#' @param ... other arguments
+#' @param l a list of items (polygon or vector)
 #'
-#' @return
-#' @export
+#' @return intersection/union/diff of items
+#' @name multi
 #'
-#' @examples
 st_multi_intersection <- function ( ...,l = NULL){
   if (is.null(l)) l <- list(...)
   n <- length(l)
@@ -22,13 +22,7 @@ st_multi_intersection <- function ( ...,l = NULL){
 }
 
 #' Perform geometric set difference with more than two simple feature geometry collections
-#'
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
+#' @rdname multi
 st_multi_difference <- function ( ...,l = NULL){
   if (is.null(l)) l <- list(...)
   n <- length(l)
@@ -46,12 +40,7 @@ st_multi_difference <- function ( ...,l = NULL){
 
 #' Perform geometric set union with more than two simple feature geometry collections
 #'
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
+#' @rdname multi
 st_multi_union <- function ( ...,l = NULL){
   if (is.null(l)) l <- list(...)
   n <- length(l)
@@ -69,12 +58,7 @@ st_multi_union <- function ( ...,l = NULL){
 
 #' Performs set union on more than two vectors.
 #'
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
+#' @rdname multi
 multi_union <- function ( ...,l = NULL){
   if (is.null(l)) l <- list(...)
   n <- length(l)
@@ -91,13 +75,7 @@ multi_union <- function ( ...,l = NULL){
 }
 
 #' Performs set intersection on more than two vectors.
-#'
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
+#' @rdname multi
 multi_intersect <- function ( ...,l = NULL){
   if (is.null(l)) l <- list(...)
   n <- length(l)
@@ -113,6 +91,9 @@ multi_intersect <- function ( ...,l = NULL){
   }
 }
 
+
+#' Performs setdiff on more than two vectors.
+#' @rdname multi
 multi_setdiff <- function(...,l=NULL){
   if (is.null(l)) l <- list(...)
   n <- length(l)

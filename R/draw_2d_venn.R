@@ -1,3 +1,4 @@
+#' @rdname draw_venn
 draw_2d_venn <- function(x, n.sides, category.names, label,...){
   category <- data.frame(x = c(-4, 8),
                          y = c(4, 4),

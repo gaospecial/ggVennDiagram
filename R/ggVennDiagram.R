@@ -3,11 +3,16 @@
 #' @param x list of items
 #' @param n.sides set how many points been generated for one ellipse, the more points, the better resolution.
 #' @param label select one from c("count","percent","both")
+#' @param category.names default is names(x)
 #' @param ... Other arguments passed on to the polygon layer.
 #'
 #' @return A ggplot object
 #'
 #' @examples
+#' x <- list(A=1:5,B=2:7,C=3:6,D=4:9)
+#' ggVennDiagram(x)  # 4d venn
+#' ggVennDiagram(x[1:3])  # 3d venn
+#' ggVennDiagram(x[1:2])  # 2d venn
 ggVennDiagram <- function(x, category.names=names(x), n.sides=3000,label="both",lty=1,color="grey",...){
   dimension <- length(x)
   if (dimension ==5){
@@ -30,15 +35,14 @@ ggVennDiagram <- function(x, category.names=names(x), n.sides=3000,label="both",
 
 #' reuse plot codes
 #'
-#' @param region_data
-#' @param category
-#' @param counts
-#' @param label
-#' @param ...
+#' @param region_data a list of two dataframes, which were used to plot polygon and label latter.
+#' @param category name of Set
+#' @param counts counts of items for every combinations
+#' @inheritParams ggVennDiagram
+#'
+#' @import ggplot2
 #'
 #' @return ggplot object
-#'
-#' @examples
 plot_venn <- function(region_data, category, counts, label, ...){
   polygon <- region_data[[1]]
   center <- region_data[[2]]
