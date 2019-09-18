@@ -8,19 +8,19 @@
 #' @return A ggplot object
 #'
 #' @examples
-ggVennDiagram <- function(x, n.sides=3000,label=NULL,...){
+ggVennDiagram <- function(x, category.names=names(x), n.sides=3000,label="both",lty=1,color="grey",...){
   dimension <- length(x)
   if (dimension ==5){
-    draw_5d_venn(x, n.sides=n.sides,category.names=names(x),label = label,...)
+    draw_5d_venn(x, n.sides=n.sides,category.names=category.names, label = label,lty=lty,color=color,...)
   }
   else if (dimension == 4){
-    draw_4d_venn(x, n.sides=n.sides,category.names=names(x),label = label,...)
+    draw_4d_venn(x, n.sides=n.sides,category.names=category.names,label = label,lty=lty,color=color,...)
   }
   else if (dimension == 3){
-    draw_3d_venn(x, n.sides=n.sides,category.names=names(x),label = label,...)
+    draw_3d_venn(x, n.sides=n.sides,category.names=category.names,label = label,lty=lty,color=color,...)
   }
   else if (dimension == 2){
-    draw_2d_venn(x, n.sides=n.sides,category.names=names(x),label = label,...)
+    draw_2d_venn(x, n.sides=n.sides,category.names=category.names,label = label,lty=lty,color=color,...)
   }
   else{
     stop("Only support 2-5 dimension venn diagram.")
@@ -45,7 +45,8 @@ plot_venn <- function(region_data, category, counts, label, ...){
   p <- ggplot() + aes_string("x","y") +
     geom_text(aes(label=label),data=category,fontface="bold",color="black") +
     geom_polygon(aes(fill=count,group=group),data = merge(polygon,counts),...) +
-    theme_void() +
+    theme_void() + scale_fill_gradient(low="white",high = "red") +
+    coord_fixed() +
     theme(legend.position = "right")
   if (is.null(label)){
     return(p)
