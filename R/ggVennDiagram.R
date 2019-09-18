@@ -17,10 +17,7 @@
 #' ggVennDiagram(x[1:2])  # 2d venn
 ggVennDiagram <- function(x, category.names=names(x), n.sides=3000,label="both",lty=1,color="grey",...){
   dimension <- length(x)
-  if (dimension ==5){
-    draw_5d_venn(x, n.sides=n.sides,category.names=category.names, label = label,lty=lty,color=color,...)
-  }
-  else if (dimension == 4){
+  if (dimension == 4){
     draw_4d_venn(x, n.sides=n.sides,category.names=category.names,label = label,lty=lty,color=color,...)
   }
   else if (dimension == 3){
@@ -30,7 +27,7 @@ ggVennDiagram <- function(x, category.names=names(x), n.sides=3000,label="both",
     draw_2d_venn(x, n.sides=n.sides,category.names=category.names,label = label,lty=lty,color=color,...)
   }
   else{
-    stop("Only support 2-5 dimension venn diagram.")
+    stop("Only support 2-4 dimension venn diagram.")
   }
 }
 
