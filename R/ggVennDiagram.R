@@ -33,7 +33,6 @@ ggVennDiagram <- function(x, n.sides=3000,label=NULL,...){
 #' @param category.names
 #' @param label
 #'
-#' @importFrom ggtree theme_tree
 #' @import ggplot2
 #' @import dplyr
 #'
@@ -44,22 +43,40 @@ draw_4d_venn <- function(x, n.sides, category.names, label,...){
                          label = category.names)
 
   region_data <- four_dimension_ellipse_regions(n.sides)
-  polygon <- region_data[[1]]
-  center <- region_data[[2]]
+
 
   counts <- four_dimension_region_values(x)
 
+  plot_venn(region_data,category, counts, label, ...)
 
+
+}
+
+
+#' reuse plot codes
+#'
+#' @param region_data
+#' @param category
+#' @param counts
+#' @param label
+#' @param ...
+#'
+#' @return ggplot object
+#'
+#' @examples
+plot_venn <- function(region_data, category, counts, label, ...){
+  polygon <- region_data[[1]]
+  center <- region_data[[2]]
   p <- ggplot() + aes_string("x","y") +
     geom_text(aes(label=label),data=category,fontface="bold",color="black") +
     geom_polygon(aes(fill=count,group=group),data = merge(polygon,counts),...) +
-    theme_tree() +
+    theme_void() +
     theme(legend.position = "right")
   if (is.null(label)){
     return(p)
   }
   else{
-    counts %<>% mutate(percent=paste(round(count/sum(count),digits = 2),"%",sep="")) %>%
+    counts %<>% mutate(percent=paste(round(count*100/sum(count),digits = 2),"%",sep="")) %>%
       mutate(label = paste(count,"\n","(",percent,")",sep=""))
     data <- merge(counts,center)
     if (label == "count"){
@@ -74,13 +91,11 @@ draw_4d_venn <- function(x, n.sides, category.names, label,...){
   }
 }
 
-
 #' calculating count values
 #'
-#' @param x
+#' @param x a list of vector items.
 #'
 #' @return
-#' @export
 #'
 #' @examples
 four_dimension_region_values <- function(x){
@@ -118,7 +133,6 @@ four_dimension_region_values <- function(x){
 #' @param n.sides
 #'
 #' @return
-#' @export
 #'
 #' @importFrom VennDiagram ell2poly
 #' @importFrom sf st_polygon st_difference st_intersection st_centroid st_union
