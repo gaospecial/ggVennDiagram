@@ -112,3 +112,18 @@ multi_intersect <- function ( ...,l = NULL){
     return(v)
   }
 }
+
+multi_setdiff <- function(...,l=NULL){
+  if (is.null(l)) l <- list(...)
+  n <- length(l)
+  if (n < 3){
+    stop("At least three parameters.")
+  }
+  else {
+    v <- l[[1]]
+    for (i in 2:n){
+      v <- setdiff(v,l[[i]])
+    }
+    return(v)
+  }
+}
