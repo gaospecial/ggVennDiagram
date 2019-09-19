@@ -26,7 +26,3 @@ data.frame
 \description{
 calculating intersection values of venn
 }
-\examples{
-x <- list(1:5,3:8)
-( two_dimension_region_values(x) )
-}

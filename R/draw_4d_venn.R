@@ -29,9 +29,6 @@ draw_4d_venn <- function(x, n.sides, category.names, label,...){
 #'
 #' @return data.frame
 #' @name region_value
-#' @examples
-#' x <- list(1:5,3:8)
-#' ( two_dimension_region_values(x) )
 four_dimension_region_values <- function(x){
 
   # values

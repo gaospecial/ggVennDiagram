@@ -1,12 +1,12 @@
 Package: ggVennDiagram
 Type: Package
-Title: A ggplot implement of VennDiagram
+Title: A Ggplot Implement of VennDiagram
 Version: 0.2.1
 Authors@R: person("Chun-Hui","Gao",email="gaospecial@gmail.com",role=c("aut","cre"))
 Maintainer: Chun-Hui Gao <gaospecial@gmail.com>
-Description: 'ggVennDiagram' extends the 'ggplot2' plotting system 
-  which implemented the grammer of graphics. 
-  'ggVennDiagram' is designed for ploting Venn Diagram.
+Description: This package extends the 'ggplot2' plotting system 
+  which implemented the grammar of graphics. 
+  'ggVennDiagram' is designed for plotting Venn Diagram.
 Depends: R (>= 3.5.0)
 Imports: VennDiagram, sf, ggplot2, dplyr
 License: GPL-3
