@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggVennDiagram.R
 \name{plot_venn}
 \alias{plot_venn}
-\title{reuse plot codes}
+\title{plot codes}
 \usage{
 plot_venn(region_data, category, counts, label, ...)
 }
@@ -21,5 +21,5 @@ plot_venn(region_data, category, counts, label, ...)
 ggplot object
 }
 \description{
-reuse plot codes
+plot codes
 }

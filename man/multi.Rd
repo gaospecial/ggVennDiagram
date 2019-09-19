@@ -2,20 +2,11 @@
 % Please edit documentation in R/multi_implement.R
 \name{multi}
 \alias{multi}
-\alias{st_multi_intersection}
-\alias{st_multi_difference}
-\alias{st_multi_union}
 \alias{multi_union}
 \alias{multi_intersect}
 \alias{multi_setdiff}
-\title{Perform geometric set intersection with more than two simple feature geometry collections}
+\title{Performs set union/intersection/diff on more than two vectors.}
 \usage{
-st_multi_intersection(..., l = NULL)
-
-st_multi_difference(..., l = NULL)
-
-st_multi_union(..., l = NULL)
-
 multi_union(..., l = NULL)
 
 multi_intersect(..., l = NULL)
@@ -23,23 +14,10 @@ multi_intersect(..., l = NULL)
 multi_setdiff(..., l = NULL)
 }
 \arguments{
-\item{...}{other arguments}
+\item{...}{at least three items are needed if use this parameter}
 
-\item{l}{a list of items (polygon or vector)}
-}
-\value{
-intersection/union/diff of items
+\item{l}{a list of vectors}
 }
 \description{
-Perform geometric set intersection with more than two simple feature geometry collections
-
-Perform geometric set difference with more than two simple feature geometry collections
-
-Perform geometric set union with more than two simple feature geometry collections
-
-Performs set union on more than two vectors.
-
-Performs set intersection on more than two vectors.
-
-Performs setdiff on more than two vectors.
+Performs set union/intersection/diff on more than two vectors.
 }

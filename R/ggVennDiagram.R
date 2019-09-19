@@ -9,9 +9,7 @@
 #' @param color line color of polygons
 #'
 #' @return A ggplot object
-#'
 #' @export
-#'
 #' @examples
 #' x <- list(A=1:5,B=2:7,C=3:6,D=4:9)
 #' ggVennDiagram(x)  # 4d venn
@@ -34,7 +32,7 @@ ggVennDiagram <- function(x, category.names=names(x), n.sides=3000,label="both",
 }
 
 
-#' reuse plot codes
+#' plot codes
 #'
 #' @param region_data a list of two dataframes, which were used to plot polygon and label latter.
 #' @param category name of Set
@@ -74,3 +72,18 @@ plot_venn <- function(region_data, category, counts, label, ...){
 }
 
 
+#' generating a circle
+#'
+#' @param x,y center of circle
+#' @param r radius of circle
+#' @param n points (resolution)
+#'
+#' @return a data.frame representing circle position
+circle <- function(x,y,r,n=1000){
+  angles <- seq(0,2*pi,length.out = n)
+  xv <- cos(angles) * r + x
+  yv <- sin(angles) * r + y
+  xv <- round(xv,6)
+  yv <- round(yv,6)
+  data.frame(x=xv,y=yv)
+}

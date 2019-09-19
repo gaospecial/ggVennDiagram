@@ -23,11 +23,15 @@ draw_4d_venn <- function(x, n.sides, category.names, label,...){
 
 }
 
-#' calculating count values
+#' calculating intersection values of venn
 #'
 #' @param x a list of vector items.
 #'
 #' @return data.frame
+#' @name region_value
+#' @examples
+#' x <- list(1:5,3:8)
+#' ( two_dimension_region_values(x) )
 four_dimension_region_values <- function(x){
 
   # values
@@ -58,15 +62,14 @@ four_dimension_region_values <- function(x){
   data.frame(group=names(items),count=values,stringsAsFactors = F)
 }
 
-#' coordinations of polygon regions/centers for 4d venn diagram
+#' coordinations of polygon regions/centers for venn diagram
 #'
 #' @inheritParams draw_venn
-#'
 #'
 #' @importFrom VennDiagram ell2poly
 #' @importFrom sf st_polygon st_difference st_intersection st_centroid st_union
 #' @import dplyr
-#'
+#' @name region_polygon
 four_dimension_ellipse_regions <- function(n.sides){
 
   # ellipse

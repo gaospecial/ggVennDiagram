@@ -11,6 +11,7 @@ draw_2d_venn <- function(x, n.sides, category.names, label,...){
   plot_venn(region_data,category, counts, label, ...)
 }
 
+#' @rdname region_polygon
 two_dimension_circle_regions <- function(n.sides=1000){
   # two circles
   parameters <- list(c(0,0,4),c(4,0,4))
@@ -44,15 +45,8 @@ two_dimension_circle_regions <- function(n.sides=1000){
   list(data_ploygons, data_centers)
 }
 
-circle <- function(x,y,r,n=1000){
-  angles <- seq(0,2*pi,length.out = n)
-  xv <- cos(angles) * r + x
-  yv <- sin(angles) * r + y
-  xv <- round(xv,6)
-  yv <- round(yv,6)
-  data.frame(x=xv,y=yv)
-}
 
+#' @rdname region_value
 two_dimension_region_values <- function(x){
   a <- x[[1]]
   b <- x[[2]]

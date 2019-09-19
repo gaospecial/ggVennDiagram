@@ -7,7 +7,6 @@
 \alias{draw_venn}
 \alias{draw_4d_venn}
 \alias{draw_5d_venn}
-\alias{five_dimension_ellipse_regions}
 \title{draw 2d, 3d, and 4d venn diagram}
 \usage{
 draw_2d_venn(x, n.sides, category.names, label, ...)
@@ -17,8 +16,6 @@ draw_3d_venn(x, n.sides, category.names, label, ...)
 draw_4d_venn(x, n.sides, category.names, label, ...)
 
 draw_5d_venn(x, n.sides, category.names, label, ...)
-
-five_dimension_ellipse_regions(n.sides)
 }
 \arguments{
 \item{x}{a list of items}
@@ -33,8 +30,4 @@ five_dimension_ellipse_regions(n.sides)
 }
 \description{
 draw 2d, 3d, and 4d venn diagram
-
-draw 5d venn diagram
-
-coordinations of polygon regions/centers for 4d venn diagram
 }

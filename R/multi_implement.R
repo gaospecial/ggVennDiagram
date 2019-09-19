@@ -1,11 +1,10 @@
-#' Perform geometric set intersection with more than two simple feature geometry collections
+#' Perform geometric set intersection, difference, and union with more than two simple feature geometry collections
 #'
-#' @param ... other arguments
-#' @param l a list of items (polygon or vector)
+#' @param ... at least three items are needed if use this parameter
+#' @param l a list of polygons
 #'
 #' @return intersection/union/diff of items
-#' @name multi
-#'
+#' @name multi_st_fun
 st_multi_intersection <- function ( ...,l = NULL){
   if (is.null(l)) l <- list(...)
   n <- length(l)
@@ -21,8 +20,7 @@ st_multi_intersection <- function ( ...,l = NULL){
   }
 }
 
-#' Perform geometric set difference with more than two simple feature geometry collections
-#' @rdname multi
+#' @rdname multi_st_fun
 st_multi_difference <- function ( ...,l = NULL){
   if (is.null(l)) l <- list(...)
   n <- length(l)
@@ -38,9 +36,8 @@ st_multi_difference <- function ( ...,l = NULL){
   }
 }
 
-#' Perform geometric set union with more than two simple feature geometry collections
-#'
-#' @rdname multi
+
+#' @rdname multi_st_fun
 st_multi_union <- function ( ...,l = NULL){
   if (is.null(l)) l <- list(...)
   n <- length(l)
@@ -56,9 +53,11 @@ st_multi_union <- function ( ...,l = NULL){
   }
 }
 
-#' Performs set union on more than two vectors.
+#' Performs set union/intersection/diff on more than two vectors.
+#' @param ... at least three items are needed if use this parameter
+#' @param l a list of vectors
 #'
-#' @rdname multi
+#' @name multi
 multi_union <- function ( ...,l = NULL){
   if (is.null(l)) l <- list(...)
   n <- length(l)
@@ -74,7 +73,6 @@ multi_union <- function ( ...,l = NULL){
   }
 }
 
-#' Performs set intersection on more than two vectors.
 #' @rdname multi
 multi_intersect <- function ( ...,l = NULL){
   if (is.null(l)) l <- list(...)
@@ -92,7 +90,6 @@ multi_intersect <- function ( ...,l = NULL){
 }
 
 
-#' Performs setdiff on more than two vectors.
 #' @rdname multi
 multi_setdiff <- function(...,l=NULL){
   if (is.null(l)) l <- list(...)

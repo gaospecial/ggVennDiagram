@@ -1,8 +1,4 @@
-#' draw 5d venn diagram
-#'
 #' @rdname draw_venn
-#'
-#'
 draw_5d_venn <- function(x, n.sides, category.names, label,...){
 
   category <- data.frame(x = c(0.13, 0.26, 0.71, 0.86, 1),
@@ -19,10 +15,8 @@ draw_5d_venn <- function(x, n.sides, category.names, label,...){
 
 }
 
-#' calculating count values
-#'
-#' @param x a list of vector items.
-#'
+
+#' @rdname region_value
 five_dimension_region_values <- function(x){
 
   if (length(x)!=5) stop("5D venn needs a list of five vectors.")
@@ -66,13 +60,8 @@ five_dimension_region_values <- function(x){
   data.frame(group=names(items),count=values,stringsAsFactors = F)
 }
 
-#' coordinations of polygon regions/centers for 4d venn diagram
-#'
-#' @importFrom VennDiagram ell2poly
-#' @importFrom sf st_polygon st_difference st_intersection st_centroid st_union
-#' @import dplyr
-#' @rdname draw_venn
-#' @inheritParams draw_venn
+
+#' @rdname region_polygon
 five_dimension_ellipse_regions <- function(n.sides){
 
   # ellipse

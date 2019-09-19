@@ -1,7 +1,7 @@
 Package: ggVennDiagram
 Type: Package
 Title: A ggplot implement of VennDiagram
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: person("Chun-Hui","Gao",email="gaospecial@gmail.com",role=c("aut","cre"))
 Maintainer: Chun-Hui Gao <gaospecial@gmail.com>
 Description: 'ggVennDiagram' extends the 'ggplot2' plotting system 
