@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "70%"
 )
 ```
 # ggVennDiagram
@@ -21,7 +21,7 @@ The goal of ggVennDiagram is to draw venn diagram in ggplot style.
 
 ## Installation
 
-You can install the released version of ggVennDiagram from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of ggVennDiagram from [CRAN](https://CRAN.R-project.org) with (under evaluation in CRAN):
 
 ``` r
 install.packages("ggVennDiagram")
@@ -69,7 +69,7 @@ The parameter `category.names` reprents set names. And the parameter `label` can
 ```{r}
 ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"))
 
-ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = "both")
+ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = NULL)
 ```
 
 

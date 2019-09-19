@@ -12,7 +12,7 @@ The goal of ggVennDiagram is to draw venn diagram in ggplot style.
 ## Installation
 
 You can install the released version of ggVennDiagram from
-[CRAN](https://CRAN.R-project.org) with:
+[CRAN](https://CRAN.R-project.org) with (under evaluation in CRAN):
 
 ``` r
 install.packages("ggVennDiagram")
@@ -40,7 +40,7 @@ x <- list(A=sample(genes,300),B=sample(genes,525),C=sample(genes,440),D=sample(g
 ggVennDiagram(x)
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-example-1.png" width="70%" />
 
 ``` r
 
@@ -48,7 +48,7 @@ ggVennDiagram(x)
 ggVennDiagram(x[1:3])
 ```
 
-<img src="man/figures/README-example-2.png" width="100%" />
+<img src="man/figures/README-example-2.png" width="70%" />
 
 ``` r
 
@@ -56,7 +56,7 @@ ggVennDiagram(x[1:3])
 ggVennDiagram(x[1:2])
 ```
 
-<img src="man/figures/README-example-3.png" width="100%" />
+<img src="man/figures/README-example-3.png" width="70%" />
 
 `ggVennDiagram` return a ggplot object, which can be further modified
 with `ggplot` functions.
@@ -68,7 +68,7 @@ ggVennDiagram(x) + scale_fill_gradient(low="blue",high = "red")
 #> which will replace the existing scale.
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="70%" />
 
 ``` r
 
@@ -77,7 +77,7 @@ ggVennDiagram(x,lty="dashed",color="black",size=2) + scale_fill_gradient(low="wh
 #> which will replace the existing scale.
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-2-2.png" width="70%" />
 
 `ggVennDiagram` now support 2-4 dimension venn plot. The generated
 figure is generally ready for publish. The main function
@@ -91,11 +91,11 @@ The parameter `category.names` reprents set names. And the parameter
 ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="70%" />
 
 ``` r
 
-ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = "both")
+ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = NULL)
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-2.png" width="70%" />
