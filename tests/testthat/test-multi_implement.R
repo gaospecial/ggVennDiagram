@@ -9,7 +9,7 @@ test_that("multiple implements",{
   )
 
   library(sf)
-  library(tidyverse)
+  library(dplyr)
 
   ellipses <- lapply(parameters, function(x) {
     do.call(ell2poly, as.list(c(x, n.sides))) %>%

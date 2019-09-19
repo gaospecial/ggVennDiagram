@@ -16,6 +16,10 @@ ggVennDiagram(x, category.names = names(x), n.sides = 3000,
 
 \item{label}{select one from c("count","percent","both")}
 
+\item{lty}{line type of polygons}
+
+\item{color}{line color of polygons}
+
 \item{...}{Other arguments passed on to the polygon layer.}
 }
 \value{

@@ -71,6 +71,8 @@ five_dimension_region_values <- function(x){
 #' @importFrom VennDiagram ell2poly
 #' @importFrom sf st_polygon st_difference st_intersection st_centroid st_union
 #' @import dplyr
+#' @rdname draw_venn
+#' @inheritParams draw_venn
 five_dimension_ellipse_regions <- function(n.sides){
 
   # ellipse
@@ -126,7 +128,7 @@ five_dimension_ellipse_regions <- function(n.sides){
   polygon_dfs <- lapply(1:length(polygon_list), function(i){
     df <- unlist(polygon_list[[i]])
     if (is.null(df)) return(NULL)
-    df %<>% matrix(ncol = 2) %>% data.frame()
+    df <- df %>% matrix(ncol = 2) %>% data.frame()
     colnames(df) <- c("x","y")
     df$group <- polygon_name[[i]]
     return(df)

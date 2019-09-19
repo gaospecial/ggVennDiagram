@@ -4,6 +4,7 @@
 #' @param n.sides  resolution
 #' @param category.names default is names(x)
 #' @param label c("both","percent","count")
+#' @param ... passing to geom_polygon, enabling modification of polygon styles
 #'
 #' @name draw_venn
 draw_4d_venn <- function(x, n.sides, category.names, label,...){
@@ -59,7 +60,7 @@ four_dimension_region_values <- function(x){
 
 #' coordinations of polygon regions/centers for 4d venn diagram
 #'
-#' @param n.sides
+#' @inheritParams draw_venn
 #'
 #'
 #' @importFrom VennDiagram ell2poly

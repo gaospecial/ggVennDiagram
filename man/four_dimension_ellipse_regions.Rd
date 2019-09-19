@@ -7,7 +7,7 @@
 four_dimension_ellipse_regions(n.sides)
 }
 \arguments{
-\item{n.sides}{}
+\item{n.sides}{resolution}
 }
 \description{
 coordinations of polygon regions/centers for 4d venn diagram

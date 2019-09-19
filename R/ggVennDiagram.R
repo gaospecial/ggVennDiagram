@@ -5,6 +5,8 @@
 #' @param label select one from c("count","percent","both")
 #' @param category.names default is names(x)
 #' @param ... Other arguments passed on to the polygon layer.
+#' @param lty line type of polygons
+#' @param color line color of polygons
 #'
 #' @return A ggplot object
 #'
@@ -55,7 +57,8 @@ plot_venn <- function(region_data, category, counts, label, ...){
     return(p)
   }
   else{
-    counts %<>% mutate(percent=paste(round(count*100/sum(count),digits = 2),"%",sep="")) %>%
+    counts <- counts %>%
+      mutate(percent=paste(round(count*100/sum(count),digits = 2),"%",sep="")) %>%
       mutate(label = paste(count,"\n","(",percent,")",sep=""))
     data <- merge(counts,center)
     if (label == "count"){
