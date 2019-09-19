@@ -2,3 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+data-raw
+!data-raw/*.rmd
+!data-raw/*.R
+
+
