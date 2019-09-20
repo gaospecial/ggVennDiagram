@@ -77,7 +77,7 @@ four_dimension_ellipse_regions <- function(n.sides){
   ellipses <- lapply(parameters,function(x){
     do.call(ell2poly,as.list(c(x,n.sides))) %>%
       data.frame() %>%
-      mutate(x=round(x,6),y=round(y,6))
+      mutate(x=round(.data$x,6),y=round(.data$y,6))
   })
 
   polygons <- lapply(ellipses,function(x)st_polygon(list(as.matrix(x))))

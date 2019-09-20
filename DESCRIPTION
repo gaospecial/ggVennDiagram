@@ -4,7 +4,7 @@ Title: A Ggplot Implement of VennDiagram
 Version: 0.2.1
 Authors@R: person("Chun-Hui","Gao",email="gaospecial@gmail.com",role=c("aut","cre"))
 Maintainer: Chun-Hui Gao <gaospecial@gmail.com>
-Description: Fancy Venn plot in ggplot style
+Description: Fancy Venn plot in ggplot style.
 Depends: R (>= 3.5.0)
 Imports: VennDiagram, sf, ggplot2, dplyr
 License: GPL-3

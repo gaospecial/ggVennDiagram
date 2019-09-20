@@ -47,7 +47,7 @@ plot_venn <- function(region_data, category, counts, label, ...){
   center <- region_data[[2]]
   p <- ggplot() + aes_string("x","y") +
     geom_text(aes(label=label),data=category,fontface="bold",color="black") +
-    geom_polygon(aes(fill=count,group=group),data = merge(polygon,counts),...) +
+    geom_polygon(aes_string(fill="count",group="group"),data = merge(polygon,counts),...) +
     theme_void() + scale_fill_gradient(low="white",high = "red") +
     coord_fixed() +
     theme(legend.position = "right")
@@ -56,17 +56,17 @@ plot_venn <- function(region_data, category, counts, label, ...){
   }
   else{
     counts <- counts %>%
-      mutate(percent=paste(round(count*100/sum(count),digits = 2),"%",sep="")) %>%
-      mutate(label = paste(count,"\n","(",percent,")",sep=""))
+      mutate(percent=paste(round(.data$count*100/sum(.data$count),digits = 2),"%",sep="")) %>%
+      mutate(label = paste(.data$count,"\n","(",.data$percent,")",sep=""))
     data <- merge(counts,center)
     if (label == "count"){
       p + geom_label(aes(label=count),data=data,label.size = NA, alpha=0.5)
     }
     else if (label == "percent"){
-      p + geom_label(aes(label=percent),data=data,label.size = NA, alpha=0.5)
+      p + geom_label(aes_string(label="percent"),data=data,label.size = NA, alpha=0.5)
     }
     else if (label == "both"){
-      p + geom_label(aes(label=label),data=data,label.size = NA,alpha=0.5)
+      p + geom_label(aes_string(label="label"),data=data,label.size = NA,alpha=0.5)
     }
   }
 }
