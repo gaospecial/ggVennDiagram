@@ -5,6 +5,7 @@ Version: 0.3
 Authors@R: c(
   person("Chun-Hui","Gao",email="gaospecial@gmail.com",role=c("aut","cre")),
   person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("ctb"), comment = c(ORCID = "0000-0002-6485-8781"))
+  )
 Maintainer: Chun-Hui Gao <gaospecial@gmail.com>
 Description: 'ggVennDiagram' enables fancy venn plot with 2-4 sets and 
   generates publication quality figure. It is the first software 
