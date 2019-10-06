@@ -7,7 +7,9 @@
 
 <!-- badges: end -->
 
-The goal of ggVennDiagram is to draw venn diagram in ggplot style.
+‘`ggVennDiagram`’ enables fancy venn plot with 2-4 sets and generates
+publication quality figure. It is the first software that can
+automatically fill different colors to each part of a venn diagram.
 
 ## Installation
 
