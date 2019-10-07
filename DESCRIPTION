@@ -3,15 +3,15 @@ Type: Package
 Title: A 'ggplot2' Implement of Venn Diagram
 Version: 0.3
 Authors@R: c(
-  person("Chun-Hui","Gao",email="gaospecial@gmail.com",role=c("aut","cre")),
+  person("Chun-Hui","Gao",email="gaospecial@gmail.com",role=c("aut","cre"), comment=c(ORCID = "0000-0002-1445-7939")),
   person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("ctb"), comment = c(ORCID = "0000-0002-6485-8781"))
   )
 Maintainer: Chun-Hui Gao <gaospecial@gmail.com>
-Description: 'ggVennDiagram' enables fancy venn plot with 2-4 sets and 
-  generates publication quality figure. It is the first software 
-  that can automatically fill different colors to each part of a venn diagram.
+Description: Easy-to-use functions to generate 2-4 sets Venn plot in publication quality. 
+  'ggVennDiagram' is the first software that can automatically fill different colors to each part of a Venn diagram.
 Depends: R (>= 3.5.0)
 Imports: VennDiagram, sf, ggplot2, dplyr
+URL: https://github.com/gaospecial/ggVennDiagram
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
