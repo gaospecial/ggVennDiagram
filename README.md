@@ -7,9 +7,9 @@
 
 <!-- badges: end -->
 
-‘`ggVennDiagram`’ enables fancy venn plot with 2-4 sets and generates
+‘`ggVennDiagram`’ enables fancy Venn plot with 2-4 sets and generates
 publication quality figure. It is the first software that can
-automatically fill different colors to each part of a venn diagram.
+automatically fill different colors to each part of a Venn diagram.
 
 ## Installation
 
@@ -38,7 +38,7 @@ genes <- paste("gene",1:1000,sep="")
 set.seed(20190708)
 x <- list(A=sample(genes,300),B=sample(genes,525),C=sample(genes,440),D=sample(genes,350))
 
-# four dimension venn plot
+# four dimension Venn plot
 ggVennDiagram(x)
 ```
 
@@ -46,7 +46,7 @@ ggVennDiagram(x)
 
 ``` r
 
-# three dimension venn plot
+# three dimension Venn plot
 ggVennDiagram(x[1:3])
 ```
 
@@ -54,7 +54,7 @@ ggVennDiagram(x[1:3])
 
 ``` r
 
-# two dimension venn plot
+# two dimension Venn plot
 ggVennDiagram(x[1:2])
 ```
 
@@ -81,7 +81,7 @@ ggVennDiagram(x,lty="dashed",color="black",size=2) + scale_fill_gradient(low="wh
 
 <img src="man/figures/README-unnamed-chunk-2-2.png" width="70%" />
 
-`ggVennDiagram` now support 2-4 dimension venn plot. The generated
+`ggVennDiagram` now support 2-4 dimension Venn plot. The generated
 figure is generally ready for publish. The main function
 `ggVennDiagram()` will check how many items in the first paramenter and
 call corresponding function automatically.
@@ -101,3 +101,22 @@ ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), lab
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-2.png" width="70%" />
+
+# Venn Diagram for more than four sets
+
+If you have reviewed my codes, you may find it is easy to support Venn
+Diagram for more than four sets, as soon as you find a ideal parameter
+to generate more circles or ellipses in the plot. The key point is to
+let the generated ellipses have exactly one intersection for each
+combination.
+
+However, Venn Diagram for more than four sets may be meaningfulless in
+some conditions, as some parts may be omittd in such ellipses.
+Therefore, it is only useful in specific conditions. For example, if the
+set intersection of all group are extremely large, you may use several
+ellipses to draw a “flower” to show that.
+
+# “`ggVennDiagram`” 诞生记
+
+在 *@GuangchuangYu* 的公众号下面，我投稿了一篇文章，介绍了 “`ggVennDiagram`”
+包开发的始末，有兴趣的同学可以移步[至此](http://mp.weixin.qq.com/s?__biz=MzI5NjUyNzkxMg==&mid=2247488094&idx=1&sn=a25732ba379f5954780c5b9caaf32a12&chksm=ec43a319db342a0ffc3fee7d9f34d9aee68dc554349fadebdfeddd47fcc569660d3d2985d6aa&mpshare=1&scene=23&srcid=&sharer_sharetime=1571301081933&sharer_shareid=04af35358b62caecb0d9de05d6f60e54#rd)查看。
