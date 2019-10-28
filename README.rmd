@@ -73,6 +73,13 @@ ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"))
 ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = NULL)
 ```
 
+Set `label_alpha = 0` to remove label background
+
+```{r}
+ggVennDiagram(x, label_alpha=0)
+```
+
+
 # Venn Diagram for more than four sets
 
 If you have reviewed my codes, you may find it is easy to support Venn Diagram for more than four sets,

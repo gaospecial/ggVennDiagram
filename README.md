@@ -102,6 +102,14 @@ ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), lab
 
 <img src="man/figures/README-unnamed-chunk-3-2.png" width="70%" />
 
+Set `label_alpha = 0` to remove label background
+
+``` r
+ggVennDiagram(x, label_alpha=0)
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="70%" />
+
 # Venn Diagram for more than four sets
 
 If you have reviewed my codes, you may find it is easy to support Venn
