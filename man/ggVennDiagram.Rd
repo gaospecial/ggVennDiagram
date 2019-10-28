@@ -5,7 +5,7 @@
 \title{ggVennDiagram}
 \usage{
 ggVennDiagram(x, category.names = names(x), n.sides = 3000,
-  label = "both", lty = 1, color = "grey", ...)
+  label = "both", label_alpha = 0.5, lty = 1, color = "grey", ...)
 }
 \arguments{
 \item{x}{list of items}
@@ -15,6 +15,8 @@ ggVennDiagram(x, category.names = names(x), n.sides = 3000,
 \item{n.sides}{set how many points been generated for one ellipse, the more points, the better resolution.}
 
 \item{label}{select one from c("count","percent","both")}
+
+\item{label_alpha}{set 0 to remove label background}
 
 \item{lty}{line type of polygons}
 

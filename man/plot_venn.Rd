@@ -4,7 +4,7 @@
 \alias{plot_venn}
 \title{plot codes}
 \usage{
-plot_venn(region_data, category, counts, label, ...)
+plot_venn(region_data, category, counts, label, label_alpha, ...)
 }
 \arguments{
 \item{region_data}{a list of two dataframes, which were used to plot polygon and label latter.}
@@ -14,6 +14,8 @@ plot_venn(region_data, category, counts, label, ...)
 \item{counts}{counts of items for every combinations}
 
 \item{label}{select one from c("count","percent","both")}
+
+\item{label_alpha}{set 0 to remove label background}
 
 \item{...}{Other arguments passed on to the polygon layer.}
 }
