@@ -32,6 +32,33 @@ ggVennDiagram <- function(x, category.names=names(x), n.sides=3000,label="both",
   }
 }
 
+#' get a list of items in Venn regions
+#' @inheritParams ggVennDiagram
+#'
+#' @return a list of region items
+#' @export
+get_region_items <- function(x, category.names=names(x)){
+  if (!identical(category.names,names(x))){
+    message("This function returns a list named by alphabet letters")
+    message("The mapping between letters and categories is as follows:")
+    message(paste(paste(names(x),category.names,sep = ": "), collapse = "\n"))
+  }
+
+  dimension <- length(x)
+  if (dimension == 4){
+    four_dimension_region_items(x)
+  }
+  else if (dimension == 3){
+    three_dimension_region_items(x)
+  }
+  else if (dimension == 2){
+    two_dimension_region_items(x)
+  }
+  else{
+    stop("Only support 2-4 dimension venn diagram.")
+  }
+}
+
 
 #' plot codes
 #'

@@ -49,9 +49,8 @@ three_dimension_circle_regions <- function(n.sides=1000){
   list(data_ploygons, data_centers)
 }
 
-
-#' @rdname region_value
-three_dimension_region_values <- function(x){
+#' @rdname region_item
+three_dimension_region_items <- function(x){
   a <- x[[1]]
   b <- x[[2]]
   c <- x[[3]]
@@ -64,7 +63,12 @@ three_dimension_region_values <- function(x){
   BC <- setdiff(intersect(b,c),a)
   ABC <- multi_intersect(a,b,c)
 
-  items <- list(A=A,B=B,C=C,AB=AB,AC=AC,BC=BC,ABC=ABC)
+  list(A=A,B=B,C=C,AB=AB,AC=AC,BC=BC,ABC=ABC)
+}
+
+#' @rdname region_value
+three_dimension_region_values <- function(x){
+  items <- three_dimension_region_items(x)
 
   values <- sapply(items, length)
 

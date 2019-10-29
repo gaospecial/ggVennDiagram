@@ -45,9 +45,8 @@ two_dimension_circle_regions <- function(n.sides=1000){
   list(data_ploygons, data_centers)
 }
 
-
-#' @rdname region_value
-two_dimension_region_values <- function(x){
+#' @rdname region_item
+two_dimension_region_items <- function(x){
   a <- x[[1]]
   b <- x[[2]]
 
@@ -55,7 +54,12 @@ two_dimension_region_values <- function(x){
   B <- setdiff(b, a)
   AB <- intersect(a,b)
 
-  items <- list(A=A,B=B,AB=AB)
+  list(A=A,B=B,AB=AB)
+}
+
+#' @rdname region_value
+two_dimension_region_values <- function(x){
+  items <- two_dimension_region_items(x)
 
   values <- sapply(items, length)
 

@@ -23,13 +23,13 @@ draw_4d_venn <- function(x, n.sides, category.names, label,...){
 
 }
 
-#' calculating intersection values of venn
+#' get the items in each region
 #'
-#' @param x a list of vector items.
+#' @param x a list of vector items
 #'
-#' @return data.frame
-#' @name region_value
-four_dimension_region_values <- function(x){
+#' @return  a list
+#' @name region_item
+four_dimension_region_items <- function(x){
 
   # values
   a <- x[[1]]
@@ -53,7 +53,18 @@ four_dimension_region_values <- function(x){
   BCD <- setdiff(intersect(intersect(d,b),c),a)
   ABCD <- intersect(intersect(intersect(a,b),c),d)
 
-  items <- list(A=A,B=B,C=C,D=D,AB=AB,AC=AC,AD=AD,BC=BC,BD=BD,CD=CD,ABC=ABC,ABD=ABD,ACD=ACD,BCD=BCD,ABCD=ABCD)
+  list(A=A,B=B,C=C,D=D,AB=AB,AC=AC,AD=AD,BC=BC,BD=BD,CD=CD,ABC=ABC,ABD=ABD,ACD=ACD,BCD=BCD,ABCD=ABCD)
+}
+
+#' calculating intersection values of venn
+#'
+#' @param x a list of vector items.
+#'
+#' @return data.frame
+#' @name region_value
+four_dimension_region_values <- function(x){
+
+  items <- four_dimension_region_items(x)
 
   values <- sapply(items, length)
   data.frame(group=names(items),count=values,stringsAsFactors = F)
