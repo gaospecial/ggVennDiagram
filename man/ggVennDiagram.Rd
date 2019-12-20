@@ -4,8 +4,16 @@
 \alias{ggVennDiagram}
 \title{ggVennDiagram}
 \usage{
-ggVennDiagram(x, category.names = names(x), n.sides = 3000,
-  label = "both", label_alpha = 0.5, lty = 1, color = "grey", ...)
+ggVennDiagram(
+  x,
+  category.names = names(x),
+  n.sides = 3000,
+  label = "both",
+  label_alpha = 0.5,
+  lty = 1,
+  color = "grey",
+  ...
+)
 }
 \arguments{
 \item{x}{list of items}
