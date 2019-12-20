@@ -77,8 +77,13 @@ four_dimension_region_values <- function(x){
 #' @importFrom VennDiagram ell2poly
 #' @importFrom sf st_polygon st_difference st_intersection st_centroid st_union
 #' @import dplyr
+#' @export
+#' @return a list of two data.frame, the first one represents polygon regions, and the second specifies polygon centers.
 #' @name region_polygon
-four_dimension_ellipse_regions <- function(n.sides){
+#' @examples
+#' polygons <- four_dimension_ellipse_regions(3000)[[1]]
+#' ggplot(polygons,aes(x,y,group=group,fill=group)) + geom_polygon()
+four_dimension_ellipse_regions <- function(n.sides=1000){
 
   # ellipse
   parameters <- list(c(0.35, 0.47, 0.35, 0.20, 135),

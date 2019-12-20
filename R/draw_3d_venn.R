@@ -12,6 +12,7 @@ draw_3d_venn <- function(x, n.sides, category.names, label,...){
 }
 
 #' @rdname  region_polygon
+#' @export
 three_dimension_circle_regions <- function(n.sides=1000){
   # three circles
   parameters <- list(c(2,4,4),c(0,0,4),c(4,0,4))

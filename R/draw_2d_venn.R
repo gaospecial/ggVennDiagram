@@ -12,6 +12,7 @@ draw_2d_venn <- function(x, n.sides, category.names, label,...){
 }
 
 #' @rdname region_polygon
+#' @export
 two_dimension_circle_regions <- function(n.sides=1000){
   # two circles
   parameters <- list(c(0,0,4),c(4,0,4))
