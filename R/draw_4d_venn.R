@@ -9,8 +9,8 @@
 #' @name draw_venn
 draw_4d_venn <- function(x, n.sides, category.names, label,...){
 
-  category <- data.frame(x = c(0.13, 0.26, 0.71, 0.86),
-                         y = c(0.77, 0.86, 0.85, 0.77),
+  category <- data.frame(x = c(0.08, 0.26, 0.71, 0.93),
+                         y = c(0.78, 0.86, 0.85, 0.78),
                          label = category.names)
 
   region_data <- four_dimension_ellipse_regions(n.sides)

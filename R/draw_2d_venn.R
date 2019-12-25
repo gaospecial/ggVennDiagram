@@ -1,7 +1,7 @@
 #' @rdname draw_venn
 draw_2d_venn <- function(x, n.sides, category.names, label,...){
-  category <- data.frame(x = c(-4, 8),
-                         y = c(4, 4),
+  category <- data.frame(x = c(-1, 5),
+                         y = 4.3,
                          label = category.names)
 
   region_data <- two_dimension_circle_regions(n.sides)
