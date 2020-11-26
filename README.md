@@ -118,7 +118,7 @@ to generate more circles or ellipses in the plot. The key point is to
 let the generated ellipses have exactly one intersection for each
 combination.
 
-However, Venn Diagram for more than four sets may be meaningfulless in
+However, Venn Diagram for more than four sets may be meaningless in
 some conditions, as some parts may be omittd in such ellipses.
 Therefore, it is only useful in specific conditions. For example, if the
 set intersection of all group are extremely large, you may use several
