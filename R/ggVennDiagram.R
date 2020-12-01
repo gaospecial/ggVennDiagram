@@ -74,8 +74,8 @@ plot_venn <- function(region_data, category, counts, label, label_alpha, ...){
   polygon <- region_data[[1]]
   center <- region_data[[2]]
   p <- ggplot() + aes_string("x","y") +
-    geom_text(aes(label=label),data=category,fontface="bold",color="black",hjust="inward",vjust="inward") +
     geom_polygon(aes_string(fill="count",group="group"),data = merge(polygon,counts),...) +
+    geom_text(aes(label=label),data=category,fontface="bold",color="black",hjust="inward",vjust="inward") +
     theme_void() + scale_fill_gradient(low="white",high = "red") +
     coord_fixed() +
     theme(legend.position = "right")
