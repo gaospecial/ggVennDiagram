@@ -74,9 +74,9 @@ region_values <- function(items){
   values <- sapply(items, length)
 
   group_items <- sapply(items, function(x){
-    sep = " "
+    sep = "; "
     x <- paste0(x, collapse = sep)
-    x <- stringr::str_wrap(x, width = 40)
+    x <- stringr::str_wrap(x)
     return(x)
   })
 
