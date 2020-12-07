@@ -16,16 +16,16 @@
 #' ggVennDiagram(x)  # 4d venn
 #' ggVennDiagram(x[1:3])  # 3d venn
 #' ggVennDiagram(x[1:2])  # 2d venn
-ggVennDiagram <- function(x, category.names=names(x), n.sides=3000,label="both",label_alpha=0.5, lty=1,color="grey",...){
+ggVennDiagram <- function(x, category.names=names(x), n.sides=3000,label="both",label_alpha=0.5,label_geom=geom_label, lty=1,color="grey",...){
   dimension <- length(x)
   if (dimension == 4){
-    draw_4d_venn(x, n.sides=n.sides,category.names=category.names,label = label, label_alpha=label_alpha, lty=lty,color=color,...)
+    draw_4d_venn(x, n.sides=n.sides,category.names=category.names,label = label, label_alpha=label_alpha, label_geom = label_geom, lty=lty,color=color,...)
   }
   else if (dimension == 3){
-    draw_3d_venn(x, n.sides=n.sides,category.names=category.names,label = label, label_alpha=label_alpha,lty=lty,color=color,...)
+    draw_3d_venn(x, n.sides=n.sides,category.names=category.names,label = label, label_alpha=label_alpha, label_geom = label_geom,lty=lty,color=color,...)
   }
   else if (dimension == 2){
-    draw_2d_venn(x, n.sides=n.sides,category.names=category.names,label = label, label_alpha=label_alpha,lty=lty,color=color,...)
+    draw_2d_venn(x, n.sides=n.sides,category.names=category.names,label = label, label_alpha=label_alpha, label_geom = label_geom,lty=lty,color=color,...)
   }
   else{
     stop("Only support 2-4 dimension venn diagram.")
@@ -70,12 +70,12 @@ get_region_items <- function(x, category.names=names(x)){
 #' @import ggplot2
 #'
 #' @return ggplot object
-plot_venn <- function(region_data, category, counts, label, label_alpha, ...){
+plot_venn <- function(region_data, category, counts, label, label_geom, label_alpha, ...){
   polygon <- region_data[[1]]
   center <- region_data[[2]]
   p <- ggplot() + aes_string("x","y") +
     geom_polygon(aes_string(fill="count",group="group"),data = merge(polygon,counts),...) +
-    geom_text(aes(label=label),data=category,fontface="bold",color="black",hjust="inward",vjust="inward") +
+    geom_text(aes(label=label),data=category,fontface="bold",color="black") +
     theme_void() + scale_fill_gradient(low="white",high = "red") +
     coord_fixed() +
     theme(legend.position = "right")
@@ -88,13 +88,13 @@ plot_venn <- function(region_data, category, counts, label, label_alpha, ...){
       mutate(label = paste(.data$count,"\n","(",.data$percent,")",sep=""))
     data <- merge(counts,center)
     if (label == "count"){
-      p + geom_label(aes(label=count),data=data,label.size = NA, alpha=label_alpha)
+      p + label_geom(aes(label=count),data=data,label.size = NA, alpha=label_alpha)
     }
     else if (label == "percent"){
-      p + geom_label(aes_string(label="percent"),data=data,label.size = NA, alpha=label_alpha)
+      p + label_geom(aes_string(label="percent"),data=data,label.size = NA, alpha=label_alpha)
     }
     else if (label == "both"){
-      p + geom_label(aes_string(label="label"),data=data,label.size = NA,alpha=label_alpha)
+      p + label_geom(aes_string(label="label"),data=data,label.size = NA,alpha=label_alpha)
     }
   }
 }
