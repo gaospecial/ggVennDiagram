@@ -71,7 +71,6 @@ three_dimension_region_items <- function(x){
 three_dimension_region_values <- function(x){
   items <- three_dimension_region_items(x)
 
-  values <- sapply(items, length)
+  region_values(items)
 
-  data.frame(group=names(items),count=values, stringsAsFactors = F)
 }

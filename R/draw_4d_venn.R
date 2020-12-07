@@ -66,8 +66,22 @@ four_dimension_region_values <- function(x){
 
   items <- four_dimension_region_items(x)
 
+  region_values(items)
+}
+
+
+region_values <- function(items){
   values <- sapply(items, length)
-  data.frame(group=names(items),count=values,stringsAsFactors = F)
+
+  group_items <- sapply(items, function(x){
+    sep = " "
+    x <- paste0(x, collapse = sep)
+    x <- stringr::str_wrap(x, width = 40)
+    return(x)
+  })
+
+  data.frame(group=names(items),count=values, text=group_items,stringsAsFactors = F)
+
 }
 
 #' coordinations of polygon regions/centers for venn diagram
