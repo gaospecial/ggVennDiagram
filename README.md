@@ -4,7 +4,6 @@
 # ggVennDiagram
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 ‘`ggVennDiagram`’ enables fancy Venn plot with 2-4 sets and generates
@@ -45,7 +44,6 @@ ggVennDiagram(x)
 <img src="man/figures/README-example-1.png" width="70%" />
 
 ``` r
-
 # three dimension Venn plot
 ggVennDiagram(x[1:3])
 ```
@@ -53,7 +51,6 @@ ggVennDiagram(x[1:3])
 <img src="man/figures/README-example-2.png" width="70%" />
 
 ``` r
-
 # two dimension Venn plot
 ggVennDiagram(x[1:2])
 ```
@@ -66,17 +63,16 @@ with `ggplot` functions.
 ``` r
 library(ggplot2)
 ggVennDiagram(x) + scale_fill_gradient(low="blue",high = "red")
-#> Scale for 'fill' is already present. Adding another scale for 'fill',
-#> which will replace the existing scale.
+#> Scale for 'fill' is already present. Adding another scale for 'fill', which
+#> will replace the existing scale.
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="70%" />
 
 ``` r
-
 ggVennDiagram(x,lty="dashed",color="black",size=2) + scale_fill_gradient(low="white",high = "red")
-#> Scale for 'fill' is already present. Adding another scale for 'fill',
-#> which will replace the existing scale.
+#> Scale for 'fill' is already present. Adding another scale for 'fill', which
+#> will replace the existing scale.
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-2.png" width="70%" />
@@ -96,7 +92,6 @@ ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"))
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="70%" />
 
 ``` r
-
 ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = NULL)
 ```
 
@@ -110,6 +105,87 @@ ggVennDiagram(x, label_alpha=0)
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="70%" />
 
+## Showing intersection values
+
+*Note: you need to install the GitHub version to enable these
+functions.*
+
+We implemented the `get_region_items()` to get intersection values.
+
+``` r
+y <- list(
+  A = sample(letters, 8),
+  B = sample(letters, 8),
+  C = sample(letters, 8),
+  d = sample(letters, 8)
+)
+
+get_region_items(y)
+#> $A
+#> [1] "y" "b" "e"
+#> 
+#> $B
+#> [1] "i" "v"
+#> 
+#> $C
+#> [1] "a"
+#> 
+#> $D
+#> [1] "h"
+#> 
+#> $AB
+#> [1] "c"
+#> 
+#> $AC
+#> character(0)
+#> 
+#> $AD
+#> [1] "z"
+#> 
+#> $BC
+#> [1] "d"
+#> 
+#> $BD
+#> [1] "k"
+#> 
+#> $CD
+#> [1] "f" "m"
+#> 
+#> $ABC
+#> [1] "w"
+#> 
+#> $ABD
+#> character(0)
+#> 
+#> $ACD
+#> [1] "j"
+#> 
+#> $BCD
+#> [1] "p"
+#> 
+#> $ABCD
+#> [1] "x"
+```
+
+If only several items were included, intersections may also be viewed
+interactively by `plotly` method (if you have two many items, this is
+useless).
+
+``` r
+p <- ggVennDiagram(y, show_intersect = TRUE)
+p
+```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="70%" />
+
+``` r
+plotly::ggplotly(p)
+```
+
+In web browser or RStudio, you will get:
+
+<img src="https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/typora-img/intersection.gif" width="70%" />
+
 # Venn Diagram for more than four sets
 
 If you have reviewed my codes, you may find it is easy to support Venn
@@ -118,7 +194,7 @@ to generate more circles or ellipses in the plot. The key point is to
 let the generated ellipses have exactly one intersection for each
 combination.
 
-However, Venn Diagram for more than four sets may be meaningless in
+However, Venn Diagram for more than four sets may be meaningfulless in
 some conditions, as some parts may be omittd in such ellipses.
 Therefore, it is only useful in specific conditions. For example, if the
 set intersection of all group are extremely large, you may use several
@@ -126,5 +202,6 @@ ellipses to draw a “flower” to show that.
 
 # “`ggVennDiagram`” 诞生记
 
-在 *@GuangchuangYu* 的公众号下面，我投稿了一篇文章，介绍了 “`ggVennDiagram`”
+在 *@GuangchuangYu* 的公众号下面，我投稿了一篇文章，介绍了
+“`ggVennDiagram`”
 包开发的始末，有兴趣的同学可以移步[至此](http://mp.weixin.qq.com/s?__biz=MzI5NjUyNzkxMg==&mid=2247488094&idx=1&sn=a25732ba379f5954780c5b9caaf32a12&chksm=ec43a319db342a0ffc3fee7d9f34d9aee68dc554349fadebdfeddd47fcc569660d3d2985d6aa&mpshare=1&scene=23&srcid=&sharer_sharetime=1571301081933&sharer_shareid=04af35358b62caecb0d9de05d6f60e54#rd)查看。

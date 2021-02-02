@@ -79,6 +79,44 @@ Set `label_alpha = 0` to remove label background
 ggVennDiagram(x, label_alpha=0)
 ```
 
+## Showing intersection values
+
+*Note: you need to install the GitHub version to enable these functions.*
+
+We implemented the `get_region_items()` to get intersection values.
+
+```{r}
+y <- list(
+  A = sample(letters, 8),
+  B = sample(letters, 8),
+  C = sample(letters, 8),
+  d = sample(letters, 8)
+)
+
+get_region_items(y)
+```
+
+If only several items were included, intersections may also be viewed interactively by `plotly` method (if you have two many items, this is useless).
+
+
+```{r}
+
+p <- ggVennDiagram(y, show_intersect = TRUE)
+p
+```
+
+
+```{r eval=FALSE}
+plotly::ggplotly(p)
+```
+
+In web browser or RStudio, you will get:
+
+```{r echo=FALSE}
+knitr::include_graphics("https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/typora-img/intersection.gif")
+```
+
+
 
 # Venn Diagram for more than four sets
 
