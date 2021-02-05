@@ -6,7 +6,7 @@
 \alias{draw_3d_venn}
 \alias{draw_venn}
 \alias{draw_4d_venn}
-\title{draw 2d, 3d, and 4d venn diagram}
+\title{draw 2d, 3d, and 4d Venn diagram}
 \usage{
 draw_2d_venn(x, n.sides, category.names, label, ...)
 
@@ -26,5 +26,5 @@ draw_4d_venn(x, n.sides, category.names, label, ...)
 \item{...}{passing to geom_polygon, enabling modification of polygon styles}
 }
 \description{
-draw 2d, 3d, and 4d venn diagram
+draw 2d, 3d, and 4d Venn diagram
 }

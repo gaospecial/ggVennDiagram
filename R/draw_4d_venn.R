@@ -1,4 +1,4 @@
-#' draw 2d, 3d, and 4d venn diagram
+#' draw 2d, 3d, and 4d Venn diagram
 #'
 #' @param x a list of items
 #' @param n.sides  resolution
@@ -84,7 +84,7 @@ region_values <- function(items){
 
 }
 
-#' coordinations of polygon regions/centers for venn diagram
+#' Coordinates of polygon regions/centers for venn diagram
 #'
 #' @inheritParams draw_venn
 #'
@@ -95,6 +95,7 @@ region_values <- function(items){
 #' @return a list of two data.frame, the first one represents polygon regions, and the second specifies polygon centers.
 #' @name region_polygon
 #' @examples
+#' library(ggplot2)
 #' polygons <- four_dimension_ellipse_regions(3000)[[1]]
 #' ggplot(polygons,aes(x,y,group=group,fill=group)) + geom_polygon()
 four_dimension_ellipse_regions <- function(n.sides=1000){

@@ -6,7 +6,7 @@
 \alias{three_dimension_circle_regions}
 \alias{region_polygon}
 \alias{four_dimension_ellipse_regions}
-\title{coordinations of polygon regions/centers for venn diagram}
+\title{Coordinates of polygon regions/centers for venn diagram}
 \usage{
 two_dimension_circle_regions(n.sides = 1000)
 
@@ -21,9 +21,10 @@ four_dimension_ellipse_regions(n.sides = 1000)
 a list of two data.frame, the first one represents polygon regions, and the second specifies polygon centers.
 }
 \description{
-coordinations of polygon regions/centers for venn diagram
+Coordinates of polygon regions/centers for venn diagram
 }
 \examples{
+library(ggplot2)
 polygons <- four_dimension_ellipse_regions(3000)[[1]]
 ggplot(polygons,aes(x,y,group=group,fill=group)) + geom_polygon()
 }

@@ -7,9 +7,11 @@
 ggVennDiagram(
   x,
   category.names = names(x),
+  show_intersect = FALSE,
   n.sides = 3000,
   label = "both",
   label_alpha = 0.5,
+  label_geom = geom_label,
   lty = 1,
   color = "grey",
   ...
@@ -20,11 +22,15 @@ ggVennDiagram(
 
 \item{category.names}{default is names(x)}
 
+\item{show_intersect}{whether add a hidden text to polygons in the plot, the text can be further visualized by `plotly::ggplotly()`}
+
 \item{n.sides}{set how many points been generated for one ellipse, the more points, the better resolution.}
 
 \item{label}{select one from c("count","percent","both")}
 
 \item{label_alpha}{set 0 to remove label background}
+
+\item{label_geom}{choose from geom_label and geom_text}
 
 \item{lty}{line type of polygons}
 
@@ -39,6 +45,7 @@ A ggplot object
 ggVennDiagram
 }
 \examples{
+library(ggVennDiagram)
 x <- list(A=1:5,B=2:7,C=3:6,D=4:9)
 ggVennDiagram(x)  # 4d venn
 ggVennDiagram(x[1:3])  # 3d venn

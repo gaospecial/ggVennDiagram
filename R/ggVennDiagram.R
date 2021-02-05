@@ -2,7 +2,7 @@
 #'
 #' @param x list of items
 #' @param n.sides set how many points been generated for one ellipse, the more points, the better resolution.
-#' @show_intersect whether add a hidden text to polygons in the plot, the text can be further visualized by `plotly::ggplotly()`
+#' @param show_intersect whether add a hidden text to polygons in the plot, the text can be further visualized by `plotly::ggplotly()`
 #' @param label select one from c("count","percent","both")
 #' @param label_geom choose from geom_label and geom_text
 #' @param label_alpha set 0 to remove label background
@@ -14,6 +14,7 @@
 #' @return A ggplot object
 #' @export
 #' @examples
+#' library(ggVennDiagram)
 #' x <- list(A=1:5,B=2:7,C=3:6,D=4:9)
 #' ggVennDiagram(x)  # 4d venn
 #' ggVennDiagram(x[1:3])  # 3d venn

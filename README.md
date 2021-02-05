@@ -57,7 +57,7 @@ ggVennDiagram(x[1:2])
 
 <img src="man/figures/README-example-3.png" width="70%" />
 
-`ggVennDiagram` return a ggplot object, which can be further modified
+`ggVennDiagram` return a `ggplot` object, which can be further modified
 with `ggplot` functions.
 
 ``` r
@@ -79,11 +79,11 @@ ggVennDiagram(x,lty="dashed",color="black",size=2) + scale_fill_gradient(low="wh
 
 `ggVennDiagram` now support 2-4 dimension Venn plot. The generated
 figure is generally ready for publish. The main function
-`ggVennDiagram()` will check how many items in the first paramenter and
+`ggVennDiagram()` will check how many items in the first parameter and
 call corresponding function automatically.
 
-The parameter `category.names` reprents set names. And the parameter
-`label` can label how many items are included in each parts.
+The parameter `category.names` is set names. And the parameter `label`
+can label how many items are included in each parts.
 
 ``` r
 ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"))
@@ -117,7 +117,7 @@ y <- list(
   A = sample(letters, 8),
   B = sample(letters, 8),
   C = sample(letters, 8),
-  d = sample(letters, 8)
+  D = sample(letters, 8)
 )
 
 get_region_items(y)
@@ -194,10 +194,10 @@ to generate more circles or ellipses in the plot. The key point is to
 let the generated ellipses have exactly one intersection for each
 combination.
 
-However, Venn Diagram for more than four sets may be meaningfulless in
-some conditions, as some parts may be omittd in such ellipses.
-Therefore, it is only useful in specific conditions. For example, if the
-set intersection of all group are extremely large, you may use several
+However, Venn Diagram for more than four sets may be meaningless in some
+conditions, as some parts may be omitted in such ellipses. Therefore, it
+is only useful in specific conditions. For example, if the set
+intersection of all group are extremely large, you may use several
 ellipses to draw a “flower” to show that.
 
 # “`ggVennDiagram`” 诞生记

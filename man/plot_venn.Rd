@@ -4,7 +4,16 @@
 \alias{plot_venn}
 \title{plot codes}
 \usage{
-plot_venn(region_data, category, counts, label, label_alpha, ...)
+plot_venn(
+  region_data,
+  category,
+  counts,
+  show_intersect,
+  label,
+  label_geom,
+  label_alpha,
+  ...
+)
 }
 \arguments{
 \item{region_data}{a list of two dataframes, which were used to plot polygon and label latter.}
@@ -13,7 +22,11 @@ plot_venn(region_data, category, counts, label, label_alpha, ...)
 
 \item{counts}{counts of items for every combinations}
 
+\item{show_intersect}{whether add a hidden text to polygons in the plot, the text can be further visualized by `plotly::ggplotly()`}
+
 \item{label}{select one from c("count","percent","both")}
+
+\item{label_geom}{choose from geom_label and geom_text}
 
 \item{label_alpha}{set 0 to remove label background}
 
