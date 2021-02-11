@@ -13,3 +13,4 @@
 ^README\.rmd$
 ^ggVennDiagram\.Rproj$
 ^cran-comments\.md$
+^CRAN-RELEASE$
