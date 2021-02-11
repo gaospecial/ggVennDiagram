@@ -12,3 +12,4 @@
 ^LICENSE\.md$
 ^README\.rmd$
 ^ggVennDiagram\.Rproj$
+^cran-comments\.md$
