@@ -4,6 +4,7 @@
 # ggVennDiagram
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 ‘`ggVennDiagram`’ enables fancy Venn plot with 2-4 sets and generates
@@ -44,6 +45,7 @@ ggVennDiagram(x)
 <img src="man/figures/README-example-1.png" width="70%" />
 
 ``` r
+
 # three dimension Venn plot
 ggVennDiagram(x[1:3])
 ```
@@ -51,6 +53,7 @@ ggVennDiagram(x[1:3])
 <img src="man/figures/README-example-2.png" width="70%" />
 
 ``` r
+
 # two dimension Venn plot
 ggVennDiagram(x[1:2])
 ```
@@ -70,6 +73,7 @@ ggVennDiagram(x) + scale_fill_gradient(low="blue",high = "red")
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="70%" />
 
 ``` r
+
 ggVennDiagram(x,lty="dashed",color="black",size=2) + scale_fill_gradient(low="white",high = "red")
 #> Scale for 'fill' is already present. Adding another scale for 'fill', which
 #> will replace the existing scale.
@@ -92,6 +96,7 @@ ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"))
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="70%" />
 
 ``` r
+
 ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = NULL)
 ```
 
@@ -172,6 +177,7 @@ interactively by `plotly` method (if you have two many items, this is
 useless).
 
 ``` r
+
 p <- ggVennDiagram(y, show_intersect = TRUE)
 p
 ```
@@ -202,6 +208,5 @@ ellipses to draw a “flower” to show that.
 
 # “`ggVennDiagram`” 诞生记
 
-在 *@GuangchuangYu* 的公众号下面，我投稿了一篇文章，介绍了
-“`ggVennDiagram`”
-包开发的始末，有兴趣的同学可以移步[至此](http://mp.weixin.qq.com/s?__biz=MzI5NjUyNzkxMg==&mid=2247488094&idx=1&sn=a25732ba379f5954780c5b9caaf32a12&chksm=ec43a319db342a0ffc3fee7d9f34d9aee68dc554349fadebdfeddd47fcc569660d3d2985d6aa&mpshare=1&scene=23&srcid=&sharer_sharetime=1571301081933&sharer_shareid=04af35358b62caecb0d9de05d6f60e54#rd)查看。
+在 *@GuangchuangYu* 的公众号下面，我投稿了一篇文章，介绍了 “`ggVennDiagram`”
+包开发的始末，有兴趣的同学可以移步[至此](https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA)查看。

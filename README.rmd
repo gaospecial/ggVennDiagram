@@ -132,5 +132,4 @@ ellipses to draw a "flower" to show that.
 
 # "`ggVennDiagram`" 诞生记
 
-在 *@GuangchuangYu* 的公众号下面，我投稿了一篇文章，介绍了 "`ggVennDiagram`" 包开发的始末，有兴趣的同学可以移步[至此](http://mp.weixin.qq.com/s?__biz=MzI5NjUyNzkxMg==&mid=2247488094&idx=1&sn=a25732ba379f5954780c5b9caaf32a12&chksm=ec43a319db342a0ffc3fee7d9f34d9aee68dc554349fadebdfeddd47fcc569660d3d2985d6aa&mpshare=1&scene=23&srcid=&sharer_sharetime=1571301081933&sharer_shareid=04af35358b62caecb0d9de05d6f60e54#rd
-)查看。
+在 *@GuangchuangYu* 的公众号下面，我投稿了一篇文章，介绍了 "`ggVennDiagram`" 包开发的始末，有兴趣的同学可以移步[至此](https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA)查看。
