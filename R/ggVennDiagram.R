@@ -21,7 +21,10 @@
 #' ggVennDiagram(x[1:2])  # 2d venn
 ggVennDiagram <- function(x, category.names=names(x),show_intersect = FALSE, n.sides=3000,label="both",label_alpha=0.5,label_geom=geom_label, lty=1,color="grey",...){
   dimension <- length(x)
-  if (dimension == 4){
+  if (dimension == 6){
+    draw_6d_venn(x, n.sides=n.sides,category.names=category.names,show_intersect = show_intersect,label = label, label_alpha=label_alpha, label_geom = label_geom,lty=lty,color=color,...)
+  }
+  else if (dimension == 4){
     draw_4d_venn(x, n.sides=n.sides,category.names=category.names,show_intersect = show_intersect, label = label, label_alpha=label_alpha, label_geom = label_geom, lty=lty,color=color,...)
   }
   else if (dimension == 3){
@@ -48,7 +51,10 @@ get_region_items <- function(x, category.names=names(x)){
   }
 
   dimension <- length(x)
-  if (dimension == 4){
+  if (dimension == 6){
+    six_dimension_region_items(x)
+  }
+  else if (dimension == 4){
     four_dimension_region_items(x)
   }
   else if (dimension == 3){

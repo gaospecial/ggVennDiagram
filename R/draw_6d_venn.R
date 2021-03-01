@@ -7,7 +7,7 @@
 #' @param ... passing to geom_polygon, enabling modification of polygon styles
 #'
 #' @name draw_venn
-draw_4d_venn <- function(x, n.sides, category.names, label,...){
+draw_6d_venn <- function(x, n.sides, category.names, label,...){
 
   category <- data.frame(x = c(0.08, 0.26, 0.71, 0.93),
                          y = c(0.78, 0.86, 0.85, 0.78),
@@ -29,7 +29,7 @@ draw_4d_venn <- function(x, n.sides, category.names, label,...){
 #'
 #' @return  a list
 #' @name region_item
-four_dimension_region_items <- function(x){
+six_dimension_region_items <- function(x){
 
   # values
   a <- x[[1]]
@@ -62,27 +62,14 @@ four_dimension_region_items <- function(x){
 #'
 #' @return data.frame
 #' @name region_value
-four_dimension_region_values <- function(x){
+six_dimension_region_values <- function(x){
 
-  items <- four_dimension_region_items(x)
+  items <- six_dimension_region_items(x)
 
   region_values(items)
 }
 
 
-region_values <- function(items){
-  values <- sapply(items, length)
-
-  group_items <- sapply(items, function(x){
-    sep = "; "
-    x <- paste0(x, collapse = sep)
-    x <- stringr::str_wrap(x)
-    return(x)
-  })
-
-  data.frame(group=names(items),count=values, text=group_items,stringsAsFactors = F)
-
-}
 
 #' Coordinates of polygon regions/centers for venn diagram
 #'
@@ -98,37 +85,50 @@ region_values <- function(items){
 #' library(ggplot2)
 #' polygons <- four_dimension_ellipse_regions(3000)[[1]]
 #' ggplot(polygons,aes(x,y,group=group,fill=group)) + geom_polygon()
-four_dimension_ellipse_regions <- function(n.sides=1000){
+six_dimension_ellipse_regions <- function(n.sides=1000){
 
-  # ellipse
-  parameters <- list(c(0.35, 0.47, 0.35, 0.20, 135),
-                     c(0.50, 0.57, 0.35, 0.15, 135),
-                     c(0.50, 0.57, 0.33, 0.15,  45),
-                     c(0.65, 0.47, 0.35, 0.20,  45))
-  ellipses <- lapply(parameters,function(x){
-    do.call(ell2poly,as.list(c(x,n.sides))) %>%
-      data.frame() %>%
-      mutate(x=round(.data$x,6),y=round(.data$y,6))
+  # triangles source: https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg
+  parameters <- list(c(-69277,-32868,135580,121186, 70900,199427),
+                     c( 81988,-44426, 38444,206222,121044,165111),
+                     c(203271,  9619, 39604, 82683, 84652,206669),
+                     c(333561,225349, 61764, 76805, 38980,182461),
+                     c(131886,385785, 38136,111491, 94208, 24690),
+                     c(-60184,274046,142476, 39903,103276,183962)
+                     )
+
+  polygons <- lapply(parameters,function(x){
+    st_polygon(list(matrix(rep(x, length.out =8), ncol=2, byrow = TRUE)))
   })
 
-  polygons <- lapply(ellipses,function(x)st_polygon(list(as.matrix(x))))
 
   # regions
-  A <- st_multi_difference(l=polygons)
-  B <- st_multi_difference(l=polygons[c(2,1,3,4)])
-  C <- st_multi_difference(l=polygons[c(3,1,2,4)])
-  D <- st_multi_difference(l=polygons[c(4,1:3)])
-  AB <- st_difference(st_intersection(polygons[[1]],polygons[[2]]),st_union(polygons[[3]],polygons[[4]]))
-  AC <- st_difference(st_intersection(polygons[[1]],polygons[[3]]),st_union(polygons[[2]],polygons[[4]]))
-  AD <- st_difference(st_intersection(polygons[[1]],polygons[[4]]),st_union(polygons[[3]],polygons[[2]]))
-  BC <- st_difference(st_intersection(polygons[[3]],polygons[[2]]),st_union(polygons[[1]],polygons[[4]]))
-  BD <- st_difference(st_intersection(polygons[[4]],polygons[[2]]),st_union(polygons[[3]],polygons[[1]]))
-  CD <- st_difference(st_intersection(polygons[[3]],polygons[[4]]),st_union(polygons[[1]],polygons[[2]]))
+  A <- st_multi_difference(l=polygons[c(1:6)])
+  B <- st_multi_difference(l=polygons[c(2,1,3:6)])
+  C <- st_multi_difference(l=polygons[c(3,1,2,4:6)])
+  D <- st_multi_difference(l=polygons[c(4,1:3,5,6)])
+  E <- st_multi_difference(l=polygons[c(5,1:4,6)])
+  F <- st_multi_difference(l=polygons[c(6,1:5)])
+  AB <- st_difference(st_intersection(polygons[[1]],polygons[[2]]),st_multi_union(l=polygons[c(-1,-2)]))
+  AC <- st_difference(st_intersection(polygons[[1]],polygons[[3]]),st_multi_union(l=polygons[c(-1,-3)]))
+  AD <- st_difference(st_intersection(polygons[[1]],polygons[[4]]),st_multi_union(l=polygons[c(-1,-4)]))
+  AE <- st_difference(st_intersection(polygons[[1]],polygons[[5]]),st_multi_union(l=polygons[c(-1,-5)]))
+  AF <- st_difference(st_intersection(polygons[[1]],polygons[[4]]),st_multi_union(l=polygons[3:6]))
+  BC <- st_difference(st_intersection(polygons[[3]],polygons[[2]]),st_multi_union(l=polygons[3:6]))
+  BD <- st_difference(st_intersection(polygons[[4]],polygons[[2]]),st_multi_union(l=polygons[3:6]))
+  BE <- st_difference(st_intersection(polygons[[4]],polygons[[2]]),st_multi_union(l=polygons[3:6]))
+  BF <- st_difference(st_intersection(polygons[[4]],polygons[[2]]),st_multi_union(l=polygons[3:6]))
+  CD <- st_difference(st_intersection(polygons[[3]],polygons[[4]]),st_multi_union(l=polygons[3:6]))
+  CE <- st_difference(st_intersection(polygons[[3]],polygons[[4]]),st_multi_union(l=polygons[3:6]))
+  CF <- st_difference(st_intersection(polygons[[3]],polygons[[4]]),st_multi_union(l=polygons[3:6]))
+  DE <- st_difference(st_intersection(polygons[[3]],polygons[[4]]),st_multi_union(l=polygons[3:6]))
+  DF <- st_difference(st_intersection(polygons[[3]],polygons[[4]]),st_multi_union(l=polygons[3:6]))
+  EF <- st_difference(st_intersection(polygons[[3]],polygons[[4]]),st_multi_union(l=polygons[3:6]))
   ABC <- st_difference(st_multi_intersection(l=polygons[1:3]),polygons[[4]])
   ABD <- st_difference(st_multi_intersection(l=polygons[c(1,2,4)]),polygons[[3]])
   ACD <- st_difference(st_multi_intersection(l=polygons[c(1,3,4)]),polygons[[2]])
   BCD <- st_difference(st_multi_intersection(l=polygons[c(4,2,3)]),polygons[[1]])
-  ABCD <- st_multi_intersection(l=polygons)
+  AB
+  ABCDEF <- st_multi_intersection(l=polygons)
 
   polygon_list <- list(A=A,B=B,C=C,D=D,AB=AB,AC=AC,AD=AD,BC=BC,BD=BD,CD=CD,ABC=ABC,ABD=ABD,ACD=ACD,BCD=BCD,ABCD=ABCD)
   polygon_name <- names(polygon_list)
