@@ -15,7 +15,8 @@ Imports:
     sf,
     ggplot2,
     dplyr,
-    stringr
+    stringr,
+    RVenn
 URL: https://github.com/gaospecial/ggVennDiagram
 License: GPL-3
 Encoding: UTF-8
