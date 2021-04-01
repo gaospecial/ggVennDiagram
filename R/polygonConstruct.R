@@ -4,8 +4,10 @@
 #' @slot names The names of the `sets` if has names. If the `list`
 #'   doesn't have names, the sets will be named as "Set_1", "Set_2"
 #'   and so on.
+#' @import RVenn
 setClass("Polygon",
-         slots = list(sets = "ANY", names = "ANY"))
+         slots = list(sets = "ANY", names = "ANY"),
+         contains = "Venn")
 
 setGeneric("Polygon", function(sets){
   standardGeneric("Polygon")
