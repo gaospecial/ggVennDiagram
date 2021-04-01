@@ -3,7 +3,7 @@
 #' @param x list of items
 #' @param n.sides set how many points been generated for one ellipse, the more points, the better resolution.
 #' @param show_intersect whether add a hidden text to polygons in the plot, the text can be further visualized by `plotly::ggplotly()`
-#' @param label select one from c("count","percent","both")
+#' @param label select one from c("count","percent","both"), set to NULL if you don't want label.
 #' @param label_geom choose from geom_label and geom_text
 #' @param label_alpha set 0 to remove label background
 #' @param category.names default is names(x)

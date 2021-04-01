@@ -1,7 +1,6 @@
 # method for polygon intersection
 
 
-
 #' @export
 #' @rdname overlap
 setMethod("overlap", c(venn = "Polygon", slice = "ANY"),
@@ -16,8 +15,7 @@ setMethod("overlap", c(venn = "Polygon", slice = "ANY"),
           })
 
 
-# Method for difference =========================
-
+# Method for polygon difference =========================
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom sf st_difference st_union
@@ -51,5 +49,34 @@ setMethod("discern", c(venn = "Polygon", slice1 = "ANY", slice2 = "ANY"),
 )
 
 
+setGeneric("discern_overlap", function(venn, slice = "all") standardGeneric("discern_overlap"))
+
+#' @export
+#' @rdname discern_overlap
+setMethod("discern_overlap", c(venn="Venn", slice="ANY"),
+          function(venn, slice = "all"){
+            overlap = RVenn::overlap(venn, slice = slice)
+            if (slice[1] == "all" | identical(venn@sets[slice], venn@sets)){
+              discern = NULL
+              return(overlap)
+            } else {
+              discern = RVenn::discern(venn, slice1 = slice)
+              return(intersect(overlap, discern))
+            }
+          })
+
+#' @export
+#' @rdname discern_overlap
+setMethod("discern_overlap", c(venn="Polygon", slice="ANY"),
+          function(venn, slice = "all"){
+            overlap = overlap(venn, slice = slice)
+            if (slice[1] == "all" | identical(venn@sets[slice], venn@sets)){
+              discern = NULL
+              return(overlap)
+            } else {
+              discern = discern(venn, slice1 = slice)
+              return(st_intersection(overlap, discern))
+            }
+          })
 
 
