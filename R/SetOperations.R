@@ -24,7 +24,7 @@ setMethod("discern", c(venn = "Polygon", slice1 = "ANY", slice2 = "ANY"),
           function(venn,
                    slice1,
                    slice2 = "all") {
-
+            polygon = venn
             if (is.numeric(slice1)) {
               slice1 = names(polygon@sets)[slice1]
             }
