@@ -8,24 +8,24 @@ combinations <- function(n){
   unlist(l, recursive = F)
 }
 
-matrix2list <- function(m){
-  lapply(seq_len(ncol(m)), function(i) m[,i])
+matrix2list <- function(matrix){
+  lapply(seq_len(ncol(matrix)), function(i) matrix[,i])
 }
 
-region_items <- function(venn){
+get_region_items <- function(venn){
   n = length(venn@sets)
   c = combinations(n)
   lapply(c, function(i) discern_overlap(venn,i))
 }
 
-region_names <- function(venn){
+get_region_names <- function(venn){
   n = length(venn@sets)
   set_name = venn@names
   c = combinations(n)
   lapply(c, function(i) paste0(set_name[i], collapse = ".."))
 }
 
-region_id <- function(venn){
+get_region_ids <- function(venn){
   n = length(venn@sets)
   c = combinations(n)
   sapply(c, function(i) paste0(i, collapse = ""))
