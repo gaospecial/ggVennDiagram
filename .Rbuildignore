@@ -14,3 +14,4 @@
 ^ggVennDiagram\.Rproj$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^data-raw$
