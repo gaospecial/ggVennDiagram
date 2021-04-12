@@ -57,35 +57,68 @@ setMethod("Polygon", c(sets = "ANY"),
 setClass("VennPlotData",
          slots = list(setEdge = "ANY", setLabel = "ANY", region = "ANY"))
 
-setGeneric("VennPlotData", function(setEdge){
+setGeneric("VennPlotData", function(setEdge, setLabel){
   standardGeneric("VennPlotData")
 })
 
+
+
+#' @param setEdge a list of coordinates matrix defining Venn set edges
+#'
+#' @param setLabel a list of coordinates matrix defining Venn set labels
+#'
 #' @export
 #' @importFrom methods new
-setMethod("VennPlotData", c(setEdge = "ANY", setLabel = "ANY", region = "ANY"),
-          function(setEdge, setLabel = NULL, region = "auto"){
-            if (!is.list(sets)){
-              stop("Data sets should be a list.")
-            }
+setMethod("VennPlotData", c(setEdge = "ANY", setLabel = "ANY"),
+          function(setEdge, setLabel){
+            if (!is.list(setEdge) | !is.list(setLabel))
+              stop("SetEdge/setLabel must be a list.")
+            if (length(setEdge) != length(setLabel))
+              stop("SetEdge/setlabel must be the same length.")
+            if (!all(sapply(setEdge, is.matrix), sapply(setLabel, is.matrix)))
+              stop("The element in setEdge/setLabel list must be a matrix.")
 
-            if (sum(sapply(sets, is.null) == TRUE) >= 1){
-              sets = sets[!(sapply(sets, is.null))]
-            }
-
-            if (length(sets) <= 1){
-              stop("The list should contain at least 2 vectors.")
-            }
-
-            if (length(unique(lapply(sets, class))) != 1) {
-              stop("Vectors should be in the same class.")
-            }
-
-            if (!(sapply(sets, class)[1] %in% c("XY", "POLYGON", "sfg"))) {
-              stop("The list must contain only XY, POLYGON or sfg object.")
-            }
-
-            data = new(Class = "VennPlotData", setEdge = setEdge)
-
+            edge <- .setEdge(setEdge)
+            label <- .setLabel(setLabel)
+            region <- .region(setEdge)
+            data = new(Class = "VennPlotData", setEdge = edge, setLabel = label, region = region)
             data
           })
+
+#' @importFrom sf st_linestring st_as_sf
+.setEdge <- function(setEdge){
+  linestrings <- lapply(setEdge, st_linestring)
+  d <- tibble::tibble(
+    id = as.character(seq_len(length(setEdge))),
+    geometry = linestrings
+  )
+  st_as_sf(d)
+}
+
+#' @importFrom sf st_point st_as_sf
+.setLabel <- function(setLabel){
+  points <- lapply(setLabel, st_point)
+  d <- tibble::tibble(
+    id = as.character(seq_len(length(setLabel))),
+    geometry = points
+  )
+  st_as_sf(d)
+}
+
+#' @importFrom sf st_polygon st_as_sf
+.region <- function(setEdge){
+  polygons <- lapply(setEdge, function(x) st_polygon(list(x)))
+  polygon <- Polygon(polygons)
+  regions <- get_region_items(polygon)
+  region_id <- get_region_ids(polygon)
+  d <- tibble::tibble(
+    id = region_id,
+    geometry = regions
+  )
+  st_as_sf(d)
+}
+
+
+
+
+
