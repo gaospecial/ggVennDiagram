@@ -73,7 +73,7 @@ get_region_items <- function(x, category.names=names(x)){
 #' @import ggplot2
 #'
 #' @return ggplot object
-plot_venn <- function(region_data, category, counts,show_intersect, label, label_geom, label_alpha, ...){
+plot_venn <- function(region_data, category, counts,show_intersect, label, label_geom, label_alpha, percent_digits = 0, ...){
   polygon <- region_data[[1]]
   center <- region_data[[2]]
   if(show_intersect) {
@@ -95,7 +95,7 @@ plot_venn <- function(region_data, category, counts,show_intersect, label, label
   }
   else{
     counts <- counts %>%
-      mutate(percent=paste(round(.data$count*100/sum(.data$count),digits = 2),"%",sep="")) %>%
+      mutate(percent=paste(round(.data$count*100/sum(.data$count),digits = percent_digits),"%",sep="")) %>%
       mutate(label = paste(.data$count,"\n","(",.data$percent,")",sep=""))
     data <- merge(counts,center)
     if (label == "count"){
