@@ -47,3 +47,45 @@ setMethod("Polygon", c(sets = "ANY"),
 
             polygon
           })
+
+
+#' An S4 class to represent Venn plot components.
+#'
+#' @slot edge
+#' @slot region
+#' @slot label
+setClass("VennPlotData",
+         slots = list(setEdge = "ANY", setLabel = "ANY", region = "ANY"))
+
+setGeneric("VennPlotData", function(setEdge){
+  standardGeneric("VennPlotData")
+})
+
+#' @export
+#' @importFrom methods new
+setMethod("VennPlotData", c(setEdge = "ANY", setLabel = "ANY", region = "ANY"),
+          function(setEdge, setLabel = NULL, region = "auto"){
+            if (!is.list(sets)){
+              stop("Data sets should be a list.")
+            }
+
+            if (sum(sapply(sets, is.null) == TRUE) >= 1){
+              sets = sets[!(sapply(sets, is.null))]
+            }
+
+            if (length(sets) <= 1){
+              stop("The list should contain at least 2 vectors.")
+            }
+
+            if (length(unique(lapply(sets, class))) != 1) {
+              stop("Vectors should be in the same class.")
+            }
+
+            if (!(sapply(sets, class)[1] %in% c("XY", "POLYGON", "sfg"))) {
+              stop("The list must contain only XY, POLYGON or sfg object.")
+            }
+
+            data = new(Class = "VennPlotData", setEdge = setEdge)
+
+            data
+          })
