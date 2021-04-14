@@ -18,10 +18,16 @@
 #' ggVennDiagram(x)  # 4d venn
 #' ggVennDiagram(x[1:3])  # 3d venn
 #' ggVennDiagram(x[1:2])  # 2d venn
-ggVennDiagram <- function(x, category.names=names(x),show_intersect = FALSE, label="count",label_alpha=0.5,label_geom=geom_label, lty=1,color="grey",...){
+ggVennDiagram <- function(x, category.names=names(x),show_intersect = FALSE,
+                          label=c("count","percent","both",NULL),
+                          label_alpha=0.5,
+                          label_geom=c("label","text"),
+                          lty=1, color="grey",...){
   dimension <- length(x)
   names(x) <- category.names
   venn <- Venn(sets = x)
+  label <- match.arg(label)
+  label_geom <- match.arg(label_geom)
   if (dimension <= 6){
     plot_venn(venn, show_intersect = show_intersect,label = label, label_alpha=label_alpha, label_geom = label_geom,lty=lty,color=color,...)
   }
@@ -43,11 +49,11 @@ ggVennDiagram <- function(x, category.names=names(x),show_intersect = FALSE, lab
 #' @import ggplot2
 #'
 #' @return ggplot object
-plot_venn <- function(venn, category, counts,show_intersect, label, label_geom, label_alpha, ...){
+plot_venn <- function(venn, category, counts,show_intersect, label, lty, label_geom, label_alpha, ...){
   data <- process_data(venn)
   p <- ggplot() +
     geom_sf(aes(fill=count), data = data@region) +
-    geom_sf(aes(color = id), size = 1, data = data@setEdge, show.legend = F) +
+    geom_sf(aes(color = id), size = 1, lty = lty, data = data@setEdge, show.legend = F) +
     geom_sf_text(aes(label = name), data = data@setLabel) +
     theme_void()
 
@@ -59,14 +65,14 @@ plot_venn <- function(venn, category, counts,show_intersect, label, label_geom, 
       dplyr::filter(component == "region") %>%
       dplyr::mutate(percent = paste(round(count*100/sum(count)),"%", sep="")) %>%
       dplyr::mutate(both = paste(count,percent,sep = "\n"))
-    if (label == "count"){
-      p + geom_sf_label(aes(label=count), data = region_label, alpha=label_alpha, label.size = NA)
+    if (label_geom == "label"){
+      p + geom_sf_label(aes_string(label=label), data = region_label, alpha=label_alpha, label.size = NA)
     }
-    else if (label == "percent"){
-      p + geom_sf_label(aes(label=percent), data = region_label, alpha=label_alpha, label.size = NA)
+    else if (label_geom == "text"){
+      p + geom_sf_text(aes_string(label=label), data = region_label, alpha=label_alpha)
     }
-    else if (label == "both"){
-      p + geom_sf_label(aes(label=both), data = region_label, alpha=label_alpha, label.size = NA)
+    else {
+      p
     }
   }
 }
