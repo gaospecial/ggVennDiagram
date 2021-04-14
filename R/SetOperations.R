@@ -75,7 +75,7 @@ setMethod("discern_overlap", c(venn="Polygon", slice="ANY"),
               return(overlap)
             } else {
               discern = discern(venn, slice1 = slice)
-              return(st_intersection(overlap, discern))
+              return(sf::st_intersection(overlap, discern))
             }
           })
 

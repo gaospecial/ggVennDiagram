@@ -56,9 +56,9 @@ plot_venn <- function(venn, category, counts,show_intersect, label, label_geom, 
   }
   else{
     region_label <- data@region %>%
-      filter(component == "region") %>%
-      mutate(percent = paste(round(count*100/sum(count)),"%", sep="")) %>%
-      mutate(both = paste(count,percent,sep = "\n"))
+      dplyr::filter(component == "region") %>%
+      dplyr::mutate(percent = paste(round(count*100/sum(count)),"%", sep="")) %>%
+      dplyr::mutate(both = paste(count,percent,sep = "\n"))
     if (label == "count"){
       p + geom_sf_label(aes(label=count), data = region_label, alpha=label_alpha, label.size = NA)
     }

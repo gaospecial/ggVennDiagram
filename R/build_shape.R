@@ -12,7 +12,7 @@
 #' @examples
 build_shape <- function(edge, label,
                       nsets = length(edge),
-                      shape_id = "auto",
+                      shape_id,
                       type = c("ellipse","triangle","polygon","circle")){
 
   if (sum(sapply(edge, is.matrix) == FALSE) >= 1)
@@ -23,10 +23,6 @@ build_shape <- function(edge, label,
     stop("Length of edge/label must be equal.")
   if (!is.list(edge) | !is.list(edge))
     stop("edge/label must be a list.")
-  if (shape_id == "auto")
-    shape_id <- as.character(max(1, as.numeric(shapes$shape_id)) + 1)
-  if (shape_id %in% unique(shapes$shape_id))
-    stop("Your shape_id is duplicated with internal data.")
   type <- match.arg(type)
 
   shape_edge <- tibble::tibble(
