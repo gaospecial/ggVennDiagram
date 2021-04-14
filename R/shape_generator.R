@@ -79,11 +79,14 @@ triangle <- function(xy = c(0,0,1,0,0,1)){
 }
 
 
+########## Four dimension ###########
 
 #' fancy 4d ellipse from `VennDiagram`
 #'
+#' @param parameters will pass to shape generators
+#'
 #' @return a list of coordinates matrix
-fancy_4d_ellipse <- function(parameters = NULL, n = 50){
+fancy_4d_ellipse <- function(parameters = NULL, n = 100){
   # 4d ellipses
   if (is.null(parameters))
     parameters <- list(c(0.35, 0.47, 0.35, 0.20, 135),
@@ -98,8 +101,23 @@ fancy_4d_ellipse <- function(parameters = NULL, n = 50){
 }
 
 
+#' @inheritParams label_position
+fancy_4d_ellipse_label <- function(position = NULL){
+  if (is.null(position))
+    position <-  tibble::tribble(
+      ~x,       ~y,
+      0.08,      0.78,
+      0.26,      0.86,
+      0.71,      0.85,
+      0.93,      0.78
+    )
+  label_position(position)
 
+}
 
+############## Three dimension #########
+
+#' @inheritParams fancy_4d_ellipse
 fancy_3d_circle <- function(parameters = NULL, n = 100){
   # three circles
   if(is.null(parameters))
@@ -112,42 +130,84 @@ fancy_3d_circle <- function(parameters = NULL, n = 100){
   circles
 }
 
+#' @inheritParams label_position
+fancy_3d_circle_label <- function(position = NULL){
+  if (is.null(position))
+    position <- tibble::tribble(
+      ~x,       ~y,
+      2,      8.5,
+      -3.5,     -4.6,
+      7.5,     -4.6
+    )
+  label_position(position)
+}
+
+######### two dimension #####
+fancy_2d_circle <- function(parameters = NULL, n = 100){
+  if(is.null(parameters))
+    parameters <- list(c(0,0,4),c(4,0,4))
+
+  circles <- lapply(parameters, function(x){
+    do.call(circle,as.list(c(x,n)))
+  })
+
+  circles
+}
+
+fancy_2d_circle_label <- function(position = NULL){
+  if (is.null(position))
+    position <- tibble::tribble(
+      ~x,       ~y,
+      -1,      4.3,
+       5,      4.3
+    )
+  label_position(position)
+}
+
+########## Six dimension #########
+# triangles source: https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg
+fancy_6d_triangle <- function(parameters = NULL){
+  if(is.null(parameters))
+    parameters <- list(c(-69277,-32868,135580,121186, 70900,199427),
+                   c( 81988,-44426, 38444,206222,121044,165111),
+                   c(203271,  9619, 39604, 82683, 84652,206669),
+                   c(333561,225349, 61764, 76805, 38980,182461),
+                   c(131886,385785, 38136,111491, 94208, 24690),
+                   c(-60184,274046,142476, 39903,103276,183962))
+
+  shapes <- lapply(parameters, function(x){
+    triangle(x)
+  })
+
+  shapes
+}
+
+fancy_6d_triangle_label <- function(position = NULL){
+  if (is.null(position))
+    position <- tibble::tribble(
+      ~x,       ~y,
+      0,      50000,
+      82000,      30000,
+      160000,     60000,
+      180000,    180000,
+      100000,    250000,
+      20000,     220000
+    )
+  label_position(position)
+}
+
 #' helper function to set label position
 #'
 #' @param position a data.frame containing label coordinates
 #'
-#' @return
+#' @return a list of matrix
 #' @export
 #'
 #' @examples
 label_position <- function(position){
   points <- lapply(seq_len(nrow(position)),function(i){
-    as.matrix(label_position[i,])
+    as.matrix(position[i,])
   })
 
   points
-}
-
-fancy_4d_ellipse_label <- function(position = NULL){
-  if (is.null(position))
-    position <-  tibble::tribble(
-        ~x,       ~y,
-      0.08,      0.78,
-      0.26,      0.86,
-      0.71,      0.85,
-      0.93,      0.78
-    )
-  label_position(position)
-
-}
-
-fancy_3d_circle_label <- function(position){
-  if (is.null(position))
-    position <- tibble::tribble(
-        ~x,       ~y,
-         2,      8.5,
-      -3.5,     -4.6,
-       7.5,     -4.6
-    )
-  label_position(position)
 }
