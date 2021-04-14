@@ -85,29 +85,26 @@ setMethod("VennPlotData", c(setEdge = "ANY", setLabel = "ANY"),
             data
           })
 
-#' @importFrom sf st_linestring st_as_sf
 .setEdge <- function(setEdge){
-  linestrings <- lapply(setEdge, st_linestring)
+  linestrings <- lapply(setEdge, sf::st_linestring)
   d <- tibble::tibble(
     id = as.character(seq_len(length(setEdge))),
     geometry = linestrings
   )
-  st_as_sf(d)
+  sf::st_as_sf(d)
 }
 
-#' @importFrom sf st_point st_as_sf
 .setLabel <- function(setLabel){
-  points <- lapply(setLabel, st_point)
+  points <- lapply(setLabel, sf::st_point)
   d <- tibble::tibble(
     id = as.character(seq_len(length(setLabel))),
     geometry = points
   )
-  st_as_sf(d)
+  sf::st_as_sf(d)
 }
 
-#' @importFrom sf st_polygon st_as_sf
 .region <- function(setEdge){
-  polygons <- lapply(setEdge, function(x) st_polygon(list(x)))
+  polygons <- lapply(setEdge, function(x) sf::st_polygon(list(x)))
   polygon <- Polygon(polygons)
   regions <- get_region_items(polygon)
   region_id <- get_region_ids(polygon)
@@ -115,7 +112,7 @@ setMethod("VennPlotData", c(setEdge = "ANY", setLabel = "ANY"),
     id = region_id,
     geometry = regions
   )
-  st_as_sf(d)
+  sf::st_as_sf(d)
 }
 
 

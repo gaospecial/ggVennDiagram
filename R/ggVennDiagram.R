@@ -26,7 +26,7 @@ ggVennDiagram <- function(x, category.names=names(x),show_intersect = FALSE, lab
     plot_venn(venn, show_intersect = show_intersect,label = label, label_alpha=label_alpha, label_geom = label_geom,lty=lty,color=color,...)
   }
   else{
-    stop("Only support 2-4 dimension Venn diagram.")
+    stop("Only support 2-6 dimension Venn diagram.")
   }
 }
 
@@ -45,17 +45,17 @@ ggVennDiagram <- function(x, category.names=names(x),show_intersect = FALSE, lab
 #' @return ggplot object
 plot_venn <- function(venn, category, counts,show_intersect, label, label_geom, label_alpha, ...){
   data <- process_data(venn)
-  p <- ggplot(data) +
-    geom_sf(aes(fill=count), data = ~ filter(.x, component == "region")) +
-    geom_sf(aes(color = id), size = 1, data = ~ filter(.x, component == "setEdge"), show.legend = F) +
-    geom_sf_text(aes(label = name), data = ~ filter(.x, component == "setLabel")) +
+  p <- ggplot() +
+    geom_sf(aes(fill=count), data = data@region) +
+    geom_sf(aes(color = id), size = 1, data = data@setEdge, show.legend = F) +
+    geom_sf_text(aes(label = name), data = data@setLabel) +
     theme_void()
 
   if (is.null(label)){
     return(p)
   }
   else{
-    region_label <- p$data %>%
+    region_label <- data@region %>%
       filter(component == "region") %>%
       mutate(percent = paste(round(count*100/sum(count)),"%", sep="")) %>%
       mutate(both = paste(count,percent,sep = "\n"))
@@ -72,18 +72,4 @@ plot_venn <- function(venn, category, counts,show_intersect, label, label_geom, 
 }
 
 
-#' generating a circle
-#'
-#' @param x,y center of circle
-#' @param r radius of circle
-#' @param n points (resolution)
-#'
-#' @return a data.frame representing circle position
-circle <- function(x,y,r,n=1000){
-  angles <- seq(0,2*pi,length.out = n)
-  xv <- cos(angles) * r + x
-  yv <- sin(angles) * r + y
-  xv <- round(xv,6)
-  yv <- round(yv,6)
-  data.frame(x=xv,y=yv)
-}
+

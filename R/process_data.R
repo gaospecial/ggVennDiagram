@@ -5,17 +5,19 @@ setGeneric("process_data", function(venn) standardGeneric("process_data"))
 #' @export
 setMethod("process_data", signature = c("Venn"),
           function(venn){
-            shape_data <- process_shape_data(venn)
+            shape <- get_shape_data(venn)
+            plot_data <- VennPlotData(setEdge = filter(shape, component == "setEdge") %>% pull(xy),
+                                      setLabel = filter(shape, component == "setLabel") %>% pull(xy))
             set_data <- process_setEdge_data(venn)
-            item_data <- process_item_data(venn)
             label_data <- process_setLabel_data(venn)
-            data <- shape_data %>%
-              left_join(bind_rows(set_data,item_data,label_data),
-                        by = c("component","id"))
-            return(data)
+            item_data <- process_item_data(venn)
+            plot_data@setEdge <- left_join(plot_data@setEdge, set_data, by = "id")
+            plot_data@setLabel <- left_join(plot_data@setLabel, label_data, by = "id")
+            plot_data@region <- left_join(plot_data@region, item_data, by = "id")
+            return(plot_data)
           })
 
-process_shape_data <- function(venn){
+get_shape_data <- function(venn){
   n = length(venn@sets)
   data <- shapes %>% filter(nsets == n)
   if (length(unique(data$shape_id))>1) {
@@ -24,7 +26,8 @@ process_shape_data <- function(venn){
     id <- sample(unique(data$shape_id), 1)
     data <- data %>% filter(shape_id == id)
   }
-  return(data)
+
+  data
 }
 
 process_setEdge_data <- function(venn){
