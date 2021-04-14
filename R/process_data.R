@@ -1,11 +1,11 @@
-setGeneric("process_data", function(venn) standardGeneric("process_data"))
+setGeneric("process_data", function(venn, ...) standardGeneric("process_data"))
 
 #' get plot data
 #' @param venn a Venn object
 #' @export
 setMethod("process_data", signature = c("Venn"),
-          function(venn){
-            shape <- get_shape_data(venn)
+          function(venn, ...){
+            shape <- get_shape_data(venn, ...)
             plot_data <- VennPlotData(setEdge = dplyr::filter(shape, component == "setEdge") %>% dplyr::pull(xy),
                                       setLabel = dplyr::filter(shape, component == "setLabel") %>% dplyr::pull(xy))
             set_data <- process_setEdge_data(venn)
@@ -17,12 +17,22 @@ setMethod("process_data", signature = c("Venn"),
             return(plot_data)
           })
 
-get_shape_data <- function(venn){
+#' get applicable shape data for Venn object
+#'
+#' @param venn Venn object
+#' @param ... i.e. shape_id == "601", type == "polygon"
+#'
+#' @return
+#'
+#' @examples
+#' get_shape_data(venn, type == "polygon")
+get_shape_data <- function(venn, ...){
   n = length(venn@sets)
-  data <- shapes %>% dplyr::filter(nsets == n)
+  data <- shapes %>% dplyr::filter(nsets == n, ...)
   if (length(unique(data$shape_id))>1) {
-    warnings("More than one shapes are available for ", n, " sets Venn plot. ",
-             "Will choose one randomly.")
+    warning("More than one shapes are available for ", n, " sets Venn plot. ",
+             "Will choose one randomly.\n",
+            "You may explictly select a shape by specify shape_id, and/or type.\n\n")
     the_id <- sample(unique(data$shape_id), 1)
     data <- data %>% dplyr::filter(shape_id == the_id)
   }
