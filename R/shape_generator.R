@@ -5,7 +5,7 @@ NULL
 
 
 # modified from VennDiagram::ell2poly
-#' generating a ellipse
+#' generating a closed ellipse
 #'
 #' @param x,y the coordinates of ellipse center
 #' @param a radius of short arm
@@ -19,6 +19,7 @@ NULL
 #' @examples
 #' # plot the default ellipse
 #' library(sf)
+#' library(ggVennDiagram)
 #' ellipse() %>% st_linestring() %>% plot()
 ellipse <- function(x = 0, y =0, a = 2, b = 1, rotation = 0, n = 100){
   rotation <- rotation * pi/180
@@ -47,8 +48,11 @@ ellipse <- function(x = 0, y =0, a = 2, b = 1, rotation = 0, n = 100){
 #' @param n number of points for polygon object (resolution)
 #'
 #' @return a matrix representing circle coordinates
+#' @export
+#'
 #' @examples
 #' # plot the default circle
+#' library(ggVennDiagram)
 #' library(sf)
 #' circle() %>% st_linestring() %>% plot()
 circle <- function(x = 0, y = 0, r = 1, n=100){
@@ -64,11 +68,13 @@ circle <- function(x = 0, y = 0, r = 1, n=100){
 #'
 #' @param xy coordinates of the three points defining a triangle
 #'
-#' @return
 #' @export
+#' @return a matrix with xy coordinates
 #'
 #' @examples
 #' # triangle coordinates
+#' library(ggVennDiagram)
+#' library(sf)
 #' triangle()
 #'
 #' # plot a new triangle
@@ -84,6 +90,7 @@ triangle <- function(xy = c(0,0,1,0,0,1)){
 #' fancy 4d ellipse from `VennDiagram`
 #'
 #' @param parameters will pass to shape generators
+#' @param n count of points to shape this polygon
 #'
 #' @return a list of coordinates matrix
 fancy_4d_ellipse <- function(parameters = NULL, n = 100){
@@ -115,7 +122,7 @@ fancy_4d_ellipse_label <- function(position = NULL){
 
 }
 
-############## Three dimension #########
+############## Three dimension circle #########
 
 #' @inheritParams fancy_4d_ellipse
 fancy_3d_circle <- function(parameters = NULL, n = 100){
@@ -142,7 +149,8 @@ fancy_3d_circle_label <- function(position = NULL){
   label_position(position)
 }
 
-######### two dimension #####
+######### two dimension circle #####
+#' @inheritParams fancy_4d_ellipse
 fancy_2d_circle <- function(parameters = NULL, n = 100){
   if(is.null(parameters))
     parameters <- list(c(0,0,4),c(4,0,4))
@@ -154,6 +162,7 @@ fancy_2d_circle <- function(parameters = NULL, n = 100){
   circles
 }
 
+#' @inheritParams label_position
 fancy_2d_circle_label <- function(position = NULL){
   if (is.null(position))
     position <- tibble::tribble(
@@ -164,8 +173,9 @@ fancy_2d_circle_label <- function(position = NULL){
   label_position(position)
 }
 
-########## Six dimension #########
+########## Six dimension triangle #########
 # triangles source: https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg
+#' @inheritParams fancy_4d_ellipse
 fancy_6d_triangle <- function(parameters = NULL){
   if(is.null(parameters))
     parameters <- list(c(-69277,-32868,135580,121186, 70900,199427),
@@ -182,6 +192,7 @@ fancy_6d_triangle <- function(parameters = NULL){
   shapes
 }
 
+#' @inheritParams label_position
 fancy_6d_triangle_label <- function(position = NULL){
   if (is.null(position))
     position <- tibble::tribble(
@@ -201,9 +212,6 @@ fancy_6d_triangle_label <- function(position = NULL){
 #' @param position a data.frame containing label coordinates
 #'
 #' @return a list of matrix
-#' @export
-#'
-#' @examples
 label_position <- function(position){
   points <- lapply(seq_len(nrow(position)),function(i){
     as.matrix(position[i,])

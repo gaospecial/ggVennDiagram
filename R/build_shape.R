@@ -1,15 +1,13 @@
 #' Helper function to add shape
 #'
-#' @param edge
-#' @param nsets
-#' @param type
-#' @param shape_id
-#' @param component
+#' @param edge a list of xy matrix
+#' @param label a list of xy matrix
+#' @param nsets 2:7
+#' @param type c("ellipse","triangle","polygon","circle")
+#' @param shape_id a unique id
 #'
-#' @return
-#' @export
+#' @return a tibble with columns: nsets, type, shape_id, component, id, xy.
 #'
-#' @examples
 build_shape <- function(edge, label,
                       nsets = length(edge),
                       shape_id,

@@ -1,19 +1,26 @@
+#' @import RVenn
+NULL
+
 #' An S4 class to represent multiple polygons.
 #'
 #' @slot sets A `list` object contains sets
 #' @slot names The names of the `sets` if has names. If the `list`
 #'   doesn't have names, the sets will be named as "Set_1", "Set_2"
 #'   and so on.
-#' @import RVenn
-setClass("Polygon",
+Polygon <- setClass("Polygon",
          slots = list(sets = "ANY", names = "ANY"),
          contains = "Venn")
 
+# Polygon object constructor
 setGeneric("Polygon", function(sets){
   standardGeneric("Polygon")
 })
 
+#' Polygon constructor
+#'
+#' @param sets a list containing multiple simple features
 #' @export
+#'
 #' @importFrom methods new
 setMethod("Polygon", c(sets = "ANY"),
           function(sets){
@@ -51,11 +58,22 @@ setMethod("Polygon", c(sets = "ANY"),
 
 #' An S4 class to represent Venn plot components.
 #'
-#' @slot edge
-#' @slot region
-#' @slot label
+#' @slot setEdge a list of coordinates matrix defining Venn set edges
+#' @slot SetLabel a list of coordinates matrix defining Venn set labels
+#' @slot region the feature region will be calculated automatically with `setEdge`
+#'
 setClass("VennPlotData",
          slots = list(setEdge = "ANY", setLabel = "ANY", region = "ANY"))
+
+#' VennPlotData constructor
+#'
+#' @param setEdge a list of coordinates matrix defining Venn set edges
+#' @param setLabel a list of coordinates matrix defining Venn set labels#'
+#' @return a S4 class VennPlotData object
+#'
+#' @name VennPlotData
+NULL
+
 
 setGeneric("VennPlotData", function(setEdge, setLabel){
   standardGeneric("VennPlotData")
@@ -63,10 +81,7 @@ setGeneric("VennPlotData", function(setEdge, setLabel){
 
 
 
-#' @param setEdge a list of coordinates matrix defining Venn set edges
-#'
-#' @param setLabel a list of coordinates matrix defining Venn set labels
-#'
+#' @rdname VennPlotData
 #' @export
 #' @importFrom methods new
 setMethod("VennPlotData", c(setEdge = "ANY", setLabel = "ANY"),

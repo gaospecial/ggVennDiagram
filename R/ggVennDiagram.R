@@ -18,18 +18,22 @@
 #' ggVennDiagram(x)  # 4d venn
 #' ggVennDiagram(x[1:3])  # 3d venn
 #' ggVennDiagram(x[1:2])  # 2d venn
-ggVennDiagram <- function(x, category.names=names(x),show_intersect = FALSE,
-                          label=c("count","percent","both",NULL),
+ggVennDiagram <- function(x, category.names=names(x),
+                          show_intersect = FALSE,
+                          label=c("count","percent","both","none"),
                           label_alpha=0.5,
                           label_geom=c("label","text"),
                           lty=1, color="grey",...){
-  dimension <- length(x)
+
+  if (!is.list(x)){
+    stop(simpleError("ggVennDiagram() requires at least a list."))
+  }
   names(x) <- category.names
-  venn <- Venn(sets = x)
+  dimension <- length(x)
   label <- match.arg(label)
   label_geom <- match.arg(label_geom)
   if (dimension <= 6){
-    plot_venn(venn, show_intersect = show_intersect,label = label, label_alpha=label_alpha, label_geom = label_geom,lty=lty,color=color,...)
+    plot_venn(x, show_intersect = show_intersect,label = label, label_alpha=label_alpha, label_geom = label_geom,lty=lty,color=color,...)
   }
   else{
     stop("Only support 2-6 dimension Venn diagram.")
@@ -41,23 +45,21 @@ ggVennDiagram <- function(x, category.names=names(x),show_intersect = FALSE,
 
 #' plot codes
 #'
-#' @param region_data a list of two dataframes, which were used to plot polygon and label latter.
-#' @param category name of Set
-#' @param counts counts of items for every combinations
 #' @inheritParams ggVennDiagram
 #'
 #' @import ggplot2
 #'
 #' @return ggplot object
-plot_venn <- function(venn, category, counts,show_intersect, label, lty, label_geom, label_alpha, ...){
+plot_venn <- function(x, show_intersect, label, label_geom, label_alpha, lty, ...){
+  venn <- Venn(x)
   data <- process_data(venn)
   p <- ggplot() +
-    geom_sf(aes(fill=count), data = data@region) +
-    geom_sf(aes(color = id), size = 1, lty = lty, data = data@setEdge, show.legend = F) +
-    geom_sf_text(aes(label = name), data = data@setLabel) +
+    geom_sf(aes_string(fill="count"), data = data@region) +
+    geom_sf(aes_string(color = "id"), size = 1, lty = lty, data = data@setEdge, show.legend = F) +
+    geom_sf_text(aes_string(label = "name"), data = data@setLabel) +
     theme_void()
 
-  if (is.null(label)){
+  if (label == "none"){
     return(p)
   }
   else{
@@ -67,11 +69,9 @@ plot_venn <- function(venn, category, counts,show_intersect, label, lty, label_g
       dplyr::mutate(both = paste(count,percent,sep = "\n"))
     if (label_geom == "label"){
       p + geom_sf_label(aes_string(label=label), data = region_label, alpha=label_alpha, label.size = NA)
-    }
-    else if (label_geom == "text"){
+    } else if (label_geom == "text"){
       p + geom_sf_text(aes_string(label=label), data = region_label, alpha=label_alpha)
-    }
-    else {
+    } else {
       p
     }
   }
