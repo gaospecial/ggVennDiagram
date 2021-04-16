@@ -46,11 +46,13 @@ ggVennDiagram <- function(x, category.names=names(x),
 #' plot codes
 #'
 #' @inheritParams ggVennDiagram
+#' @param percent_digit number of digits when formating percent label (0)
+#' @param txtWidth width of text used in showing intersect members (40)
 #'
 #' @import ggplot2
 #'
 #' @return ggplot object, or plotly object if show_intersect is TRUE
-plot_venn <- function(x, show_intersect, label, label_geom, label_alpha, lty, percent_digit = 0, ...){
+plot_venn <- function(x, show_intersect, label, label_geom, label_alpha, lty, percent_digit = 0, txtWidth = 40, ...){
   venn <- Venn(x)
   data <- process_data(venn)
   p <- ggplot() +
@@ -75,7 +77,7 @@ plot_venn <- function(x, show_intersect, label, label_geom, label_alpha, lty, pe
   if (show_intersect == TRUE){
     items <- data@region %>%
       dplyr::rowwise() %>%
-      dplyr::mutate(text = stringr::str_wrap(paste0(item, collapse = " "),40)) %>%
+      dplyr::mutate(text = stringr::str_wrap(paste0(item, collapse = " "), txtWidth = txtWidth)) %>%
       sf::st_as_sf()
     p <- ggplot(items, aes(fill=count, text = text)) + geom_sf() +
       geom_sf_text(aes_string(label = "name"), data = data@setLabel, inherit.aes = F) +
