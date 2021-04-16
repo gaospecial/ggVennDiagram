@@ -49,8 +49,8 @@ ggVennDiagram <- function(x, category.names=names(x),
 #'
 #' @import ggplot2
 #'
-#' @return ggplot object
-plot_venn <- function(x, show_intersect, label, label_geom, label_alpha, lty, ...){
+#' @return ggplot object, or plotly object if show_intersect is TRUE
+plot_venn <- function(x, show_intersect, label, label_geom, label_alpha, lty, percent_digit = 0, ...){
   venn <- Venn(x)
   data <- process_data(venn)
   p <- ggplot() +
@@ -59,22 +59,36 @@ plot_venn <- function(x, show_intersect, label, label_geom, label_alpha, lty, ..
     geom_sf_text(aes_string(label = "name"), data = data@setLabel) +
     theme_void()
 
-  if (label == "none"){
-    return(p)
-  }
-  else{
+  if (label != "none" & show_intersect == FALSE){
     region_label <- data@region %>%
       dplyr::filter(component == "region") %>%
-      dplyr::mutate(percent = paste(round(count*100/sum(count)),"%", sep="")) %>%
+      dplyr::mutate(percent = paste(round(count*100/sum(count), digits = percent_digit),"%", sep="")) %>%
       dplyr::mutate(both = paste(count,percent,sep = "\n"))
     if (label_geom == "label"){
-      p + geom_sf_label(aes_string(label=label), data = region_label, alpha=label_alpha, label.size = NA)
-    } else if (label_geom == "text"){
-      p + geom_sf_text(aes_string(label=label), data = region_label, alpha=label_alpha)
-    } else {
-      p
+      p <- p + geom_sf_label(aes_string(label=label), data = region_label, alpha=label_alpha, label.size = NA)
+    }
+    if (label_geom == "text"){
+      p <- p + geom_sf_text(aes_string(label=label), data = region_label, alpha=label_alpha)
     }
   }
+
+  if (show_intersect == TRUE){
+    items <- data@region %>%
+      dplyr::rowwise() %>%
+      dplyr::mutate(text = stringr::str_wrap(paste0(item, collapse = " "),40)) %>%
+      sf::st_as_sf()
+    p <- ggplot(items, aes(fill=count, text = text)) + geom_sf() +
+      geom_sf_text(aes_string(label = "name"), data = data@setLabel, inherit.aes = F) +
+      theme_void()
+    ax <- list(
+      showline = FALSE
+    )
+    p <- plotly::ggplotly(p) %>%
+      plotly::style(hoveron = "fills+points") %>%
+      plotly::layout(xaxis = ax, yaxis = ax)
+  }
+
+  p
 }
 
 

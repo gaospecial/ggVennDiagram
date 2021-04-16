@@ -10,7 +10,7 @@ setGeneric("process_data", function(venn, ...) standardGeneric("process_data"))
 #' @name process_data
 setMethod("process_data", signature = c("Venn"),
           function(venn, ...){
-            shape <- get_shape_data(venn, ...)
+            shape <- get_shape_data(nsets = length(venn@sets), ...)
             plot_data <- VennPlotData(
               setEdge = dplyr::filter(shape, component == "setEdge") %>% dplyr::pull(xy),
               setLabel = dplyr::filter(shape, component == "setLabel") %>% dplyr::pull(xy)
@@ -20,20 +20,17 @@ setMethod("process_data", signature = c("Venn"),
 
 #' get applicable shape data for Venn object
 #'
-#' @inheritParams process_data
+#' @param nsets number of sets
 #' @inheritDotParams process_data
 #'
 #' @return a tibble describing specific shape
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#'   venn <- Venn(list(A=1:3,B=2:6,C=3:7))
-#'   get_shape_data(venn, type == "polygon")
-#' }
-get_shape_data <- function(venn, ...){
-  n = length(venn@sets)
-  data <- shapes %>% dplyr::filter(.data$nsets == n, ...)
+#' get_shape_data(nsets = 3, type == "polygon")
+#'
+get_shape_data <- function(nsets, ...){
+  data <- shapes %>% dplyr::filter(.data$nsets == {{nsets}}, ...)
   if (length(unique(data[["shape_id"]]))>1) {
     # message("More than one shapes are available for ", n, " sets Venn plot. ",
     #          "Will choose the first one.\n",
@@ -50,7 +47,7 @@ plotData_add_venn <- function(plotData, venn){
   if (!inherits(venn, "Venn")) stop(simpleError("venn should be a S4 Venn object."))
   edge_data <- process_setEdge_data(venn)
   label_data <- process_setLabel_data(venn)
-  region_data <- process_item_data(venn)
+  region_data <- process_region_data(venn)
   plotData@setEdge <- dplyr::left_join(plotData@setEdge, edge_data, by = "id")
   plotData@setLabel <- dplyr::left_join(plotData@setLabel, label_data, by = "id")
   plotData@region <- dplyr::left_join(plotData@region, region_data, by = "id")
@@ -74,7 +71,7 @@ process_setLabel_data <- function(venn){
   )
 }
 
-process_item_data <- function(venn){
+process_region_data <- function(venn){
   region_items <- get_region_items(venn)
   counts <- sapply(region_items, length)
   region_ids <- get_region_ids(venn)
