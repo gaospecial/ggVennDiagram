@@ -54,6 +54,26 @@ plotData_add_venn <- function(plotData, venn){
   return(plotData)
 }
 
+#' Prepare Venn data
+#'
+#' @name venn_data
+#' @param venn a Venn object
+#'
+#' @return a tibble
+#' @export
+#'
+#' @examples
+#' x <- list(
+#' A = sample(letters, 8),
+#' B = sample(letters, 8),
+#' C = sample(letters, 8),
+#' D = sample(letters, 8)
+#' )
+#'
+#' venn <- Venn(x)
+#' process_region_data(venn)
+#' process_setEdge_data(venn)
+#' process_setLabel_data(venn)
 process_setEdge_data <- function(venn){
   tibble::tibble(
     component = "setEdge",
@@ -63,6 +83,8 @@ process_setEdge_data <- function(venn){
   )
 }
 
+#' @rdname venn_data
+#' @export
 process_setLabel_data <- function(venn){
   tibble::tibble(
     component = "setLabel",
@@ -71,6 +93,8 @@ process_setLabel_data <- function(venn){
   )
 }
 
+#' @rdname venn_data
+#' @export
 process_region_data <- function(venn){
   region_items <- get_region_items(venn)
   counts <- sapply(region_items, length)
