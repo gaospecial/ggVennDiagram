@@ -32,11 +32,11 @@ ggVennDiagram <- function(x, category.names=names(x),
   dimension <- length(x)
   label <- match.arg(label)
   label_geom <- match.arg(label_geom)
-  if (dimension <= 6){
+  if (dimension <= 7){
     plot_venn(x, show_intersect = show_intersect,label = label, label_alpha=label_alpha, label_geom = label_geom,lty=lty,color=color,...)
   }
   else{
-    stop("Only support 2-6 dimension Venn diagram.")
+    stop("Only support 2-7 dimension Venn diagram.")
   }
 }
 
