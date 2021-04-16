@@ -4,7 +4,6 @@
 # ggVennDiagram
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 ‘`ggVennDiagram`’ enables fancy Venn plot with 2-4 sets and generates
@@ -34,6 +33,7 @@ us to visually observe the differences between different parts.
 
 ``` r
 library(ggVennDiagram)
+#> Loading required package: RVenn
 genes <- paste("gene",1:1000,sep="")
 set.seed(20190708)
 x <- list(A=sample(genes,300),B=sample(genes,525),C=sample(genes,440),D=sample(genes,350))
@@ -45,7 +45,6 @@ ggVennDiagram(x)
 <img src="man/figures/README-example-1.png" width="70%" />
 
 ``` r
-
 # three dimension Venn plot
 ggVennDiagram(x[1:3])
 ```
@@ -53,7 +52,6 @@ ggVennDiagram(x[1:3])
 <img src="man/figures/README-example-2.png" width="70%" />
 
 ``` r
-
 # two dimension Venn plot
 ggVennDiagram(x[1:2])
 ```
@@ -66,17 +64,12 @@ with `ggplot` functions.
 ``` r
 library(ggplot2)
 ggVennDiagram(x) + scale_fill_gradient(low="blue",high = "red")
-#> Scale for 'fill' is already present. Adding another scale for 'fill', which
-#> will replace the existing scale.
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="70%" />
 
 ``` r
-
 ggVennDiagram(x,lty="dashed",color="black",size=2) + scale_fill_gradient(low="white",high = "red")
-#> Scale for 'fill' is already present. Adding another scale for 'fill', which
-#> will replace the existing scale.
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-2.png" width="70%" />
@@ -96,7 +89,6 @@ ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"))
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="70%" />
 
 ``` r
-
 ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = NULL)
 ```
 
@@ -115,7 +107,7 @@ ggVennDiagram(x, label_alpha=0)
 *Note: you need to install the GitHub version to enable these
 functions.*
 
-We implemented the `get_region_items()` to get intersection values.
+We implemented the `process_region_data()` to get intersection values.
 
 ``` r
 y <- list(
@@ -125,51 +117,25 @@ y <- list(
   D = sample(letters, 8)
 )
 
-get_region_items(y)
-#> $A
-#> [1] "y" "b" "e"
-#> 
-#> $B
-#> [1] "i" "v"
-#> 
-#> $C
-#> [1] "a"
-#> 
-#> $D
-#> [1] "h"
-#> 
-#> $AB
-#> [1] "c"
-#> 
-#> $AC
-#> character(0)
-#> 
-#> $AD
-#> [1] "z"
-#> 
-#> $BC
-#> [1] "d"
-#> 
-#> $BD
-#> [1] "k"
-#> 
-#> $CD
-#> [1] "f" "m"
-#> 
-#> $ABC
-#> [1] "w"
-#> 
-#> $ABD
-#> character(0)
-#> 
-#> $ACD
-#> [1] "j"
-#> 
-#> $BCD
-#> [1] "p"
-#> 
-#> $ABCD
-#> [1] "x"
+process_region_data(Venn(y))
+#> # A tibble: 15 x 5
+#>    component id    item      count name      
+#>    <chr>     <chr> <list>    <int> <chr>     
+#>  1 region    1     <chr [3]>     3 A         
+#>  2 region    2     <chr [2]>     2 B         
+#>  3 region    3     <chr [1]>     1 C         
+#>  4 region    4     <chr [1]>     1 D         
+#>  5 region    12    <chr [1]>     1 A..B      
+#>  6 region    13    <chr [0]>     0 A..C      
+#>  7 region    14    <chr [1]>     1 A..D      
+#>  8 region    23    <chr [1]>     1 B..C      
+#>  9 region    24    <chr [1]>     1 B..D      
+#> 10 region    34    <chr [2]>     2 C..D      
+#> 11 region    123   <chr [1]>     1 A..B..C   
+#> 12 region    124   <chr [0]>     0 A..B..D   
+#> 13 region    134   <chr [1]>     1 A..C..D   
+#> 14 region    234   <chr [1]>     1 B..C..D   
+#> 15 region    1234  <chr [1]>     1 A..B..C..D
 ```
 
 If only several items were included, intersections may also be viewed
@@ -177,15 +143,7 @@ interactively by `plotly` method (if you have two many items, this is
 useless).
 
 ``` r
-
-p <- ggVennDiagram(y, show_intersect = TRUE)
-p
-```
-
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="70%" />
-
-``` r
-plotly::ggplotly(p)
+ggVennDiagram(y, show_intersect = TRUE)
 ```
 
 In web browser or RStudio, you will get:
@@ -208,5 +166,6 @@ ellipses to draw a “flower” to show that.
 
 # “`ggVennDiagram`” 诞生记
 
-在 *@GuangchuangYu* 的公众号下面，我投稿了一篇文章，介绍了 “`ggVennDiagram`”
+在 *@GuangchuangYu* 的公众号下面，我投稿了一篇文章，介绍了
+“`ggVennDiagram`”
 包开发的始末，有兴趣的同学可以移步[至此](https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA)查看。

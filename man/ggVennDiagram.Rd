@@ -8,10 +8,9 @@ ggVennDiagram(
   x,
   category.names = names(x),
   show_intersect = FALSE,
-  n.sides = 3000,
-  label = "both",
+  label = c("count", "percent", "both", "none"),
   label_alpha = 0.5,
-  label_geom = geom_label,
+  label_geom = c("label", "text"),
   lty = 1,
   color = "grey",
   ...
@@ -24,9 +23,7 @@ ggVennDiagram(
 
 \item{show_intersect}{whether add a hidden text to polygons in the plot, the text can be further visualized by `plotly::ggplotly()`}
 
-\item{n.sides}{set how many points been generated for one ellipse, the more points, the better resolution.}
-
-\item{label}{select one from c("count","percent","both")}
+\item{label}{select one from c("count","percent","both"), set to NULL if you don't want label.}
 
 \item{label_alpha}{set 0 to remove label background}
 
