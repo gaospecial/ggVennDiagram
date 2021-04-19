@@ -2,6 +2,7 @@
 % Please edit documentation in R/Construct.R
 \name{Polygon,ANY-method}
 \alias{Polygon,ANY-method}
+\alias{polygon}
 \title{Polygon constructor}
 \usage{
 \S4method{Polygon}{ANY}(sets)

@@ -81,6 +81,7 @@ circle <- function(x = 0, y = 0, r = 1, n=100){
 #' triangle(c(-1,0,1,0,0,2)) %>% st_linestring() %>% plot()
 triangle <- function(xy = c(0,0,1,0,0,1)){
   xy <- matrix(rep(xy, length.out =8), ncol=2, byrow = TRUE)
+  colnames(xy) <- c("x","y")
   return(xy)
 }
 
@@ -197,12 +198,12 @@ fancy_6d_triangle_label <- function(position = NULL){
   if (is.null(position))
     position <- tibble::tribble(
       ~x,       ~y,
-      0,      50000,
-      82000,      30000,
-      160000,     60000,
-      180000,    180000,
-      100000,    250000,
-      20000,     220000
+      -50000,     50000,
+      60000,          0,
+      160000,     20000,
+      280000,    170000,
+      140000,    300000,
+      -20000,   270000
     )
   label_position(position)
 }

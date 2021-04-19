@@ -1,9 +1,11 @@
 ################## method for polygon intersection  ############
 
+
+
 #' calculate the overlap region of `Polygon` object
 #'
 #' @inheritParams discern_overlap
-#'
+#' @importMethodsFrom RVenn overlap
 #' @export
 setMethod("overlap", c(venn = "Polygon", slice = "ANY"),
           function(venn, slice = "all"){
@@ -21,13 +23,12 @@ setMethod("overlap", c(venn = "Polygon", slice = "ANY"),
 
 #' calculate the difference region of `Polygon` object
 #'
-#' @param venn Venn object
+#' @param venn Venn/Polygon object
 #' @param slice1 first slice of Venn object
 #' @param slice2 second slice of Venn object, default is all except the first slice
 #'
+#' @importMethodsFrom RVenn discern
 #' @export
-#' @importFrom magrittr %>%
-#' @importFrom sf st_difference st_union
 setMethod("discern", c(venn = "Polygon", slice1 = "ANY", slice2 = "ANY"),
           function(venn,
                    slice1,
@@ -43,13 +44,13 @@ setMethod("discern", c(venn = "Polygon", slice1 = "ANY", slice2 = "ANY"),
 
             if (slice2[1] == "all") {
               slice2 = setdiff(names(polygon@sets), slice1)
-              set1 = polygon@sets[slice1] %>% purrr::reduce(function(x, y) st_union(x, y))
-              set2 = polygon@sets[slice2] %>% purrr::reduce(function(x, y) st_union(x, y))
-              differ = st_difference(set1, set2)
+              set1 = polygon@sets[slice1] %>% purrr::reduce(function(x, y) sf::st_union(x, y))
+              set2 = polygon@sets[slice2] %>% purrr::reduce(function(x, y) sf::st_union(x, y))
+              differ = sf::st_difference(set1, set2)
             } else {
-              set1 = polygon@sets[slice1] %>% purrr::reduce(function(x, y) st_union(x, y))
-              set2 = polygon@sets[slice2] %>% purrr::reduce(function(x, y) st_union(x, y))
-              differ = st_difference(set1, set2)
+              set1 = polygon@sets[slice1] %>% purrr::reduce(function(x, y) sf::st_union(x, y))
+              set2 = polygon@sets[slice2] %>% purrr::reduce(function(x, y) sf::st_union(x, y))
+              differ = sf::st_difference(set1, set2)
             }
 
             differ
@@ -59,7 +60,7 @@ setMethod("discern", c(venn = "Polygon", slice1 = "ANY", slice2 = "ANY"),
 
 #' calculate region of Venn
 #'
-#' @param venn a Venn object
+#' @param venn a Venn/Polygon object
 #' @param slice index of Venn members, default is "all"
 #'
 #' @return region items

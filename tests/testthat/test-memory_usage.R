@@ -1,4 +1,4 @@
-test_that("multiplication works", {
+test_that("memory usage for large list", {
 
   large_list <- list(Score = as.character(rnorm(130000, 80, 20)),
                      Length = as.character(rnorm(6000, 200, 50)),

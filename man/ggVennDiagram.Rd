@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggVennDiagram.R
 \name{ggVennDiagram}
 \alias{ggVennDiagram}
-\title{ggVennDiagram}
+\title{ggVennDiagram main parser}
 \usage{
 ggVennDiagram(
   x,
@@ -11,8 +11,6 @@ ggVennDiagram(
   label = c("count", "percent", "both", "none"),
   label_alpha = 0.5,
   label_geom = c("label", "text"),
-  lty = 1,
-  color = "grey",
   ...
 )
 }
@@ -21,25 +19,21 @@ ggVennDiagram(
 
 \item{category.names}{default is names(x)}
 
-\item{show_intersect}{whether add a hidden text to polygons in the plot, the text can be further visualized by `plotly::ggplotly()`}
+\item{show_intersect}{if TRUE the text can be visualized by `plotly`}
 
-\item{label}{select one from c("count","percent","both"), set to NULL if you don't want label.}
+\item{label}{select one from c("count","percent","both","none")}
 
 \item{label_alpha}{set 0 to remove label background}
 
-\item{label_geom}{choose from geom_label and geom_text}
+\item{label_geom}{choose from c("label", "text")}
 
-\item{lty}{line type of polygons}
-
-\item{color}{line color of polygons}
-
-\item{...}{Other arguments passed on to the polygon layer.}
+\item{...}{Other arguments passed on to downstream functions.}
 }
 \value{
 A ggplot object
 }
 \description{
-ggVennDiagram
+ggVennDiagram main parser
 }
 \examples{
 library(ggVennDiagram)

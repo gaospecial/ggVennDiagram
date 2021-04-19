@@ -1,17 +1,33 @@
+#' An S4 class to represent multiple sets.
+#'
+#' This class is adopted from RVenn. Since RVenn doesn't export this class,
+#' I have to copy its codes hereafter.
+#'
+#' @slot sets A \code{list} object containing vectors in the same type.
+#' @slot names The names of the \code{sets} if it has names. If the \code{list}
+#'   doesn't have names, the sets will be named as "Set_1", "Set_2", "Set_3" and
+#'   so on.
+#' @name Venn-class
+setClass("Venn",
+         slots = list(sets = "ANY", names = "ANY")
+)
+
+
+#' @export
 #' @import RVenn
-NULL
+setGeneric("Venn", getGeneric("Venn",package = "RVenn"))
 
 #' An S4 class to represent multiple polygons.
 #'
-#' @slot sets A `list` object contains sets
+#' @slot sets A list contains sets
 #' @slot names The names of the `sets` if has names. If the `list`
 #'   doesn't have names, the sets will be named as "Set_1", "Set_2"
 #'   and so on.
-Polygon <- setClass("Polygon",
+#'
+setClass("Polygon",
          slots = list(sets = "ANY", names = "ANY"),
          contains = "Venn")
 
-# Polygon object constructor
 setGeneric("Polygon", function(sets){
   standardGeneric("Polygon")
 })
@@ -20,7 +36,7 @@ setGeneric("Polygon", function(sets){
 #'
 #' @param sets a list containing multiple simple features
 #' @export
-#'
+#' @aliases polygon
 #' @importFrom methods new
 setMethod("Polygon", c(sets = "ANY"),
           function(sets){

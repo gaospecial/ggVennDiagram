@@ -1,19 +1,24 @@
-# process plot data for venn
 setGeneric("process_data", function(venn, ...) standardGeneric("process_data"))
 
 #' get plot data
 #'
 #' @param venn a Venn object
-#' @param ... filter shapes. i.e. shape_id == "601", type == "polygon"
+#' @param ... apply filter to internal shapes. i.e. shape_id == "601", type == "polygon"
 #'
-#' @export
 #' @name process_data
+#' @export
+#' @examples
+#' \dontrun{
+#'  venn <- Venn(list(A=1:3,B=2:5,C=4:8))
+#'  data <- process_data(venn)
+#' }
+#' @aliases processData
 setMethod("process_data", signature = c("Venn"),
           function(venn, ...){
             shape <- get_shape_data(nsets = length(venn@sets), ...)
             plot_data <- VennPlotData(
-              setEdge = dplyr::filter(shape, component == "setEdge") %>% dplyr::pull(xy),
-              setLabel = dplyr::filter(shape, component == "setLabel") %>% dplyr::pull(xy)
+              setEdge = dplyr::filter(shape, .data$component == "setEdge") %>% dplyr::pull(.data$xy),
+              setLabel = dplyr::filter(shape, .data$component == "setLabel") %>% dplyr::pull(.data$xy)
             )
             plotData_add_venn(plotData = plot_data, venn = venn)
           })

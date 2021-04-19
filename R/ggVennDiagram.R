@@ -1,14 +1,27 @@
-#' ggVennDiagram
+#' `ggVennDiagram`: an easy to use Venn diagram generator
+#'
+#' Venn diagram is frequently used in scientific studies of many fields.
+#' This package incorporates state-of-art Venn plot tools and provides a set of
+#' easy-to-use functions to plot Venn. By dealing with a user-provided list,
+#' which contains the sets of Venn, `ggVennDiagram` returns a structured data that
+#' can be used to plot Venn. The data contains three slots: 1) the edge of Venn sets;
+#' 2) the separated regions of Venn sets; 3) the labels of Venn sets.
+#' By help from the package `venn`, it is possible to draw Venn diagram up to 7 sets.
+#'
+#' @docType package
+#' @name ggVennDiagram-package
+NULL
+
+
+#' ggVennDiagram main parser
 #'
 #' @param x list of items
 #' @param show_intersect if TRUE the text can be visualized by `plotly`
 #' @param label select one from c("count","percent","both","none")
-#' @param label_geom choose from geom_label and geom_text
+#' @param label_geom choose from c("label", "text")
 #' @param label_alpha set 0 to remove label background
 #' @param category.names default is names(x)
 #' @param ... Other arguments passed on to downstream functions.
-#' @param lty line type of polygons
-#' @param color line color of polygons
 #'
 #' @return A ggplot object
 #' @export
@@ -22,8 +35,7 @@ ggVennDiagram <- function(x, category.names=names(x),
                           show_intersect = FALSE,
                           label=c("count","percent","both","none"),
                           label_alpha=0.5,
-                          label_geom=c("label","text"),
-                          lty=1, color="grey",...){
+                          label_geom=c("label","text")){
 
   if (!is.list(x)){
     stop(simpleError("ggVennDiagram() requires at least a list."))
@@ -33,7 +45,7 @@ ggVennDiagram <- function(x, category.names=names(x),
   label <- match.arg(label)
   label_geom <- match.arg(label_geom)
   if (dimension <= 7){
-    plot_venn(x, show_intersect = show_intersect,label = label, label_alpha=label_alpha, label_geom = label_geom,lty=lty,color=color,...)
+    plot_venn(x, show_intersect = show_intersect,label = label, label_alpha=label_alpha, label_geom = label_geom)
   }
   else{
     stop("Only support 2-7 dimension Venn diagram.")
@@ -52,20 +64,26 @@ ggVennDiagram <- function(x, category.names=names(x),
 #' @import ggplot2
 #'
 #' @return ggplot object, or plotly object if show_intersect is TRUE
-plot_venn <- function(x, show_intersect, label, label_geom, label_alpha, lty, percent_digit = 0, txtWidth = 40, ...){
+plot_venn <- function(x,
+                      show_intersect = FALSE,
+                      label = "count",
+                      label_geom = "label",
+                      label_alpha = 0.3,
+                      percent_digit = 0,
+                      txtWidth = 40){
   venn <- Venn(x)
   data <- process_data(venn)
   p <- ggplot() +
     geom_sf(aes_string(fill="count"), data = data@region) +
-    geom_sf(aes_string(color = "id"), size = 1, lty = lty, data = data@setEdge, show.legend = F) +
+    geom_sf(aes_string(color = "id"), size = 1, data = data@setEdge, show.legend = F) +
     geom_sf_text(aes_string(label = "name"), data = data@setLabel) +
     theme_void()
 
   if (label != "none" & show_intersect == FALSE){
     region_label <- data@region %>%
-      dplyr::filter(component == "region") %>%
-      dplyr::mutate(percent = paste(round(count*100/sum(count), digits = percent_digit),"%", sep="")) %>%
-      dplyr::mutate(both = paste(count,percent,sep = "\n"))
+      dplyr::filter(.data$component == "region") %>%
+      dplyr::mutate(percent = paste(round(.data$count*100/sum(.data$count), digits = percent_digit),"%", sep="")) %>%
+      dplyr::mutate(both = paste(.data$count,.data$percent,sep = "\n"))
     if (label_geom == "label"){
       p <- p + geom_sf_label(aes_string(label=label), data = region_label, alpha=label_alpha, label.size = NA)
     }
@@ -77,9 +95,9 @@ plot_venn <- function(x, show_intersect, label, label_geom, label_alpha, lty, pe
   if (show_intersect == TRUE){
     items <- data@region %>%
       dplyr::rowwise() %>%
-      dplyr::mutate(text = stringr::str_wrap(paste0(item, collapse = " "), txtWidth = txtWidth)) %>%
+      dplyr::mutate(text = stringr::str_wrap(paste0(.data$item, collapse = " "), width = txtWidth)) %>%
       sf::st_as_sf()
-    p <- ggplot(items, aes(fill=count, text = text)) + geom_sf() +
+    p <- ggplot(items, aes_string(fill="count", text = 'text')) + geom_sf() +
       geom_sf_text(aes_string(label = "name"), data = data@setLabel, inherit.aes = F) +
       theme_void()
     ax <- list(

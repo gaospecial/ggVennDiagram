@@ -7,7 +7,7 @@
 \S4method{discern}{Polygon}(venn, slice1, slice2 = "all")
 }
 \arguments{
-\item{venn}{Venn object}
+\item{venn}{Venn/Polygon object}
 
 \item{slice1}{first slice of Venn object}
 

@@ -17,8 +17,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-'`ggVennDiagram`' enables fancy Venn plot with 2-4 sets and generates publication quality figure. 
-It is the first software that can automatically fill different colors to each part of a Venn diagram.
+'`ggVennDiagram`' enables fancy Venn plot with 2-7 sets and generates publication quality figure. 
 
 ## Installation
 
@@ -38,39 +37,36 @@ devtools::install_github("gaospecial/ggVennDiagram")
 
 `ggVennDiagram` maps the fill color of each region to quantity, allowing us to visually observe the differences between different parts. 
 
-```{r example}
+```{r}
 library(ggVennDiagram)
 genes <- paste("gene",1:1000,sep="")
-set.seed(20190708)
-x <- list(A=sample(genes,300),B=sample(genes,525),C=sample(genes,440),D=sample(genes,350))
-
-# four dimension Venn plot
-ggVennDiagram(x)
-
-# three dimension Venn plot
-ggVennDiagram(x[1:3])
-
-# two dimension Venn plot
-ggVennDiagram(x[1:2])
+set.seed(20210419)
+x <- list(A=sample(genes,300),
+          B=sample(genes,525),
+          C=sample(genes,440),
+          D=sample(genes,350))
 ```
 
-`ggVennDiagram` return a `ggplot` object, which can be further modified with `ggplot` functions.
+
+
+
+`ggVennDiagram` return a `ggplot` object, the fill/edge colors can be further modified with `ggplot` functions.
 
 ```{r}
 library(ggplot2)
 ggVennDiagram(x) + scale_fill_gradient(low="blue",high = "red")
 
-ggVennDiagram(x,lty="dashed",color="black",size=2) + scale_fill_gradient(low="white",high = "red")
+ggVennDiagram(x) + scale_color_brewer(palette = "Paired")
 ```
 
-`ggVennDiagram` now support 2-4 dimension Venn plot. The generated figure is generally ready for publish. The main function `ggVennDiagram()` will check how many items in the first parameter and call corresponding function automatically.
+`ggVennDiagram` now support 2-7 dimension Venn plot. The generated figure is generally ready for publish. The main function `ggVennDiagram()` will check how many items in the first parameter and call corresponding function automatically.
 
 The parameter `category.names` is set names. And the parameter `label` can label how many items are included in each parts.
 
 ```{r}
 ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"))
 
-ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = NULL)
+ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = "none")
 ```
 
 Set `label_alpha = 0` to remove label background
@@ -111,6 +107,41 @@ In web browser or RStudio, you will get:
 knitr::include_graphics("https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/typora-img/intersection.gif")
 ```
 
+# Customizing your plot
+
+There are three components in a Venn plot: 1) the set labels; 2) the edge of sets;
+and 3) the filling regions of each parts. We separately stored these data in a structured S4 class
+`VennPlotData` object, in which labels, edges and regions are stored as simple features. 
+
+Simple features or simple feature access refers to a formal standard (ISO 19125-1:2004) that describes how objects in the real world can be represented in computers, with emphasis on the spatial geometry of these objects. But here we employed this to describe the coordinates of Venn
+components.
+
+In general, `ggVennDiagram()` plot a Venn in three steps:
+
+- get the coordinates of a applicable shape from internal `shapes` datasets.
+- calculate sub regions of sets, including both the shape regions and sets members,
+  and return a `PlotDataVenn` object that includes all necessary definitions.
+  We implement a number of set operations functions to do this job.
+- plot using `ggplot2` functions.
+
+
+```{r}
+venn <- Venn(x)
+data <- process_data(venn)
+data
+```
+
+Now we can custom this figure.
+
+```{r}
+ggplot() +
+  geom_sf(aes(fill=count), data = data@region) +
+  geom_sf(size = 2, lty = "dashed", color = "grey", data = data@setEdge, show.legend = F) +
+  geom_sf_text(aes(label = name), data = data@setLabel) +
+  geom_sf_label(aes(label=id), fontface = "bold", data = data@region) +
+  theme_void()
+```
+
 
 
 # Venn Diagram for more than four sets
@@ -119,11 +150,59 @@ If you have reviewed my codes, you may find it is easy to support Venn Diagram f
 as soon as you find a ideal parameter to generate more circles or ellipses in the plot. 
 The key point is to let the generated ellipses have exactly one intersection for each combination.
 
+
+From v1.0, `ggVennDiagram` can plot up to seven dimension Venn plot. 
+We would like to acknowledgment the author of package `venn`, for his kind help on
+sharing the required shape coordinates for this feature.
+
 However, Venn Diagram for more than four sets may be meaningless in some conditions, 
 as some parts may be omitted in such ellipses. Therefore, it is only useful in specific conditions. 
 For example, if the set intersection of all group are extremely large, you may use several
 ellipses to draw a "flower" to show that.
 
+
+```{r eval=FALSE}
+x <- list(A=sample(genes,300),
+          B=sample(genes,525),
+          C=sample(genes,440),
+          D=sample(genes,350),
+          E=sample(genes,200),
+          F=sample(genes,150),
+          G=sample(genes,100))
+
+# seven dimension Venn plot
+ggVennDiagram(x)
+
+# six dimension Venn plot
+ggVennDiagram(x[1:6])
+
+# five dimension Venn plot
+ggVennDiagram(x[1:5])
+
+# four dimension Venn plot
+ggVennDiagram(x[1:4])
+
+# three dimension Venn plot
+ggVennDiagram(x[1:3])
+
+# two dimension Venn plot
+ggVennDiagram(x[1:2])
+```
+
+```{r echo=FALSE, fig.asp=1.2,fig.width=6}
+x <- list(A=sample(genes,300),
+          B=sample(genes,525),
+          C=sample(genes,440),
+          D=sample(genes,350),
+          E=sample(genes,200),
+          F=sample(genes,150),
+          G=sample(genes,100))
+plots <- lapply(2:7, function(i) ggVennDiagram(x[1:i],label = "none") + 
+                  labs(title = paste("sets = ", i)) +
+                  theme(legend.position = "none",
+                        title = element_text(hjust = 0.5)))
+cowplot::plot_grid(plotlist = plots, ncol = 2)
+```
 
 # "`ggVennDiagram`" 诞生记
 

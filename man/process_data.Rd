@@ -2,6 +2,7 @@
 % Please edit documentation in R/process_data.R
 \name{process_data}
 \alias{process_data}
+\alias{processData}
 \title{get plot data}
 \usage{
 \S4method{process_data}{Venn}(venn, ...)
@@ -9,8 +10,14 @@
 \arguments{
 \item{venn}{a Venn object}
 
-\item{...}{filter shapes. i.e. shape_id == "601", type == "polygon"}
+\item{...}{apply filter to internal shapes. i.e. shape_id == "601", type == "polygon"}
 }
 \description{
 get plot data
+}
+\examples{
+\dontrun{
+ venn <- Venn(list(A=1:3,B=2:5,C=4:8))
+ data <- process_data(venn)
+}
 }

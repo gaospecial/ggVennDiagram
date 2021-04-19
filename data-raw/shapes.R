@@ -71,7 +71,8 @@ scoords <- data.frame(
   dplyr::ungroup()
 scoords <- transform_venn_data(scoords) %>% dplyr::mutate(component = "setLabel")
 
-shapes <- dplyr::bind_rows(f4e, f3c, f2c, f6t, sets, scoords)
+shapes <- dplyr::bind_rows(f4e, f3c, f2c, sets, scoords, f6t) %>%
+  dplyr::mutate(id = as.character(id))
 
 # shapes <- NULL
 usethis::use_data(shapes, overwrite = TRUE, internal = TRUE)
