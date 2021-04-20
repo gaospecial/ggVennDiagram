@@ -6,13 +6,12 @@
 \usage{
 plot_venn(
   x,
-  show_intersect,
-  label,
-  label_geom,
-  label_alpha,
+  show_intersect = FALSE,
+  label = "count",
+  label_geom = "label",
+  label_alpha = 0.3,
   percent_digit = 0,
-  txtWidth = 40,
-  ...
+  txtWidth = 40
 )
 }
 \arguments{
@@ -29,8 +28,6 @@ plot_venn(
 \item{percent_digit}{number of digits when formating percent label (0)}
 
 \item{txtWidth}{width of text used in showing intersect members (40)}
-
-\item{...}{Other arguments passed on to downstream functions.}
 }
 \value{
 ggplot object, or plotly object if show_intersect is TRUE

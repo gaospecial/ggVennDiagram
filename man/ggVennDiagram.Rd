@@ -10,8 +10,7 @@ ggVennDiagram(
   show_intersect = FALSE,
   label = c("count", "percent", "both", "none"),
   label_alpha = 0.5,
-  label_geom = c("label", "text"),
-  ...
+  label_geom = c("label", "text")
 )
 }
 \arguments{
