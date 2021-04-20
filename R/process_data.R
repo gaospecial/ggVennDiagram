@@ -83,6 +83,7 @@ process_setEdge_data <- function(venn){
   tibble::tibble(
     component = "setEdge",
     id = as.character(seq_along(venn@sets)),
+    item = venn@sets,
     count = sapply(venn@sets, length),
     name = venn@names
   )
