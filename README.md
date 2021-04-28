@@ -161,18 +161,18 @@ data <- process_data(venn)
 data
 #> An object of class "VennPlotData"
 #> Slot "setEdge":
-#> Simple feature collection with 4 features and 4 fields
+#> Simple feature collection with 4 features and 5 fields
 #> geometry type:  LINESTRING
 #> dimension:      XY
 #> bbox:           xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534
 #> CRS:            NA
-#> # A tibble: 4 x 5
-#>   id                                              geometry component count name 
-#>   <chr>                                       <LINESTRING> <chr>     <int> <chr>
-#> 1 1     (0.1025126 0.7174874, 0.09412107 0.7081191, 0.086~ setEdge     300 A    
-#> 2 2     (0.2525126 0.8174874, 0.246341 0.8103391, 0.24117~ setEdge     525 B    
-#> 3 3     (0.7333452 0.8033452, 0.7262248 0.8095447, 0.7182~ setEdge     440 C    
-#> 4 4     (0.8974874 0.7174874, 0.8881191 0.7258789, 0.8778~ setEdge     350 D    
+#> # A tibble: 4 x 6
+#>   id                                      geometry component item    count name 
+#>   <chr>                               <LINESTRING> <chr>     <named> <int> <chr>
+#> 1 1     (0.1025126 0.7174874, 0.09412107 0.708119~ setEdge   <chr [~   300 A    
+#> 2 2     (0.2525126 0.8174874, 0.246341 0.8103391,~ setEdge   <chr [~   525 B    
+#> 3 3     (0.7333452 0.8033452, 0.7262248 0.8095447~ setEdge   <chr [~   440 C    
+#> 4 4     (0.8974874 0.7174874, 0.8881191 0.7258789~ setEdge   <chr [~   350 D    
 #> 
 #> Slot "setLabel":
 #> Simple feature collection with 4 features and 3 fields
@@ -218,10 +218,10 @@ Now we can custom this figure.
 
 ``` r
 ggplot() +
-  geom_sf(aes(fill=count), data = data@region) +
-  geom_sf(size = 2, lty = "dashed", color = "grey", data = data@setEdge, show.legend = F) +
-  geom_sf_text(aes(label = name), data = data@setLabel) +
-  geom_sf_label(aes(label=id), fontface = "bold", data = data@region) +
+  geom_sf(aes(fill=count), data = venn_region(data)) +
+  geom_sf(size = 2, lty = "dashed", color = "grey", data = venn_setedge(data), show.legend = F) +
+  geom_sf_text(aes(label = name), data = venn_setlabel(data)) +
+  geom_sf_label(aes(label=id), fontface = "bold", data = venn_region(data)) +
   theme_void()
 ```
 

@@ -135,10 +135,10 @@ Now we can custom this figure.
 
 ```{r}
 ggplot() +
-  geom_sf(aes(fill=count), data = data@region) +
-  geom_sf(size = 2, lty = "dashed", color = "grey", data = data@setEdge, show.legend = F) +
-  geom_sf_text(aes(label = name), data = data@setLabel) +
-  geom_sf_label(aes(label=id), fontface = "bold", data = data@region) +
+  geom_sf(aes(fill=count), data = venn_region(data)) +
+  geom_sf(size = 2, lty = "dashed", color = "grey", data = venn_setedge(data), show.legend = F) +
+  geom_sf_text(aes(label = name), data = venn_setlabel(data)) +
+  geom_sf_label(aes(label=id), fontface = "bold", data = venn_region(data)) +
   theme_void()
 ```
 
