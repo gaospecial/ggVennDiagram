@@ -23,6 +23,41 @@ setMethod("process_data", signature = c("Venn"),
             plotData_add_venn(plotData = plot_data, venn = venn)
           })
 
+
+#' Get VennPlotData slot
+#'
+#' @param obj a S4 class `VennPlotData` object
+#'
+#' @return a tibble, `sf` object
+#' @export
+#' @name venn_data
+#'
+#' @examples
+#' \dontrun{
+#' # obj is VennPlotData
+#' venn_region(obj)   # return region data
+#' venn_setlabel(obj) # return setLabel data
+#' venn_setedge(obj)  # return setEdge data
+#' }
+venn_region <- function(obj){
+  if (!inherits(obj, "VennPlotData")) stop(simpleError("object is not a S4 class 'VennPlotData'."))
+  obj@region
+}
+
+#' @rdname venn_data
+#' @export
+venn_setedge <- function(obj){
+  if (!inherits(obj, "VennPlotData")) stop(simpleError("object is not a S4 class 'VennPlotData'."))
+  obj@setEdge
+}
+
+#' @rdname venn_data
+#' @export
+venn_setlabel <- function(obj){
+  if (!inherits(obj, "VennPlotData")) stop(simpleError("object is not a S4 class 'VennPlotData'."))
+  obj@setLabel
+}
+
 #' get applicable shape data for Venn object
 #'
 #' @param nsets number of sets

@@ -2,11 +2,20 @@
 % Please edit documentation in R/process_data.R
 \name{venn_data}
 \alias{venn_data}
+\alias{venn_region}
+\alias{venn_setedge}
+\alias{venn_setlabel}
 \alias{process_setEdge_data}
 \alias{process_setLabel_data}
 \alias{process_region_data}
-\title{Prepare Venn data}
+\title{Get VennPlotData slot}
 \usage{
+venn_region(obj)
+
+venn_setedge(obj)
+
+venn_setlabel(obj)
+
 process_setEdge_data(venn)
 
 process_setLabel_data(venn)
@@ -14,15 +23,27 @@ process_setLabel_data(venn)
 process_region_data(venn)
 }
 \arguments{
+\item{obj}{a S4 class `VennPlotData` object}
+
 \item{venn}{a Venn object}
 }
 \value{
+a tibble, `sf` object
+
 a tibble
 }
 \description{
+Get VennPlotData slot
+
 Prepare Venn data
 }
 \examples{
+\dontrun{
+# obj is VennPlotData
+venn_region(obj)   # return region data
+venn_setlabel(obj) # return setLabel data
+venn_setedge(obj)  # return setEdge data
+}
 x <- list(
 A = sample(letters, 8),
 B = sample(letters, 8),
