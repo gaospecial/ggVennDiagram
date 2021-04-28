@@ -1,18 +1,20 @@
-setGeneric("process_data", function(venn, ...) standardGeneric("process_data"))
-
 #' get plot data
 #'
 #' @param venn a Venn object
 #' @param ... apply filter to internal shapes. i.e. shape_id == "601", type == "polygon"
 #'
 #' @name process_data
+#' @docType methods
 #' @export
 #' @examples
 #' \dontrun{
 #'  venn <- Venn(list(A=1:3,B=2:5,C=4:8))
 #'  data <- process_data(venn)
 #' }
-#' @aliases processData
+setGeneric("process_data", function(venn, ...) standardGeneric("process_data"))
+
+#' @rdname process_data
+#' @export
 setMethod("process_data", signature = c("Venn"),
           function(venn, ...){
             shape <- get_shape_data(nsets = length(venn@sets), ...)
@@ -115,6 +117,7 @@ plotData_add_venn <- function(plotData, venn){
 #' process_setEdge_data(venn)
 #' process_setLabel_data(venn)
 process_setEdge_data <- function(venn){
+  if(!inherits(venn, "Venn")) stop(simpleError("venn is not a S4 class 'Venn' object."))
   tibble::tibble(
     component = "setEdge",
     id = as.character(seq_along(venn@sets)),
@@ -127,6 +130,7 @@ process_setEdge_data <- function(venn){
 #' @rdname venn_data
 #' @export
 process_setLabel_data <- function(venn){
+  if(!inherits(venn, "Venn")) stop(simpleError("venn is not a S4 class 'Venn' object."))
   tibble::tibble(
     component = "setLabel",
     id = as.character(seq_along(venn@sets)),
@@ -137,6 +141,7 @@ process_setLabel_data <- function(venn){
 #' @rdname venn_data
 #' @export
 process_region_data <- function(venn){
+  if(!inherits(venn, "Venn")) stop(simpleError("venn is not a S4 class 'Venn' object."))
   region_items <- get_region_items(venn)
   counts <- sapply(region_items, length)
   region_ids <- get_region_ids(venn)

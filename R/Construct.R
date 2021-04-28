@@ -28,15 +28,20 @@ setClass("Polygon",
          slots = list(sets = "ANY", names = "ANY"),
          contains = "Venn")
 
-setGeneric("Polygon", function(sets){
-  standardGeneric("Polygon")
-})
 
 #' Polygon constructor
 #'
 #' @param sets a list containing multiple simple features
 #' @export
-#' @aliases polygon
+#' @docType methods
+#' @rdname polygon-methods
+setGeneric("Polygon", function(sets){
+  standardGeneric("Polygon")
+})
+
+
+#' @rdname polygon-methods
+#' @export
 #' @importFrom methods new
 setMethod("Polygon", c(sets = "ANY"),
           function(sets){
@@ -88,9 +93,7 @@ setClass("VennPlotData",
 #' @return a S4 class VennPlotData object
 #'
 #' @name VennPlotData
-NULL
-
-
+#' @docType methods
 setGeneric("VennPlotData", function(setEdge, setLabel){
   standardGeneric("VennPlotData")
 })

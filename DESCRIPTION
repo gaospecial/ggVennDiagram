@@ -1,7 +1,7 @@
 Package: ggVennDiagram
 Type: Package
 Title: A 'ggplot2' Implement of Venn Diagram
-Version: 1.0.6
+Version: 1.0.7
 Authors@R: c(
   person("Chun-Hui","Gao",email="gaospecial@gmail.com",role=c("aut","cre"), comment=c(ORCID = "0000-0002-1445-7939")),
   person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("ctb"), comment = c(ORCID = "0000-0002-6485-8781"))
