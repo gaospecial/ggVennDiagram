@@ -21,7 +21,9 @@ ellipse(x = 0, y = 0, a = 2, b = 1, rotation = 0, n = 100)
 a matrix representing ellipse coordinates
 }
 \description{
-generating a closed ellipse
+This function is derived from `VennDiagram::ell2poly`, we modified it and then
+it can generating a closed ellipse, which is a requirement for further transformation
+to a POLYGON sf object.
 }
 \examples{
 # plot the default ellipse

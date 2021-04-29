@@ -7,7 +7,15 @@
 plot_shapes()
 }
 \description{
-plot all shapes provided by internal dataset
+These shapes are mainly collected from the package `venn`, and `VennDiagram`.
+For Venn plot with more than 4 sets, it is usually impossible to plot with
+simple circle or ellipse. So we need to use a predefined coordinates in plot.
+}
+\details{
+- Shape 101, 201, 301, 401, 402, 501, 502, 601 and 701 are from `venn`
+- Shape 401f is from `VennDiagram`
+
+see `data-raw/shapes.R` to find how we incorporate these data.
 }
 \examples{
 plot_shapes()

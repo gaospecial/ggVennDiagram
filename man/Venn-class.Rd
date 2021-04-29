@@ -5,8 +5,8 @@
 \alias{Venn-class}
 \title{An S4 class to represent multiple sets.}
 \description{
-This class is adopted from RVenn. Since RVenn doesn't export this class,
-I have to copy its codes hereafter.
+This class is adopted from `RVenn`. Since `RVenn` doesn't export this class,
+I have to copy its codes hereafter to use it.
 }
 \section{Slots}{
 

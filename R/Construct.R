@@ -1,7 +1,7 @@
 #' An S4 class to represent multiple sets.
 #'
-#' This class is adopted from RVenn. Since RVenn doesn't export this class,
-#' I have to copy its codes hereafter.
+#' This class is adopted from `RVenn`. Since `RVenn` doesn't export this class,
+#' I have to copy its codes hereafter to use it.
 #'
 #' @slot sets A \code{list} object containing vectors in the same type.
 #' @slot names The names of the \code{sets} if it has names. If the \code{list}

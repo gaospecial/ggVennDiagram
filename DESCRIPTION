@@ -1,13 +1,19 @@
 Package: ggVennDiagram
 Type: Package
 Title: A 'ggplot2' Implement of Venn Diagram
-Version: 1.0.7
+Version: 1.0.8
 Authors@R: c(
   person("Chun-Hui","Gao",email="gaospecial@gmail.com",role=c("aut","cre"), comment=c(ORCID = "0000-0002-1445-7939")),
   person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("ctb"), comment = c(ORCID = "0000-0002-6485-8781"))
   )
 Maintainer: Chun-Hui Gao <gaospecial@gmail.com>
 Description: Easy-to-use functions to generate 2-7 sets Venn plot in publication quality. 
+  ggVennDiagram plot Venn using well-defined geometry dataset and ggplot2. The shapes of 2-4 sets 
+  Venn use circles and ellipses, while the shapes of 4-7 sets Venn use irregular polygons (4 has both forms), which 
+  are derived from another Venn plot package `venn`. We provided internal functions to 
+  integrate shape data with user provided sets data, and calculated the geometry of every regions/intersections 
+  of them, then separately plot Venn in three components: set edges, set labels, and regions.
+  From version 1.0, it is possible to customize these components as you demand in ordinary ggplot grammar.
 Depends: 
     R (>= 3.5.0)
 Imports: 

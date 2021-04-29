@@ -12,6 +12,28 @@
 #' @name ggVennDiagram-package
 NULL
 
+#' shapes: internal shape data
+#'
+#' a collection of geometric shapes, which defined the edge and label of sets in a Venn plot.
+#' use `plot_shapes()` to see some of them.
+#'
+#' @format a tibble with 6 columns
+#'
+#'  * `nsets`: number of sets, from 1-7.
+#'  * `type`: ellipse, circle or triangle
+#'  - `shape_id`: to separate different shapes
+#'  - `component`: each shape has two components, 'setEdge' and 'setLabel'
+#'  - `id`: to separate edges/labels of a shape. For example, 4 sets shape will have ids of 1-4.
+#'  - `xy`: coordinates
+#' @md
+#'
+#' @source
+#' - `venn:::sets`
+#' - `library(VennDiagram)`
+#' - [Wiki](https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg)
+#' @md
+#' @name vennplot-shapes
+"shapes"
 
 #' ggVennDiagram main parser
 #'
@@ -59,7 +81,7 @@ ggVennDiagram <- function(x, category.names=names(x),
 #' plot codes
 #'
 #' @inheritParams ggVennDiagram
-#' @param percent_digit number of digits when formating percent label (0)
+#' @param percent_digit number of digits when formatting percent label (0)
 #' @param txtWidth width of text used in showing intersect members (40)
 #'
 #' @import ggplot2

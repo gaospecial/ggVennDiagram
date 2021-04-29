@@ -62,6 +62,9 @@ venn_setlabel <- function(obj){
 
 #' get applicable shape data for Venn object
 #'
+#' ggVennDiagram stores shapes as internal data. You may see all the shapes by
+#' using `plot_shapes()`.
+#'
 #' @param nsets number of sets
 #' @inheritDotParams process_data
 #'

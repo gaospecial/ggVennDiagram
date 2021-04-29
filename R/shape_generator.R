@@ -4,8 +4,12 @@
 NULL
 
 
-# modified from VennDiagram::ell2poly
+
 #' generating a closed ellipse
+#'
+#' This function is derived from `VennDiagram::ell2poly`, we modified it and then
+#' it can generating a closed ellipse, which is a requirement for further transformation
+#' to a POLYGON sf object.
 #'
 #' @param x,y the coordinates of ellipse center
 #' @param a radius of short arm

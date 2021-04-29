@@ -19,7 +19,8 @@ get_shape_data(nsets, ...)
 a tibble describing specific shape
 }
 \description{
-get applicable shape data for Venn object
+ggVennDiagram stores shapes as internal data. You may see all the shapes by
+using `plot_shapes()`.
 }
 \examples{
 get_shape_data(nsets = 3, type == "polygon")

@@ -25,7 +25,7 @@ plot_venn(
 
 \item{label_alpha}{set 0 to remove label background}
 
-\item{percent_digit}{number of digits when formating percent label (0)}
+\item{percent_digit}{number of digits when formatting percent label (0)}
 
 \item{txtWidth}{width of text used in showing intersect members (40)}
 }
