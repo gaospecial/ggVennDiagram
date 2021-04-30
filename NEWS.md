@@ -7,7 +7,7 @@
 ## Features
 
 * user can modify the edge/label just use ordinary ggplot functions, without extra knowledge.
-* support up to 7 sets Venn diagram. We thank the author of `venn` providing required edge shape data.
+* support up to 7 sets Venn diagram, based on the polygon data imported from package `venn`, which is another Venn plot tool authored by Adrian Dusa.
 * less memory usage and maybe more faster.
 * a lot of helper functions.
 
