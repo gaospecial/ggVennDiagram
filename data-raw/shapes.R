@@ -75,4 +75,4 @@ shapes <- dplyr::bind_rows(f4e, f3c, f2c, sets, scoords, f6t) %>%
   dplyr::mutate(id = as.character(id))
 
 # shapes <- NULL
-usethis::use_data(shapes, overwrite = TRUE)
+usethis::use_data(shapes, overwrite = TRUE, internal = TRUE)
