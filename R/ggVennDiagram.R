@@ -120,14 +120,19 @@ plot_venn <- function(x,
       dplyr::rowwise() %>%
       dplyr::mutate(text = stringr::str_wrap(paste0(.data$item, collapse = " "), width = txtWidth)) %>%
       sf::st_as_sf()
-    p <- ggplot(items, aes_string(fill="count", text = 'text')) + geom_sf() +
+    label_coord = sf::st_centroid(items$geometry) %>% sf::st_coordinates()
+    p <- ggplot(items) +
+      geom_sf(aes_string(fill="count")) +
       geom_sf_text(aes_string(label = "name"), data = data@setLabel, inherit.aes = F) +
+      geom_text(aes_string(label = "count", text = "text"),
+                x = label_coord[,1],
+                y = label_coord[,2],
+                show.legend = FALSE) +
       theme_void()
     ax <- list(
       showline = FALSE
     )
-    p <- plotly::ggplotly(p) %>%
-      plotly::style(hoveron = "fills+points") %>%
+    p <- plotly::ggplotly(p, tooltip = c("text")) %>%
       plotly::layout(xaxis = ax, yaxis = ax)
   }
 
