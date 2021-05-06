@@ -28,7 +28,8 @@ Imports:
     tibble,
     plotly,
     RVenn,
-    tidyr
+    tidyr,
+    venn
 URL: https://github.com/gaospecial/ggVennDiagram
 License: GPL-3
 Encoding: UTF-8
