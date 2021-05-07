@@ -10,7 +10,7 @@
 #' see `data-raw/shapes.R` to find how we incorporate these data.
 #'
 #'
-#'
+#' @importFrom graphics par
 #' @import ggplot2
 #' @export
 #' @examples

@@ -6,12 +6,19 @@
 \usage{
 plot_venn(
   x,
-  show_intersect = FALSE,
-  label = "count",
-  label_geom = "label",
-  label_alpha = 0.3,
-  percent_digit = 0,
-  txtWidth = 40
+  show_intersect,
+  set_color,
+  set_size,
+  label,
+  label_geom,
+  label_alpha,
+  label_color,
+  label_size,
+  label_percent_digit,
+  label_txtWidth,
+  edge_lty,
+  edge_size,
+  ...
 )
 }
 \arguments{
@@ -19,15 +26,29 @@ plot_venn(
 
 \item{show_intersect}{if TRUE the text can be visualized by `plotly`}
 
-\item{label}{select one from c("count","percent","both","none")}
+\item{set_color}{color of set labels ("black")}
 
-\item{label_geom}{choose from c("label", "text")}
+\item{set_size}{size of set labels (NA)}
 
-\item{label_alpha}{set 0 to remove label background}
+\item{label}{format of region labels, select one from c("count","percent","both","none")}
 
-\item{percent_digit}{number of digits when formatting percent label (0)}
+\item{label_geom}{layer of region labels, choose from c("label", "text")}
 
-\item{txtWidth}{width of text used in showing intersect members (40)}
+\item{label_alpha}{set 0 to remove the background of region labels}
+
+\item{label_color}{color of region labels ("black")}
+
+\item{label_size}{size of region labels (NA)}
+
+\item{label_percent_digit}{number of digits when formatting percent label (0)}
+
+\item{label_txtWidth}{width of text used in showing intersect members, will be ignored unless show_intersection is TRUE (40)}
+
+\item{edge_lty}{line type of set edges ("solid")}
+
+\item{edge_size}{line width of set edges (1)}
+
+\item{...}{Other arguments passed on to downstream functions.}
 }
 \value{
 ggplot object, or plotly object if show_intersect is TRUE

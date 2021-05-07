@@ -8,9 +8,17 @@ ggVennDiagram(
   x,
   category.names = names(x),
   show_intersect = FALSE,
-  label = c("count", "percent", "both", "none"),
+  set_color = "black",
+  set_size = NA,
+  label = c("both", "count", "percent", "none"),
   label_alpha = 0.5,
   label_geom = c("label", "text"),
+  label_color = "black",
+  label_size = NA,
+  label_percent_digit = 0,
+  label_txtWidth = 40,
+  edge_lty = "solid",
+  edge_size = 1,
   ...
 )
 }
@@ -21,11 +29,27 @@ ggVennDiagram(
 
 \item{show_intersect}{if TRUE the text can be visualized by `plotly`}
 
-\item{label}{select one from c("count","percent","both","none")}
+\item{set_color}{color of set labels ("black")}
 
-\item{label_alpha}{set 0 to remove label background}
+\item{set_size}{size of set labels (NA)}
 
-\item{label_geom}{choose from c("label", "text")}
+\item{label}{format of region labels, select one from c("count","percent","both","none")}
+
+\item{label_alpha}{set 0 to remove the background of region labels}
+
+\item{label_geom}{layer of region labels, choose from c("label", "text")}
+
+\item{label_color}{color of region labels ("black")}
+
+\item{label_size}{size of region labels (NA)}
+
+\item{label_percent_digit}{number of digits when formatting percent label (0)}
+
+\item{label_txtWidth}{width of text used in showing intersect members, will be ignored unless show_intersection is TRUE (40)}
+
+\item{edge_lty}{line type of set edges ("solid")}
+
+\item{edge_size}{line width of set edges (1)}
 
 \item{...}{Other arguments passed on to downstream functions.}
 }

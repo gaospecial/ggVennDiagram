@@ -1,3 +1,9 @@
+# ggVennDiagram 1.1
+
+* more handy parameters were added to `ggVennDiagram()`, make it much easier to set edge/setlabel/regionlabel color and size.
+* some default parameter was reset to previous values in consideration of compatible.
+* we released a online book to show detailed usage at https://venn.bio-spring.info.
+
 # ggVennDiagram 1.0
 
 * We completely rebuild `ggVennDiagram` in v1.0. It is now has well-defined data structure and maybe more elegant in coding.

@@ -30,6 +30,6 @@ shapes
 }
 \description{
 a collection of geometric shapes, which defined the edge and label of sets in a Venn plot.
-use \verb{[plot_shapes()](ggVennDiagram::plot_shapes)} to see some of them.
+use \code{plot_shapes()} to see some of them.
 }
 \keyword{datasets}
