@@ -4,6 +4,13 @@
 # ggVennDiagram
 
 <!-- badges: start -->
+
+[![](http://cranlogs.r-pkg.org/badges/grand-total/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
+[![](http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
+[![](http://cranlogs.r-pkg.org/badges/last-week/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
+[![](https://www.r-pkg.org/badges/version/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
+[![](https://img.shields.io/badge/devel%20version-1.0.10-green.svg)](https://github.com/gaospecial/ggVennDiagram)
+[![](https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://codecov.io/gh/gaospecial/ggVennDiagram)
 <!-- badges: end -->
 
 ‘`ggVennDiagram`’ enables fancy Venn plot with 2-7 sets and generates
@@ -45,6 +52,7 @@ further modified with `ggplot` functions.
 
 ``` r
 library(ggplot2)
+#> Warning: package 'ggplot2' was built under R version 4.0.5
 ggVennDiagram(x) + scale_fill_gradient(low="blue",high = "red")
 ```
 
