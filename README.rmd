@@ -16,9 +16,7 @@ library("badger")
 # ggVennDiagram
 
 <!-- badges: start -->
-`r badge_cran_download("ggVennDiagram", type = "grand-total")`
 `r badge_cran_download("ggVennDiagram", type = "last-month")`
-`r badge_cran_download("ggVennDiagram", type = "last-week")`
 `r badge_cran_release("ggVennDiagram","green")`
 `r badge_devel("gaospecial/ggVennDiagram", "green")`
 `r badge_codecov(token = "c365345d-e34c-40f6-b2c0-881b5b2841e7")`
@@ -197,20 +195,31 @@ ggVennDiagram(x[1:2])
 ```
 
 ```{r echo=FALSE, fig.asp=1.2,fig.width=6}
-x <- list(A=sample(genes,300),
-          B=sample(genes,525),
-          C=sample(genes,440),
-          D=sample(genes,350),
-          E=sample(genes,200),
-          F=sample(genes,150),
-          G=sample(genes,100))
-plots <- lapply(2:7, function(i) ggVennDiagram(x[1:i],label = "none") + 
-                  labs(title = paste("sets = ", i)) +
+set.seed(20210507)
+x <- list(A = sample(genes,100),
+          B = sample(genes,150),
+          C = sample(genes,200),
+          D = sample(genes,250),
+          E = sample(genes,300),
+          F = sample(genes,350),
+          G = sample(genes,400))
+plots <- lapply(2:7, function(i) ggVennDiagram(x[1:i],label = "none",edge_size = 2) + 
+                  labs(title = paste("sets = ", i)) + 
+                  scale_fill_distiller(palette = "RdBu") +
                   theme(legend.position = "none",
                         title = element_text(hjust = 0.5)))
 cowplot::plot_grid(plotlist = plots, ncol = 2)
 ```
 
-# "`ggVennDiagram`" 诞生记
+
+# Futher information
+
+## Venn Diagram cookbook in R
+
+I have released a online book to introduce the development of `ggVennDiagram`,
+it contains a chapter that compare many different R packages in plotting a Venn.
+Refer to [Venn Diagram cookbook in R](https://venn.bio-spring.info).
+
+## "`ggVennDiagram`" 诞生记
 
 在 *@GuangchuangYu* 的公众号下面，我投稿了一篇文章，介绍了 "`ggVennDiagram`" 包开发的始末，有兴趣的同学可以移步[至此](https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA)查看。
