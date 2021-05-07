@@ -9,12 +9,12 @@ Authors@R: c(
   )
 Maintainer: Chun-Hui Gao <gaospecial@gmail.com>
 Description: Easy-to-use functions to generate 2-7 sets Venn plot in publication quality. 
-  ggVennDiagram plot Venn using well-defined geometry dataset and ggplot2. The shapes of 2-4 sets 
+  'ggVennDiagram' plot Venn using well-defined geometry dataset and 'ggplot2'. The shapes of 2-4 sets 
   Venn use circles and ellipses, while the shapes of 4-7 sets Venn use irregular polygons (4 has both forms), which 
-  are developed and imported from another package `venn`, authored by Adrian Dusa. We provided internal functions to 
+  are developed and imported from another package 'venn', authored by Adrian Dusa. We provided internal functions to 
   integrate shape data with user provided sets data, and calculated the geometry of every regions/intersections 
   of them, then separately plot Venn in three components: set edges, set labels, and regions.
-  From version 1.0, it is possible to customize these components as you demand in ordinary ggplot grammar.
+  From version 1.0, it is possible to customize these components as you demand in ordinary 'ggplot2' grammar.
 Depends: 
     R (>= 3.5.0)
 Imports: 
