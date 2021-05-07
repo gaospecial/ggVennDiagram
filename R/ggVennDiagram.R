@@ -38,11 +38,19 @@ NULL
 #' ggVennDiagram main parser
 #'
 #' @param x list of items
-#' @param show_intersect if TRUE the text can be visualized by `plotly`
-#' @param label select one from c("count","percent","both","none")
-#' @param label_geom choose from c("label", "text")
-#' @param label_alpha set 0 to remove label background
 #' @param category.names default is names(x)
+#' @param show_intersect if TRUE the text can be visualized by `plotly`
+#' @param set_color color of set labels ("black")
+#' @param set_size size of set labels (NA)
+#' @param label format of region labels, select one from c("count","percent","both","none")
+#' @param label_geom layer of region labels, choose from c("label", "text")
+#' @param label_alpha set 0 to remove the background of region labels
+#' @param label_color color of region labels ("black")
+#' @param label_size size of region labels (NA)
+#' @param label_percent_digit number of digits when formatting percent label (0)
+#' @param label_txtWidth width of text used in showing intersect members, will be ignored unless show_intersection is TRUE (40)
+#' @param edge_lty line type of set edges ("solid")
+#' @param edge_size line width of set edges (1)
 #' @param ... Other arguments passed on to downstream functions.
 #'
 #' @return A ggplot object
@@ -55,9 +63,17 @@ NULL
 #' ggVennDiagram(x[1:2])  # 2d venn
 ggVennDiagram <- function(x, category.names=names(x),
                           show_intersect = FALSE,
+                          set_color = "black",
+                          set_size = NA,
                           label=c("count","percent","both","none"),
                           label_alpha=0.5,
                           label_geom=c("label","text"),
+                          label_color = "black",
+                          label_size = NA,
+                          label_percent_digit = 0,
+                          label_txtWidth = 40,
+                          edge_lty = "solid",
+                          edge_size = 1,
                           ...){
 
   if (!is.list(x)){
@@ -68,7 +84,20 @@ ggVennDiagram <- function(x, category.names=names(x),
   label <- match.arg(label)
   label_geom <- match.arg(label_geom)
   if (dimension <= 7){
-    plot_venn(x, show_intersect = show_intersect,label = label, label_alpha=label_alpha, label_geom = label_geom)
+    plot_venn(x,
+              show_intersect = show_intersect,
+              set_color = set_color,
+              set_size = set_size,
+              label = label,
+              label_alpha=label_alpha,
+              label_geom = label_geom,
+              label_color = label_color,
+              label_size = label_size,
+              label_percent_digit = label_percent_digit,
+              label_txtWidth = label_txtWidth,
+              edge_lty = edge_lty,
+              edge_size = edge_size,
+              ...)
   }
   else{
     stop("Only support 2-7 dimension Venn diagram.")
@@ -81,49 +110,73 @@ ggVennDiagram <- function(x, category.names=names(x),
 #' plot codes
 #'
 #' @inheritParams ggVennDiagram
-#' @param percent_digit number of digits when formatting percent label (0)
-#' @param txtWidth width of text used in showing intersect members (40)
 #'
 #' @import ggplot2
+#' @export
 #'
 #' @return ggplot object, or plotly object if show_intersect is TRUE
 plot_venn <- function(x,
-                      show_intersect = FALSE,
-                      label = "count",
-                      label_geom = "label",
-                      label_alpha = 0.3,
-                      percent_digit = 0,
-                      txtWidth = 40){
+                      show_intersect,
+                      set_color,
+                      set_size,
+                      label,
+                      label_geom,
+                      label_alpha,
+                      label_color,
+                      label_size,
+                      label_percent_digit,
+                      label_txtWidth,
+                      edge_lty,
+                      edge_size,
+                      ...){
   venn <- Venn(x)
   data <- process_data(venn)
   p <- ggplot() +
     geom_sf(aes_string(fill="count"), data = data@region) +
-    geom_sf(aes_string(color = "id"), size = 1, data = data@setEdge, show.legend = F) +
-    geom_sf_text(aes_string(label = "name"), data = data@setLabel) +
+    geom_sf(aes_string(color = "id"), data = data@setEdge, show.legend = F,
+            lty = edge_lty, size = edge_size) +
+    geom_sf_text(aes_string(label = "name"), data = data@setLabel,
+                 size = set_size,
+                 color = set_color) +
     theme_void()
 
   if (label != "none" & show_intersect == FALSE){
     region_label <- data@region %>%
       dplyr::filter(.data$component == "region") %>%
-      dplyr::mutate(percent = paste(round(.data$count*100/sum(.data$count), digits = percent_digit),"%", sep="")) %>%
-      dplyr::mutate(both = paste(.data$count,.data$percent,sep = "\n"))
+      dplyr::mutate(percent = paste(round(.data$count*100/sum(.data$count),
+                                          digits = label_percent_digit),"%", sep="")) %>%
+      dplyr::mutate(both = paste(.data$count,paste0("(",.data$percent,")"),sep = "\n"))
     if (label_geom == "label"){
-      p <- p + geom_sf_label(aes_string(label=label), data = region_label, alpha=label_alpha, label.size = NA)
+      p <- p + geom_sf_label(aes_string(label=label),
+                             data = region_label,
+                             alpha=label_alpha,
+                             color = label_color,
+                             size = label_size,
+                             lineheight = 0.85,
+                             label.size = NA)
     }
     if (label_geom == "text"){
-      p <- p + geom_sf_text(aes_string(label=label), data = region_label, alpha=label_alpha)
+      p <- p + geom_sf_text(aes_string(label=label),
+                            data = region_label,
+                            alpha=label_alpha,
+                            color = label_color,
+                            size = label_size,
+                            lineheight = 0.85)
     }
   }
 
   if (show_intersect == TRUE){
     items <- data@region %>%
       dplyr::rowwise() %>%
-      dplyr::mutate(text = stringr::str_wrap(paste0(.data$item, collapse = " "), width = txtWidth)) %>%
+      dplyr::mutate(text = stringr::str_wrap(paste0(.data$item, collapse = " "),
+                                             width = label_txtWidth)) %>%
       sf::st_as_sf()
     label_coord = sf::st_centroid(items$geometry) %>% sf::st_coordinates()
     p <- ggplot(items) +
       geom_sf(aes_string(fill="count")) +
-      geom_sf_text(aes_string(label = "name"), data = data@setLabel, inherit.aes = F) +
+      geom_sf_text(aes_string(label = "name"),
+                   data = data@setLabel,
+                   inherit.aes = F) +
       geom_text(aes_string(label = "count", text = "text"),
                 x = label_coord[,1],
                 y = label_coord[,2],
