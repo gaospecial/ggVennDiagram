@@ -1,0 +1,47 @@
+home:
+    strip_header: true
+
+reference:
+    - title: Main wrapers
+      desc: Main functions of `ggVennDiagram`
+      contents:
+      - ggVennDiagram
+
+    - title: Shape generation
+      desc: methods used to get shape data
+      contents:
+      - plot_shapes
+      - process_data
+      - process_region_data
+      - process_setEdge_data
+      - process_setLabel_data
+
+    - title: Data structures
+      desc: defined classes and methods
+      contents:
+      - Venn-class
+      - discern-method
+      - overlap-method
+      - discern_overlap
+      - Polygon
+      - VennPlotData
+      - venn_data
+      - venn_region
+      - venn_setedge
+      - venn_setlabel
+
+    - title: helper functions
+      desc: helper functions to generate shapes
+      contents:
+      - shape_generator
+      - circle
+      - ellipse
+      - triangle
+      - fancy_4d_ellipse
+
+    - title: shapes
+      desc: internal shpaes
+      contents:
+      - plot_shapes
+      - shapes
+

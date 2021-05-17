@@ -1,3 +1,7 @@
+# ggVennDiagram 1.1.1
+
+* add pkgdown docments
+
 # ggVennDiagram 1.1
 
 * more handy parameters were added to `ggVennDiagram()`, make it much easier to set edge/setlabel/regionlabel color and size.
