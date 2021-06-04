@@ -16,3 +16,4 @@
 ^CRAN-RELEASE$
 ^data-raw$
 ^.travis.yml$
+^\.github$
