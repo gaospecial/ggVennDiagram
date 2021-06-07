@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ggVennDiagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -122,7 +122,6 @@
 <p><code>ggVennDiagram</code> return a <code>ggplot</code> object, the fill/edge colors can be further modified with <code>ggplot</code> functions.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="co">#&gt; Warning: package 'ggplot2' was built under R version 4.0.5</span>
 <span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"blue"</span>,high <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="70%"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -198,10 +197,10 @@
 <span class="co">#&gt; An object of class "VennPlotData"</span>
 <span class="co">#&gt; Slot "setEdge":</span>
 <span class="co">#&gt; Simple feature collection with 4 features and 5 fields</span>
-<span class="co">#&gt; geometry type:  LINESTRING</span>
-<span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534</span>
-<span class="co">#&gt; CRS:            NA</span>
+<span class="co">#&gt; Geometry type: LINESTRING</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534</span>
+<span class="co">#&gt; CRS:           NA</span>
 <span class="co">#&gt; # A tibble: 4 x 6</span>
 <span class="co">#&gt;   id                                      geometry component item    count name </span>
 <span class="co">#&gt;   &lt;chr&gt;                               &lt;LINESTRING&gt; &lt;chr&gt;     &lt;named&gt; &lt;int&gt; &lt;chr&gt;</span>
@@ -212,10 +211,10 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Slot "setLabel":</span>
 <span class="co">#&gt; Simple feature collection with 4 features and 3 fields</span>
-<span class="co">#&gt; geometry type:  POINT</span>
-<span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 0.08 ymin: 0.78 xmax: 0.93 ymax: 0.86</span>
-<span class="co">#&gt; CRS:            NA</span>
+<span class="co">#&gt; Geometry type: POINT</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 0.08 ymin: 0.78 xmax: 0.93 ymax: 0.86</span>
+<span class="co">#&gt; CRS:           NA</span>
 <span class="co">#&gt; # A tibble: 4 x 4</span>
 <span class="co">#&gt;   id       geometry component name </span>
 <span class="co">#&gt;   &lt;chr&gt;     &lt;POINT&gt; &lt;chr&gt;     &lt;chr&gt;</span>
@@ -226,28 +225,28 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Slot "region":</span>
 <span class="co">#&gt; Simple feature collection with 15 features and 5 fields</span>
-<span class="co">#&gt; geometry type:  POLYGON</span>
-<span class="co">#&gt; dimension:      XY</span>
-<span class="co">#&gt; bbox:           xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534</span>
-<span class="co">#&gt; CRS:            NA</span>
+<span class="co">#&gt; Geometry type: POLYGON</span>
+<span class="co">#&gt; Dimension:     XY</span>
+<span class="co">#&gt; Bounding box:  xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534</span>
+<span class="co">#&gt; CRS:           NA</span>
 <span class="co">#&gt; # A tibble: 15 x 6</span>
 <span class="co">#&gt;    id                                    geometry component item    count name  </span>
 <span class="co">#&gt;    &lt;chr&gt;                                &lt;POLYGON&gt; &lt;chr&gt;     &lt;list&gt;  &lt;int&gt; &lt;chr&gt; </span>
-<span class="co">#&gt;  1 1     ((0.09412107 0.7081191, 0.1025126 0.717~ region    &lt;chr [~    41 A     </span>
-<span class="co">#&gt;  2 2     ((0.246341 0.8103391, 0.2525126 0.81748~ region    &lt;chr [~   151 B     </span>
-<span class="co">#&gt;  3 3     ((0.7262248 0.8095447, 0.7333452 0.8033~ region    &lt;chr [~    91 C     </span>
-<span class="co">#&gt;  4 4     ((0.8881191 0.7258789, 0.8974874 0.7174~ region    &lt;chr [~    75 D     </span>
-<span class="co">#&gt;  5 12    ((0.230883 0.7535216, 0.2329039 0.75334~ region    &lt;chr [~    49 A..B  </span>
-<span class="co">#&gt;  6 13    ((0.3652259 0.3172212, 0.3598131 0.3161~ region    &lt;chr [~    51 A..C  </span>
-<span class="co">#&gt;  7 14    ((0.6342731 0.3084734, 0.6341476 0.3062~ region    &lt;chr [~    36 A..D  </span>
-<span class="co">#&gt;  8 23    ((0.4026376 0.6845244, 0.4087951 0.6905~ region    &lt;chr [~   111 B..C  </span>
-<span class="co">#&gt;  9 24    ((0.6939592 0.5713475, 0.7013464 0.5605~ region    &lt;chr [~    63 B..D  </span>
-<span class="co">#&gt; 10 34    ((0.7555766 0.7516003, 0.7560044 0.7479~ region    &lt;chr [~    53 C..D  </span>
-<span class="co">#&gt; 11 123   ((0.4026376 0.6845244, 0.4080219 0.6809~ region    &lt;chr [~    49 A..B.~</span>
-<span class="co">#&gt; 12 124   ((0.6009462 0.4589584, 0.6020164 0.4567~ region    &lt;chr [~    38 A..B.~</span>
-<span class="co">#&gt; 13 134   ((0.4986525 0.3760408, 0.4966178 0.3746~ region    &lt;chr [~    21 A..C.~</span>
-<span class="co">#&gt; 14 234   ((0.5 0.602529, 0.5085786 0.6114214, 0.~ region    &lt;chr [~    49 B..C.~</span>
-<span class="co">#&gt; 15 1234  ((0.5 0.602529, 0.5066822 0.5956024, 0.~ region    &lt;chr [~    15 A..B.~</span></code></pre></div>
+<span class="co">#&gt;  1 1     ((0.0649949 0.6187446, 0.06585244 0.633~ region    &lt;chr [~    41 A     </span>
+<span class="co">#&gt;  2 2     ((0.4872824 0.7545178, 0.4712329 0.7429~ region    &lt;chr [~   151 B     </span>
+<span class="co">#&gt;  3 3     ((0.5033822 0.765325, 0.5194686 0.77536~ region    &lt;chr [~    91 C     </span>
+<span class="co">#&gt;  4 4     ((0.5 0.1850668, 0.513719 0.1858524, 0.~ region    &lt;chr [~    75 D     </span>
+<span class="co">#&gt;  5 12    ((0.2986536 0.5794036, 0.2878257 0.5962~ region    &lt;chr [~    49 A..B  </span>
+<span class="co">#&gt;  6 13    ((0.3598131 0.3161471, 0.3466157 0.3144~ region    &lt;chr [~    51 A..C  </span>
+<span class="co">#&gt;  7 14    ((0.4719527 0.1878314, 0.4583271 0.1909~ region    &lt;chr [~    36 A..D  </span>
+<span class="co">#&gt;  8 23    ((0.5919781 0.6809775, 0.5745693 0.6685~ region    &lt;chr [~   111 B..C  </span>
+<span class="co">#&gt;  9 24    ((0.6350051 0.3212554, 0.6347379 0.3368~ region    &lt;chr [~    63 B..D  </span>
+<span class="co">#&gt; 10 34    ((0.6897239 0.5775115, 0.6773526 0.5943~ region    &lt;chr [~    53 C..D  </span>
+<span class="co">#&gt; 11 123   ((0.393934 0.463934, 0.3786034 0.479683~ region    &lt;chr [~    49 A..B.~</span>
+<span class="co">#&gt; 12 124   ((0.6020164 0.4567956, 0.6098817 0.4389~ region    &lt;chr [~    38 A..B.~</span>
+<span class="co">#&gt; 13 134   ((0.4966178 0.374675, 0.4805314 0.36463~ region    &lt;chr [~    21 A..C.~</span>
+<span class="co">#&gt; 14 234   ((0.5931564 0.4747005, 0.5833369 0.4925~ region    &lt;chr [~    49 B..C.~</span>
+<span class="co">#&gt; 15 1234  ((0.4068436 0.4747005, 0.4166631 0.4925~ region    &lt;chr [~    15 A..B.~</span></code></pre></div>
 <p>Now we can custom this figure.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
@@ -300,10 +299,14 @@
 <a href="#venn-diagram-cookbook-in-r" class="anchor"></a>Venn Diagram cookbook in R</h2>
 <p>I have released a online book to introduce the development of <code>ggVennDiagram</code>, it contains a chapter that compare many different R packages in plotting a Venn. Refer to <a href="https://venn.bio-spring.info">Venn Diagram cookbook in R</a>.</p>
 </div>
-<div id="ggvenndiagram-诞生记" class="section level2">
+<div id="公众号文章" class="section level2">
 <h2 class="hasAnchor">
-<a href="#ggvenndiagram-%E8%AF%9E%E7%94%9F%E8%AE%B0" class="anchor"></a>“<code>ggVennDiagram</code>” 诞生记</h2>
-<p>在 <em>@GuangchuangYu</em> 的公众号下面，我投稿了一篇文章，介绍了 “<code>ggVennDiagram</code>” 包开发的始末，有兴趣的同学可以移步<a href="https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA">至此</a>查看。</p>
+<a href="#%E5%85%AC%E4%BC%97%E5%8F%B7%E6%96%87%E7%AB%A0" class="anchor"></a>公众号文章</h2>
+<p>在 <em>@GuangchuangYu</em> 的公众号下面，我投稿了两篇文章，介绍了 “<code>ggVennDiagram</code>” 包开发的始末。</p>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA">“<code>ggVennDiagram</code>” 诞生记</a></li>
+<li><a href="https://mp.weixin.qq.com/s/6kDXPrJRyXab6HpVjq6JBw">“<code>ggVennDiagram</code>” 的重构</a></li>
+</ul>
 </div>
 </div>
 
@@ -339,7 +342,7 @@
 <ul class="list-unstyled">
 <li><a href="https://cran.r-project.org/package=ggVennDiagram"><img src="http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram?color=green"></a></li>
 <li><a href="https://cran.r-project.org/package=ggVennDiagram"><img src="https://www.r-pkg.org/badges/version/ggVennDiagram?color=green"></a></li>
-<li><a href="https://github.com/gaospecial/ggVennDiagram"><img src="https://img.shields.io/badge/devel%20version-1.1.0-green.svg"></a></li>
+<li><a href="https://github.com/gaospecial/ggVennDiagram"><img src="https://img.shields.io/badge/devel%20version-1.1.2-green.svg"></a></li>
 <li><a href="https://codecov.io/gh/gaospecial/ggVennDiagram"><img src="https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7"></a></li>
 </ul>
 </div>
