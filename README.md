@@ -7,7 +7,7 @@
 
 [![](http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
 [![](https://www.r-pkg.org/badges/version/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
-[![](https://img.shields.io/badge/devel%20version-1.1.0-green.svg)](https://github.com/gaospecial/ggVennDiagram)
+[![](https://img.shields.io/badge/devel%20version-1.1.2-green.svg)](https://github.com/gaospecial/ggVennDiagram)
 [![](https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://codecov.io/gh/gaospecial/ggVennDiagram)
 <!-- badges: end -->
 
@@ -50,7 +50,6 @@ further modified with `ggplot` functions.
 
 ``` r
 library(ggplot2)
-#> Warning: package 'ggplot2' was built under R version 4.0.5
 ggVennDiagram(x) + scale_fill_gradient(low="blue",high = "red")
 ```
 
@@ -168,10 +167,10 @@ data
 #> An object of class "VennPlotData"
 #> Slot "setEdge":
 #> Simple feature collection with 4 features and 5 fields
-#> geometry type:  LINESTRING
-#> dimension:      XY
-#> bbox:           xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534
-#> CRS:            NA
+#> Geometry type: LINESTRING
+#> Dimension:     XY
+#> Bounding box:  xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534
+#> CRS:           NA
 #> # A tibble: 4 x 6
 #>   id                                      geometry component item    count name 
 #>   <chr>                               <LINESTRING> <chr>     <named> <int> <chr>
@@ -182,10 +181,10 @@ data
 #> 
 #> Slot "setLabel":
 #> Simple feature collection with 4 features and 3 fields
-#> geometry type:  POINT
-#> dimension:      XY
-#> bbox:           xmin: 0.08 ymin: 0.78 xmax: 0.93 ymax: 0.86
-#> CRS:            NA
+#> Geometry type: POINT
+#> Dimension:     XY
+#> Bounding box:  xmin: 0.08 ymin: 0.78 xmax: 0.93 ymax: 0.86
+#> CRS:           NA
 #> # A tibble: 4 x 4
 #>   id       geometry component name 
 #>   <chr>     <POINT> <chr>     <chr>
@@ -196,28 +195,28 @@ data
 #> 
 #> Slot "region":
 #> Simple feature collection with 15 features and 5 fields
-#> geometry type:  POLYGON
-#> dimension:      XY
-#> bbox:           xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534
-#> CRS:            NA
+#> Geometry type: POLYGON
+#> Dimension:     XY
+#> Bounding box:  xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534
+#> CRS:           NA
 #> # A tibble: 15 x 6
 #>    id                                    geometry component item    count name  
 #>    <chr>                                <POLYGON> <chr>     <list>  <int> <chr> 
-#>  1 1     ((0.09412107 0.7081191, 0.1025126 0.717~ region    <chr [~    41 A     
-#>  2 2     ((0.246341 0.8103391, 0.2525126 0.81748~ region    <chr [~   151 B     
-#>  3 3     ((0.7262248 0.8095447, 0.7333452 0.8033~ region    <chr [~    91 C     
-#>  4 4     ((0.8881191 0.7258789, 0.8974874 0.7174~ region    <chr [~    75 D     
-#>  5 12    ((0.230883 0.7535216, 0.2329039 0.75334~ region    <chr [~    49 A..B  
-#>  6 13    ((0.3652259 0.3172212, 0.3598131 0.3161~ region    <chr [~    51 A..C  
-#>  7 14    ((0.6342731 0.3084734, 0.6341476 0.3062~ region    <chr [~    36 A..D  
-#>  8 23    ((0.4026376 0.6845244, 0.4087951 0.6905~ region    <chr [~   111 B..C  
-#>  9 24    ((0.6939592 0.5713475, 0.7013464 0.5605~ region    <chr [~    63 B..D  
-#> 10 34    ((0.7555766 0.7516003, 0.7560044 0.7479~ region    <chr [~    53 C..D  
-#> 11 123   ((0.4026376 0.6845244, 0.4080219 0.6809~ region    <chr [~    49 A..B.~
-#> 12 124   ((0.6009462 0.4589584, 0.6020164 0.4567~ region    <chr [~    38 A..B.~
-#> 13 134   ((0.4986525 0.3760408, 0.4966178 0.3746~ region    <chr [~    21 A..C.~
-#> 14 234   ((0.5 0.602529, 0.5085786 0.6114214, 0.~ region    <chr [~    49 B..C.~
-#> 15 1234  ((0.5 0.602529, 0.5066822 0.5956024, 0.~ region    <chr [~    15 A..B.~
+#>  1 1     ((0.0649949 0.6187446, 0.06585244 0.633~ region    <chr [~    41 A     
+#>  2 2     ((0.4872824 0.7545178, 0.4712329 0.7429~ region    <chr [~   151 B     
+#>  3 3     ((0.5033822 0.765325, 0.5194686 0.77536~ region    <chr [~    91 C     
+#>  4 4     ((0.5 0.1850668, 0.513719 0.1858524, 0.~ region    <chr [~    75 D     
+#>  5 12    ((0.2986536 0.5794036, 0.2878257 0.5962~ region    <chr [~    49 A..B  
+#>  6 13    ((0.3598131 0.3161471, 0.3466157 0.3144~ region    <chr [~    51 A..C  
+#>  7 14    ((0.4719527 0.1878314, 0.4583271 0.1909~ region    <chr [~    36 A..D  
+#>  8 23    ((0.5919781 0.6809775, 0.5745693 0.6685~ region    <chr [~   111 B..C  
+#>  9 24    ((0.6350051 0.3212554, 0.6347379 0.3368~ region    <chr [~    63 B..D  
+#> 10 34    ((0.6897239 0.5775115, 0.6773526 0.5943~ region    <chr [~    53 C..D  
+#> 11 123   ((0.393934 0.463934, 0.3786034 0.479683~ region    <chr [~    49 A..B.~
+#> 12 124   ((0.6020164 0.4567956, 0.6098817 0.4389~ region    <chr [~    38 A..B.~
+#> 13 134   ((0.4966178 0.374675, 0.4805314 0.36463~ region    <chr [~    21 A..C.~
+#> 14 234   ((0.5931564 0.4747005, 0.5833369 0.4925~ region    <chr [~    49 B..C.~
+#> 15 1234  ((0.4068436 0.4747005, 0.4166631 0.4925~ region    <chr [~    15 A..B.~
 ```
 
 Now we can custom this figure.
@@ -290,8 +289,12 @@ I have released a online book to introduce the development of
 packages in plotting a Venn. Refer to [Venn Diagram cookbook in
 R](https://venn.bio-spring.info).
 
-## “`ggVennDiagram`” 诞生记
+## 公众号文章
 
-在 *@GuangchuangYu* 的公众号下面，我投稿了一篇文章，介绍了
-“`ggVennDiagram`”
-包开发的始末，有兴趣的同学可以移步[至此](https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA)查看。
+在 *@GuangchuangYu* 的公众号下面，我投稿了两篇文章，介绍了
+“`ggVennDiagram`” 包开发的始末。
+
+-   [“`ggVennDiagram`”
+    诞生记](https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA)
+-   [“`ggVennDiagram`”
+    的重构](https://mp.weixin.qq.com/s/6kDXPrJRyXab6HpVjq6JBw)

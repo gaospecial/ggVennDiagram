@@ -40,6 +40,13 @@ jobs:
           install.packages("pkgdown", type = "binary")
         shell: Rscript {0}
 
+      - name: Codecov analysis
+        run: |
+          install.packages("covr")
+          library("covr")
+          codecov()
+        shell: Rscript {0}
+
       - name: Install package
         run: R CMD INSTALL .
 

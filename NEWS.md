@@ -1,3 +1,9 @@
+# ggVennDiagram 1.1.2
+
+* setup GitHub actions
+* enable GitHub pages: https://gaospecial.github.io/ggVennDiagram/index.html
+* setup Code Coverage analysis
+
 # ggVennDiagram 1.1.1
 
 * add pkgdown docments

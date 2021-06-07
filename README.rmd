@@ -220,6 +220,10 @@ I have released a online book to introduce the development of `ggVennDiagram`,
 it contains a chapter that compare many different R packages in plotting a Venn.
 Refer to [Venn Diagram cookbook in R](https://venn.bio-spring.info).
 
-## "`ggVennDiagram`" 诞生记
+## 公众号文章
 
-在 *@GuangchuangYu* 的公众号下面，我投稿了一篇文章，介绍了 "`ggVennDiagram`" 包开发的始末，有兴趣的同学可以移步[至此](https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA)查看。
+在 *@GuangchuangYu* 的公众号下面，我投稿了两篇文章，介绍了 "`ggVennDiagram`" 包开发的始末。
+
+* ["`ggVennDiagram`" 诞生记](https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA)
+* ["`ggVennDiagram`" 的重构](https://mp.weixin.qq.com/s/6kDXPrJRyXab6HpVjq6JBw)
+
