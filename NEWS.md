@@ -1,3 +1,10 @@
+# ggVennDiagram 1.1.3
+
+* we now export more internal functions which are used in internal data process,
+this allow the users to use novel shapes with there data.
+* the vignette has benn split to three by topics, and a new vignette was added.
+* document has been updated, including pkgdown settings.
+
 # ggVennDiagram 1.1.2
 
 * setup GitHub actions

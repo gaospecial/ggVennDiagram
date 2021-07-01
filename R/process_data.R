@@ -87,6 +87,12 @@ get_shape_data <- function(nsets, ...){
   data
 }
 
+#' join the shape data with set data
+#'
+#' @param plotData a VennPlot object that stores plot shapes
+#' @param venn a Venn object that stores set values
+#'
+#' @export
 plotData_add_venn <- function(plotData, venn){
   if (!inherits(plotData,"VennPlotData")) stop(simpleError("plotData should be a S4 VennPlotData object."))
   if (!inherits(venn, "Venn")) stop(simpleError("venn should be a S4 Venn object."))

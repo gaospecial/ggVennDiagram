@@ -37,7 +37,11 @@ reference:
       - circle
       - ellipse
       - triangle
+      - fancy_6d_triangle
       - fancy_4d_ellipse
+      - fancy_3d_circle
+      - fancy_2d-circle
+      - label_position
 
     - title: shapes
       desc: internal shpaes

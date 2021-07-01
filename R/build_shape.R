@@ -8,6 +8,7 @@
 #'
 #' @return a tibble with columns: nsets, type, shape_id, component, id, xy.
 #'
+#' @export
 build_shape <- function(edge, label,
                       nsets = length(edge),
                       shape_id,

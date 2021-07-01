@@ -1,0 +1,95 @@
+---
+title: "fully-customed"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fully-customed}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ggVennDiagram)
+```
+
+## Comprehensive customization by using helper functions
+
+The main function `ggVennDiagram()` accepts a list input, and output a ggplot object. 
+By measuring the length of input list, it automatically applies internal functions 
+to build a plot in two steps: data preparation and visualization. 
+
+Data preparation was packaged into one function `process_data()`. Its output
+is a S4 `VennPlotData` class object, which contains three slots, `setEdge`, 
+`setLabel` and `region`. These slot data then can be further plotted with `ggplot` 
+functions. 
+
+See below for a better understanding.
+
+Generate example data.
+
+```{r}
+genes <- paste0("gene",1:1000)
+set.seed(20210302)
+gene_list <- list(A = sample(genes,100),
+                  B = sample(genes,200),
+                  C = sample(genes,300),
+                  D = sample(genes,200))
+
+library(ggVennDiagram)
+library(ggplot2)
+```
+
+Then we can reproduce the plot of `ggVennDiagram()` with several lines.
+
+```{r}
+venn <- Venn(gene_list)
+data <- process_data(venn)
+ggplot() +
+  # 1. region count layer
+  geom_sf(aes(fill = count), data = venn_region(data)) +
+  # 2. set edge layer
+  geom_sf(aes(color = id), data = venn_setedge(data), show.legend = FALSE) +
+  # 3. set label layer
+  geom_sf_text(aes(label = name), data = venn_setlabel(data)) +
+  # 4. region label layer
+  geom_sf_label(aes(label = count), data = venn_region(data)) +
+  theme_void()
+```
+
+The variable `data` is a S4 class object that has three slots.
+
+```{r}
+data
+```
+
+
+`ggVennDiagram` export functions to get these data, and they can be used 
+for comprehensive customization in user-side.
+
+- `Venn()`: Venn object constructor, use this to construct a Venn object from list.
+- `process_data()`: process data with a Venn object
+- `venn_region()`: get region data to plot
+- `venn_setedge()`: get setedge data to plot
+- `venn_setlabel()`: get setlabel data to plot
+
+
+For example, you may change edge/fill/label properties as you will.
+
+```{r}
+ggplot() +
+  # change mapping of color filling
+  geom_sf(aes(fill = id), data = venn_region(data), show.legend = FALSE) +  
+  # adjust edge size and color
+  geom_sf(color="grey", size = 3, data = venn_setedge(data), show.legend = FALSE) +  
+  # show set label in bold
+  geom_sf_text(aes(label = name), fontface = "bold", data = venn_setlabel(data)) +  
+  # add a alternative region name
+  geom_sf_label(aes(label = name), data = venn_region(data), alpha = 0.5) +  
+  theme_void()
+```
