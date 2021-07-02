@@ -33,7 +33,7 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
       - name: Install package dependencies
-        run: sudo apt-get install libcurl4-openssl-dev libudunits2-dev
+        run: sudo apt-get install libcurl4-openssl-dev libudunits2-dev libgdal-dev libharfbuzz-dev libfribidi-dev
 
       - name: Install dependencies
         run: |
