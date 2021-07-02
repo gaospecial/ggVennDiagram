@@ -37,7 +37,7 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
           install.packages("badger")
           install.packages('plyr')
-          install.packages("pkgdown", type = "binary")
+          install.packages("pkgdown")
         shell: Rscript {0}
 
       - name: Codecov analysis
