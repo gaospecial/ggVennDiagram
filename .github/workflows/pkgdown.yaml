@@ -43,15 +43,15 @@ jobs:
       - name: Install libcurl
         run: sudo apt-get install libcurl4-openssl-dev
 
+      - name: Install package
+        run: R CMD INSTALL .
+
       - name: Codecov analysis
         run: |
           install.packages("covr")
           library("covr")
           codecov()
         shell: Rscript {0}
-
-      - name: Install package
-        run: R CMD INSTALL .
 
       - name: Deploy package
         run: |
