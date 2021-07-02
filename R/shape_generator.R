@@ -233,7 +233,7 @@ fancy_6d_triangle_label <- function(position = NULL){
 #'
 #' @details
 #' - `label_position`: basal wrapper for label postion
-#' - `fancy_6d_triangle_label`: 6 sets triangle label position work with `fancy_6d_triable`
+#' - `fancy_6d_triangle_label`: 6 sets triangle label position work with `fancy_6d_triangle`
 #' - `fancy_4d_ellipse_label`: 4 sets ellipse label position work with `fancy_4d_ellipse`
 #' - `fancy_3d_circle_label`: 3 sets circle label position work with `fancy_3d_circle`
 #' - `fancy_2d_circle_label`: 2 sets circle label position work with `fancy_2d_circle`

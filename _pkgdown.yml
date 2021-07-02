@@ -25,6 +25,7 @@ reference:
       - discern_overlap
       - Polygon
       - VennPlotData
+      - plotData_add_venn
       - venn_data
       - venn_region
       - venn_setedge
