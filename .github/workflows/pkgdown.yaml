@@ -32,6 +32,9 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
+      - name: Install package dependencies
+        run: sudo apt-get install libcurl4-openssl-dev libudunits2-dev
+
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
@@ -39,9 +42,6 @@ jobs:
           install.packages('plyr')
           install.packages("pkgdown")
         shell: Rscript {0}
-
-      - name: Install libcurl
-        run: sudo apt-get install libcurl4-openssl-dev
 
       - name: Install package
         run: R CMD INSTALL .
