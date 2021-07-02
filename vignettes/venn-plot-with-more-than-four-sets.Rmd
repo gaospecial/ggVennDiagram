@@ -1,5 +1,5 @@
 ---
-title: "venn-plot-with-more-than-four-sets"
+title: "Venn Plot with More Than Four Sets"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{venn-plot-with-more-than-four-sets}

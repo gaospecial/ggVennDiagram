@@ -1,5 +1,5 @@
 ---
-title: "fully-customed"
+title: "Fully Customed Venn Diagram"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{fully-customed}
