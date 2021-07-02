@@ -40,6 +40,9 @@ jobs:
           install.packages("pkgdown")
         shell: Rscript {0}
 
+      - name: Install libcurl
+        run: sudo apt-get install libcurl4-openssl-dev
+
       - name: Codecov analysis
         run: |
           install.packages("covr")
