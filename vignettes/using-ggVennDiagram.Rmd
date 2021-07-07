@@ -2,7 +2,7 @@
 title: "Tutorial: Using ggVennDiagram"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{using ggVennDiagram}
+  %\VignetteIndexEntry{Tutorial: Using ggVennDiagram}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

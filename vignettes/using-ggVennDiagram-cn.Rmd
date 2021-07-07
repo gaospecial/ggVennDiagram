@@ -2,8 +2,7 @@
 title: "ggVennDiagram 使用说明"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ggVennDiagram 使用说明}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{ggVennDiagram tutorial in Chinese}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -15,6 +14,12 @@ knitr::opts_chunk$set(
   fig.asp = 0.618,
   fig.align = "center"
 )
+library(httr)
+library(jsonlite)
+library(dplyr)
+library(ggplot2)
+library(badger)
+library(RColorBrewer)
 ```
 
 `ggVennDiagram` 是一个用于绘制 Venn 图的 R 语言软件包。软件发布在 GitHub 和 CRAN 上面。
@@ -24,11 +29,6 @@ GitHub 上，已经获得了超过 100 个小星星。
 
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.cap="广受好评的`ggVennDiagram`"}
-library(httr)
-library(jsonlite)
-library(dplyr)
-library(ggplot2)
-library(badger)
 
 url = 'https://api.github.com/repos/gaospecial/ggVennDiagram/stargazers'
 header = 'application/vnd.github.v3.star+json'

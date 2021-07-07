@@ -2,7 +2,7 @@
 title: "Venn Plot with More Than Four Sets"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{venn-plot-with-more-than-four-sets}
+  %\VignetteIndexEntry{Venn Plot with More Than Four Sets}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

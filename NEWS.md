@@ -1,3 +1,7 @@
+# ggVennDiagram 1.1.4
+
+* minor changes and bug fixing
+
 # ggVennDiagram 1.1.3
 
 * we now export more internal functions which are used in internal data process,

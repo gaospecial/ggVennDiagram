@@ -2,7 +2,7 @@
 title: "Fully Customed Venn Diagram"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{fully-customed}
+  %\VignetteIndexEntry{Fully Customed Venn Diagram}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

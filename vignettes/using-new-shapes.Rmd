@@ -2,7 +2,7 @@
 title: "Using New Shapes in Venn Diagram"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{using-new-shapes}
+  %\VignetteIndexEntry{Using New Shapes in Venn Diagram}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -153,7 +153,7 @@ data = plotData_add_venn(plotData = shape, venn = venn)
 
 and plot Venn diagram with ggplot2.
 
-```{r}
+```{r fig.width=10}
 ggplot() +
   geom_sf(aes(fill = count), data = venn_region(data)) +
   geom_sf(aes(color = name), size = 2, data = venn_setedge(data)) +
