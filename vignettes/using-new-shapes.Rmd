@@ -54,7 +54,7 @@ plot_shapes()
 
 By default, only the most appropriate shape is used when calling the main function
 `ggVennDiagram()`. However, it may be specified in step wise plot which has been
-described in [fully customed plot](./fully-customed).
+described in [fully customed plot](https://gaospecial.github.io/ggVennDiagram/articles/fully-customed).
 
 For example:
 

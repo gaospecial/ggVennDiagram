@@ -3,6 +3,7 @@ title: "ggVennDiagram 使用说明"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{ggVennDiagram tutorial in Chinese}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
