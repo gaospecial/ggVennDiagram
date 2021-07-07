@@ -20,3 +20,4 @@
 ^_pkgdown\.yml$
 ^doc$
 ^Meta$
+^vignettes/using-ggVennDiagram-cn\.Rmd$
