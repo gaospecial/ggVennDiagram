@@ -16,9 +16,11 @@ library("badger")
 # ggVennDiagram
 
 <!-- badges: start -->
+`r badge_cran_download("ggVennDiagram", type = "grand-total")`
 `r badge_cran_download("ggVennDiagram", type = "last-month")`
+`r badge_cran_download("ggVennDiagram", type = "last-week")`
 `r badge_cran_release("ggVennDiagram","green")`
-`r badge_devel("gaospecial/ggVennDiagram", "green")`
+`r badge_devel(color = "green")`
 `r badge_codecov(token = "c365345d-e34c-40f6-b2c0-881b5b2841e7")`
 <!-- badges: end -->
 
