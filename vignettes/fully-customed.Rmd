@@ -93,3 +93,36 @@ ggplot() +
   geom_sf_label(aes(label = name), data = venn_region(data), alpha = 0.5) +  
   theme_void()
 ```
+
+## Stepwise `plotly`
+
+This is for [issue #26](https://github.com/gaospecial/ggVennDiagram/issues/26).
+
+```{r}
+venn <- Venn(gene_list)
+data <- process_data(venn)
+items <- venn_region(data) %>%
+  dplyr::rowwise() %>%
+  dplyr::mutate(text = stringr::str_wrap(paste0(.data$item, collapse = " "),
+                                         width = 40)) %>%
+  sf::st_as_sf()
+label_coord = sf::st_centroid(items$geometry) %>% sf::st_coordinates()
+p <- ggplot(items) +
+  geom_sf(aes_string(fill="count")) +
+  geom_sf_text(aes_string(label = "name"),
+               data = data@setLabel,
+               inherit.aes = F) +
+  geom_text(aes_string(label = "count", text = "text"),
+            x = label_coord[,1],
+            y = label_coord[,2],
+            show.legend = FALSE) +
+  theme_void() +
+  scale_fill_distiller(palette = "RdBu")
+ax <- list(
+  showline = FALSE
+)
+plotly::ggplotly(p, tooltip = c("text")) %>%
+  plotly::layout(xaxis = ax, yaxis = ax)
+```
+
+**Note**: Please be aware that due to the poor compatibility between plotly and ggplot, this feature is only experimental.
