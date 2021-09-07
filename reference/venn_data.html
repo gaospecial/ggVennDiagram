@@ -73,7 +73,7 @@ Prepare Venn data" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggVennDiagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.6</span>
       </span>
     </div>
 
@@ -192,7 +192,7 @@ D <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sam
 
 <span class='va'>venn</span> <span class='op'>&lt;-</span> <span class='fu'>Venn</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 <span class='fu'>process_region_data</span><span class='op'>(</span><span class='va'>venn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 15 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 15 × 5</span>
 #&gt;    component id    item      count name      
 #&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     
 #&gt; <span style='color: #BCBCBC;'> 1</span> region    1     <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 A         
@@ -210,14 +210,14 @@ D <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sam
 #&gt; <span style='color: #BCBCBC;'>13</span> region    134   <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 A..C..D   
 #&gt; <span style='color: #BCBCBC;'>14</span> region    234   <span style='color: #949494;'>&lt;chr [2]&gt;</span>     2 B..C..D   
 #&gt; <span style='color: #BCBCBC;'>15</span> region    1234  <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 A..B..C..D</div><div class='input'><span class='fu'>process_setEdge_data</span><span class='op'>(</span><span class='va'>venn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 5</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 5</span>
 #&gt;   component id    item         count name 
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;named list&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> setEdge   1     <span style='color: #949494;'>&lt;chr [8]&gt;</span>        8 A    
 #&gt; <span style='color: #BCBCBC;'>2</span> setEdge   2     <span style='color: #949494;'>&lt;chr [8]&gt;</span>        8 B    
 #&gt; <span style='color: #BCBCBC;'>3</span> setEdge   3     <span style='color: #949494;'>&lt;chr [8]&gt;</span>        8 C    
 #&gt; <span style='color: #BCBCBC;'>4</span> setEdge   4     <span style='color: #949494;'>&lt;chr [8]&gt;</span>        8 D    </div><div class='input'><span class='fu'>process_setLabel_data</span><span class='op'>(</span><span class='va'>venn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 x 3</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 3</span>
 #&gt;   component id    name 
 #&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
 #&gt; <span style='color: #BCBCBC;'>1</span> setLabel  1     A    
