@@ -19,7 +19,7 @@ publication quality figure.
 ## Installation
 
 You can install the released version of ggVennDiagram from
-[CRAN](https://CRAN.R-project.org) with (under evaluation in CRAN):
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("ggVennDiagram")
