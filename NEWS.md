@@ -1,3 +1,7 @@
+# ggVennDiagram 1.1.7
+
+* minor fixing of URLs
+
 # ggVennDiagram 1.1.6
 
 * Paper published. doi: 10.3389/fgene.2021.706907.
