@@ -10,7 +10,7 @@
 [![](http://cranlogs.r-pkg.org/badges/last-week/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
 [![](https://www.r-pkg.org/badges/version/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
 [![](https://img.shields.io/badge/devel%20version-1.1.6-green.svg)](https://github.com/gaospecial/ggVennDiagram)
-[![](https://app.codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://app.codecov.io/gh/gaospecial/ggVennDiagram)
+[![](https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://app.codecov.io/gh/gaospecial/ggVennDiagram)
 <!-- badges: end -->
 
 ‘`ggVennDiagram`’ enables fancy Venn plot with 2-7 sets and generates
