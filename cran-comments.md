@@ -1,4 +1,4 @@
-This is a update to version 1.1.7
+This is a update to version 1.2
 
 Several links have been mended.
 
