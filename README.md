@@ -19,7 +19,7 @@ publication quality figure.
 ## Installation
 
 You can install the released version of ggVennDiagram from
-[CRAN](https://CRAN.R-project.org) with:
+[CRAN](https://CRAN.R-project.org) with (under evaluation in CRAN):
 
 ``` r
 install.packages("ggVennDiagram")
@@ -40,7 +40,7 @@ you may cite this package as:
 Gao, C.-H., Yu, G., and Cai, P. (2021). ggVennDiagram: An Intuitive,
 Easy-to-Use, and Highly Customizable R Package to Generate Venn Diagram.
 Frontiers in Genetics 12, 1598. doi:
-[10.3389/fgene.2021.706907](https://www.frontiersin.org/articles/10.3389/fgene.2021.706907).
+[10.3389/fgene.2021.706907](https://www.frontiersin.org/articles/10.3389/fgene.2021.706907/full).
 
 ## Example
 
@@ -299,7 +299,7 @@ ggVennDiagram(x[1:2])
 I have released a online book to introduce the development of
 `ggVennDiagram`, it contains a chapter that compare many different R
 packages in plotting a Venn. Refer to [Venn Diagram cookbook in
-R](https://venn.bio-spring.info).
+R](https://venn.bio-spring.top).
 
 ## 公众号文章
 

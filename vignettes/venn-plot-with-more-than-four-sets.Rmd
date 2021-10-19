@@ -47,4 +47,4 @@ Although **ggVennDiagram** supports 5-7 sets Venn diagram, I don't encourage to
 use them in scientific publications as it  is difficult to separate the border 
 of different sets in the plot (even with thick edges), especially for 7 and 6 sets Venn.
 Upset plot is a possible solution for these datasets. You may check a discussion of
-the [Applications of Venn, Euler and Upset plot](https://venn.bio-spring.info/applications.html).
+the [Applications of Venn, Euler and Upset plot](https://venn.bio-spring.top/applications.html).
