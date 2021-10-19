@@ -1,3 +1,11 @@
+# ggVennDiagram 1.1.6
+
+* Paper published. doi: 10.3389/fgene.2021.706907.
+
+# ggVennDiagram 1.1.5
+
+* minor changes
+
 # ggVennDiagram 1.1.4
 
 * minor changes and bug fixing
