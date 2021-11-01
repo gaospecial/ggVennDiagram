@@ -138,7 +138,7 @@ fancy_4d_ellipse_label <- function(position = NULL){
 fancy_3d_circle <- function(parameters = NULL, n = 100){
   # three circles
   if(is.null(parameters))
-    parameters <- list(c(2,4,4),c(0,0,4),c(4,0,4))
+    parameters <- list(c(0,0,4),c(4,0,4), c(2,-4,4))
 
   circles <- lapply(parameters, function(x){
     do.call(circle,as.list(c(x,n)))
@@ -153,9 +153,9 @@ fancy_3d_circle_label <- function(position = NULL){
   if (is.null(position))
     position <- tibble::tribble(
       ~x,       ~y,
-      2,      8.5,
-      -3.5,     -4.6,
-      7.5,     -4.6
+      -3.5,     4.6,
+      7.5,     4.6,
+      2,      -8.5
     )
   label_position(position)
 }
@@ -165,7 +165,7 @@ fancy_3d_circle_label <- function(position = NULL){
 #' @export
 fancy_2d_circle <- function(parameters = NULL, n = 100){
   if(is.null(parameters))
-    parameters <- list(c(0,0,4),c(4,0,4))
+    parameters <- list(c(0,0,4),c(0,4,4))
 
   circles <- lapply(parameters, function(x){
     do.call(circle,as.list(c(x,n)))
@@ -180,8 +180,8 @@ fancy_2d_circle_label <- function(position = NULL){
   if (is.null(position))
     position <- tibble::tribble(
       ~x,       ~y,
-      -1,      4.3,
-       5,      4.3
+      -5,      0,
+      -5,      4
     )
   label_position(position)
 }
