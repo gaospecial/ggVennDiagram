@@ -172,17 +172,20 @@ calculate the unique region defined by `Venn` object and the parameter `slice`" 
     <p>region items</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/gaospecial/ggVennDiagram'>ggVennDiagram</a></span><span class='op'>)</span>
-<span class='va'>venn</span> <span class='op'>&lt;-</span> <span class='fu'>Venn</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>A<span class='op'>=</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,B<span class='op'>=</span><span class='fl'>2</span><span class='op'>:</span><span class='fl'>5</span>,C<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1L</span>,<span class='fl'>3L</span>,<span class='fl'>5L</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='fu'>discern_overlap</span><span class='op'>(</span><span class='va'>venn</span>, slice <span class='op'>=</span> <span class='st'>"all"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 3</div><div class='input'><span class='co'># is equal to</span>
-<span class='fu'>overlap</span><span class='op'>(</span><span class='va'>venn</span>, slice <span class='op'>=</span> <span class='st'>"all"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 3</div><div class='input'>
-<span class='co'># however, `discern_overlap()` only contains specific region</span>
-<span class='fu'>discern_overlap</span><span class='op'>(</span><span class='va'>venn</span>, slice <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 2</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/gaospecial/ggVennDiagram'>ggVennDiagram</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>venn</span> <span class='op'>&lt;-</span> <span class='fu'>Venn</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>A<span class='op'>=</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,B<span class='op'>=</span><span class='fl'>2</span><span class='op'>:</span><span class='fl'>5</span>,C<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1L</span>,<span class='fl'>3L</span>,<span class='fl'>5L</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>discern_overlap</span><span class='op'>(</span><span class='va'>venn</span>, slice <span class='op'>=</span> <span class='st'>"all"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 3</span>
+<span class='r-in'><span class='co'># is equal to</span></span>
+<span class='r-in'><span class='fu'>overlap</span><span class='op'>(</span><span class='va'>venn</span>, slice <span class='op'>=</span> <span class='st'>"all"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 3</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># however, `discern_overlap()` only contains specific region</span></span>
+<span class='r-in'><span class='fu'>discern_overlap</span><span class='op'>(</span><span class='va'>venn</span>, slice <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

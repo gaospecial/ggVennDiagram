@@ -177,53 +177,56 @@ Prepare Venn data" />
 <p>a tibble</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># obj is VennPlotData</span>
-<span class='fu'>venn_region</span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span>   <span class='co'># return region data</span>
-<span class='fu'>venn_setlabel</span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span> <span class='co'># return setLabel data</span>
-<span class='fu'>venn_setedge</span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span>  <span class='co'># return setEdge data</span>
-<span class='op'>}</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
-A <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span>, <span class='fl'>8</span><span class='op'>)</span>,
-B <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span>, <span class='fl'>8</span><span class='op'>)</span>,
-C <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span>, <span class='fl'>8</span><span class='op'>)</span>,
-D <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span>, <span class='fl'>8</span><span class='op'>)</span>
-<span class='op'>)</span>
-
-<span class='va'>venn</span> <span class='op'>&lt;-</span> <span class='fu'>Venn</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-<span class='fu'>process_region_data</span><span class='op'>(</span><span class='va'>venn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 15 × 5</span>
-#&gt;    component id    item      count name      
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     
-#&gt; <span style='color: #BCBCBC;'> 1</span> region    1     <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 A         
-#&gt; <span style='color: #BCBCBC;'> 2</span> region    2     <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 B         
-#&gt; <span style='color: #BCBCBC;'> 3</span> region    3     <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 C         
-#&gt; <span style='color: #BCBCBC;'> 4</span> region    4     <span style='color: #949494;'>&lt;chr [3]&gt;</span>     3 D         
-#&gt; <span style='color: #BCBCBC;'> 5</span> region    12    <span style='color: #949494;'>&lt;chr [2]&gt;</span>     2 A..B      
-#&gt; <span style='color: #BCBCBC;'> 6</span> region    13    <span style='color: #949494;'>&lt;chr [2]&gt;</span>     2 A..C      
-#&gt; <span style='color: #BCBCBC;'> 7</span> region    14    <span style='color: #949494;'>&lt;chr [0]&gt;</span>     0 A..D      
-#&gt; <span style='color: #BCBCBC;'> 8</span> region    23    <span style='color: #949494;'>&lt;chr [0]&gt;</span>     0 B..C      
-#&gt; <span style='color: #BCBCBC;'> 9</span> region    24    <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 B..D      
-#&gt; <span style='color: #BCBCBC;'>10</span> region    34    <span style='color: #949494;'>&lt;chr [0]&gt;</span>     0 C..D      
-#&gt; <span style='color: #BCBCBC;'>11</span> region    123   <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 A..B..C   
-#&gt; <span style='color: #BCBCBC;'>12</span> region    124   <span style='color: #949494;'>&lt;chr [0]&gt;</span>     0 A..B..D   
-#&gt; <span style='color: #BCBCBC;'>13</span> region    134   <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 A..C..D   
-#&gt; <span style='color: #BCBCBC;'>14</span> region    234   <span style='color: #949494;'>&lt;chr [2]&gt;</span>     2 B..C..D   
-#&gt; <span style='color: #BCBCBC;'>15</span> region    1234  <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 A..B..C..D</div><div class='input'><span class='fu'>process_setEdge_data</span><span class='op'>(</span><span class='va'>venn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 5</span>
-#&gt;   component id    item         count name 
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;named list&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> setEdge   1     <span style='color: #949494;'>&lt;chr [8]&gt;</span>        8 A    
-#&gt; <span style='color: #BCBCBC;'>2</span> setEdge   2     <span style='color: #949494;'>&lt;chr [8]&gt;</span>        8 B    
-#&gt; <span style='color: #BCBCBC;'>3</span> setEdge   3     <span style='color: #949494;'>&lt;chr [8]&gt;</span>        8 C    
-#&gt; <span style='color: #BCBCBC;'>4</span> setEdge   4     <span style='color: #949494;'>&lt;chr [8]&gt;</span>        8 D    </div><div class='input'><span class='fu'>process_setLabel_data</span><span class='op'>(</span><span class='va'>venn</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 4 × 3</span>
-#&gt;   component id    name 
-#&gt;   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>
-#&gt; <span style='color: #BCBCBC;'>1</span> setLabel  1     A    
-#&gt; <span style='color: #BCBCBC;'>2</span> setLabel  2     B    
-#&gt; <span style='color: #BCBCBC;'>3</span> setLabel  3     C    
-#&gt; <span style='color: #BCBCBC;'>4</span> setLabel  4     D    </div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># obj is VennPlotData</span></span>
+<span class='r-in'><span class='fu'>venn_region</span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span>   <span class='co'># return region data</span></span>
+<span class='r-in'><span class='fu'>venn_setlabel</span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span> <span class='co'># return setLabel data</span></span>
+<span class='r-in'><span class='fu'>venn_setedge</span><span class='op'>(</span><span class='va'>obj</span><span class='op'>)</span>  <span class='co'># return setEdge data</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span></span>
+<span class='r-in'>A <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span>, <span class='fl'>8</span><span class='op'>)</span>,</span>
+<span class='r-in'>B <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span>, <span class='fl'>8</span><span class='op'>)</span>,</span>
+<span class='r-in'>C <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span>, <span class='fl'>8</span><span class='op'>)</span>,</span>
+<span class='r-in'>D <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span>, <span class='fl'>8</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>venn</span> <span class='op'>&lt;-</span> <span class='fu'>Venn</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>process_region_data</span><span class='op'>(</span><span class='va'>venn</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 15 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    component id    item      count name      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span> region    1     <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 A         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span> region    2     <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 B         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span> region    3     <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 C         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span> region    4     <span style='color: #949494;'>&lt;chr [3]&gt;</span>     3 D         </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span> region    12    <span style='color: #949494;'>&lt;chr [2]&gt;</span>     2 A..B      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span> region    13    <span style='color: #949494;'>&lt;chr [2]&gt;</span>     2 A..C      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span> region    14    <span style='color: #949494;'>&lt;chr [0]&gt;</span>     0 A..D      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span> region    23    <span style='color: #949494;'>&lt;chr [0]&gt;</span>     0 B..C      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span> region    24    <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 B..D      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span> region    34    <span style='color: #949494;'>&lt;chr [0]&gt;</span>     0 C..D      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span> region    123   <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 A..B..C   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span> region    124   <span style='color: #949494;'>&lt;chr [0]&gt;</span>     0 A..B..D   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span> region    134   <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 A..C..D   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span> region    234   <span style='color: #949494;'>&lt;chr [2]&gt;</span>     2 B..C..D   </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span> region    1234  <span style='color: #949494;'>&lt;chr [1]&gt;</span>     1 A..B..C..D</span>
+<span class='r-in'><span class='fu'>process_setEdge_data</span><span class='op'>(</span><span class='va'>venn</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   component id    item         count name </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;named list&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> setEdge   1     <span style='color: #949494;'>&lt;chr [8]&gt;</span>        8 A    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> setEdge   2     <span style='color: #949494;'>&lt;chr [8]&gt;</span>        8 B    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> setEdge   3     <span style='color: #949494;'>&lt;chr [8]&gt;</span>        8 C    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> setEdge   4     <span style='color: #949494;'>&lt;chr [8]&gt;</span>        8 D    </span>
+<span class='r-in'><span class='fu'>process_setLabel_data</span><span class='op'>(</span><span class='va'>venn</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   component id    name </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> setLabel  1     A    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> setLabel  2     B    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> setLabel  3     C    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> setLabel  4     D    </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
