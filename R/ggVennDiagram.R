@@ -12,7 +12,7 @@
 #' @name ggVennDiagram-package
 NULL
 
-#' shapes: internal shape data
+#' shapes: shape data used to setup Venn plot
 #'
 #' a collection of geometric shapes, which defined the edge and label of sets in a Venn plot.
 #' use `plot_shapes()` to see some of them.
@@ -33,7 +33,7 @@ NULL
 #' - [Wiki](https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg)
 #' @md
 #' @name vennplot-shapes
-"shapes"
+NULL
 
 #' ggVennDiagram main parser
 #'
