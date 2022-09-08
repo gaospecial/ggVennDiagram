@@ -3,9 +3,11 @@ home:
 
 reference:
     - title: Main wrapers
-      desc: Main functions of `ggVennDiagram`
+      desc: Main functions of 'ggVennDiagram'
       contents:
+      - 'ggVennDiagram-package'
       - ggVennDiagram
+      - plot_venn
 
     - title: Shape generation
       desc: methods used to get shape data
@@ -19,12 +21,14 @@ reference:
     - title: Data structures
       desc: defined classes and methods
       contents:
-      - Venn-class
-      - discern-method
-      - overlap-method
-      - discern_overlap
+      - 'Venn-class'
+      - 'discern,Polygon-method'
+      - 'overlap,Polygon-method'
       - Polygon
+      - discern_overlap
       - VennPlotData
+      - 'Polygon-class'
+      - 'VennPlotData-class'
       - plotData_add_venn
       - venn_data
       - venn_region
@@ -41,12 +45,15 @@ reference:
       - fancy_6d_triangle
       - fancy_4d_ellipse
       - fancy_3d_circle
-      - fancy_2d-circle
+      - fancy_2d_circle
       - label_position
+      - build_shape
+      - combinations
 
     - title: shapes
-      desc: internal shpaes
+      desc: internal shapes
       contents:
       - plot_shapes
-      - shapes
+      - 'vennplot-shapes'
+      - get_shape_data
 
