@@ -5,12 +5,12 @@
 
 <!-- badges: start -->
 
-[![](http://cranlogs.r-pkg.org/badges/grand-total/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
-[![](http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
-[![](http://cranlogs.r-pkg.org/badges/last-week/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
+[![](http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
+[![](http://cranlogs.r-pkg.org/badges/last-week/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
 [![](https://www.r-pkg.org/badges/version/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
-[![](https://img.shields.io/badge/devel%20version-1.2.0-green.svg)](https://github.com/gaospecial/ggVennDiagram)
-[![](https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://codecov.io/gh/gaospecial/ggVennDiagram)
+[![](https://img.shields.io/badge/devel%20version-1.2.2-green.svg)](https://github.com/gaospecial/ggVennDiagram)
+[![](https://app.codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://app.codecov.io/gh/gaospecial/ggVennDiagram)
 <!-- badges: end -->
 
 ‘`ggVennDiagram`’ enables fancy Venn plot with 2-7 sets and generates
@@ -117,7 +117,7 @@ y <- list(
 )
 
 process_region_data(Venn(y))
-#> # A tibble: 15 x 5
+#> # A tibble: 15 × 5
 #>    component id    item      count name      
 #>    <chr>     <chr> <list>    <int> <chr>     
 #>  1 region    1     <chr [1]>     1 A         
@@ -183,13 +183,14 @@ data
 #> Dimension:     XY
 #> Bounding box:  xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534
 #> CRS:           NA
-#> # A tibble: 4 x 6
-#>   id                                      geometry component item    count name 
-#>   <chr>                               <LINESTRING> <chr>     <named> <int> <chr>
-#> 1 1     (0.1025126 0.7174874, 0.09412107 0.708119~ setEdge   <chr [~   300 A    
-#> 2 2     (0.2525126 0.8174874, 0.246341 0.8103391,~ setEdge   <chr [~   525 B    
-#> 3 3     (0.7333452 0.8033452, 0.7262248 0.8095447~ setEdge   <chr [~   440 C    
-#> 4 4     (0.8974874 0.7174874, 0.8881191 0.7258789~ setEdge   <chr [~   350 D    
+#> # A tibble: 4 × 6
+#>   id                                          geometry compo…¹ item  count name 
+#>   <chr>                                   <LINESTRING> <chr>   <nam> <int> <chr>
+#> 1 1     (0.1025126 0.7174874, 0.09412107 0.7081191, 0… setEdge <chr>   300 A    
+#> 2 2     (0.2525126 0.8174874, 0.246341 0.8103391, 0.2… setEdge <chr>   525 B    
+#> 3 3     (0.7333452 0.8033452, 0.7262248 0.8095447, 0.… setEdge <chr>   440 C    
+#> 4 4     (0.8974874 0.7174874, 0.8881191 0.7258789, 0.… setEdge <chr>   350 D    
+#> # … with abbreviated variable name ¹​component
 #> 
 #> Slot "setLabel":
 #> Simple feature collection with 4 features and 3 fields
@@ -197,7 +198,7 @@ data
 #> Dimension:     XY
 #> Bounding box:  xmin: 0.08 ymin: 0.78 xmax: 0.93 ymax: 0.86
 #> CRS:           NA
-#> # A tibble: 4 x 4
+#> # A tibble: 4 × 4
 #>   id       geometry component name 
 #>   <chr>     <POINT> <chr>     <chr>
 #> 1 1     (0.08 0.78) setLabel  A    
@@ -211,24 +212,25 @@ data
 #> Dimension:     XY
 #> Bounding box:  xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534
 #> CRS:           NA
-#> # A tibble: 15 x 6
-#>    id                                    geometry component item    count name  
-#>    <chr>                                <POLYGON> <chr>     <list>  <int> <chr> 
-#>  1 1     ((0.0649949 0.6187446, 0.06585244 0.633~ region    <chr [~    41 A     
-#>  2 2     ((0.4872824 0.7545178, 0.4712329 0.7429~ region    <chr [~   151 B     
-#>  3 3     ((0.5033822 0.765325, 0.5194686 0.77536~ region    <chr [~    91 C     
-#>  4 4     ((0.5 0.1850668, 0.513719 0.1858524, 0.~ region    <chr [~    75 D     
-#>  5 12    ((0.2986536 0.5794036, 0.2878257 0.5962~ region    <chr [~    49 A..B  
-#>  6 13    ((0.3598131 0.3161471, 0.3466157 0.3144~ region    <chr [~    51 A..C  
-#>  7 14    ((0.4719527 0.1878314, 0.4583271 0.1909~ region    <chr [~    36 A..D  
-#>  8 23    ((0.5919781 0.6809775, 0.5745693 0.6685~ region    <chr [~   111 B..C  
-#>  9 24    ((0.6350051 0.3212554, 0.6347379 0.3368~ region    <chr [~    63 B..D  
-#> 10 34    ((0.6897239 0.5775115, 0.6773526 0.5943~ region    <chr [~    53 C..D  
-#> 11 123   ((0.393934 0.463934, 0.3786034 0.479683~ region    <chr [~    49 A..B.~
-#> 12 124   ((0.6020164 0.4567956, 0.6098817 0.4389~ region    <chr [~    38 A..B.~
-#> 13 134   ((0.4966178 0.374675, 0.4805314 0.36463~ region    <chr [~    21 A..C.~
-#> 14 234   ((0.5931564 0.4747005, 0.5833369 0.4925~ region    <chr [~    49 B..C.~
-#> 15 1234  ((0.4068436 0.4747005, 0.4166631 0.4925~ region    <chr [~    15 A..B.~
+#> # A tibble: 15 × 6
+#>    id                                         geometry compo…¹ item  count name 
+#>    <chr>                                     <POLYGON> <chr>   <lis> <int> <chr>
+#>  1 1     ((0.1025126 0.7174874, 0.1118809 0.7258789, … region  <chr>    41 A    
+#>  2 2     ((0.2525126 0.8174874, 0.2596609 0.823659, 0… region  <chr>   151 B    
+#>  3 3     ((0.7333452 0.8033452, 0.7395447 0.7962248, … region  <chr>    91 C    
+#>  4 4     ((0.8974874 0.7174874, 0.9058789 0.7081191, … region  <chr>    75 D    
+#>  5 12    ((0.2494531 0.7508377, 0.266399 0.7472201, 0… region  <chr>    49 A..B 
+#>  6 13    ((0.3598131 0.3161471, 0.3466157 0.3144203, … region  <chr>    51 A..C 
+#>  7 14    ((0.6341476 0.306281, 0.6321686 0.2919527, 0… region  <chr>    36 A..D 
+#>  8 23    ((0.4087951 0.6905086, 0.4240163 0.7044756, … region  <chr>   111 B..C 
+#>  9 24    ((0.7013464 0.5605964, 0.7121743 0.5437184, … region  <chr>    63 B..D 
+#> 10 34    ((0.7562978 0.7359764, 0.7555797 0.7233843, … region  <chr>    53 C..D 
+#> 11 123   ((0.4254307 0.668526, 0.4425419 0.6552909, 0… region  <chr>    49 A..B…
+#> 12 124   ((0.6020164 0.4567956, 0.6098817 0.4389429, … region  <chr>    38 A..B…
+#> 13 134   ((0.4966178 0.374675, 0.4805314 0.3646387, 0… region  <chr>    21 A..C…
+#> 14 234   ((0.5085786 0.6114214, 0.5243976 0.6266822, … region  <chr>    49 B..C…
+#> 15 1234  ((0.5066822 0.5956024, 0.5213246 0.5792878, … region  <chr>    15 A..B…
+#> # … with abbreviated variable name ¹​component
 ```
 
 Now we can custom this figure.
