@@ -1,3 +1,7 @@
+# ggVennDiagram 1.2.2
+
+* I removed the package dependency to `stringr`
+
 # ggVennDiagram 1.2
 
 * Paper published. doi: 10.3389/fgene.2021.706907
