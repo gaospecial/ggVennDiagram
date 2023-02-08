@@ -31,7 +31,7 @@ Imports:
 URL: https://github.com/gaospecial/ggVennDiagram
 License: GPL-3
 Encoding: UTF-8
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 Suggests: 
     testthat (>= 2.1.0),
     knitr,

@@ -131,14 +131,35 @@ plot_venn <- function(x,
                       ...){
   venn <- Venn(x)
   data <- process_data(venn)
-  p <- ggplot() +
-    geom_sf(aes_string(fill="count"), data = data@region) +
-    geom_sf(aes_string(color = "id"), data = data@setEdge, show.legend = F,
-            lty = edge_lty, size = edge_size) +
-    geom_sf_text(aes_string(label = "name"), data = data@setLabel,
-                 size = set_size,
-                 color = set_color) +
-    theme_void()
+  p <- ggplot()
+
+  region.params <- list(data = data@region, mapping = aes_string(fill = 'count'))
+
+  edge.params <- list(data = data@setEdge, 
+                      mapping = aes_string(color = 'id'), 
+                      show.legend = FALSE)
+
+  if (utils::packageVersion('ggplot2') >= '3.4.0'){
+    edge.params$linetype <- edge_lty
+    edge.params$linewidth <- edge_size
+  }else{
+    edge.params$lty <- edge_lty
+    edge.params$size <- edge_size
+  }
+
+  text.params <- list(data = data@setLabel, 
+                      mapping = aes_string(label = 'name'),
+                      size = set_size,
+                      color = set_color
+                 )
+
+  region.layer <- do.call('geom_sf', region.params)
+  
+  edge.layer <- do.call('geom_sf', edge.params)
+
+  text.layer <- do.call('geom_sf_text', text.params)
+
+  p <- p + region.layer + edge.layer + text.layer + theme_void()
 
   if (label != "none" & show_intersect == FALSE){
     region_label <- data@region %>%
