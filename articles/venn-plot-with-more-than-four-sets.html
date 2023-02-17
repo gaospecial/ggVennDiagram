@@ -87,7 +87,7 @@
 
       
 
-      </header><script src="venn-plot-with-more-than-four-sets_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Venn Plot with More Than Four Sets</h1>
@@ -106,7 +106,9 @@
 <div class="section level2">
 <h2 id="venn-diagram-for-more-than-four-sets">Venn Diagram for more than four sets<a class="anchor" aria-label="anchor" href="#venn-diagram-for-more-than-four-sets"></a>
 </h2>
-<p>With <strong>ggVennDiagram</strong> version less than 1.0, it only support 2-4 set Venn. By importing the polygon from <code>venn</code> , <code>ggVennDiagram</code> now supports 5-7 sets Venn.</p>
+<p>With <strong>ggVennDiagram</strong> version less than 1.0, it only
+support 2-4 set Venn. By importing the polygon from <code>venn</code> ,
+<code>ggVennDiagram</code> now supports 5-7 sets Venn.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"gene"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">20210507</span><span class="op">)</span></span>
@@ -126,7 +128,13 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, label <span class="op">=</span> <span class="st">"none"</span>, edge_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_fill_distiller</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="venn-plot-with-more-than-four-sets_files/figure-html/unnamed-chunk-3-3.png" width="700"></p>
-<p>Although <strong>ggVennDiagram</strong> supports 5-7 sets Venn diagram, I don’t encourage to use them in scientific publications as it is difficult to separate the border of different sets in the plot (even with thick edges), especially for 7 and 6 sets Venn. Upset plot is a possible solution for these datasets. You may check a discussion of the <a href="https://venn.bio-spring.top/applications.html" class="external-link">Applications of Venn, Euler and Upset plot</a>.</p>
+<p>Although <strong>ggVennDiagram</strong> supports 5-7 sets Venn
+diagram, I don’t encourage to use them in scientific publications as it
+is difficult to separate the border of different sets in the plot (even
+with thick edges), especially for 7 and 6 sets Venn. Upset plot is a
+possible solution for these datasets. You may check a discussion of the
+<a href="https://venn.bio-spring.top/applications.html" class="external-link">Applications of
+Venn, Euler and Upset plot</a>.</p>
 </div>
   </div>
 
@@ -147,7 +155,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

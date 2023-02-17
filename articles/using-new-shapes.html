@@ -87,7 +87,7 @@
 
       
 
-      </header><script src="using-new-shapes_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using New Shapes in Venn Diagram</h1>
@@ -105,7 +105,11 @@
 <div class="section level2">
 <h2 id="internal-shapes">Internal Shapes<a class="anchor" aria-label="anchor" href="#internal-shapes"></a>
 </h2>
-<p>The <strong>ggVennDiagram</strong> package has a set of built-in shapes that are used to plot Venn diagram. These internal data are stored as sys data as a tibble. It can be viewed with <code>ggVennDiagram:::shapes</code> and plotted with the function <code><a href="../reference/plot_shapes.html">plot_shapes()</a></code>.</p>
+<p>The <strong>ggVennDiagram</strong> package has a set of built-in
+shapes that are used to plot Venn diagram. These internal data are
+stored as sys data as a tibble. It can be viewed with
+<code>ggVennDiagram:::shapes</code> and plotted with the function
+<code><a href="../reference/plot_shapes.html">plot_shapes()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggVennDiagram</span><span class="fu">:::</span><span class="va">shapes</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 104 × 6</span></span></span>
@@ -129,8 +133,10 @@
 <li><p><code>nsets</code>: number of sets, from 1-7.</p></li>
 <li><p><code>type</code>: ellipse, circle or triangle</p></li>
 <li><p><code>shape_id</code>: to separate different shapes</p></li>
-<li><p><code>component</code>: each shape has two components, ‘setEdge’ and ‘setLabel’</p></li>
-<li><p><code>id</code>: to separate edges/labels of a shape. For example, 4 sets shape will have ids of 1-4.</p></li>
+<li><p><code>component</code>: each shape has two components, ‘setEdge’
+and ‘setLabel’</p></li>
+<li><p><code>id</code>: to separate edges/labels of a shape. For
+example, 4 sets shape will have ids of 1-4.</p></li>
 <li><p><code>xy</code>: coordinates</p></li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -140,7 +146,10 @@
 <div class="section level2">
 <h2 id="using-alternative-internal-shapes">Using alternative internal shapes<a class="anchor" aria-label="anchor" href="#using-alternative-internal-shapes"></a>
 </h2>
-<p>By default, only the most appropriate shape is used when calling the main function <code><a href="../reference/ggVennDiagram.html">ggVennDiagram()</a></code>. However, it may be specified in step wise plot which has been described in <a href="https://gaospecial.github.io/ggVennDiagram/articles/fully-customed" class="external-link">fully customed plot</a>.</p>
+<p>By default, only the most appropriate shape is used when calling the
+main function <code><a href="../reference/ggVennDiagram.html">ggVennDiagram()</a></code>. However, it may be specified
+in step wise plot which has been described in <a href="https://gaospecial.github.io/ggVennDiagram/articles/fully-customed" class="external-link">fully
+customed plot</a>.</p>
 <p>For example:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate example data.</span></span>
@@ -166,10 +175,17 @@
 <div class="section level2">
 <h2 id="using-a-novel-shape">Using a novel shape<a class="anchor" aria-label="anchor" href="#using-a-novel-shape"></a>
 </h2>
-<p>Besides, user can use a novel shape when knows its coordinates. A possible start is from a SVG shape. Therefore, I would like to show the method of using a novel triangle shape to plot 6-sets Venn diagram in this section.</p>
+<p>Besides, user can use a novel shape when knows its coordinates. A
+possible start is from a SVG shape. Therefore, I would like to show the
+method of using a novel triangle shape to plot 6-sets Venn diagram in
+this section.</p>
 <p>The triangle is found in WiKi at <a href="https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg" class="external-link uri">https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg</a>.</p>
 <p><img src="https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/typora-img/triangles.svg"><!-- --></p>
-<p>Since SVG is a XML format file, the coordinates can be found in its content. For this figure, the definition of six triangles are stored in the six object, <code>object1b</code>, <code>object2b</code>, …, <code>object6b</code>. We just need to build set regions by closing the vertexes with the function <code><a href="../reference/triangle.html">triangle()</a></code>.</p>
+<p>Since SVG is a XML format file, the coordinates can be found in its
+content. For this figure, the definition of six triangles are stored in
+the six object, <code>object1b</code>, <code>object2b</code>, …,
+<code>object6b</code>. We just need to build set regions by closing the
+vertexes with the function <code><a href="../reference/triangle.html">triangle()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># the vertext coordinates of six triangles</span></span>
 <span><span class="va">vertex_coordinates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">69277</span>,<span class="op">-</span><span class="fl">32868</span>,<span class="fl">135580</span>,<span class="fl">121186</span>, <span class="fl">70900</span>,<span class="fl">199427</span><span class="op">)</span>,</span>
@@ -180,7 +196,8 @@
 <span>                   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">60184</span>,<span class="fl">274046</span>,<span class="fl">142476</span>, <span class="fl">39903</span>,<span class="fl">103276</span>,<span class="fl">183962</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">triangles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">vertex_coordinates</span>, <span class="va">triangle</span><span class="op">)</span></span></code></pre></div>
-<p>Likewise, <code><a href="../reference/label_position.html">label_position()</a></code> is used to setup the coordinates of set labels.</p>
+<p>Likewise, <code><a href="../reference/label_position.html">label_position()</a></code> is used to setup the
+coordinates of set labels.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">position</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
 <span>      <span class="op">~</span><span class="va">x</span>,       <span class="op">~</span><span class="va">y</span>,</span>
@@ -192,11 +209,13 @@
 <span>      <span class="op">-</span><span class="fl">20000</span>,   <span class="fl">270000</span></span>
 <span>    <span class="op">)</span></span>
 <span><span class="va">label_position</span> <span class="op">=</span> <span class="fu"><a href="../reference/label_position.html">label_position</a></span><span class="op">(</span><span class="va">position</span><span class="op">)</span></span></code></pre></div>
-<p>Then construct a <code>VennPlotData</code> class object with shapes and labels.</p>
+<p>Then construct a <code>VennPlotData</code> class object with shapes
+and labels.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">shape</span> <span class="op">=</span> <span class="fu"><a href="../reference/VennPlotData.html">VennPlotData</a></span><span class="op">(</span>setEdge <span class="op">=</span> <span class="va">triangles</span>,</span>
 <span>                     setLabel <span class="op">=</span> <span class="va">label_position</span><span class="op">)</span></span></code></pre></div>
-<p>Now we can join plot data with set and calculated region values with <code><a href="../reference/plotData_add_venn.html">plotData_add_venn()</a></code>.</p>
+<p>Now we can join plot data with set and calculated region values with
+<code><a href="../reference/plotData_add_venn.html">plotData_add_venn()</a></code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"gene"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">20210701</span><span class="op">)</span></span>
@@ -238,7 +257,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
