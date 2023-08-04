@@ -1,3 +1,7 @@
+# ggVennDiagram 1.2.3
+
+* Minor fixing for ggplot 3.4
+
 # ggVennDiagram 1.2.2
 
 * I removed the package dependency to `stringr`
