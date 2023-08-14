@@ -9,8 +9,8 @@
 [![](http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
 [![](http://cranlogs.r-pkg.org/badges/last-week/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
 [![](https://www.r-pkg.org/badges/version/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
-[![](https://img.shields.io/badge/devel%20version-1.2.2-green.svg)](https://github.com/gaospecial/ggVennDiagram)
-[![](https://app.codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://app.codecov.io/gh/gaospecial/ggVennDiagram)
+[![](https://img.shields.io/badge/devel%20version-1.2.3-green.svg)](https://github.com/gaospecial/ggVennDiagram)
+[![](https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://codecov.io/gh/gaospecial/ggVennDiagram)
 <!-- badges: end -->
 
 ‘`ggVennDiagram`’ enables fancy Venn plot with 2-7 sets and generates
@@ -49,6 +49,7 @@ us to visually observe the differences between different parts.
 
 ``` r
 library(ggVennDiagram)
+#> Warning: package 'ggVennDiagram' was built under R version 4.2.3
 genes <- paste("gene",1:1000,sep="")
 set.seed(20210419)
 x <- list(A=sample(genes,300),
@@ -62,12 +63,14 @@ further modified with `ggplot` functions.
 
 ``` r
 library(ggplot2)
+#> Warning: package 'ggplot2' was built under R version 4.2.3
 ggVennDiagram(x) + scale_fill_gradient(low="blue",high = "red")
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="70%" />
 
 ``` r
+
 ggVennDiagram(x) + scale_color_brewer(palette = "Paired")
 ```
 
@@ -88,6 +91,7 @@ ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"))
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="70%" />
 
 ``` r
+
 ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = "none")
 ```
 
@@ -164,13 +168,13 @@ components.
 
 In general, `ggVennDiagram()` plot a Venn in three steps:
 
--   get the coordinates of a applicable shape from internal `shapes`
-    datasets.
--   calculate sub regions of sets, including both the shape regions and
-    sets members, and return a `PlotDataVenn` object that includes all
-    necessary definitions. We implement a number of set operations
-    functions to do this job.
--   plot using `ggplot2` functions.
+- get the coordinates of a applicable shape from internal `shapes`
+  datasets.
+- calculate sub regions of sets, including both the shape regions and
+  sets members, and return a `PlotDataVenn` object that includes all
+  necessary definitions. We implement a number of set operations
+  functions to do this job.
+- plot using `ggplot2` functions.
 
 ``` r
 venn <- Venn(x)
@@ -184,13 +188,12 @@ data
 #> Bounding box:  xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534
 #> CRS:           NA
 #> # A tibble: 4 × 6
-#>   id                                          geometry compo…¹ item  count name 
-#>   <chr>                                   <LINESTRING> <chr>   <nam> <int> <chr>
-#> 1 1     (0.1025126 0.7174874, 0.09412107 0.7081191, 0… setEdge <chr>   300 A    
-#> 2 2     (0.2525126 0.8174874, 0.246341 0.8103391, 0.2… setEdge <chr>   525 B    
-#> 3 3     (0.7333452 0.8033452, 0.7262248 0.8095447, 0.… setEdge <chr>   440 C    
-#> 4 4     (0.8974874 0.7174874, 0.8881191 0.7258789, 0.… setEdge <chr>   350 D    
-#> # … with abbreviated variable name ¹​component
+#>   id                                        geometry component item  count name 
+#>   <chr>                                 <LINESTRING> <chr>     <nam> <int> <chr>
+#> 1 1     (0.1025126 0.7174874, 0.09412107 0.7081191,… setEdge   <chr>   300 A    
+#> 2 2     (0.2525126 0.8174874, 0.246341 0.8103391, 0… setEdge   <chr>   525 B    
+#> 3 3     (0.7333452 0.8033452, 0.7262248 0.8095447, … setEdge   <chr>   440 C    
+#> 4 4     (0.8974874 0.7174874, 0.8881191 0.7258789, … setEdge   <chr>   350 D    
 #> 
 #> Slot "setLabel":
 #> Simple feature collection with 4 features and 3 fields
@@ -213,24 +216,23 @@ data
 #> Bounding box:  xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534
 #> CRS:           NA
 #> # A tibble: 15 × 6
-#>    id                                         geometry compo…¹ item  count name 
-#>    <chr>                                     <POLYGON> <chr>   <lis> <int> <chr>
-#>  1 1     ((0.1025126 0.7174874, 0.1118809 0.7258789, … region  <chr>    41 A    
-#>  2 2     ((0.2525126 0.8174874, 0.2596609 0.823659, 0… region  <chr>   151 B    
-#>  3 3     ((0.7333452 0.8033452, 0.7395447 0.7962248, … region  <chr>    91 C    
-#>  4 4     ((0.8974874 0.7174874, 0.9058789 0.7081191, … region  <chr>    75 D    
-#>  5 12    ((0.2494531 0.7508377, 0.266399 0.7472201, 0… region  <chr>    49 A..B 
-#>  6 13    ((0.3598131 0.3161471, 0.3466157 0.3144203, … region  <chr>    51 A..C 
-#>  7 14    ((0.6341476 0.306281, 0.6321686 0.2919527, 0… region  <chr>    36 A..D 
-#>  8 23    ((0.4087951 0.6905086, 0.4240163 0.7044756, … region  <chr>   111 B..C 
-#>  9 24    ((0.7013464 0.5605964, 0.7121743 0.5437184, … region  <chr>    63 B..D 
-#> 10 34    ((0.7562978 0.7359764, 0.7555797 0.7233843, … region  <chr>    53 C..D 
-#> 11 123   ((0.4254307 0.668526, 0.4425419 0.6552909, 0… region  <chr>    49 A..B…
-#> 12 124   ((0.6020164 0.4567956, 0.6098817 0.4389429, … region  <chr>    38 A..B…
-#> 13 134   ((0.4966178 0.374675, 0.4805314 0.3646387, 0… region  <chr>    21 A..C…
-#> 14 234   ((0.5085786 0.6114214, 0.5243976 0.6266822, … region  <chr>    49 B..C…
-#> 15 1234  ((0.5066822 0.5956024, 0.5213246 0.5792878, … region  <chr>    15 A..B…
-#> # … with abbreviated variable name ¹​component
+#>    id                                       geometry component item  count name 
+#>    <chr>                                   <POLYGON> <chr>     <lis> <int> <chr>
+#>  1 1     ((0.1025126 0.7174874, 0.1118809 0.7258789… region    <chr>    41 A    
+#>  2 2     ((0.2525126 0.8174874, 0.2596609 0.823659,… region    <chr>   151 B    
+#>  3 3     ((0.7333452 0.8033452, 0.7395447 0.7962248… region    <chr>    91 C    
+#>  4 4     ((0.8974874 0.7174874, 0.9058789 0.7081191… region    <chr>    75 D    
+#>  5 12    ((0.2494531 0.7508377, 0.266399 0.7472201,… region    <chr>    49 A..B 
+#>  6 13    ((0.3598131 0.3161471, 0.3466157 0.3144203… region    <chr>    51 A..C 
+#>  7 14    ((0.6341476 0.306281, 0.6321686 0.2919527,… region    <chr>    36 A..D 
+#>  8 23    ((0.4087951 0.6905086, 0.4240163 0.7044756… region    <chr>   111 B..C 
+#>  9 24    ((0.7013464 0.5605964, 0.7121743 0.5437184… region    <chr>    63 B..D 
+#> 10 34    ((0.7562978 0.7359764, 0.7555797 0.7233843… region    <chr>    53 C..D 
+#> 11 123   ((0.4254307 0.668526, 0.4425419 0.6552909,… region    <chr>    49 A..B…
+#> 12 124   ((0.6020164 0.4567956, 0.6098817 0.4389429… region    <chr>    38 A..B…
+#> 13 134   ((0.4966178 0.374675, 0.4805314 0.3646387,… region    <chr>    21 A..C…
+#> 14 234   ((0.5085786 0.6114214, 0.5243976 0.6266822… region    <chr>    49 B..C…
+#> 15 1234  ((0.5066822 0.5956024, 0.5213246 0.5792878… region    <chr>    15 A..B…
 ```
 
 Now we can custom this figure.
@@ -308,7 +310,7 @@ R](https://venn.bio-spring.top).
 在 *@GuangchuangYu* 的公众号下面，我投稿了两篇文章，介绍了
 “`ggVennDiagram`” 包开发的始末。
 
--   [“`ggVennDiagram`”
-    诞生记](https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA)
--   [“`ggVennDiagram`”
-    的重构](https://mp.weixin.qq.com/s/6kDXPrJRyXab6HpVjq6JBw)
+- [“`ggVennDiagram`”
+  诞生记](https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA)
+- [“`ggVennDiagram`”
+  的重构](https://mp.weixin.qq.com/s/6kDXPrJRyXab6HpVjq6JBw)
