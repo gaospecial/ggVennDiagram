@@ -52,8 +52,10 @@ deps %>%
   select(package, sysreqs, filesize) %>%
   arrange(desc(filesize)) %>%
   filter(package %in% dependency)
-
 ```
+
+
+
 `sf` not only have the largest size of package, but also depends on several system packages, such as `GDAL`, `GEOS`, `PROJ`, and so on. Furthermore, two of the `sf`-dependent packages, `s2` and `units` also have system requirements, especially `units`, whose system dependence `udunits-2` is an additional one that usually not installed by most of the `ggVennDiagram` users.
 
 ```{r}
@@ -66,21 +68,71 @@ However, `sf` is a necessary for the full functions of `ggVennDiagram` in shape 
 
 ### Other dependencies
 
-|package |                        reason             |
-|--------| ------------------------------------------|
-| `plotly` |  |
-| `RVenn`  |  |
+Besides, several other packages are removed from dependency list after considerations.
+
+```{r}
+deps %>%
+  select(package, sysreqs, filesize) %>%
+  filter(!package %in% pak::pkg_deps("sf")$package, !package %in% pak::pkg_deps("ggplot2")$package) %>% 
+  arrange(desc(filesize))
+```
+
+|package    |                        reason             |
+|--------   | ------------------------------------------|
+| `plotly`  | Not the main feature, many dependencies   |
+| `RVenn`   | Easy to replace                           |
 
 
-Besides, `plotly` also has a large size, and it is only used
+- [RVenn](https://cran.r-project.org/web/packages/RVenn/vignettes/vignette.html)
+
+## More optimizations
+
+### The introduction of `shapeMageR` package
+
+`shapeMageR` is implemented to deal with the shape generation for plotting complex geometries in `ggVennDiagram`. It's named after "shape + mage + R". All the related shape generation functions used in `ggVennDiagram` are transferred to the new `shapeMageR` package. 
+
+- Shape Generation
+  - Circle
+  - Ellipse
+  - Triangle
+  - Rectangle
+  - Line
+  - Dot
+- Geometry Processing
+  - diff
+  - union
+  - discern
+  - overlap
+- Shape Transformation
+  - sf2polygon
+  - polygon2sf
+- Misc
+  - shape reading
+  
 
 
-## Ready-to-use new shapes
+### Ready-to-use new shapes
 
 
-## Native support for Upset plot
+
+![](https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/20231112002209.png)
+
+![](https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/20231112002411.png)
+
+### Native support for Upset plot
+
+As been stated in our previous publication, Venn Diagram is not suitable for analyzing more than seven sets. In that case we recommend the Upset plot as an alternative method, which is supported by `UpsetR` in R platform. We add native support for Upset plot.
+
+**Read more**:
+
+- [about Upset](https://upset.app/)
+
+### Optimization of default settings
+
+**Transparent background of labels**
 
 
-## Optimization of default settings
+**Gray line of region borders**
 
 
+**Region fill colors pallete**
