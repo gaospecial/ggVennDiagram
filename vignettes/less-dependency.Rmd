@@ -1,0 +1,86 @@
+---
+title: "Update of ggVennDiagram 1.5"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{update-of-ggVennDigram-1.5}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ggVennDiagram)
+```
+
+## Less dependency
+
+`ggVennDiagram` has a large package dependencies. This is because we build this package standing on the shoulder of those who came before us.
+
+```{r}
+dependency = c(
+  "sf",
+  "ggplot2",
+  "dplyr",
+  "magrittr",
+  "methods",
+  "purrr",
+  "tibble",
+  "plotly",
+  "RVenn",
+  "yulab.utils"
+)
+```
+
+Although we only import ten packages in the development, the dependence tree is huge.
+
+```{r}
+(deps = pak::pkg_deps_tree("ggVennDiagram"))
+```
+
+### Remove sf dependency
+
+Among them, `sf` is the heaviest package that `ggVennDiagram` depend on. 
+
+```{r}
+deps %>%
+  select(package, sysreqs, filesize) %>%
+  arrange(desc(filesize)) %>%
+  filter(package %in% dependency)
+
+```
+`sf` not only have the largest size of package, but also depends on several system packages, such as `GDAL`, `GEOS`, `PROJ`, and so on. Furthermore, two of the `sf`-dependent packages, `s2` and `units` also have system requirements, especially `units`, whose system dependence `udunits-2` is an additional one that usually not installed by most of the `ggVennDiagram` users.
+
+```{r}
+deps_sf = pak::pkg_deps("sf")
+deps %>% filter(package %in% deps_sf$package, sysreqs != "") %>% 
+  select(package, sysreqs, filesize)
+```
+
+However, `sf` is a necessary for the full functions of `ggVennDiagram` in shape generation. So it is difficult to remove it. Therefore, we decided to move the shape generation functions to a new package, namely `shape`. And only import this package as a "suggestion" in new version of `ggVennDiagram`.
+
+### Other dependencies
+
+|package |                        reason             |
+|--------| ------------------------------------------|
+| `plotly` |  |
+| `RVenn`  |  |
+
+
+Besides, `plotly` also has a large size, and it is only used
+
+
+## Ready-to-use new shapes
+
+
+## Native support for Upset plot
+
+
+## Optimization of default settings
+
+
