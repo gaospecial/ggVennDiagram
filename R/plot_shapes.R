@@ -16,15 +16,47 @@
 #' @examples
 #' plot_shapes()
 plot_shapes <- function(){
-  ids <- sort(unique(shapes$shape_id))
-  ids <- ids[ids != "601f"]
-  # windows()
-  par(mfrow = c(3,4), mar = c(1,1,1,1))
-  success <- lapply(seq_along(ids), function(i){
-    id = ids[[i]]
-    shapes %>% dplyr::filter(.data$component == "setEdge", .data$shape_id == {{id}}) %>%
-      dplyr::pull(.data$xy) %>%
-      sf::st_polygon() %>%
-      plot(main = {{id}})
-  })
+  plots = lapply(shapes, plot_shape_edge)
+  aplot::plot_list(gglist = plots, widths = 1)
+}
+
+get_shapes = function(){
+  df = lapply(shapes, function(x){
+    tibble::tibble(shape_id = get_shape_id(x),
+                   nsets = get_shape_nsets(x),
+                   type = get_shape_type(x))
+  }) |> dplyr::bind_rows()
+  return(df)
+}
+
+plot_shape_edge = function(x){
+  id = get_shape_id(x)
+  edge = get_shape_setedge(x)
+  ggplot2::ggplot(edge) +
+    ggplot2::geom_sf() +
+    ggplot2::labs(title = id) +
+    ggplot2::theme_void() +
+    ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+}
+
+
+get_shape_by_id = function(id){
+  idx = sapply(shapes, function(x) get_shape_id(x) == id)
+  if (sum(idx) == 1) return(shapes[idx][[1]])
+}
+
+get_shape_id = function(x){
+  x@shapeId
+}
+
+get_shape_type = function(x){
+  x@type
+}
+
+get_shape_nsets = function(x){
+  x@nsets
+}
+
+get_shape_setedge = function(x){
+  x@setEdge
 }
