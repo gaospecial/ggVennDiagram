@@ -85,6 +85,8 @@ deps %>%
 
 - [RVenn](https://cran.r-project.org/web/packages/RVenn/vignettes/vignette.html)
 
+The author of RVenn agreed to reuse his code and is open for join in the further development of ggVennDiagram. I will also add him as a co-author of the new manuscript.
+
 ## More optimizations
 
 ### The introduction of `shapeMageR` package
@@ -123,6 +125,8 @@ deps %>%
 
 As been stated in our previous publication, Venn Diagram is not suitable for analyzing more than seven sets. In that case we recommend the Upset plot as an alternative method, which is supported by `UpsetR` in R platform. We add native support for Upset plot.
 
+This function will be provided on base of aplot.
+
 **Read more**:
 
 - [about Upset](https://upset.app/)
@@ -144,4 +148,4 @@ Transforming coordination.
 
 ### Work with TBtools
 
-
+Provide an official TBtools plugin.
