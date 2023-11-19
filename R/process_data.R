@@ -32,7 +32,7 @@ setMethod("process_data", signature = c("Venn"),
 #'
 #' @return a tibble, `sf` object
 #' @export
-#' @name venn_data
+#' @name venn_plot_data
 #'
 #' @examples
 #' \dontrun{
@@ -46,46 +46,20 @@ venn_region <- function(obj){
   obj@region
 }
 
-#' @rdname venn_data
+#' @rdname venn_plot_data
 #' @export
 venn_setedge <- function(obj){
   if (!inherits(obj, "VennPlotData")) stop(simpleError("object is not a S4 class 'VennPlotData'."))
   obj@setEdge
 }
 
-#' @rdname venn_data
+#' @rdname venn_plot_data
 #' @export
 venn_setlabel <- function(obj){
   if (!inherits(obj, "VennPlotData")) stop(simpleError("object is not a S4 class 'VennPlotData'."))
   obj@setLabel
 }
 
-#' get applicable shape data for Venn object
-#'
-#' ggVennDiagram stores shapes as internal data. You may see all the shapes by
-#' using `plot_shapes()`.
-#'
-#' @param nsets number of sets
-#' @inheritDotParams process_data
-#'
-#' @return a tibble describing specific shape
-#' @export
-#'
-#' @examples
-#' get_shape_data(nsets = 3, type == "polygon")
-#'
-get_shape_data <- function(nsets, ...){
-  data <- shapes %>% dplyr::filter(.data$nsets == {{nsets}}, ...)
-  if (length(unique(data[["shape_id"]]))>1) {
-    # message("More than one shapes are available for ", n, " sets Venn plot. ",
-    #          "Will choose the first one.\n",
-    #         "You may explictly select a shape by specify shape_id, and/or type.\n\n")
-    the_id <- unique(data[["shape_id"]])[1]
-    data <- data %>% dplyr::filter(.data$shape_id == the_id)
-  }
-
-  data
-}
 
 #' join the shape data with set data
 #'
