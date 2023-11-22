@@ -1,11 +1,12 @@
 Package: ggVennDiagram
 Type: Package
 Title: A 'ggplot2' Implement of Venn Diagram
-Version: 1.2.3
+Version: 1.2.4
 Authors@R: c(
   person("Chun-Hui","Gao",email="gaospecial@gmail.com",role=c("aut","cre"), comment=c(ORCID = "0000-0002-1445-7939")),
   person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("ctb"), comment = c(ORCID = "0000-0002-6485-8781")),
-  person("Adrian", "Dusa", role = c("ctb"),  email = "dusa.adrian@unibuc.ro")
+  person("Adrian", "Dusa", role = c("ctb"),  email = "dusa.adrian@unibuc.ro"),
+  person("Turgut Yigit", "Akyol", email = "tyakyol@gmail.com", role = c("ctb"), comment=c(ORCID = "0000-0003-0897-7716"))
   )
 Maintainer: Chun-Hui Gao <gaospecial@gmail.com>
 Description: Easy-to-use functions to generate 2-7 sets Venn plot in publication quality. 
@@ -16,17 +17,16 @@ Description: Easy-to-use functions to generate 2-7 sets Venn plot in publication
   of them, then separately plot Venn in three components: set edges, set labels, and regions.
   From version 1.0, it is possible to customize these components as you demand in ordinary 'ggplot2' grammar.
 Depends: 
-    R (>= 3.5.0)
+    R (>= 4.1.0)
 Imports: 
-    sf,
     ggplot2,
     dplyr,
     magrittr,
     methods,
     purrr,
     tibble,
-    RVenn,
-    yulab.utils
+    yulab.utils,
+    aplot
 URL: https://github.com/gaospecial/ggVennDiagram
 License: GPL-3
 Encoding: UTF-8
@@ -38,6 +38,7 @@ Suggests:
     rmarkdown,
     tidyr,
     venn,
-    RColorBrewer
+    RColorBrewer,
+    plotly
 VignetteBuilder: knitr
 LazyData: true
