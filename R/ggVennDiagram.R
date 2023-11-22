@@ -186,7 +186,7 @@ plot_venn <- function(x,
     }
   }
 
-  if (show_intersect == TRUE && plotly_ready() ){
+  if (show_intersect == TRUE & plotly_ready() ){
     items <- data@region %>%
       dplyr::rowwise() %>%
       dplyr::mutate(text = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),

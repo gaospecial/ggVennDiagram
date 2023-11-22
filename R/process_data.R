@@ -17,12 +17,8 @@ setGeneric("process_data", function(venn, ...) standardGeneric("process_data"))
 #' @export
 setMethod("process_data", signature = c("Venn"),
           function(venn, ...){
-            shape <- get_shape_data(nsets = length(venn@sets), ...)
-            plot_data <- VennPlotData(
-              setEdge = dplyr::filter(shape, .data$component == "setEdge") %>% dplyr::pull(.data$xy),
-              setLabel = dplyr::filter(shape, .data$component == "setLabel") %>% dplyr::pull(.data$xy)
-            )
-            plotData_add_venn(plotData = plot_data, venn = venn)
+            shape = get_shape_data(nsets = length(venn@sets), ...)
+            plotData_add_venn(plotData = shape, venn = venn)
           })
 
 
