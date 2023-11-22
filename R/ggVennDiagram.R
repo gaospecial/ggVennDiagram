@@ -135,8 +135,8 @@ plot_venn <- function(x,
 
   region.params <- list(data = data@region, mapping = aes_string(fill = 'count'))
 
-  edge.params <- list(data = data@setEdge, 
-                      mapping = aes_string(color = 'id'), 
+  edge.params <- list(data = data@setEdge,
+                      mapping = aes_string(color = 'id'),
                       show.legend = FALSE)
 
   if (utils::packageVersion('ggplot2') >= '3.4.0'){
@@ -147,14 +147,14 @@ plot_venn <- function(x,
     edge.params$size <- edge_size
   }
 
-  text.params <- list(data = data@setLabel, 
+  text.params <- list(data = data@setLabel,
                       mapping = aes_string(label = 'name'),
                       size = set_size,
                       color = set_color
                  )
 
   region.layer <- do.call('geom_sf', region.params)
-  
+
   edge.layer <- do.call('geom_sf', edge.params)
 
   text.layer <- do.call('geom_sf_text', text.params)
@@ -186,7 +186,7 @@ plot_venn <- function(x,
     }
   }
 
-  if (show_intersect == TRUE){
+  if (show_intersect == TRUE && plotly_ready() ){
     items <- data@region %>%
       dplyr::rowwise() %>%
       dplyr::mutate(text = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),
@@ -214,4 +214,14 @@ plot_venn <- function(x,
 }
 
 
-
+plotly_ready = function(){
+  if (requireNamespace("plotly", quietly = TRUE)){
+    invisible(TRUE)
+  } else {
+    warning(paste("The plotly package is not found in your library paths.",
+                  "  It is required to show intersections interactively.",
+                  "  Please run 'install.packages('plotly') and retry.",
+                  collapse = "\n"))
+    invisible(FALSE)
+  }
+}

@@ -25,7 +25,6 @@ Imports:
     methods,
     purrr,
     tibble,
-    plotly,
     RVenn,
     yulab.utils
 URL: https://github.com/gaospecial/ggVennDiagram
@@ -34,6 +33,7 @@ Encoding: UTF-8
 RoxygenNote: 7.2.3
 Suggests: 
     testthat (>= 2.1.0),
+    plotly,
     knitr,
     rmarkdown,
     tidyr,
