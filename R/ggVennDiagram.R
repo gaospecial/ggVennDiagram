@@ -135,17 +135,17 @@ plot_venn <- function(x,
   p <- ggplot()
 
   region.params <- list(data = get_shape_region(data),
-                        mapping = aes(fill = .data$count))
+                        mapping = aes(geometry = .data$geometry, fill = .data$count))
 
   edge.params <- list(data = get_shape_setedge(data),
-                      mapping = aes(color = .data$id),
+                      mapping = aes(geometry = .data$geometry, color = .data$id),
                       linetype = edge_lty,
                       linewidth = edge_size,
                       color = set_color,
                       show.legend = FALSE)
 
   text.params <- list(data = get_shape_setlabel(data),
-                      mapping = aes(label = .data$name),
+                      mapping = aes(geometry = .data$geometry, label = .data$name),
                       size = set_size,
                       color = set_color
                  )
@@ -164,7 +164,7 @@ plot_venn <- function(x,
                                           digits = label_percent_digit),"%", sep="")) %>%
       dplyr::mutate(both = paste(.data$count,paste0("(",.data$percent,")"),sep = "\n"))
     if (label_geom == "label"){
-      p <- p + geom_sf_label(aes(label = .data[[label]]),
+      p <- p + geom_sf_label(aes(geometry = .data$geometry, label = .data[[label]]),
                              data = region_label,
                              alpha = label_alpha,
                              color = label_color,
@@ -173,7 +173,7 @@ plot_venn <- function(x,
                              label.size = NA)
     }
     if (label_geom == "text"){
-      p <- p + geom_sf_text(aes(label = .data[[label]]),
+      p <- p + geom_sf_text(aes(geometry = .data$geometry, label = .data[[label]]),
                             data = region_label,
                             alpha = label_alpha,
                             color = label_color,
@@ -190,11 +190,11 @@ plot_venn <- function(x,
       sf::st_as_sf()
     label_coord = sf::st_centroid(items$geometry) %>% sf::st_coordinates()
     p <- ggplot(items) +
-      geom_sf(aes_string(fill="count")) +
-      geom_sf_text(aes(label = .data$name),
+      geom_sf(aes(geometry = .data$geometry, fill= .data$count)) +
+      geom_sf_text(aes(geometry = .data$geometry, label = .data$name),
                    data = venn_setlabel(data),
                    inherit.aes = F) +
-      geom_sf_text(aes(label = .data$count, text = .data$text),
+      geom_sf_text(aes(geometry = .data$geometry, label = .data$count, text = .data$text),
                 show.legend = FALSE) +
       theme_void()
     ax <- list(

@@ -55,13 +55,13 @@ venn <- Venn(gene_list)
 data <- process_data(venn)
 ggplot() +
   # 1. region count layer
-  geom_sf(aes(fill = count), data = venn_region(data)) +
+  geom_sf(aes(geometry = geometry, fill = count), data = venn_region(data)) +
   # 2. set edge layer
-  geom_sf(aes(color = id), data = venn_setedge(data), show.legend = FALSE) +
+  geom_sf(aes(geometry = geometry, color = id), data = venn_setedge(data), show.legend = FALSE) +
   # 3. set label layer
-  geom_sf_text(aes(label = name), data = venn_setlabel(data)) +
+  geom_sf_text(aes(geometry = geometry, label = name), data = venn_setlabel(data)) +
   # 4. region label layer
-  geom_sf_label(aes(label = count), data = venn_region(data)) +
+  geom_sf_label(aes(geometry = geometry, label = count), data = venn_region(data)) +
   theme_void()
 ```
 
@@ -87,13 +87,13 @@ For example, you may change edge/fill/label properties as you will.
 ```{r}
 ggplot() +
   # change mapping of color filling
-  geom_sf(aes(fill = id), data = venn_region(data), show.legend = FALSE) +  
+  geom_sf(aes(geometry = geometry, fill = id), data = venn_region(data), show.legend = FALSE) +  
   # adjust edge size and color
-  geom_sf(color="grey", size = 3, data = venn_setedge(data), show.legend = FALSE) +  
+  geom_sf(aes(geometry = geometry), color="grey", size = 3, data = venn_setedge(data), show.legend = FALSE) +  
   # show set label in bold
-  geom_sf_text(aes(label = name), fontface = "bold", data = venn_setlabel(data)) +  
+  geom_sf_text(aes(geometry = geometry, label = name), fontface = "bold", data = venn_setlabel(data)) +  
   # add a alternative region name
-  geom_sf_label(aes(label = name), data = venn_region(data), alpha = 0.5) +  
+  geom_sf_label(aes(geometry = geometry, label = name), data = venn_region(data), alpha = 0.5) +  
   theme_void()
 ```
 
@@ -109,11 +109,11 @@ items <- venn_region(data) |>
   dplyr::mutate(text = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),
                                          width = 40))
 p <- ggplot(items) +
-  geom_sf(aes_string(fill="count")) +
-  geom_sf_text(aes(label = name),
+  geom_sf(aes(geometry = geometry, fill=count)) +
+  geom_sf_text(aes(geometry = geometry, label = name),
                data = venn_setlabel(data),
                inherit.aes = F) +
-  geom_sf_text(aes(label = count, text = text),
+  geom_sf_text(aes(geometry = geometry, label = count, text = text),
                show.legend = FALSE) +
   theme_void() +
   scale_fill_distiller(palette = "RdBu")
