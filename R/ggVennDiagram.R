@@ -141,6 +141,7 @@ plot_venn <- function(x,
                       mapping = aes(color = .data$id),
                       linetype = edge_lty,
                       linewidth = edge_size,
+                      color = set_color,
                       show.legend = FALSE)
 
   text.params <- list(data = get_shape_setlabel(data),
@@ -182,7 +183,7 @@ plot_venn <- function(x,
   }
 
   if (show_intersect == TRUE & plotly_ready() ){
-    items <- data@region %>%
+    items <- venn_region(data) %>%
       dplyr::rowwise() %>%
       dplyr::mutate(text = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),
                                              width = label_txtWidth)) %>%
@@ -190,12 +191,10 @@ plot_venn <- function(x,
     label_coord = sf::st_centroid(items$geometry) %>% sf::st_coordinates()
     p <- ggplot(items) +
       geom_sf(aes_string(fill="count")) +
-      geom_sf_text(aes_string(label = "name"),
-                   data = data@setLabel,
+      geom_sf_text(aes(label = .data$name),
+                   data = venn_setlabel(data),
                    inherit.aes = F) +
-      geom_text(aes_string(label = "count", text = "text"),
-                x = label_coord[,1],
-                y = label_coord[,2],
+      geom_sf_text(aes(label = .data$count, text = .data$text),
                 show.legend = FALSE) +
       theme_void()
     ax <- list(

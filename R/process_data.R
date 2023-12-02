@@ -37,19 +37,16 @@ setMethod("process_data", signature = c("Venn"),
 
 #' Get VennPlotData slot
 #'
-#' @param obj a S4 class `VennPlotData` object
+#' @param obj a list that stores all the data from the S4 class `VennPlotData` object
 #'
 #' @return a tibble, `sf` object
 #' @export
 #' @name venn_plot_data
 #'
 #' @examples
-#' \dontrun{
-#' # obj is VennPlotData
 #' venn_region(obj)   # return region data
 #' venn_setlabel(obj) # return setLabel data
 #' venn_setedge(obj)  # return setEdge data
-#' }
 venn_region <- function(obj){
   obj$region
 }
