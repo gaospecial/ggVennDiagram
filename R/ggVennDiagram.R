@@ -51,23 +51,24 @@ NULL
 #' @param label_txtWidth width of text used in showing intersect members, will be ignored unless show_intersection is TRUE (40)
 #' @param edge_lty line type of set edges ("solid")
 #' @param edge_size line width of set edges (1)
-#' @param ... Other arguments passed on to downstream functions.
+#' @param ... useless
 #'
 #' @return A ggplot object
 #' @export
 #' @examples
 #' library(ggVennDiagram)
-#' x <- list(A=1:5,B=2:7,C=3:6,D=4:9)
+#' x = list(A=1:5,B=2:7,C=3:6,D=4:9)
 #' ggVennDiagram(x)  # 4d venn
 #' ggVennDiagram(x[1:3])  # 3d venn
 #' ggVennDiagram(x[1:2])  # 2d venn
-ggVennDiagram <- function(x, category.names=names(x),
+ggVennDiagram = function(x,
+                          category.names = names(x),
                           show_intersect = FALSE,
                           set_color = "black",
                           set_size = NA,
-                          label=c("both","count","percent","none"),
-                          label_alpha=0.5,
-                          label_geom=c("label","text"),
+                          label = c("both","count","percent","none"),
+                          label_alpha = 0.5,
+                          label_geom = c("label","text"),
                           label_color = "black",
                           label_size = NA,
                           label_percent_digit = 0,
@@ -133,22 +134,17 @@ plot_venn <- function(x,
   data <- process_data(venn)
   p <- ggplot()
 
-  region.params <- list(data = data@region, mapping = aes_string(fill = 'count'))
+  region.params <- list(data = get_shape_region(data),
+                        mapping = aes(fill = .data$count))
 
-  edge.params <- list(data = data@setEdge,
-                      mapping = aes_string(color = 'id'),
+  edge.params <- list(data = get_shape_setedge(data),
+                      mapping = aes(color = .data$id),
+                      linetype = edge_lty,
+                      linewidth = edge_size,
                       show.legend = FALSE)
 
-  if (utils::packageVersion('ggplot2') >= '3.4.0'){
-    edge.params$linetype <- edge_lty
-    edge.params$linewidth <- edge_size
-  }else{
-    edge.params$lty <- edge_lty
-    edge.params$size <- edge_size
-  }
-
-  text.params <- list(data = data@setLabel,
-                      mapping = aes_string(label = 'name'),
+  text.params <- list(data = get_shape_setlabel(data),
+                      mapping = aes(label = .data$name),
                       size = set_size,
                       color = set_color
                  )
@@ -161,25 +157,24 @@ plot_venn <- function(x,
 
   p <- p + region.layer + edge.layer + text.layer + theme_void()
 
-  if (label != "none" & show_intersect == FALSE){
-    region_label <- data@region %>%
-      dplyr::filter(.data$component == "region") %>%
+  if (label != "none" & !show_intersect){
+    region_label <- get_shape_region(data) %>%
       dplyr::mutate(percent = paste(round(.data$count*100/sum(.data$count),
                                           digits = label_percent_digit),"%", sep="")) %>%
       dplyr::mutate(both = paste(.data$count,paste0("(",.data$percent,")"),sep = "\n"))
     if (label_geom == "label"){
-      p <- p + geom_sf_label(aes_string(label=label),
+      p <- p + geom_sf_label(aes(label = .data[[label]]),
                              data = region_label,
-                             alpha=label_alpha,
+                             alpha = label_alpha,
                              color = label_color,
                              size = label_size,
                              lineheight = 0.85,
                              label.size = NA)
     }
     if (label_geom == "text"){
-      p <- p + geom_sf_text(aes_string(label=label),
+      p <- p + geom_sf_text(aes(label = .data[[label]]),
                             data = region_label,
-                            alpha=label_alpha,
+                            alpha = label_alpha,
                             color = label_color,
                             size = label_size,
                             lineheight = 0.85)

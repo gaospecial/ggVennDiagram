@@ -69,3 +69,7 @@ get_shape_setedge = function(x){
 get_shape_region = function(x){
   x$region
 }
+
+get_shape_setlabel = function(x){
+  x$setLabel
+}
