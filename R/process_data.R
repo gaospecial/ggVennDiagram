@@ -68,6 +68,9 @@ venn_setlabel <- function(obj){
 #'
 #' @param plotData a VennPlot object that stores plot shapes
 #' @param venn a Venn object that stores set values
+#'
+#' @export
+#'
 plotData_add_venn <- function(plotData, venn){
   if (!all(c("setLabel","setEdge","region") %in% names(plotData))) stop("Invalid shape data.")
   if (!inherits(venn, "Venn")) stop("venn should be a S4 Venn object.")

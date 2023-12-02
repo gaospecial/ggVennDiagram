@@ -2,7 +2,7 @@
 title: "Update of ggVennDiagram 1.5"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{update-of-ggVennDigram-1.5}
+  %\VignetteIndexEntry{Update of ggVennDiagram 1.5}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

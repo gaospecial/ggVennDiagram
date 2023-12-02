@@ -2,8 +2,11 @@
 
 export(Venn)
 export(discern_overlap)
+export(get_shape_by_id)
 export(get_shape_data)
+export(get_shapes)
 export(ggVennDiagram)
+export(plotData_add_venn)
 export(plot_shapes)
 export(plot_venn)
 export(process_data)

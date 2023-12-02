@@ -36,7 +36,14 @@ get_shape_data <- function(nsets, type = NULL, shape_id = NULL){
 }
 
 
-get_shapes = function(shapes = ggVennDiagram:::shapes){
+#' Get all shapes
+#'
+#' @return a tibble
+#' @export
+#'
+#' @examples
+#' get_shapes()
+get_shapes = function(){
   df = lapply(shapes, function(x){
     tibble::tibble(shape_id = get_shape_id(x),
                    nsets = get_shape_nsets(x),
@@ -45,7 +52,16 @@ get_shapes = function(shapes = ggVennDiagram:::shapes){
   return(df)
 }
 
-get_shape_by_id = function(id, shapes = ggVennDiagram:::shapes){
+#' Specifying a shape
+#'
+#' @param id shape id
+#'
+#' @return a shape
+#' @export
+#'
+#' @examples
+#' get_shape_by_id("401f")
+get_shape_by_id = function(id){
   idx = sapply(shapes, function(x) get_shape_id(x) == id)
   if (sum(idx) == 1) return(shapes[idx][[1]])
 }
