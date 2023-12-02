@@ -62,7 +62,7 @@ ggplot() +
   theme_void()
 ```
 
-The variable `data` is a S4 class object that has three slots.
+The variable `data` is a structured list that has three slots.
 
 ```{r}
 data
@@ -104,18 +104,14 @@ data <- process_data(venn)
 items <- venn_region(data) %>%
   dplyr::rowwise() %>%
   dplyr::mutate(text = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),
-                                         width = 40)) %>%
-  sf::st_as_sf()
-label_coord = sf::st_centroid(items$geometry) %>% sf::st_coordinates()
+                                         width = 40))
 p <- ggplot(items) +
   geom_sf(aes_string(fill="count")) +
-  geom_sf_text(aes_string(label = "name"),
-               data = data@setLabel,
+  geom_sf_text(aes(label = name),
+               data = venn_setlabel(data),
                inherit.aes = F) +
-  geom_text(aes_string(label = "count", text = "text"),
-            x = label_coord[,1],
-            y = label_coord[,2],
-            show.legend = FALSE) +
+  geom_sf_text(aes(label = count, text = text),
+               show.legend = FALSE) +
   theme_void() +
   scale_fill_distiller(palette = "RdBu")
 ax <- list(

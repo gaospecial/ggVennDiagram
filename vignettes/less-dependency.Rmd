@@ -41,7 +41,7 @@ dependency = c(
 Although we only import ten packages in the development, the dependence tree is huge.
 
 ```{r}
-(deps = pak::pkg_deps_tree("ggVennDiagram"))
+(deps = pak::pkg_deps_tree("gaospecial/ggVennDiagram@V1.2.3"))
 ```
 
 ### Remove sf dependency

@@ -23,11 +23,12 @@ library(ggVennDiagram)
 
 The **ggVennDiagram** package has a set of built-in shapes that are used to plot
 Venn diagram. These internal data are stored as sys data as a tibble. It can be
-viewed with `ggVennDiagram:::shapes` and plotted with the function `plot_shapes()`.
+accessed with `ggVennDiagram:::shapes` and viewed by the function `get_shapes()`, 
+and plotted with the function `plot_shapes()`.
 
 ```{r}
-ggVennDiagram:::shapes
-library(ggplot2)
+shape1 = ggVennDiagram:::shapes[[4]]
+shape1
 ```
 The format of these shapes data are defined as followings:
 
@@ -37,13 +38,31 @@ The format of these shapes data are defined as followings:
 
 - `type`: ellipse, circle or triangle
 
-- `shape_id`: to separate different shapes
+- `shapeId`: to separate different shapes
 
-- `component`: each shape has two components, 'setEdge' and 'setLabel'
+- `setEdge`, `setLabel` and `region`: each shape has three components, 'setEdge', 'setLabel' and 'region'. They are `sf` object that can be plot directly.
 
-- `id`: to separate edges/labels of a shape. For example, 4 sets shape will have ids of 1-4.
 
-- `xy`: coordinates
+```{r}
+plot(venn_setedge(shape1))
+```
+
+`get_shapes()` will extract the meta features of these shapes and output a tibble. These information can be used for sepecifying a shape either by its id, or type.
+
+```{r}
+get_shapes()
+```
+
+For example, if you want to extract the shape whose id is "401f". This time we use `ggplot2` functions to plot the set edge of it.
+
+```{r}
+library(ggplot2)
+shape2 = get_shape_by_id("401f")
+ggplot(get_shape_setedge(shape2)) +
+  geom_sf()
+```
+
+The `plot_shapes()` function can be used to plot all the available shapes stored in this package.
 
 
 ```{r}
@@ -70,7 +89,7 @@ gene_list <- list(A = sample(genes,100),
 
 # construct a Venn object
 venn = Venn(gene_list)
-data = process_data(venn, shape_id == "401")
+data = process_data(venn, shape_id = "401")
 
 ggplot() +
   geom_sf(aes(fill = count), data = venn_region(data)) +
@@ -126,16 +145,22 @@ position <- tibble::tribble(
 label_position = label_position(position)
 ```
 
-Then construct a `VennPlotData` class object with shapes and labels.
+Then construct a `VennPlotData` class object with shapes and labels. Please note the `VennPlotData()` constructor is now moved to the new `shapeMageR` package.
 
-```{r}
+```{r eval=FALSE}
+library("shapeMageR")
 shape = VennPlotData(setEdge = triangles,
-                     setLabel = label_position)
+                     setLabel = label_position,
+                     type = "triangle",
+                     shapeId = "six_triangle")
+shape = unclass(shape)
+```
 
+```{r include=FALSE}
+shape = get_shape_by_id("601t")
 ```
 
 Now we can join plot data with set and calculated region values with `plotData_add_venn()`.
-
 
 ```{r}
 genes <- paste0("gene",1:1000)

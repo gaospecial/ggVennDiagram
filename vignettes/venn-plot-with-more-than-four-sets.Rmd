@@ -38,9 +38,9 @@ x <- list(A = sample(genes,100),
 
 
 ```{r}
-ggVennDiagram(x, label = "none", edge_size = 2) + scale_fill_distiller(palette = "RdBu")
-ggVennDiagram(x[1:6], label = "none", edge_size = 2) + scale_fill_distiller(palette = "RdBu")
-ggVennDiagram(x[1:5], label = "none", edge_size = 2) + scale_fill_distiller(palette = "RdBu")
+ggVennDiagram(x, label = "none", edge_size = 1) + scale_fill_distiller(palette = "RdBu")
+ggVennDiagram(x[1:6], label = "none", edge_size = 1) + scale_fill_distiller(palette = "RdBu")
+ggVennDiagram(x[1:5], label = "none", edge_size = 1) + scale_fill_distiller(palette = "RdBu")
 ```
 
 Although **ggVennDiagram** supports 5-7 sets Venn diagram, I don't encourage to
