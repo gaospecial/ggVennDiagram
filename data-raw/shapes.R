@@ -1,6 +1,9 @@
 ## code to prepare `shapes` dataset goes here
 
-library("shapeMageR")
+rm(list = ls())
+if (!requireNamespace("shapeMageR", quietly = TRUE)){
+  devtools::load_all("../shapeMageR/")
+}
 
 ## code to prepare `ggVennDiagramShapes` dataset goes here
 
@@ -91,6 +94,7 @@ venn_shapes = lapply(seq_len(nrow(sets)), function(i){
 
 shapes =
   c(list(f4e), list(f3c), list(f2c), list(f6t), venn_shapes)
+shapes = lapply(shapes, unclass)
 sortby = sapply(shapes, get_shape_nsets) |> order()
 shapes = shapes[sortby]
 usethis::use_data(shapes, overwrite = TRUE, internal = TRUE)

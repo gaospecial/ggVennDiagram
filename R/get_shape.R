@@ -51,21 +51,21 @@ get_shape_by_id = function(id){
 }
 
 get_shape_id = function(x){
-  x@shapeId
+  x$shapeId
 }
 
 get_shape_type = function(x){
-  x@type
+  x$type
 }
 
 get_shape_nsets = function(x){
-  x@nsets
+  x$nsets
 }
 
 get_shape_setedge = function(x){
-  x@setEdge
+  x$setEdge
 }
 
 get_shape_region = function(x){
-  x@region
+  x$region
 }
