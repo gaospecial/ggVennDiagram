@@ -159,9 +159,9 @@ plot_venn <- function(x,
   p <- p + region.layer + edge.layer + text.layer + theme_void()
 
   if (label != "none" & !show_intersect){
-    region_label <- get_shape_region(data) %>%
+    region_label <- get_shape_region(data) |>
       dplyr::mutate(percent = paste(round(.data$count*100/sum(.data$count),
-                                          digits = label_percent_digit),"%", sep="")) %>%
+                                          digits = label_percent_digit),"%", sep="")) |>
       dplyr::mutate(both = paste(.data$count,paste0("(",.data$percent,")"),sep = "\n"))
     if (label_geom == "label"){
       p <- p + geom_sf_label(aes(geometry = .data$geometry, label = .data[[label]]),
@@ -183,12 +183,12 @@ plot_venn <- function(x,
   }
 
   if (show_intersect == TRUE & plotly_ready() ){
-    items <- venn_region(data) %>%
-      dplyr::rowwise() %>%
+    items <- venn_region(data) |>
+      dplyr::rowwise() |>
       dplyr::mutate(text = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),
-                                             width = label_txtWidth)) %>%
+                                             width = label_txtWidth)) |>
       sf::st_as_sf()
-    label_coord = sf::st_centroid(items$geometry) %>% sf::st_coordinates()
+    label_coord = sf::st_centroid(items$geometry) |> sf::st_coordinates()
     p <- ggplot(items) +
       geom_sf(aes(geometry = .data$geometry, fill= .data$count)) +
       geom_sf_text(aes(geometry = .data$geometry, label = .data$name),
@@ -200,7 +200,7 @@ plot_venn <- function(x,
     ax <- list(
       showline = FALSE
     )
-    p <- plotly::ggplotly(p, tooltip = c("text")) %>%
+    p <- plotly::ggplotly(p, tooltip = c("text")) |>
       plotly::layout(xaxis = ax, yaxis = ax)
   }
 
