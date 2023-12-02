@@ -8,15 +8,26 @@
 \usage{
 process_data(venn, ...)
 
-\S4method{process_data}{Venn}(venn, ...)
+\S4method{process_data}{Venn}(venn, nsets = length(venn@sets), shape_id = NULL, type = NULL)
 }
 \arguments{
 \item{venn}{a Venn object}
 
-\item{...}{apply filter to internal shapes. i.e. shape_id == "601", type == "polygon"}
+\item{nsets}{This parameter will be set automatically.}
+
+\item{shape_id}{apply filter to internal shapes. i.e. shape_id = "601"}
+
+\item{type}{apply filter to internal shapes. i.e. type = "polygon"}
 }
 \description{
 get plot data
+}
+\details{
+This function will conduct set operations and combine the outputs will
+stored shapes, thus produce a dataset for plot in next step.
+
+Run `get_shapes()` to show all the characteristics of available shapes.
+Run `plot_shapes()` to view those shapes.
 }
 \examples{
 \dontrun{

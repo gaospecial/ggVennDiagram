@@ -48,7 +48,7 @@ plot_venn(
 
 \item{edge_size}{line width of set edges (1)}
 
-\item{...}{Other arguments passed on to downstream functions.}
+\item{...}{useless}
 }
 \value{
 ggplot object, or plotly object if show_intersect is TRUE

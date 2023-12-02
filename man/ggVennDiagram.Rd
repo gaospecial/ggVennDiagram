@@ -51,7 +51,7 @@ ggVennDiagram(
 
 \item{edge_size}{line width of set edges (1)}
 
-\item{...}{Other arguments passed on to downstream functions.}
+\item{...}{useless}
 }
 \value{
 A ggplot object
@@ -61,7 +61,7 @@ ggVennDiagram main parser
 }
 \examples{
 library(ggVennDiagram)
-x <- list(A=1:5,B=2:7,C=3:6,D=4:9)
+x = list(A=1:5,B=2:7,C=3:6,D=4:9)
 ggVennDiagram(x)  # 4d venn
 ggVennDiagram(x[1:3])  # 3d venn
 ggVennDiagram(x[1:2])  # 2d venn

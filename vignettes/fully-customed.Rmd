@@ -40,7 +40,10 @@ gene_list <- list(A = sample(genes,100),
                   B = sample(genes,200),
                   C = sample(genes,300),
                   D = sample(genes,200))
+```
 
+
+```{r}
 library(ggVennDiagram)
 library(ggplot2)
 ```
@@ -101,8 +104,8 @@ This is for [issue #26](https://github.com/gaospecial/ggVennDiagram/issues/26).
 ```{r}
 venn <- Venn(gene_list)
 data <- process_data(venn)
-items <- venn_region(data) %>%
-  dplyr::rowwise() %>%
+items <- venn_region(data) |> 
+  dplyr::rowwise() |> 
   dplyr::mutate(text = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),
                                          width = 40))
 p <- ggplot(items) +
@@ -117,7 +120,7 @@ p <- ggplot(items) +
 ax <- list(
   showline = FALSE
 )
-plotly::ggplotly(p, tooltip = c("text")) %>%
+plotly::ggplotly(p, tooltip = c("text"))  |> 
   plotly::layout(xaxis = ax, yaxis = ax)
 ```
 

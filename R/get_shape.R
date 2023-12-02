@@ -36,7 +36,7 @@ get_shape_data <- function(nsets, type = NULL, shape_id = NULL){
 }
 
 
-get_shapes = function(){
+get_shapes = function(shapes = ggVennDiagram:::shapes){
   df = lapply(shapes, function(x){
     tibble::tibble(shape_id = get_shape_id(x),
                    nsets = get_shape_nsets(x),
@@ -45,7 +45,7 @@ get_shapes = function(){
   return(df)
 }
 
-get_shape_by_id = function(id){
+get_shape_by_id = function(id, shapes = ggVennDiagram:::shapes){
   idx = sapply(shapes, function(x) get_shape_id(x) == id)
   if (sum(idx) == 1) return(shapes[idx][[1]])
 }
