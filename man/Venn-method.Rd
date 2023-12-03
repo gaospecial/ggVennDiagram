@@ -7,9 +7,7 @@
 \usage{
 Venn(sets, names)
 
-\S4method{Venn}{ANY}(sets)
-
-\S4method{Venn}{ANY}(sets)
+\S4method{Venn}{ANY}(sets, names = NULL)
 }
 \arguments{
 \item{sets}{(Required) A list containing vectors in the same class. If a
@@ -22,9 +20,9 @@ names the sets will be named as "Set_1", "Set_2", "Set_3" and so on.}
 A \code{Venn} object.
 }
 \description{
-\code{Venn} builds a \code{Venn} object from a list.
+\code{Venn()} builds a \code{Venn} object from a list.
 }
 \examples{
-venn = Venn(list(letters[1:10], letters[3:12], letters[6:15]))
-print(venn)
+ venn = Venn(list(letters[1:10], letters[3:12], letters[6:15]))
+ print(venn)
 }

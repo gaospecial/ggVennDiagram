@@ -24,76 +24,84 @@ setClass("Venn",
 
 #' Venn class object constructor
 #'
-#' @param sets a list of sets
-#' @param names names of sets
-#' @name Venn-method
-#' @export
-setGeneric("Venn", function(sets, names){
-  standardGeneric("Venn")
-})
-
-#' Build a \code{Venn} object.
-#'
-#' \code{Venn} builds a \code{Venn} object from a list.
+#' `Venn()` builds a `Venn` object from a list.
 #'
 #' @param sets (Required) A list containing vectors in the same class. If a
 #'   vector contains duplicates they will be discarded. If the list doesn't have
 #'   names the sets will be named as "Set_1", "Set_2", "Set_3" and so on.
-#' @return A \code{Venn} object.
-#' @examples
-#' venn = Venn(list(letters[1:10], letters[3:12], letters[6:15]))
-#' print(venn)
+#' @param names names of sets
+#' @return A `Venn` object.
+#' @md
 #' @name Venn-method
-#' @importFrom methods new
-setMethod("Venn", c(sets = "ANY", names = "ANY"),
-          function(sets, names){
-            # validate parameters
-
-
-            # constructor
-            data = new(Class = "Venn",
-                       sets = sets,
-                       names = names)
-            data
-          })
+#' @export
+#' @examples
+#'  venn = Venn(list(letters[1:10], letters[3:12], letters[6:15]))
+#'  print(venn)
+setGeneric("Venn", function(sets, names = NULL){
+  standardGeneric("Venn")
+})
 
 
 #' @export
-#' @importFrom methods new
 #' @rdname Venn-method
-setMethod("Venn", c(sets = "ANY"),
-          function(sets) {
+#' @importFrom methods new
+setMethod("Venn", c(sets = "ANY", names = "ANY"),
+          function(sets, names = NULL){
 
+            # validate parameters
             if (!is.list(sets)) {
               stop("Data should be given in a list.")
-            }
-
-            if (sum(sapply(sets, is.null) == TRUE) >= 1) {
-              sets = sets[!(sapply(sets, is.null))]
             }
 
             if (length(sets) <= 1) {
               stop("The list should contain at least 2 vectors.")
             }
 
-            if (length(unique(sapply(sets, class))) != 1) {
-              stop("Vectors should be in the same class.")
+            if (!all_identical(lapply(sets, class))){
+              stop("All sets should have same classes.")
             }
 
-            if (!(sapply(sets, class)[1] %in% c("integer", "numeric", "character"))) {
-              stop("The list must contain only integers, numerics or characters.")
+            # check and assign valid set names
+            if (!is.null(names)){
+              if (length(sets) != length(names)) stop("Lengths of sets and names are not equal.")
+            } else if (is.null(names(sets))){
+              names = paste("Set", seq_len(length(sets)), sep = "_")
+            } else {
+              names = names(sets)
             }
 
-            venn = new(Class = "Venn", sets = sets)
+            # remove duplicates
+            sets = lapply(sets, unique)
 
-            if (is.null(names(venn@sets))) {
-              names(venn@sets) = paste("Set", seq_len(length(venn@sets)), sep = "_")
-            }
+            # constructor
+            data = new(Class = "Venn",
+                       sets = sets,
+                       names = names)
 
-            venn@names = names(venn@sets)
+            return(data)
+          })
 
-            venn@sets = lapply(venn@sets, unique)  # Sets shouldn't include duplicates.
+#' All items in a list are the same
+all_identical = function(list){
+  if (!is.list(list)) stop("Input should be a list.")
+  n = length(list)
+  if (n <= 1){
+    warning("list has less than 2 items.")
+    invisible()
+  } else if (n <= 2){
+    identical(list[[1]], list[[2]])
+  } else {
+    all(sapply(list[-1], identical, x = list[[1]]))
+  }
+}
 
-            venn
-          }
-)
+#' @export
+#' @importFrom methods show slotNames slot
+setMethod("show", c(object = "Venn"),
+          function(object){
+            cat("An object of class 'Venn':\n")
+            cat("   Slots: ", paste0(slotNames(object), collapse = ", "), ";\n", sep = "")
+            cat("   No. Sets:", length(object@sets))
+            cat("   SetNames: ", paste0(slot(object, "names"), collapse = ", "), ".\n", sep = "")
+})
+
