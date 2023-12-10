@@ -65,6 +65,7 @@ setGeneric("unite", function(venn, slice = "all") {
 #' @rdname unite
 setMethod("unite", c(venn = "Venn", slice = "ANY"),
           function(venn, slice = "all") {
+            slice = slice_idx(venn, slice)
             if (slice[1] != "all") {
               venn2 = venn@sets[slice]
               uni = Reduce(union, venn2)
@@ -111,23 +112,16 @@ setMethod("discern", c(venn = "Venn", slice1 = "ANY", slice2 = "ANY"),
           function(venn,
                    slice1,
                    slice2 = "all") {
-
-            if (is.numeric(slice1)) {
-              slice1 = names(venn@sets)[slice1]
-            }
-
-            if (is.numeric(slice2)) {
-              slice2 = names(venn@sets)[slice2]
-            }
+            slice1 = slice_idx(venn, slice1)
+            slice2 = slice_idx(venn, slice2)
 
             if (slice2[1] == "all") {
-              slice2 = setdiff(names(venn@sets), slice1)
-              set1 = venn@sets[slice1] |> purrr::reduce(function(x, y) union(x, y))
-              set2 = venn@sets[slice2] |> purrr::reduce(function(x, y) union(x, y))
+              set1 = Reduce(union, venn@sets[slice1])
+              set2 = Reduce(union, venn@sets[-slice1])
               differ = setdiff(set1, set2)
             } else {
-              set1 = venn@sets[slice1] |> purrr::reduce(function(x, y) union(x, y))
-              set2 = venn@sets[slice2] |> purrr::reduce(function(x, y) union(x, y))
+              set1 = Reduce(union, venn@sets[slice1])
+              set2 = Reduce(union, venn@sets[slice2])
               differ = setdiff(set1, set2)
             }
 
@@ -168,6 +162,7 @@ setGeneric("discern_overlap", function(venn, slice = "all") standardGeneric("dis
 #' @rdname discern_overlap
 setMethod("discern_overlap", c(venn="Venn", slice="ANY"),
           function(venn, slice = "all"){
+            slice = slice_idx(venn, slice)
             overlap = overlap(venn, slice = slice)
             if (slice[1] == "all" | identical(venn@sets[slice], venn@sets)){
               discern = NULL
@@ -177,3 +172,37 @@ setMethod("discern_overlap", c(venn="Venn", slice="ANY"),
               return(intersect(overlap, discern))
             }
           })
+
+
+#' check and format slice name
+#'
+#' @param venn a Venn object
+#' @param slice a numeric or character vector
+#'
+#' @return the index of Venn (numeric vector) or "all"
+slice_idx = function(venn, slice){
+  set_name = venn@names
+  if (is.numeric(slice)){
+    found = slice %in% seq_along(set_name)
+    if (all(found)){
+      return(slice)
+    } else {
+      stop(paste("slice is not valid:", slice[!found]))
+    }
+  }
+  if (is.character(slice)){
+    if (any(slice == "all")){
+      return("all")
+    } else {
+      matches = match(slice, set_name)
+      if (all(!is.na(matches))){
+        slice = matches
+        return(slice)
+      } else {
+        non_exist_item = slice[is.na(matches)]
+        stop(paste(non_exist_item, "is not found in this object."))
+      }
+    }
+  }
+  stop("slice should either be a character or numeric vector.")
+}
