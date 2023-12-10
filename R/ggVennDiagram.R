@@ -25,13 +25,11 @@ NULL
 #'  - `component`: each shape has two components, 'setEdge' and 'setLabel'
 #'  - `id`: to separate edges/labels of a shape. For example, 4 sets shape will have ids of 1-4.
 #'  - `xy`: coordinates
-#' @md
 #'
 #' @source
 #' - `venn:::sets`
 #' - `library(VennDiagram)`
 #' - [Wiki](https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg)
-#' @md
 #' @name vennplot-shapes
 NULL
 
@@ -76,14 +74,13 @@ ggVennDiagram = function(x,
                           edge_lty = "solid",
                           edge_size = 1,
                           ...){
-
   if (!is.list(x)){
     stop(simpleError("ggVennDiagram() requires at least a list."))
   }
-  names(x) <- category.names
-  dimension <- length(x)
-  label <- match.arg(label)
-  label_geom <- match.arg(label_geom)
+  names(x) = category.names
+  dimension = length(x)
+  label = match.arg(label)
+  label_geom = match.arg(label_geom)
   if (dimension <= 7){
     plot_venn(x,
               show_intersect = show_intersect,
@@ -116,106 +113,109 @@ ggVennDiagram = function(x,
 #' @export
 #'
 #' @return ggplot object, or plotly object if show_intersect is TRUE
-plot_venn <- function(x,
-                      show_intersect,
-                      set_color,
-                      set_size,
-                      label,
-                      label_geom,
-                      label_alpha,
-                      label_color,
-                      label_size,
-                      label_percent_digit,
-                      label_txtWidth,
-                      edge_lty,
-                      edge_size,
-                      ...){
-  venn <- Venn(x)
-  data <- process_data(venn)
-  p <- ggplot()
+plot_venn = function(x,
+                     show_intersect,
+                     set_color,
+                     set_size,
+                     label,
+                     label_geom,
+                     label_alpha,
+                     label_color,
+                     label_size,
+                     label_percent_digit,
+                     label_txtWidth,
+                     edge_lty,
+                     edge_size,
+                     ...){
+  venn = Venn(x)
+  data = process_data(venn)
+  p = ggplot(mapping = aes(X, Y))
+  setedge.params = list(data = get_shape_setedge(data),
+                         mapping = aes(color = .data$id,
+                                       group = .data$id),
+                         linetype = edge_lty,
+                         linewidth = edge_size,
+                         color = set_color,
+                         show.legend = FALSE)
+  setlabel.params = list(data = get_shape_setlabel(data),
+                          mapping = aes(label = .data$name),
+                          size = set_size,
+                          color = set_color)
+  region.params = list(data = get_shape_regionedge(data) |> dplyr::left_join(venn_region(data), by = "id"),
+                        mapping = aes(fill = .data$count,
+                                      group = .data$id))
 
-  region.params <- list(data = get_shape_region(data),
-                        mapping = aes(geometry = .data$geometry, fill = .data$count))
+  setedge.layer = do.call('geom_path', setedge.params)
+  setlabel.layer = do.call('geom_text', setlabel.params)
+  region.layer = do.call('geom_polygon', region.params)
 
-  edge.params <- list(data = get_shape_setedge(data),
-                      mapping = aes(geometry = .data$geometry, color = .data$id),
-                      linetype = edge_lty,
-                      linewidth = edge_size,
-                      color = set_color,
-                      show.legend = FALSE)
+  p = p + region.layer + setedge.layer + setlabel.layer + theme_void()
 
-  text.params <- list(data = get_shape_setlabel(data),
-                      mapping = aes(geometry = .data$geometry, label = .data$name),
-                      size = set_size,
-                      color = set_color
-                 )
-
-  region.layer <- do.call('geom_sf', region.params)
-
-  edge.layer <- do.call('geom_sf', edge.params)
-
-  text.layer <- do.call('geom_sf_text', text.params)
-
-  p <- p + region.layer + edge.layer + text.layer + theme_void()
-
-  if (label != "none" & !show_intersect){
-    region_label <- get_shape_region(data) |>
-      dplyr::mutate(percent = paste(round(.data$count*100/sum(.data$count),
-                                          digits = label_percent_digit),"%", sep="")) |>
-      dplyr::mutate(both = paste(.data$count,paste0("(",.data$percent,")"),sep = "\n"))
-    if (label_geom == "label"){
-      p <- p + geom_sf_label(aes(geometry = .data$geometry, label = .data[[label]]),
-                             data = region_label,
-                             alpha = label_alpha,
-                             color = label_color,
-                             size = label_size,
-                             lineheight = 0.85,
-                             label.size = NA)
-    }
-    if (label_geom == "text"){
-      p <- p + geom_sf_text(aes(geometry = .data$geometry, label = .data[[label]]),
-                            data = region_label,
-                            alpha = label_alpha,
-                            color = label_color,
-                            size = label_size,
-                            lineheight = 0.85)
-    }
+  if (label == "none"){
+    return(p)
   }
 
-  if (show_intersect == TRUE & plotly_ready() ){
-    items <- venn_region(data) |>
+  # process data for plotting region labels
+  region_label = get_shape_regionlabel(data)
+
+  # use plotly to show intersect
+  if (show_intersect){
+    check_plotly()
+    region_label = region_label |>
       dplyr::rowwise() |>
-      dplyr::mutate(text = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),
-                                             width = label_txtWidth)) |>
-      sf::st_as_sf()
-    label_coord = sf::st_centroid(items$geometry) |> sf::st_coordinates()
-    p <- ggplot(items) +
-      geom_sf(aes(geometry = .data$geometry, fill= .data$count)) +
-      geom_sf_text(aes(geometry = .data$geometry, label = .data$name),
-                   data = venn_setlabel(data),
-                   inherit.aes = F) +
-      geom_sf_text(aes(geometry = .data$geometry, label = .data$count, text = .data$text),
-                show.legend = FALSE) +
-      theme_void()
-    ax <- list(
+      dplyr::mutate(item = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),
+                                                 width = label_txtWidth))
+    p = p + geom_text(aes(label = .data$item),
+                      data = region_label)
+    ax = list(
       showline = FALSE
     )
-    p <- plotly::ggplotly(p, tooltip = c("text")) |>
+    p = plotly::ggplotly(p, tooltip = c("label")) |>
       plotly::layout(xaxis = ax, yaxis = ax)
+    return(p)
   }
 
-  p
+  # calculate labels, which are 'percent', 'count', or 'both'
+  region_label = region_label |>
+    dplyr::mutate(percent = paste(round(.data$count*100/sum(.data$count),
+                                        digits = label_percent_digit),"%", sep=""),
+                  both = paste(.data$count,paste0("(",.data$percent,")"),sep = "\n"))
+
+  # if label != "none" & show_intersect == FALSE
+  if (label_geom == "label"){
+    p = p + geom_label(
+      aes(label = .data[[label]]),
+      data = region_label,
+      alpha = label_alpha,
+      color = label_color,
+      size = label_size,
+      lineheight = 0.85,
+      label.size = NA
+    )
+    return(p)
+  }
+
+  if (label_geom == "text"){
+    p = p + geom_text(
+      aes(label = .data[[label]]),
+      data = region_label,
+      alpha = label_alpha,
+      color = label_color,
+      size = label_size,
+      lineheight = 0.85
+    )
+    return(p)
+  }
+
+
 }
 
 
-plotly_ready = function(){
-  if (requireNamespace("plotly", quietly = TRUE)){
-    invisible(TRUE)
-  } else {
-    warning(paste("The plotly package is not found in your library paths.",
-                  "  It is required to show intersections interactively.",
-                  "  Please run 'install.packages('plotly') and retry.",
-                  collapse = "\n"))
-    invisible(FALSE)
+check_plotly = function(){
+  if (!requireNamespace("plotly", quietly = TRUE)){
+    stop(paste("The plotly package is not found in your library paths.",
+               "  It is required to show intersections interactively.",
+               "  Please run `install.packages('plotly')` and retry.",
+               collapse = "\n"))
   }
 }

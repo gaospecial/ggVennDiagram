@@ -18,8 +18,8 @@
 #' @export
 #' @examples
 #' \dontrun{
-#'  venn <- Venn(list(A=1:3,B=2:5,C=4:8))
-#'  data <- process_data(venn)
+#'  venn = Venn(list(A=1:3,B=2:5,C=4:8))
+#'  data = process_data(venn)
 #' }
 setGeneric("process_data", function(venn, ...) standardGeneric("process_data"))
 
@@ -37,32 +37,55 @@ setMethod("process_data", signature = c("Venn"),
 
 #' Get VennPlotData slot
 #'
-#' @param obj a list that stores all the data from the S4 class `VennPlotData` object
+#' @param obj a list that stores all the data from the S3 class `VennPlotData` object
 #'
-#' @return a tibble, `sf` object
+#' @return a tibble
 #' @export
 #' @name venn_plot_data
 #'
 #' @examples
-#' venn_region(obj)   # return region data
+#' venn_regionedge(obj)   # return region data
 #' venn_setlabel(obj) # return setLabel data
 #' venn_setedge(obj)  # return setEdge data
-venn_region <- function(obj){
-  obj$region
+venn_regionedge = function(obj){
+  if (!inherits(obj, "VennPlotData")) stop("obj should be a VennPlotData object.")
+  obj$regionEdge |> dplyr::as_tibble()
 }
 
 #' @rdname venn_plot_data
 #' @export
-venn_setedge <- function(obj){
-  obj$setEdge
+venn_regionlabel = function(obj){
+  if (!inherits(obj, "VennPlotData")) stop("obj should be a VennPlotData object.")
+  obj$regionLabel |> dplyr::as_tibble()
 }
 
 #' @rdname venn_plot_data
 #' @export
-venn_setlabel <- function(obj){
-  obj$setLabel
+venn_setedge = function(obj){
+  if (!inherits(obj, "VennPlotData")) stop("obj should be a VennPlotData object.")
+  obj$setEdge |> dplyr::as_tibble()
 }
 
+#' @rdname venn_plot_data
+#' @export
+venn_setlabel = function(obj){
+  if (!inherits(obj, "VennPlotData")) stop("obj should be a VennPlotData object.")
+  obj$setLabel |> dplyr::as_tibble()
+}
+
+#' @rdname venn_plot_data
+#' @export
+venn_set = function(obj){
+  if (!inherits(obj, "VennPlotData")) stop("obj should be a VennPlotData object.")
+  obj$setData |> dplyr::as_tibble()
+}
+
+#' @rdname venn_plot_data
+#' @export
+venn_region = function(obj){
+  if (!inherits(obj, "VennPlotData")) stop("obj should be a VennPlotData object.")
+  obj$regionData |> dplyr::as_tibble()
+}
 
 #' join the shape data with set data
 #'
@@ -71,18 +94,21 @@ venn_setlabel <- function(obj){
 #'
 #' @export
 #'
-plotData_add_venn <- function(plotData, venn){
-  if (!all(c("setLabel","setEdge","region") %in% names(plotData))) stop("Invalid shape data.")
+plotData_add_venn = function(plotData, venn){
+  if (!all(c("setLabel","setEdge","regionLabel", "regionEdge") %in% names(plotData))){
+    stop("Invalid shape data.")
+  }
   if (!inherits(venn, "Venn")) stop("venn should be a S4 Venn object.")
-  edge_data <- process_setEdge_data(venn)
-  label_data <- process_setLabel_data(venn)
-  region_data <- process_region_data(venn)
+  set_data = process_set_data(venn)
+  region_data = process_region_data(venn)
   set_edge = get_shape_setedge(plotData)
   set_label = get_shape_setlabel(plotData)
-  region = get_shape_region(plotData)
-  plotData$setEdge <- dplyr::left_join(set_edge, edge_data, by = "id")
-  plotData$setLabel <- dplyr::left_join(set_label, label_data, by = "id")
-  plotData$region <- dplyr::left_join(region, region_data, by = "id")
+  region_edge = get_shape_regionedge(plotData)
+  region_label = get_shape_regionlabel(plotData)
+  plotData$setData = set_data
+  plotData$setLabel = dplyr::left_join(set_label, set_data, by = "id")
+  plotData$regionData = region_data
+  plotData$regionLabel = dplyr::left_join(region_label, region_data, by = "id")
   return(plotData)
 }
 
@@ -95,18 +121,18 @@ plotData_add_venn <- function(plotData, venn){
 #' @export
 #'
 #' @examples
-#' x <- list(
+#' x = list(
 #' A = sample(letters, 8),
 #' B = sample(letters, 8),
 #' C = sample(letters, 8),
 #' D = sample(letters, 8)
 #' )
 #'
-#' venn <- Venn(x)
+#' venn = Venn(x)
 #' process_region_data(venn)
 #' process_setEdge_data(venn)
 #' process_setLabel_data(venn)
-process_setEdge_data <- function(venn){
+process_set_data = function(venn){
   if(!inherits(venn, "Venn")) stop("venn is not a S4 class 'Venn' object.")
   tibble::tibble(
     id = as.character(seq_along(venn@sets)),
@@ -118,22 +144,12 @@ process_setEdge_data <- function(venn){
 
 #' @rdname venn_data
 #' @export
-process_setLabel_data <- function(venn){
+process_region_data = function(venn){
   if(!inherits(venn, "Venn")) stop("venn is not a S4 class 'Venn' object.")
-  tibble::tibble(
-    id = as.character(seq_along(venn@sets)),
-    name = venn@names
-  )
-}
-
-#' @rdname venn_data
-#' @export
-process_region_data <- function(venn){
-  if(!inherits(venn, "Venn")) stop("venn is not a S4 class 'Venn' object.")
-  region_items <- get_region_items(venn)
-  counts <- sapply(region_items, length)
-  region_ids <- get_region_ids(venn)
-  region_names <- get_region_names(venn)
+  region_items = get_region_items(venn)
+  counts = sapply(region_items, length)
+  region_ids = get_region_ids(venn)
+  region_names = get_region_names(venn)
   tibble::tibble(
     id = region_ids,
     item = region_items,
