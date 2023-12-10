@@ -17,6 +17,9 @@ VennPlotData = function(x){
 #' @method print VennPlotData
 #' @export
 print.VennPlotData = function(x){
-  cat("print")
+  cat(sprintf("Class VennPlotData - '%s'\n", x$shapeId))
+  cat(sprintf("  Number of sets: %d; Type: %s.\n", x$nsets, x$type))
+  cat(sprintf("  To view this shape, use `plot_shape_edge()`.\n"))
+  cat(sprintf("  To view its components, use `venn_setedge()`, `venn_setlabel()`, etc.\n"))
 }
 
