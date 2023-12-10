@@ -28,7 +28,6 @@ setGeneric("overlap", function(venn, slice = "all") {
 #' @rdname overlap
 setMethod("overlap", c(venn = "Venn", slice = "ANY"),
           function(venn, slice = "all") {
-
             if (slice[1] != "all") {
               venn2 = venn@sets[slice]
               inter = purrr::reduce(venn2, function(x, y) intersect(x, y))
@@ -66,14 +65,12 @@ setGeneric("unite", function(venn, slice = "all") {
 #' @rdname unite
 setMethod("unite", c(venn = "Venn", slice = "ANY"),
           function(venn, slice = "all") {
-
             if (slice[1] != "all") {
               venn2 = venn@sets[slice]
-              uni = purrr::reduce(venn2, function(x, y) union(x, y))
+              uni = Reduce(union, venn2)
             } else {
-              uni = purrr::reduce(venn@sets, function(x, y) union(x, y))
+              uni = Reduce(union, venn@sets)
             }
-
             uni
           }
 )
@@ -164,7 +161,7 @@ setMethod("discern", c(venn = "Venn", slice1 = "ANY", slice2 = "ANY"),
 #'
 #' # however, `discern_overlap()` only contains specific region
 #' discern_overlap(venn, slice = 1:2)
-#'
+#' overlap(venn, slice = 1:2)
 setGeneric("discern_overlap", function(venn, slice = "all") standardGeneric("discern_overlap"))
 
 #' @export
