@@ -82,10 +82,14 @@ get_shape_setedge = function(x){
   x$setEdge
 }
 
-get_shape_region = function(x){
-  x$region
-}
-
 get_shape_setlabel = function(x){
   x$setLabel
+}
+
+get_shape_regionedge = function(x){
+  x$regionEdge
+}
+
+get_shape_regionlabel = function(x){
+  x$regionLabel
 }

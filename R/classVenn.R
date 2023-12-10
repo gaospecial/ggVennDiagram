@@ -47,7 +47,6 @@ setGeneric("Venn", function(sets, names = NULL){
 #' @importFrom methods new
 setMethod("Venn", c(sets = "ANY", names = "ANY"),
           function(sets, names = NULL){
-
             # validate parameters
             if (!is.list(sets)) {
               stop("Data should be given in a list.")
@@ -81,7 +80,7 @@ setMethod("Venn", c(sets = "ANY", names = "ANY"),
             return(data)
           })
 
-#' All items in a list are the same
+#' All members of a list have the same elements
 all_identical = function(list){
   if (!is.list(list)) stop("Input should be a list.")
   n = length(list)

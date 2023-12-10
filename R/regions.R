@@ -27,13 +27,13 @@ get_region_names <- function(venn){
   n = length(venn@sets)
   set_name = venn@names
   c = combinations(n)
-  sapply(c, function(i) paste0(set_name[i], collapse = ".."))
+  sapply(c, function(i) paste0(set_name[i], collapse = "/"))
 }
 
 get_region_ids <- function(venn){
   n = length(venn@sets)
   c = combinations(n)
-  sapply(c, function(i) paste0(i, collapse = ""))
+  sapply(c, function(i) paste0(i, collapse = "/"))
 }
 
 
