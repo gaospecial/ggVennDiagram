@@ -44,9 +44,14 @@ setMethod("process_data", signature = c("Venn"),
 #' @name venn_plot_data
 #'
 #' @examples
-#' venn_regionedge(obj)   # return region data
+#' venn = Venn(list(A=1:5,B=2:7,C=3:6,D=4:9))
+#' obj = process_data(venn)
+#' venn_regionlabel(obj)  # return regionLabel data
+#' venn_regionedge(obj)   # return regionEdge data
 #' venn_setlabel(obj) # return setLabel data
 #' venn_setedge(obj)  # return setEdge data
+#' venn_set(obj)     # set items
+#' venn_region(obj)  # region items
 venn_regionedge = function(obj){
   if (!inherits(obj, "VennPlotData")) stop("obj should be a VennPlotData object.")
   obj$regionEdge |> dplyr::as_tibble()
@@ -129,9 +134,8 @@ plotData_add_venn = function(plotData, venn){
 #' )
 #'
 #' venn = Venn(x)
+#' process_set_data(venn)
 #' process_region_data(venn)
-#' process_setEdge_data(venn)
-#' process_setLabel_data(venn)
 process_set_data = function(venn){
   if(!inherits(venn, "Venn")) stop("venn is not a S4 class 'Venn' object.")
   tibble::tibble(

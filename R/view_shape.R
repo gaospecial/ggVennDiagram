@@ -1,5 +1,7 @@
 #' An S3 class constructor of representing Venn plot components.
 #'
+#' @param x data source of a VennPlotData object
+#'
 #' @slot shapeId shape id
 #' @slot type type of shape
 #' @slot nsets number of sets
@@ -16,7 +18,7 @@ VennPlotData = function(x){
 #'
 #' @method print VennPlotData
 #' @export
-print.VennPlotData = function(x){
+print.VennPlotData = function(x, ...){
   cat(sprintf("Class VennPlotData - '%s'\n", x$shapeId))
   cat(sprintf("  Number of sets: %d; Type: %s.\n", x$nsets, x$type))
   cat(sprintf("  To view this shape, use `plot_shape_edge()`.\n"))

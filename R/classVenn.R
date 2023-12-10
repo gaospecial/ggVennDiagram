@@ -31,7 +31,6 @@ setClass("Venn",
 #'   names the sets will be named as "Set_1", "Set_2", "Set_3" and so on.
 #' @param names names of sets
 #' @return A `Venn` object.
-#' @md
 #' @name Venn-method
 #' @export
 #' @examples
@@ -94,7 +93,10 @@ all_identical = function(list){
   }
 }
 
+#' method for S4 Venn object
+#'
 #' @export
+#' @method show Venn
 #' @importFrom methods show slotNames slot
 setMethod("show", c(object = "Venn"),
           function(object){

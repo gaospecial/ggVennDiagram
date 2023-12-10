@@ -132,12 +132,12 @@ setMethod("discern", c(venn = "Venn", slice1 = "ANY", slice2 = "ANY"),
 
 # Method for specific region =============
 
-#' Calculate region of polygons
+#' Calculate region of sets
 #'
 #' calculate the unique region defined
 #' by `Venn` object and the parameter `slice`.
 #'
-#' @param polygon a Polygon object
+#' @param venn a Venn object
 #' @param slice index of Venn members, default is "all"
 #'
 #' @return region items
@@ -155,6 +155,7 @@ setMethod("discern", c(venn = "Venn", slice1 = "ANY", slice2 = "ANY"),
 #'
 #' # however, `discern_overlap()` only contains specific region
 #' discern_overlap(venn, slice = 1:2)
+#' # is different from
 #' overlap(venn, slice = 1:2)
 setGeneric("discern_overlap", function(venn, slice = "all") standardGeneric("discern_overlap"))
 
