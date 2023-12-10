@@ -2,10 +2,10 @@
 % Please edit documentation in R/classVenn.R
 \name{all_identical}
 \alias{all_identical}
-\title{All items in a list are the same}
+\title{All members of a list have the same elements}
 \usage{
 all_identical(list)
 }
 \description{
-All items in a list are the same
+All members of a list have the same elements
 }

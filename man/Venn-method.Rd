@@ -5,7 +5,7 @@
 \alias{Venn,ANY-method}
 \title{Venn class object constructor}
 \usage{
-Venn(sets, names)
+Venn(sets, names = NULL)
 
 \S4method{Venn}{ANY}(sets, names = NULL)
 }
@@ -17,10 +17,10 @@ names the sets will be named as "Set_1", "Set_2", "Set_3" and so on.}
 \item{names}{names of sets}
 }
 \value{
-A \code{Venn} object.
+A `Venn` object.
 }
 \description{
-\code{Venn()} builds a \code{Venn} object from a list.
+`Venn()` builds a `Venn` object from a list.
 }
 \examples{
  venn = Venn(list(letters[1:10], letters[3:12], letters[6:15]))

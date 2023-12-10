@@ -31,7 +31,7 @@ Run `plot_shapes()` to view those shapes.
 }
 \examples{
 \dontrun{
- venn <- Venn(list(A=1:3,B=2:5,C=4:8))
- data <- process_data(venn)
+ venn = Venn(list(A=1:3,B=2:5,C=4:8))
+ data = process_data(venn)
 }
 }

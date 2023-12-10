@@ -3,16 +3,16 @@
 \name{discern_overlap}
 \alias{discern_overlap}
 \alias{discern_overlap,Venn-method}
-\title{Calculate region of polygons}
+\title{Calculate region of sets}
 \usage{
 discern_overlap(venn, slice = "all")
 
 \S4method{discern_overlap}{Venn}(venn, slice = "all")
 }
 \arguments{
-\item{slice}{index of Venn members, default is "all"}
+\item{venn}{a Venn object}
 
-\item{polygon}{a Polygon object}
+\item{slice}{index of Venn members, default is "all"}
 }
 \value{
 region items
@@ -31,7 +31,8 @@ overlap(venn, slice = "all")
 
 # however, `discern_overlap()` only contains specific region
 discern_overlap(venn, slice = 1:2)
-
+# is different from
+overlap(venn, slice = 1:2)
 }
 \author{
 gaospecial@gmail.com

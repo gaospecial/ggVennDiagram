@@ -2,14 +2,11 @@
 % Please edit documentation in R/process_data.R
 \name{venn_data}
 \alias{venn_data}
-\alias{process_setEdge_data}
-\alias{process_setLabel_data}
+\alias{process_set_data}
 \alias{process_region_data}
 \title{Prepare Venn data}
 \usage{
-process_setEdge_data(venn)
-
-process_setLabel_data(venn)
+process_set_data(venn)
 
 process_region_data(venn)
 }
@@ -23,15 +20,14 @@ a tibble
 Prepare Venn data
 }
 \examples{
-x <- list(
+x = list(
 A = sample(letters, 8),
 B = sample(letters, 8),
 C = sample(letters, 8),
 D = sample(letters, 8)
 )
 
-venn <- Venn(x)
+venn = Venn(x)
+process_set_data(venn)
 process_region_data(venn)
-process_setEdge_data(venn)
-process_setLabel_data(venn)
 }

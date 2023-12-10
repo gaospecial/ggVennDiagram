@@ -5,25 +5,20 @@
 \title{shapes: shape data used to setup Venn plot}
 \format{
 a tibble with 6 columns
-\itemize{
-\item \code{nsets}: number of sets, from 1-7.
-\item \code{type}: ellipse, circle or triangle
-}
-\itemize{
-\item \code{shape_id}: to separate different shapes
-\item \code{component}: each shape has two components, 'setEdge' and 'setLabel'
-\item \code{id}: to separate edges/labels of a shape. For example, 4 sets shape will have ids of 1-4.
-\item \code{xy}: coordinates
-}
+
+ * `nsets`: number of sets, from 1-7.
+ * `type`: ellipse, circle or triangle
+ - `shape_id`: to separate different shapes
+ - `component`: each shape has two components, 'setEdge' and 'setLabel'
+ - `id`: to separate edges/labels of a shape. For example, 4 sets shape will have ids of 1-4.
+ - `xy`: coordinates
 }
 \source{
-\itemize{
-\item \code{venn:::sets}
-\item \code{library(VennDiagram)}
-\item \href{https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg}{Wiki}
-}
+- `venn:::sets`
+- `library(VennDiagram)`
+- [Wiki](https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg)
 }
 \description{
 a collection of geometric shapes, which defined the edge and label of sets in a Venn plot.
-use \code{plot_shapes()} to see some of them.
+use `plot_shapes()` to see some of them.
 }
