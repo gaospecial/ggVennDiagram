@@ -87,7 +87,7 @@ ggVennDiagram(small_list,
 ### color of set label 
 
 ```{r}
-ggVennDiagram(gene_list, set_color = c("blue","black","red","green"))
+ggVennDiagram(gene_list, set_color = c("blue","black","red","yellow"))
 ```
 
 ### size of set labels
@@ -101,9 +101,22 @@ ggVennDiagram(gene_list, set_size = 8)
 
 ### text content
 
-```{r}
+
+
+```{r eval=FALSE}
 ggVennDiagram(gene_list, label = "count")
 ggVennDiagram(gene_list, label = "percent")
+ggVennDiagram(gene_list, label = "both")
+ggVennDiagram(gene_list, label = "none")
+```
+
+```{r fig.width=12, echo=FALSE}
+plots = lapply(c("none","count","percent","both"), function(x){
+  ggVennDiagram(gene_list,label = x) + 
+    labs(title = paste0('label = "', x, '"')) +
+    theme(legend.position = "none")
+})
+aplot::plot_list(gglist = plots, ncol = 2, labels = LETTERS[1:4])
 ```
 
 ### percentage digits
