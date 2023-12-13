@@ -30,7 +30,6 @@ GitHub 上，已经获得了超过 100 个小星星。
 
 
 ```{r echo = FALSE, message=FALSE, warning=FALSE, fig.cap="广受好评的`ggVennDiagram`"}
-
 url = 'https://api.github.com/repos/gaospecial/ggVennDiagram/stargazers'
 header = 'application/vnd.github.v3.star+json'
 response = lapply(1:2, function(i) {
@@ -66,6 +65,8 @@ ggplot(data, aes(x=time, y=count)) +
 `ggVennDiagram` 最早于 2019 年夏发布在作者的 GitHub 主页，后由 CRAN 收录。
 2021 年，作者又系统调研了 R 环境中可用的 Venn 图绘制工具，博取众家之长，并增强了自己原有的特色和优势，
 并发布为 1.1 版本。新版本的 `ggVennDiagram` 用起来更加方便，功能也更加强大，同时以后的扩展性也会非常好。
+2023 年，作者又对代码进行了优化，将形状生成的代码迁移到了一个新的 R 包 `shapeMageR`，减少了 `ggVennDiagram`
+的依赖，使其更容易安装和使用。
 
 
 ## 软件的安装
@@ -207,18 +208,19 @@ venn <- Venn(gene_list)
 data <- process_data(venn)
 ggplot() +
   # 1. region count layer
-  geom_sf(aes(fill = count), 
-          data = venn_region(data)) +
+  geom_polygon(aes(X, Y, fill = count, group = id), 
+          data = venn_regionedge(data)) +
   # 2. set edge layer
-  geom_sf(aes(color = id), 
+  geom_path(aes(X, Y, color = id, group = id), 
           data = venn_setedge(data), 
           show.legend = FALSE) +
   # 3. set label layer
-  geom_sf_text(aes(label = name), 
+  geom_text(aes(X, Y, label = name), 
                data = venn_setlabel(data)) +
   # 4. region label layer
-  geom_sf_label(aes(label = count), 
-                data = venn_region(data)) +
+  geom_label(aes(X, Y, label = count), 
+                data = venn_regionlabel(data)) +
+  coord_equal() +
   theme_void()
 ```
 
@@ -227,22 +229,23 @@ ggplot() +
 ```{r}
 ggplot() +
   # change mapping of color filling
-  geom_sf(aes(fill = id), 
-          data = venn_region(data), 
-          show.legend = FALSE) +  
+  geom_polygon(aes(X, Y, fill = id, group = id), 
+          data = venn_regionedge(data),
+          show.legend = FALSE) +
   # adjust edge size and color
-  geom_sf(color="grey", 
-          size = 3, 
+  geom_path(aes(X, Y, color = id, group = id), 
           data = venn_setedge(data), 
-          show.legend = FALSE) +  
+          linewidth = 3,
+          show.legend = FALSE) +
   # show set label in bold
-  geom_sf_text(aes(label = name), 
-               fontface = "bold", 
-               data = venn_setlabel(data)) +  
+  geom_text(aes(X, Y, label = name), 
+            fontface = "bold",
+            data = venn_setlabel(data)) +
   # add a alternative region name
-  geom_sf_label(aes(label = name), 
-                data = venn_region(data), 
-                alpha = 0.5) +  
+  geom_label(aes(X, Y, label = id), 
+             data = venn_regionlabel(data),
+             alpha = 0.5) +
+  coord_equal() +
   theme_void()
 ```
 
