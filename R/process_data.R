@@ -21,11 +21,13 @@
 #'  venn = Venn(list(A=1:3,B=2:5,C=4:8))
 #'  data = process_data(venn)
 #' }
-setGeneric("process_data", function(venn, ...) standardGeneric("process_data"))
+setGeneric("process_data", function(venn, nsets = NULL, shape_id = NULL, type = NULL){
+  standardGeneric("process_data")
+})
 
 #' @rdname process_data
 #' @export
-setMethod("process_data", signature = c("Venn"),
+setMethod("process_data", signature = c(venn = "Venn"),
           function(venn,
                    nsets = length(venn@sets),
                    shape_id = NULL,

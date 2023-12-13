@@ -51,9 +51,9 @@ setMethod("overlap", c(venn = "Venn", slice = "ANY"),
 #'   is "all", meaning the union will be calculated for all the sets.
 #' @return A vector showing the union of the sets.
 #' @examples
-#' venn = Venn(list(letters[1:10], letters[3:12], letters[6:15]))
-#' unite(venn)
-#' unite(venn, slice = c(1, 2))
+#'   venn = Venn(list(letters[1:10], letters[3:12], letters[6:15]))
+#'   unite(venn)
+#'   unite(venn, slice = c(1, 2))
 #' @name unite
 #' @author tyakyol@gmail.com
 setGeneric("unite", function(venn, slice = "all") {

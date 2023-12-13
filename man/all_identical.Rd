@@ -6,6 +6,12 @@
 \usage{
 all_identical(list)
 }
+\arguments{
+\item{list}{a list}
+}
+\value{
+TRUE or FALSE
+}
 \description{
 All members of a list have the same elements
 }

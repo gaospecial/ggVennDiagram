@@ -14,13 +14,19 @@ VennPlotData = function(x){
   return(x)
 }
 
-#' S3 method for VennPlotData
+#' S3 method for `VennPlotData`
+#'
+#' @param x a VennPlotData object
+#' @param ... useless
 #'
 #' @method print VennPlotData
+#' @docType methods
+#' @name print
+#' @md
 #' @export
 print.VennPlotData = function(x, ...){
   cat(sprintf("Class VennPlotData - '%s'\n", x$shapeId))
-  cat(sprintf("  Number of sets: %d; Type: %s.\n", x$nsets, x$type))
+  cat(sprintf("  Type: %s; No. sets: %d; No. regions: %d.\n", x$type, x$nsets, length(unique(x$regionEdge$id))))
   cat(sprintf("  To view this shape, use `plot_shape_edge()`.\n"))
   cat(sprintf("  To view its components, use `venn_setedge()`, `venn_setlabel()`, etc.\n"))
 }

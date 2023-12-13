@@ -6,7 +6,7 @@
 \alias{process_data,Venn-method}
 \title{get plot data}
 \usage{
-process_data(venn, ...)
+process_data(venn, nsets = NULL, shape_id = NULL, type = NULL)
 
 \S4method{process_data}{Venn}(venn, nsets = length(venn@sets), shape_id = NULL, type = NULL)
 }

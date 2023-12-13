@@ -129,7 +129,7 @@ plot_venn = function(x,
                      ...){
   venn = Venn(x)
   data = process_data(venn)
-  p = ggplot(mapping = aes(X, Y))
+  p = ggplot(mapping = aes(.data$X, .data$Y))
   setedge.params = list(data = get_shape_setedge(data),
                          mapping = aes(color = .data$id,
                                        group = .data$id),

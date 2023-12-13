@@ -22,9 +22,9 @@ A vector showing the union of the sets.
 \code{unite} returns the union of the sets in a \code{Venn} object.
 }
 \examples{
-venn = Venn(list(letters[1:10], letters[3:12], letters[6:15]))
-unite(venn)
-unite(venn, slice = c(1, 2))
+  venn = Venn(list(letters[1:10], letters[3:12], letters[6:15]))
+  unite(venn)
+  unite(venn, slice = c(1, 2))
 }
 \author{
 tyakyol@gmail.com

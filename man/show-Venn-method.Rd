@@ -6,6 +6,9 @@
 \usage{
 \S4method{show}{Venn}(object)
 }
+\arguments{
+\item{object}{a Venn class object}
+}
 \description{
-method for S4 Venn object
+Print user-friendly information of a Venn object
 }

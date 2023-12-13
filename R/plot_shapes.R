@@ -23,7 +23,7 @@ plot_shapes <- function(){
 plot_shape_edge = function(x){
   id = get_shape_id(x)
   edge = get_shape_setedge(x)
-  ggplot2::ggplot(edge, aes(X, Y, group = id)) +
+  ggplot2::ggplot(edge, aes(.data$X, .data$Y, group = id)) +
     ggplot2::geom_path() +
     ggplot2::coord_equal() +
     ggplot2::labs(title = id) +
