@@ -24,7 +24,8 @@ get_shape_data <- function(nsets, type = NULL, shape_id = NULL){
     # message("More than one shapes are available for ", n, " sets Venn plot. ",
     #          "Will choose the first one.\n",
     #         "You may explictly select a shape by specify shape_id, and/or type.\n\n")
-    the_id <- data[["shape_id"]][[1]]
+    data = data |> arrange(.data$type)
+    the_id = data[["shape_id"]][[1]]
     return(get_shape_by_id(the_id))
 
   } else if (nrow(data) == 1) {
