@@ -1,16 +1,13 @@
 ############ Class Venn #####################
 #
-# The Venn class is defined originally in RVenn package by **.
-# It set a good model in caculating the subsets between different sets.
+# The Venn class is defined originally in RVenn package by *Turgut Yigit Akyol*.
+# It set a good model in calculating the subsets between different sets.
 # However, RVenn has not been updated since 2019. I communicate with
-# its author and agreed to transfer some of the codes from RVenn to
+# its author and he agreed to transfer some of the codes from RVenn to
 # ggVennDiagram.
 
-#' An S4 class to represent multiple sets.
-#'
-#' This class is adopted from `RVenn`. Since `RVenn` doesn't export this class,
-#' I have to copy its codes hereafter to use it.
-#'
+#' *`Venn`* is a S4 class to represent multiple sets.
+#' @md
 #' @slot sets A \code{list} object containing vectors in the same type.
 #' @slot names The names of the \code{sets} if it has names. If the \code{list}
 #'   doesn't have names, the sets will be named as "Set_1", "Set_2", "Set_3" and
@@ -21,18 +18,20 @@ setClass("Venn",
 )
 
 
+######### Venn Constructor #####
 
-#' Venn class object constructor
-#'
-#' `Venn()` builds a `Venn` object from a list.
+#' @title `Venn()` is a Venn class object constructor.
 #'
 #' @param sets (Required) A list containing vectors in the same class. If a
 #'   vector contains duplicates they will be discarded. If the list doesn't have
 #'   names the sets will be named as "Set_1", "Set_2", "Set_3" and so on.
 #' @param names names of sets
+#'
 #' @return A `Venn` object.
-#' @name Venn-method
+#' @rdname Venn-class
+#' @docType methods
 #' @export
+#' @md
 #' @examples
 #'  venn = Venn(list(letters[1:10], letters[3:12], letters[6:15]))
 #'  print(venn)
@@ -42,7 +41,7 @@ setGeneric("Venn", function(sets, names = NULL){
 
 
 #' @export
-#' @rdname Venn-method
+#' @rdname Venn-class
 #' @importFrom methods new
 setMethod("Venn", c(sets = "ANY", names = "ANY"),
           function(sets, names = NULL){
@@ -79,7 +78,12 @@ setMethod("Venn", c(sets = "ANY", names = "ANY"),
             return(data)
           })
 
+######## Helper functions ########
+
 #' All members of a list have the same elements
+#'
+#' @param list a list
+#' @return TRUE or FALSE
 all_identical = function(list){
   if (!is.list(list)) stop("Input should be a list.")
   n = length(list)
@@ -95,6 +99,9 @@ all_identical = function(list){
 
 #' method for S4 Venn object
 #'
+#' Print user-friendly information of a Venn object
+#'
+#' @param object a Venn class object
 #' @export
 #' @method show Venn
 #' @importFrom methods show slotNames slot

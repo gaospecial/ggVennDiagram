@@ -3,10 +3,28 @@
 \docType{class}
 \name{Venn-class}
 \alias{Venn-class}
-\title{An S4 class to represent multiple sets.}
+\alias{Venn}
+\alias{Venn,ANY-method}
+\title{\emph{\code{Venn}} is a S4 class to represent multiple sets.}
+\usage{
+Venn(sets, names = NULL)
+
+\S4method{Venn}{ANY}(sets, names = NULL)
+}
+\arguments{
+\item{sets}{(Required) A list containing vectors in the same class. If a
+vector contains duplicates they will be discarded. If the list doesn't have
+names the sets will be named as "Set_1", "Set_2", "Set_3" and so on.}
+
+\item{names}{names of sets}
+}
+\value{
+A \code{Venn} object.
+}
 \description{
-This class is adopted from `RVenn`. Since `RVenn` doesn't export this class,
-I have to copy its codes hereafter to use it.
+\emph{\code{Venn}} is a S4 class to represent multiple sets.
+
+\code{Venn()} is a Venn class object constructor.
 }
 \section{Slots}{
 
@@ -18,3 +36,7 @@ doesn't have names, the sets will be named as "Set_1", "Set_2", "Set_3" and
 so on.}
 }}
 
+\examples{
+ venn = Venn(list(letters[1:10], letters[3:12], letters[6:15]))
+ print(venn)
+}
