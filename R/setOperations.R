@@ -30,9 +30,9 @@ setMethod("overlap", c(venn = "Venn", slice = "ANY"),
           function(venn, slice = "all") {
             if (slice[1] != "all") {
               venn2 = venn@sets[slice]
-              inter = purrr::reduce(venn2, function(x, y) intersect(x, y))
+              inter = Reduce(intersect, venn2)
             } else {
-              inter = purrr::reduce(venn@sets, function(x, y) intersect(x, y))
+              inter = Reduce(intersect, venn@sets)
             }
 
             inter
