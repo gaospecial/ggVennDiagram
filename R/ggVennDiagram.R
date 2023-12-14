@@ -165,7 +165,7 @@ plot_venn = function(data,
     check_plotly()
     region_label = region_label |>
       dplyr::rowwise() |>
-      dplyr::mutate(item = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),
+      dplyr::mutate(item = str_wrap(paste0(.data$item, collapse = " "),
                                                  width = label_txtWidth))
     p = p + geom_text(aes(label = .data$count, text = .data$item),
                       data = region_label) +
@@ -221,4 +221,31 @@ check_plotly = function(){
                "  Please run `install.packages('plotly')` and retry.",
                collapse = "\n"))
   }
+}
+
+
+# from yulab.utils::str_wrap
+str_wrap = function (string, width = getOption("width")){
+  result <- vapply(string, FUN = function(st) {
+    words <- list()
+    i <- 1
+    while (nchar(st) > width) {
+      if (length(grep(" ", st)) == 0)
+        break
+      y <- gregexpr(" ", st)[[1]]
+      n <- nchar(st)
+      y <- c(y, n)
+      idx <- which(y < width)
+      if (length(idx) == 0)
+        idx <- 1
+      words[[i]] <- substring(st, 1, y[idx[length(idx)]] -
+                                1)
+      st <- substring(st, y[idx[length(idx)]] + 1, n)
+      i <- i + 1
+    }
+    words[[i]] <- st
+    paste0(unlist(words), collapse = "\n")
+  }, FUN.VALUE = character(1))
+  names(result) <- NULL
+  result
 }
