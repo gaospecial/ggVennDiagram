@@ -21,12 +21,16 @@ An S3 class constructor of representing Venn plot components.
 
 \item{\code{nsets}}{number of sets}
 
-\item{\code{setEdge}}{a data.frame, the coordinates of set edges}
+\item{\code{setEdge}}{a data.frame, the coordinates of set edges, can be retrieved by \code{venn_setedge()}}
 
-\item{\code{setLabel}}{a data.frame, the coordinates of set labels}
+\item{\code{setLabel}}{a data.frame, the coordinates of set labels, can be retrieved by \code{venn_setlabel()}}
 
-\item{\code{regionEdge}}{a data.frame, the coordinates of different regions}
+\item{\code{regionEdge}}{a data.frame, the coordinates of different regions, can be retrieved by \code{venn_regionedge()}}
 
-\item{\code{regionLabel}}{a data.frame, the centroid of the regions, where region labels anchored}
+\item{\code{regionLabel}}{a data.frame, the centroid of the regions, where region labels anchored, can be retrieved by \code{venn_regionlabel()}}
+
+\item{\code{setData}}{a data.frame, the set data provided by user, can be retrieved by \code{venn_set()}}
+
+\item{\code{regionData}}{a data.frame, the region data that calculated by \code{ggVennDiagram}, can be retrieved by \code{venn_region()}}
 }}
 

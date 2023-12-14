@@ -5,10 +5,13 @@
 #' @slot shapeId shape id
 #' @slot type type of shape
 #' @slot nsets number of sets
-#' @slot setEdge a data.frame, the coordinates of set edges
-#' @slot setLabel a data.frame, the coordinates of set labels
-#' @slot regionEdge a data.frame, the coordinates of different regions
-#' @slot regionLabel a data.frame, the centroid of the regions, where region labels anchored
+#' @slot setEdge a data.frame, the coordinates of set edges, can be retrieved by `venn_setedge()`
+#' @slot setLabel a data.frame, the coordinates of set labels, can be retrieved by `venn_setlabel()`
+#' @slot regionEdge a data.frame, the coordinates of different regions, can be retrieved by `venn_regionedge()`
+#' @slot regionLabel a data.frame, the centroid of the regions, where region labels anchored, can be retrieved by `venn_regionlabel()`
+#' @slot setData a data.frame, the set data provided by user, can be retrieved by `venn_set()`
+#' @slot regionData a data.frame, the region data that calculated by `ggVennDiagram`, can be retrieved by `venn_region()`
+#' @md
 VennPlotData = function(x){
   class(x) = "VennPlotData"
   return(x)
