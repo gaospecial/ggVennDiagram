@@ -9,7 +9,7 @@
 [![](http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
 [![](http://cranlogs.r-pkg.org/badges/last-week/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
 [![](https://www.r-pkg.org/badges/version/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
-[![](https://img.shields.io/badge/devel%20version-1.4-green.svg)](https://github.com/gaospecial/ggVennDiagram)
+[![](https://img.shields.io/badge/devel%20version-1.4.1-green.svg)](https://github.com/gaospecial/ggVennDiagram)
 [![](https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://codecov.io/gh/gaospecial/ggVennDiagram)
 <!-- badges: end -->
 
@@ -174,7 +174,8 @@ In general, `ggVennDiagram()` plot a Venn in three steps:
   functions to do this job.
 - plot using `ggplot2` functions.
 
-Please check `vignette()` for more information.
+Please check `vignette("fully-customed", package = "ggVennDiagram")` for
+more information.
 
 # Venn Diagram for more than four sets
 

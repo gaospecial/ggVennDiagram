@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(ggVennDiagram)
-#library(sf)
 ```
 
 ## Comprehensive customization by using helper functions

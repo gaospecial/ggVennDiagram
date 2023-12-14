@@ -142,7 +142,7 @@ In general, `ggVennDiagram()` plot a Venn in three steps:
   We implement a number of set operations functions to do this job.
 - plot using `ggplot2` functions.
 
-Please check `vignette()` for more information.
+Please check `vignette("fully-customed", package = "ggVennDiagram")` for more information.
 
 # Venn Diagram for more than four sets
 
