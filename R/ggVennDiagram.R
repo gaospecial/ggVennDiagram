@@ -168,7 +168,8 @@ plot_venn = function(data,
       dplyr::mutate(item = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),
                                                  width = label_txtWidth))
     p = p + geom_text(aes(label = .data$count, text = .data$item),
-                      data = region_label)
+                      data = region_label) +
+      theme(legend.position = "none")
     ax = list(
       showline = FALSE
     )
