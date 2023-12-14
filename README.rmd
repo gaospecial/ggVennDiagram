@@ -58,7 +58,7 @@ Gao, C.-H., Yu, G., and Cai, P. (2021). ggVennDiagram: An Intuitive, Easy-to-Use
 ```{r}
 library(ggVennDiagram)
 genes <- paste("gene",1:1000,sep="")
-set.seed(20210419)
+set.seed(20231214)
 x <- list(A=sample(genes,300),
           B=sample(genes,525),
           C=sample(genes,440),
@@ -142,25 +142,7 @@ In general, `ggVennDiagram()` plot a Venn in three steps:
   We implement a number of set operations functions to do this job.
 - plot using `ggplot2` functions.
 
-
-```{r}
-venn <- Venn(x)
-data <- process_data(venn)
-data
-```
-
-Now we can custom this figure.
-
-```{r}
-ggplot() +
-  geom_sf(aes(fill=count), data = venn_region(data)) +
-  geom_sf(size = 2, lty = "dashed", color = "grey", data = venn_setedge(data), show.legend = F) +
-  geom_sf_text(aes(label = name), data = venn_setlabel(data)) +
-  geom_sf_label(aes(label=id), fontface = "bold", data = venn_region(data)) +
-  theme_void()
-```
-
-
+Please check `vignette()` for more information.
 
 # Venn Diagram for more than four sets
 
