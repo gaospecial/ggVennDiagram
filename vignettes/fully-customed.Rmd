@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(ggVennDiagram)
-library(sf)
+#library(sf)
 ```
 
 ## Comprehensive customization by using helper functions
@@ -36,7 +36,7 @@ Generate example data.
 
 ```{r}
 genes <- paste0("gene",1:1000)
-set.seed(20210302)
+set.seed(20231214)
 gene_list <- list(A = sample(genes,100),
                   B = sample(genes,200),
                   C = sample(genes,300),
@@ -56,13 +56,19 @@ venn <- Venn(gene_list)
 data <- process_data(venn)
 ggplot() +
   # 1. region count layer
-  geom_sf(aes(geometry = geometry, fill = count), data = venn_region(data)) +
+  geom_polygon(aes(X, Y, fill = count, group = id), 
+          data = venn_regionedge(data)) +
   # 2. set edge layer
-  geom_sf(aes(geometry = geometry, color = id), data = venn_setedge(data), show.legend = FALSE) +
+  geom_path(aes(X, Y, color = id, group = id), 
+          data = venn_setedge(data), 
+          show.legend = FALSE) +
   # 3. set label layer
-  geom_sf_text(aes(geometry = geometry, label = name), data = venn_setlabel(data)) +
+  geom_text(aes(X, Y, label = name), 
+               data = venn_setlabel(data)) +
   # 4. region label layer
-  geom_sf_label(aes(geometry = geometry, label = count), data = venn_region(data)) +
+  geom_label(aes(X, Y, label = count), 
+                data = venn_regionlabel(data)) +
+  coord_equal() +
   theme_void()
 ```
 
@@ -78,7 +84,8 @@ for comprehensive customization in user-side.
 
 - `Venn()`: Venn object constructor, use this to construct a Venn object from list.
 - `process_data()`: process data with a Venn object
-- `venn_region()`: get region data to plot
+- `venn_regionedge()`: get region edge data to plot
+- `venn_regionlabel()`: get region label position to plot
 - `venn_setedge()`: get setedge data to plot
 - `venn_setlabel()`: get setlabel data to plot
 
@@ -88,41 +95,23 @@ For example, you may change edge/fill/label properties as you will.
 ```{r}
 ggplot() +
   # change mapping of color filling
-  geom_sf(aes(geometry = geometry, fill = id), data = venn_region(data), show.legend = FALSE) +  
+  geom_polygon(aes(X, Y, fill = id, group = id), 
+          data = venn_regionedge(data),
+          show.legend = FALSE) +
   # adjust edge size and color
-  geom_sf(aes(geometry = geometry), color="grey", size = 3, data = venn_setedge(data), show.legend = FALSE) +  
+  geom_path(aes(X, Y, color = id, group = id), 
+          data = venn_setedge(data), 
+          linewidth = 3,
+          show.legend = FALSE) +
   # show set label in bold
-  geom_sf_text(aes(geometry = geometry, label = name), fontface = "bold", data = venn_setlabel(data)) +  
+  geom_text(aes(X, Y, label = name), 
+            fontface = "bold",
+            data = venn_setlabel(data)) +
   # add a alternative region name
-  geom_sf_label(aes(geometry = geometry, label = name), data = venn_region(data), alpha = 0.5) +  
+  geom_label(aes(X, Y, label = id), 
+             data = venn_regionlabel(data),
+             alpha = 0.5) +
+  coord_equal() +
   theme_void()
 ```
 
-## Stepwise `plotly`
-
-This is for [issue #26](https://github.com/gaospecial/ggVennDiagram/issues/26).
-
-```{r}
-venn <- Venn(gene_list)
-data <- process_data(venn)
-items <- venn_region(data) |> 
-  dplyr::rowwise() |> 
-  dplyr::mutate(text = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),
-                                         width = 40))
-p <- ggplot(items) +
-  geom_sf(aes(geometry = geometry, fill=count)) +
-  geom_sf_text(aes(geometry = geometry, label = name),
-               data = venn_setlabel(data),
-               inherit.aes = F) +
-  geom_sf_text(aes(geometry = geometry, label = count, text = text),
-               show.legend = FALSE) +
-  theme_void() +
-  scale_fill_distiller(palette = "RdBu")
-ax <- list(
-  showline = FALSE
-)
-plotly::ggplotly(p, tooltip = c("text"))  |> 
-  plotly::layout(xaxis = ax, yaxis = ax)
-```
-
-**Note**: Please be aware that due to the poor compatibility between plotly and ggplot, this feature is only experimental.

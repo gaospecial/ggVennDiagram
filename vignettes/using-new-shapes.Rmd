@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(ggVennDiagram)
-library(sf)
 ```
 
 ## Internal Shapes
@@ -31,21 +30,10 @@ and plotted with the function `plot_shapes()`.
 shape1 = ggVennDiagram:::shapes[[4]]
 shape1
 ```
-The format of these shapes data are defined as followings:
-
-**a tibble with 6 columns**
-
-- `nsets`: number of sets, from 1-7.
-
-- `type`: ellipse, circle or triangle
-
-- `shapeId`: to separate different shapes
-
-- `setEdge`, `setLabel` and `region`: each shape has three components, 'setEdge', 'setLabel' and 'region'. They are `sf` object that can be plot directly.
-
+The format of these shapes data are defined in `VennPlotData` class. Use `?VennPlotData` to view the document.
 
 ```{r}
-plot(venn_setedge(shape1)$geometry)
+plot_shape_edge(shape1)
 ```
 
 `get_shapes()` will extract the meta features of these shapes and output a tibble. These information can be used for sepecifying a shape either by its id, or type.
@@ -59,8 +47,7 @@ For example, if you want to extract the shape whose id is "401f". This time we u
 ```{r}
 library(ggplot2)
 shape2 = get_shape_by_id("401f")
-ggplot(venn_setedge(shape2), aes(geometry = geometry)) +
-  geom_sf()
+plot_shape_edge(shape2)
 ```
 
 The `plot_shapes()` function can be used to plot all the available shapes stored in this package.
@@ -90,102 +77,14 @@ gene_list <- list(A = sample(genes,100),
 
 # construct a Venn object
 venn = Venn(gene_list)
-data = process_data(venn, shape_id = "401")
-
-ggplot() +
-  geom_sf(aes(geometry = geometry, fill = count), data = venn_region(data)) +
-  geom_sf(aes(geometry = geometry, color = id), data = venn_setedge(data), show.legend = FALSE) +
-  geom_sf_text(aes(geometry = geometry, label = name), data = venn_setlabel(data)) +
-  geom_sf_label(aes(geometry = geometry, label = count), data = venn_region(data)) +
-  theme_void()
+data = process_data(venn, shape_id = "402")
+plot_venn(data)
 ```
 
 ## Using a novel shape
 
-Besides, user can use a novel shape when knows its coordinates. A possible start
-is from a SVG shape. Therefore, I would like to show the method of using a 
-novel triangle shape to plot 6-sets Venn diagram in this section.
-
-The triangle is found in WiKi at https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg.
-
-```{r echo=FALSE}
-# I have to use a copy here
-svg_url = "https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/typora-img/triangles.svg"
-knitr::include_graphics(svg_url)
-```
-
-Since SVG is a XML format file, the coordinates can be found in its content.
-For this figure, the definition of six triangles are stored in the six object,
-`object1b`, `object2b`, ..., `object6b`. We just need to build set regions by
-closing the vertexes with the function `triangle()`.
-
-```{r}
-library("shapeMageR")
-
-# the vertext coordinates of six triangles
-vertex_coordinates <- list(c(-69277,-32868,135580,121186, 70900,199427),
-                   c( 81988,-44426, 38444,206222,121044,165111),
-                   c(203271,  9619, 39604, 82683, 84652,206669),
-                   c(333561,225349, 61764, 76805, 38980,182461),
-                   c(131886,385785, 38136,111491, 94208, 24690),
-                   c(-60184,274046,142476, 39903,103276,183962))
-
-triangles <- lapply(vertex_coordinates, triangle)
-```
-
-Likewise, `label_position()` is used to setup the coordinates of set labels.
-
-```{r}
-position <- tibble::tribble(
-      ~x,       ~y,
-      -50000,     50000,
-      60000,          0,
-      160000,     20000,
-      280000,    170000,
-      140000,    300000,
-      -20000,   270000
-    )
-label_position = label_position(position)
-```
-
-Then construct a `VennPlotData` class object with shapes and labels. Please note the `VennPlotData()` constructor is now moved to the new `shapeMageR` package.
-
-```{r eval=FALSE}
-shape = VennPlotData(setEdge = triangles,
-                     setLabel = label_position,
-                     type = "triangle",
-                     shapeId = "six_triangle")
-shape = unclass(shape)
-```
-
-```{r include=FALSE}
-shape = get_shape_by_id("601t")
-```
-
-Now we can join plot data with set and calculated region values with `plotData_add_venn()`.
-
-```{r}
-genes <- paste0("gene",1:1000)
-set.seed(20210701)
-x <- list(A = sample(genes,100),
-          B = sample(genes,150),
-          C = sample(genes,200),
-          D = sample(genes,250),
-          E = sample(genes,300),
-          F = sample(genes,350))
-venn = Venn(x)
-
-data = plotData_add_venn(plotData = shape, venn = venn)
-```
-
-and plot Venn diagram with ggplot2.
-
-```{r fig.width=10}
-ggplot() +
-  geom_sf(aes(geometry = geometry, fill = count), data = venn_region(data)) +
-  geom_sf(aes(geometry = geometry, color = name), size = 2, data = venn_setedge(data)) +
-  geom_sf_text(aes(geometry = geometry, label = name), data = venn_setlabel(data)) +
-  theme_void() +
-  labs(color = "Set Name", fill = "Count")
-```
-
+If user knows the coordinates of a novel shape, it may also be used to draw in 
+`ggVennDiagram`. The functions of this part have been transfered to a new R package 
+`shapeMageR`, which can be found in <https://github.com/gaospecial/shapeMageR>.
+To do this, the dependency of `ggVennDiagram` is very light, thus increase the 
+accessiblity of the package.
