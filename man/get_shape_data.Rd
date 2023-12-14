@@ -22,5 +22,4 @@ using `plot_shapes()` or `get_shapes()`.
 }
 \examples{
 get_shape_data(nsets = 4, type = "polygon")
-
 }

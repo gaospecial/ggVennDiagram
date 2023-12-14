@@ -79,10 +79,13 @@ ggVennDiagram = function(x,
   }
   names(x) = category.names
   dimension = length(x)
+  venn = Venn(x)
+
   label = match.arg(label)
   label_geom = match.arg(label_geom)
   if (dimension <= 7){
-    plot_venn(x,
+    data = process_data(venn)
+    plot_venn(data,
               show_intersect = show_intersect,
               set_color = set_color,
               set_size = set_size,
@@ -108,34 +111,33 @@ ggVennDiagram = function(x,
 #' plot codes
 #'
 #' @inheritParams ggVennDiagram
+#' @param data plot data
 #'
 #' @import ggplot2
 #' @export
 #'
 #' @return ggplot object, or plotly object if show_intersect is TRUE
-plot_venn = function(x,
-                     show_intersect,
-                     set_color,
-                     set_size,
-                     label,
-                     label_geom,
-                     label_alpha,
-                     label_color,
-                     label_size,
-                     label_percent_digit,
-                     label_txtWidth,
-                     edge_lty,
-                     edge_size,
+plot_venn = function(data,
+                     show_intersect = FALSE,
+                     set_color = "black",
+                     set_size = NA,
+                     label = "both",
+                     label_geom = "label",
+                     label_alpha = 0.5,
+                     label_color = "black",
+                     label_size = NA,
+                     label_percent_digit = 0,
+                     label_txtWidth = 40,
+                     edge_lty = "solid",
+                     edge_size = 1,
                      ...){
-  venn = Venn(x)
-  data = process_data(venn)
   p = ggplot(mapping = aes(.data$X, .data$Y))
   setedge.params = list(data = get_shape_setedge(data),
                          mapping = aes(color = .data$id,
                                        group = .data$id),
                          linetype = edge_lty,
                          linewidth = edge_size,
-                         color = set_color,
+                         # color = set_color,
                          show.legend = FALSE)
   setlabel.params = list(data = get_shape_setlabel(data),
                           mapping = aes(label = .data$name),
@@ -149,7 +151,7 @@ plot_venn = function(x,
   setlabel.layer = do.call('geom_text', setlabel.params)
   region.layer = do.call('geom_polygon', region.params)
 
-  p = p + region.layer + setedge.layer + setlabel.layer + theme_void()
+  p = p + region.layer + setedge.layer + setlabel.layer + theme_void() + coord_equal()
 
   if (label == "none"){
     return(p)
@@ -165,12 +167,12 @@ plot_venn = function(x,
       dplyr::rowwise() |>
       dplyr::mutate(item = yulab.utils::str_wrap(paste0(.data$item, collapse = " "),
                                                  width = label_txtWidth))
-    p = p + geom_text(aes(label = .data$item),
+    p = p + geom_text(aes(label = .data$count, text = .data$item),
                       data = region_label)
     ax = list(
       showline = FALSE
     )
-    p = plotly::ggplotly(p, tooltip = c("label")) |>
+    p = plotly::ggplotly(p, tooltip = c("text")) |>
       plotly::layout(xaxis = ax, yaxis = ax)
     return(p)
   }

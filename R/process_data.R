@@ -56,7 +56,9 @@ setMethod("process_data", signature = c(venn = "Venn"),
 #' venn_region(obj)  # region items
 venn_regionedge = function(obj){
   if (!inherits(obj, "VennPlotData")) stop("obj should be a VennPlotData object.")
-  obj$regionEdge |> dplyr::as_tibble()
+  obj$regionEdge |>
+    dplyr::left_join(venn_region(obj)) |>
+    dplyr::as_tibble()
 }
 
 #' @rdname venn_plot_data

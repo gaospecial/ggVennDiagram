@@ -20,7 +20,21 @@ plot_shapes <- function(){
   aplot::plot_list(gglist = plots, widths = 1)
 }
 
+#' Plot the set edge of a VennPlotData
+#'
+#' This is for viewing the shape id and appearance of the shape.
+#'
+#' @param x a VennPlotData object
+#'
+#' @return a ggplot object
+#' @export
+#'
+#' @examples
+#'   shape = get_shape_by_id("301")
+#'   plot_shape_edge(shape)
 plot_shape_edge = function(x){
+  if (!inherits(x, "VennPlotData"))
+    stop("Try to plot a non-VennPlotData object. Please check.")
   id = get_shape_id(x)
   edge = get_shape_setedge(x)
   ggplot2::ggplot(edge, aes(.data$X, .data$Y, group = id)) +

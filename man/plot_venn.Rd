@@ -5,24 +5,24 @@
 \title{plot codes}
 \usage{
 plot_venn(
-  x,
-  show_intersect,
-  set_color,
-  set_size,
-  label,
-  label_geom,
-  label_alpha,
-  label_color,
-  label_size,
-  label_percent_digit,
-  label_txtWidth,
-  edge_lty,
-  edge_size,
+  data,
+  show_intersect = FALSE,
+  set_color = "black",
+  set_size = NA,
+  label = "both",
+  label_geom = "label",
+  label_alpha = 0.5,
+  label_color = "black",
+  label_size = NA,
+  label_percent_digit = 0,
+  label_txtWidth = 40,
+  edge_lty = "solid",
+  edge_size = 1,
   ...
 )
 }
 \arguments{
-\item{x}{list of items}
+\item{data}{plot data}
 
 \item{show_intersect}{if TRUE the text can be visualized by `plotly`}
 

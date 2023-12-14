@@ -5,10 +5,10 @@
 #' @slot shapeId shape id
 #' @slot type type of shape
 #' @slot nsets number of sets
-#' @slot setEdge a list of coordinates matrix defining Venn set edges
-#' @slot setLabel label of sets
-#' @slot regionEdge the feature region will be calculated automatically with `setEdge`
-#' @slot regionLabel the centroid of region, where region label appears
+#' @slot setEdge a data.frame, the coordinates of set edges
+#' @slot setLabel a data.frame, the coordinates of set labels
+#' @slot regionEdge a data.frame, the coordinates of different regions
+#' @slot regionLabel a data.frame, the centroid of the regions, where region labels anchored
 VennPlotData = function(x){
   class(x) = "VennPlotData"
   return(x)

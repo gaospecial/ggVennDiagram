@@ -14,7 +14,6 @@
 #'
 #' @examples
 #' get_shape_data(nsets = 4, type = "polygon")
-#'
 get_shape_data <- function(nsets, type = NULL, shape_id = NULL){
   all_shape = get_shapes()
   data = all_shape[all_shape$nsets == nsets,]
@@ -24,7 +23,7 @@ get_shape_data <- function(nsets, type = NULL, shape_id = NULL){
     # message("More than one shapes are available for ", n, " sets Venn plot. ",
     #          "Will choose the first one.\n",
     #         "You may explictly select a shape by specify shape_id, and/or type.\n\n")
-    data = data |> arrange(.data$type)
+    data = data |> dplyr::arrange(.data$type)
     the_id = data[["shape_id"]][[1]]
     return(get_shape_by_id(the_id))
 
