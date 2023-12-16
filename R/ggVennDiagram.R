@@ -35,6 +35,12 @@ NULL
 
 #' ggVennDiagram main parser
 #'
+#' @details
+#' From version 1.4.4, `ggVennDiagram` will plot a upset plot when the number of sets
+#' is more than 7. Besides, user can switch to a upset plot with `upset_plot()` function.
+#' Please check the document of this function.
+#'
+#'
 #' @param x list of items
 #' @param category.names default is names(x)
 #' @param show_intersect if TRUE the text can be visualized by `plotly`

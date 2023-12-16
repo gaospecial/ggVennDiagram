@@ -61,7 +61,7 @@ upset_plot = function(venn,
   # combine into a plot
   pp = aplot::insert_top(p_main, p_top, height=4) |>
     aplot::insert_left(p_left, width=.2)
-  class(pp) <- c("a_upset_plot", class(pp))
+  class(pp) = c("upset_plot", class(pp))
 
   return(pp)
 }
@@ -132,8 +132,9 @@ theme_upset_left = function(){
 process_upset_data = function(venn,
                              nintersects = NULL,
                              order.intersect.by = "size",
-                             order.set.by = "name"){
-  data = process_region_data(venn)
+                             order.set.by = "name",
+                             name_separator = "/"){
+  data = process_region_data(venn, sep = name_separator)
   data$size = data$count
   set_name = venn@names
 
@@ -153,7 +154,7 @@ process_upset_data = function(venn,
     dplyr::select(c("id", "name", "size")) |>
     dplyr::mutate(set = .data$id,
                   id = forcats::fct_reorder(.data$id, .data[[order.intersect.by]], .desc = TRUE)) |>
-    tidyr::separate_longer_delim(.data$set, delim = "/")
+    tidyr::separate_longer_delim(.data$set, delim = name_separator)
   main_data$set = factor(set_name[as.integer(main_data$set)],
                          levels = levels(left_data$set))
 
