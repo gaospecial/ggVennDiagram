@@ -59,6 +59,11 @@ A ggplot object
 \description{
 ggVennDiagram main parser
 }
+\details{
+From version 1.4.4, `ggVennDiagram` will plot a upset plot when the number of sets
+is more than 7. Besides, user can switch to a upset plot with `upset_plot()` function.
+Please check the document of this function.
+}
 \examples{
 library(ggVennDiagram)
 x = list(A=1:5,B=2:7,C=3:6,D=4:9)
