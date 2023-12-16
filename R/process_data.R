@@ -154,10 +154,10 @@ process_set_data = function(venn){
 #' @export
 process_region_data = function(venn){
   if(!inherits(venn, "Venn")) stop("venn is not a S4 class 'Venn' object.")
-  region_items = get_region_items(venn)
+  region_items = get_subset_items(venn)
   counts = sapply(region_items, length)
-  region_ids = get_region_ids(venn)
-  region_names = get_region_names(venn)
+  region_ids = get_subset_ids(venn)
+  region_names = get_subset_names(venn)
   tibble::tibble(
     id = region_ids,
     item = region_items,
