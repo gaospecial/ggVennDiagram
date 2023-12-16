@@ -101,7 +101,8 @@ ggVennDiagram = function(x,
               ...)
   }
   else{
-    stop("Only support 2-7 dimension Venn diagram.")
+    warning("Only support 2-7 dimension Venn diagram. Will give a plain upset plot instead.")
+    upset_plot(venn, nintersects = 30, order.intersect.by = "size", order.set.by = "name")
   }
 }
 

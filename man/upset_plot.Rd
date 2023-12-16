@@ -12,7 +12,7 @@ upset_plot(
 )
 }
 \arguments{
-\item{venn}{a list of sets}
+\item{venn}{a class Venn object}
 
 \item{nintersects}{number of intersects. If NULL, all intersections will show.}
 

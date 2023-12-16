@@ -1,5 +1,9 @@
 # Changelog of ggVennDiagram
 
+## ggVennDiagram 1.4.3
+
+* add native support to upset plot. Upset plot will be automatically called when nsets > 7. Besides, it can be used by using `upset_plot()` function. See `?upset_plot` for more information.
+
 ## ggVennDiagram 1.4
 
 * remove the dependency of `sf`, `purrr`, etc. It is now easy to install.

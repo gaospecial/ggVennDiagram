@@ -24,6 +24,7 @@ VennPlotData = function(x){
 #'
 #' @method print VennPlotData
 #' @docType methods
+#' @rdname print
 #' @name print
 #' @md
 #' @export
