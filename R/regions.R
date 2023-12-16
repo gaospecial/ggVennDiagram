@@ -23,17 +23,17 @@ get_subset_items <- function(venn){
   lapply(c, function(i) discern_overlap(venn,i))
 }
 
-get_subset_names <- function(venn){
+get_subset_names <- function(venn, sep = "/"){
   n = length(venn@sets)
   set_name = venn@names
   c = combinations(n)
-  sapply(c, function(i) paste0(set_name[i], collapse = "/"))
+  sapply(c, function(i) paste0(set_name[i], collapse = sep))
 }
 
-get_subset_ids <- function(venn){
+get_subset_ids <- function(venn, sep = "/"){
   n = length(venn@sets)
   c = combinations(n)
-  sapply(c, function(i) paste0(i, collapse = "/"))
+  sapply(c, function(i) paste0(i, collapse = sep))
 }
 
 
