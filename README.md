@@ -9,7 +9,7 @@
 [![](http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
 [![](http://cranlogs.r-pkg.org/badges/last-week/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
 [![](https://www.r-pkg.org/badges/version/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
-[![](https://img.shields.io/badge/devel%20version-1.4.1-green.svg)](https://github.com/gaospecial/ggVennDiagram)
+[![](https://img.shields.io/badge/devel%20version-1.4.6-green.svg)](https://github.com/gaospecial/ggVennDiagram)
 [![](https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://codecov.io/gh/gaospecial/ggVennDiagram)
 <!-- badges: end -->
 
@@ -120,23 +120,23 @@ y <- list(
 
 process_region_data(Venn(y))
 #> # A tibble: 15 × 4
-#>    id      item      count name   
-#>    <chr>   <list>    <int> <chr>  
-#>  1 1       <chr [3]>     3 A      
-#>  2 2       <chr [1]>     1 B      
-#>  3 3       <chr [3]>     3 C      
-#>  4 4       <chr [0]>     0 D      
-#>  5 1/2     <chr [0]>     0 A/B    
-#>  6 1/3     <chr [1]>     1 A/C    
-#>  7 1/4     <chr [2]>     2 A/D    
-#>  8 2/3     <chr [1]>     1 B/C    
-#>  9 2/4     <chr [3]>     3 B/D    
-#> 10 3/4     <chr [1]>     1 C/D    
-#> 11 1/2/3   <chr [1]>     1 A/B/C  
-#> 12 1/2/4   <chr [1]>     1 A/B/D  
-#> 13 1/3/4   <chr [0]>     0 A/C/D  
-#> 14 2/3/4   <chr [1]>     1 B/C/D  
-#> 15 1/2/3/4 <chr [0]>     0 A/B/C/D
+#>    id      name    item      count
+#>    <chr>   <chr>   <list>    <int>
+#>  1 1       A       <chr [3]>     3
+#>  2 2       B       <chr [1]>     1
+#>  3 3       C       <chr [3]>     3
+#>  4 4       D       <chr [0]>     0
+#>  5 1/2     A/B     <chr [0]>     0
+#>  6 1/3     A/C     <chr [1]>     1
+#>  7 1/4     A/D     <chr [2]>     2
+#>  8 2/3     B/C     <chr [1]>     1
+#>  9 2/4     B/D     <chr [3]>     3
+#> 10 3/4     C/D     <chr [1]>     1
+#> 11 1/2/3   A/B/C   <chr [1]>     1
+#> 12 1/2/4   A/B/D   <chr [1]>     1
+#> 13 1/3/4   A/C/D   <chr [0]>     0
+#> 14 2/3/4   B/C/D   <chr [1]>     1
+#> 15 1/2/3/4 A/B/C/D <chr [0]>     0
 ```
 
 If only several items were included, intersections may also be viewed
@@ -185,6 +185,8 @@ to generate more circles or ellipses in the plot. The key point is to
 let the generated ellipses have exactly one intersection for each
 combination.
 
+## Venn Diagram of up to seven sets
+
 From v1.0, `ggVennDiagram` can plot up to seven dimension Venn plot. We
 would like to acknowledgment the author of package `venn`, for his kind
 help on sharing the required shape coordinates for this feature.
@@ -224,6 +226,37 @@ ggVennDiagram(x[1:2])
 ```
 
 <img src="man/figures/README-unnamed-chunk-10-1.png" width="70%" />
+
+## Native support of upset plot
+
+From version 1.4.4, `ggVennDiagram` supports unlimited number of sets,
+as it can draw a plain upset plot automatically when number of sets is
+more than 7.
+
+``` r
+# add an extra member in list
+x$H = sample(genes,500)
+ggVennDiagram(x)
+#> Warning in ggVennDiagram(x): Only support 2-7 dimension Venn diagram. Will give
+#> a plain upset plot instead.
+```
+
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" />
+
+Since upset plot is consisted with upper panel and lower panel, and left
+panel and right panel, the appearance should be adjusted with different
+conditions. We provide two parameters, which are `relative_height` and
+`relative_width` to do this.
+
+For example, if we want to give more space to lower panel, just change
+the `relative_height` from 3 (the default) to 2.
+
+``` r
+venn = Venn(x)
+upset_plot(venn, nintersects = 30, relative_height = 2, relative_width = 0.3)
+```
+
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="70%" />
 
 # Futher information
 

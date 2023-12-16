@@ -150,6 +150,7 @@ If you have reviewed my codes, you may find it is easy to support Venn Diagram f
 as soon as you find a ideal parameter to generate more circles or ellipses in the plot. 
 The key point is to let the generated ellipses have exactly one intersection for each combination.
 
+## Venn Diagram of up to seven sets
 
 From v1.0, `ggVennDiagram` can plot up to seven dimension Venn plot. 
 We would like to acknowledgment the author of package `venn`, for his kind help on
@@ -204,6 +205,25 @@ plots <- lapply(2:7, function(i) ggVennDiagram(x[1:i],label = "none",edge_size =
                   theme(legend.position = "none",
                         title = element_text(hjust = 0.5)))
 cowplot::plot_grid(plotlist = plots, ncol = 2)
+```
+
+## Native support of upset plot
+
+From version 1.4.4, `ggVennDiagram` supports unlimited number of sets, as it can draw a plain upset plot automatically when number of sets is more than 7.
+
+```{r}
+# add an extra member in list
+x$H = sample(genes,500)
+ggVennDiagram(x)
+```
+
+Since upset plot is consisted with upper panel and lower panel, and left panel and right panel, the appearance should be adjusted with different conditions. We provide two parameters, which are `relative_height` and `relative_width` to do this.
+
+For example, if we want to give more space to lower panel, just change the `relative_height` from 3 (the default) to 2.
+
+```{r}
+venn = Venn(x)
+upset_plot(venn, nintersects = 30, relative_height = 2, relative_width = 0.3)
 ```
 
 
