@@ -24,6 +24,8 @@
 #' @param nintersects number of intersects. If NULL, all intersections will show.
 #' @param order.intersect.by one of 'size' or 'name'
 #' @param order.set.by one of 'size' or 'name'
+#' @param relative_height the relative height of top panel in upset plot
+#' @param relative_width the relative width of left panel in upset plot
 #' @return an upset plot
 #'
 #' @export
@@ -40,7 +42,9 @@
 upset_plot = function(venn,
                       nintersects = NULL,
                       order.intersect.by = c("size", "name"),
-                      order.set.by = c("size", "name")){
+                      order.set.by = c("size", "name"),
+                      relative_height = 3,
+                      relative_width = 0.2){
   # process arguments
   order.intersect.by = match.arg(order.intersect.by)
   order.set.by = match.arg(order.set.by)
@@ -59,8 +63,8 @@ upset_plot = function(venn,
   p_left = upsetplot_left(data$left_data)
 
   # combine into a plot
-  pp = aplot::insert_top(p_main, p_top, height=4) |>
-    aplot::insert_left(p_left, width=.2)
+  pp = aplot::insert_top(p_main, p_top, height = relative_height) |>
+    aplot::insert_left(p_left, width = relative_width)
   class(pp) = c("upset_plot", class(pp))
 
   return(pp)

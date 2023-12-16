@@ -8,7 +8,9 @@ upset_plot(
   venn,
   nintersects = NULL,
   order.intersect.by = c("size", "name"),
-  order.set.by = c("size", "name")
+  order.set.by = c("size", "name"),
+  relative_height = 3,
+  relative_width = 0.2
 )
 }
 \arguments{
@@ -19,6 +21,10 @@ upset_plot(
 \item{order.intersect.by}{one of 'size' or 'name'}
 
 \item{order.set.by}{one of 'size' or 'name'}
+
+\item{relative_height}{the relative height of top panel in upset plot}
+
+\item{relative_width}{the relative width of left panel in upset plot}
 }
 \value{
 an upset plot
