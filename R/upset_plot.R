@@ -150,7 +150,7 @@ process_upset_data = function(venn,
 
   # main data
   main_data = data |>
-    dplyr::select(c("id", "size")) |>
+    dplyr::select(c("id", "name", "size")) |>
     dplyr::mutate(set = .data$id,
                   id = forcats::fct_reorder(.data$id, .data[[order.intersect.by]], .desc = TRUE)) |>
     tidyr::separate_longer_delim(.data$set, delim = "/")

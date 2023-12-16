@@ -8,10 +8,12 @@
 \usage{
 process_set_data(venn)
 
-process_region_data(venn)
+process_region_data(venn, sep = "/")
 }
 \arguments{
 \item{venn}{a Venn object}
+
+\item{sep}{name and id separator for intersections}
 }
 \value{
 a tibble

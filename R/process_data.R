@@ -125,6 +125,7 @@ plotData_add_venn = function(plotData, venn){
 #'
 #' @name venn_data
 #' @param venn a Venn object
+#' @param sep name and id separator for intersections
 #'
 #' @return a tibble
 #' @export
