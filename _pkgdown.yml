@@ -16,6 +16,7 @@ reference:
   - get_shapes
   - get_shape_data
   - get_shape_by_id
+  - vennplot-shapes
 - title: VennPlotData object and methods
   desc: a S3 class to store Venn sets and shape data
   contents:
@@ -24,10 +25,12 @@ reference:
   - VennPlotData
   - venn_plot_data
   - print
+  - 'show.Venn-method'
 - title: Venn object and methods
   desc: a S4 class to store Venn sets and calculate subsets
   contents:
   - Venn-class
+  - venn_data
   - venn_region
   - venn_regionedge
   - venn_regionlabel
@@ -40,6 +43,8 @@ reference:
   - combinations
   - all_identical
   - discern_overlap
+  - discern
   - overlap
   - unite
+  - slice_idx
 
