@@ -7,7 +7,7 @@ reference:
   contents:
   - ggVennDiagram
   - plot_venn
-  - upset_plot
+  - plot_upset
 - title: Shape viewer
   desc: methods used to get and view shape data
   contents:
