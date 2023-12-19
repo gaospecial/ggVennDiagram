@@ -105,6 +105,7 @@ all_identical = function(list){
 #' @export
 #' @method show Venn
 #' @importFrom methods show slotNames slot
+#' @rdname Venn-class
 setMethod("show", c(object = "Venn"),
           function(object){
             cat("An object of class 'Venn':\n")

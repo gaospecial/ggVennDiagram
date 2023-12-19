@@ -5,11 +5,14 @@
 \alias{Venn-class}
 \alias{Venn}
 \alias{Venn,ANY-method}
+\alias{show,Venn-method}
 \title{\emph{\code{Venn}} is a S4 class to represent multiple sets.}
 \usage{
 Venn(sets, names = NULL)
 
 \S4method{Venn}{ANY}(sets, names = NULL)
+
+\S4method{show}{Venn}(object)
 }
 \arguments{
 \item{sets}{(Required) A list containing vectors in the same class. If a
@@ -17,14 +20,14 @@ vector contains duplicates they will be discarded. If the list doesn't have
 names the sets will be named as "Set_1", "Set_2", "Set_3" and so on.}
 
 \item{names}{names of sets}
+
+\item{object}{a Venn class object}
 }
 \value{
 A \code{Venn} object.
 }
 \description{
-\emph{\code{Venn}} is a S4 class to represent multiple sets.
-
-\code{Venn()} is a Venn class object constructor.
+Print user-friendly information of a Venn object
 }
 \section{Slots}{
 

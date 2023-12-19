@@ -25,7 +25,6 @@ reference:
   - VennPlotData
   - venn_plot_data
   - print
-  - 'show.Venn-method'
 - title: Venn object and methods
   desc: a S4 class to store Venn sets and calculate subsets
   contents:
