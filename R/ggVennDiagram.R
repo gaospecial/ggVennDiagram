@@ -1,30 +1,12 @@
-#' `ggVennDiagram`: an easy to use Venn diagram generator
-#'
-#' Venn diagram is frequently used in scientific studies of many fields.
-#' This package incorporates state-of-art Venn plot tools and provides a set of
-#' easy-to-use functions to plot Venn. By dealing with a user-provided list,
-#' which contains the sets of Venn, `ggVennDiagram` returns a structured data that
-#' can be used to plot Venn. The data contains three slots: 1) the edge of Venn sets;
-#' 2) the separated regions of Venn sets; 3) the labels of Venn sets.
-#' By help from the package `venn`, it is possible to draw Venn diagram up to 7 sets.
-#'
-#' @docType package
-#' @name ggVennDiagram-package
-NULL
+
 
 #' shapes: shape data used to setup Venn plot
 #'
 #' a collection of geometric shapes, which defined the edge and label of sets in a Venn plot.
 #' use `plot_shapes()` to see some of them.
 #'
-#' @format a tibble with 6 columns
-#'
-#'  * `nsets`: number of sets, from 1-7.
-#'  * `type`: ellipse, circle or triangle
-#'  - `shape_id`: to separate different shapes
-#'  - `component`: each shape has two components, 'setEdge' and 'setLabel'
-#'  - `id`: to separate edges/labels of a shape. For example, 4 sets shape will have ids of 1-4.
-#'  - `xy`: coordinates
+#' @format a list with several slots
+#'  see "?vennPlotData".
 #'
 #' @source
 #' - `venn:::sets`
@@ -108,7 +90,7 @@ ggVennDiagram = function(x,
   }
   else{
     warning("Only support 2-7 dimension Venn diagram. Will give a plain upset plot instead.")
-    upset_plot(venn, nintersects = 30, order.intersect.by = "size", order.set.by = "name")
+    plot_upset(venn, nintersects = 30, order.intersect.by = "size", order.set.by = "name")
   }
 }
 

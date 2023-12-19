@@ -4,14 +4,8 @@
 \alias{vennplot-shapes}
 \title{shapes: shape data used to setup Venn plot}
 \format{
-a tibble with 6 columns
-
- * `nsets`: number of sets, from 1-7.
- * `type`: ellipse, circle or triangle
- - `shape_id`: to separate different shapes
- - `component`: each shape has two components, 'setEdge' and 'setLabel'
- - `id`: to separate edges/labels of a shape. For example, 4 sets shape will have ids of 1-4.
- - `xy`: coordinates
+a list with several slots
+ see "?vennPlotData".
 }
 \source{
 - `venn:::sets`

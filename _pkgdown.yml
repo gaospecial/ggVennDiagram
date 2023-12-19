@@ -5,55 +5,43 @@ reference:
     - title: Main wrapers
       desc: Main functions of 'ggVennDiagram'
       contents:
-      - 'ggVennDiagram-package'
       - ggVennDiagram
       - plot_venn
+      - upset_plot
 
-    - title: Shape generation
-      desc: methods used to get shape data
+    - title: Shape viewer
+      desc: methods used to get and view shape data
       contents:
       - plot_shapes
-      - process_data
-      - process_region_data
-      - process_setEdge_data
-      - process_setLabel_data
+      - plot_shape_edge
+      - get_shapes
+      - get_shape_data
+      - get_shape_by_id
 
-    - title: Data structures
-      desc: defined classes and methods
+    - title: VennPlotData object and methods
+      desc: a S3 class to store Venn sets and shape data
+      - process_data
+      - plotData_add_venn
+      - VennPlotData
+      - venn_plot_data
+      - print
+
+    - title: Venn object and methods
+      desc: a S4 class to store Venn sets and calculate subsets
       contents:
       - 'Venn-class'
-      - 'discern,Polygon-method'
-      - 'overlap,Polygon-method'
-      - Polygon
-      - discern_overlap
-      - VennPlotData
-      - 'Polygon-class'
-      - 'VennPlotData-class'
-      - plotData_add_venn
-      - venn_data
       - venn_region
+      - venn_regionedge
+      - venn_regionlabel
+      - venn_set
       - venn_setedge
       - venn_setlabel
 
-    - title: helper functions
-      desc: helper functions to generate shapes
+    - title: subset processing
+      desc: helper functions to calculate subset members
       contents:
-      - shape_generator
-      - circle
-      - ellipse
-      - triangle
-      - fancy_6d_triangle
-      - fancy_4d_ellipse
-      - fancy_3d_circle
-      - fancy_2d_circle
-      - label_position
-      - build_shape
       - combinations
-
-    - title: shapes
-      desc: internal shapes
-      contents:
-      - plot_shapes
-      - 'vennplot-shapes'
-      - get_shape_data
-
+      - all_identical
+      - discern_overlap
+      - overlap
+      - unite

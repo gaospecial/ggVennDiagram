@@ -36,10 +36,10 @@
 #'              C = sample(LETTERS, 14),
 #'              D = sample(LETTERS, 30, replace = TRUE))
 #'  venn = Venn(list)
-#'  upset_plot(venn)
-#'  upset_plot(venn, order.intersect.by = "name")
-#'  upset_plot(venn, nintersects = 6)
-upset_plot = function(venn,
+#'  plot_upset(venn)
+#'  plot_upset(venn, order.intersect.by = "name")
+#'  plot_upset(venn, nintersects = 6)
+plot_upset = function(venn,
                       nintersects = NULL,
                       order.intersect.by = c("size", "name"),
                       order.set.by = c("size", "name"),

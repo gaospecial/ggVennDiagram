@@ -65,14 +65,14 @@ library(ggplot2)
 ggVennDiagram(x) + scale_fill_gradient(low="blue",high = "red")
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="90%" />
 
 ``` r
 
 ggVennDiagram(x) + scale_color_brewer(palette = "Paired")
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-2.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-3-2.png" width="90%" />
 
 `ggVennDiagram` now support 2-7 dimension Venn plot. The generated
 figure is generally ready for publish. The main function
@@ -86,14 +86,14 @@ can label how many items are included in each parts.
 ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="90%" />
 
 ``` r
 
 ggVennDiagram(x,category.names = c("Stage 1","Stage 2","Stage 3", "Stage4"), label = "none")
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-2.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-4-2.png" width="90%" />
 
 Set `label_alpha = 0` to remove label background
 
@@ -101,7 +101,7 @@ Set `label_alpha = 0` to remove label background
 ggVennDiagram(x, label_alpha=0)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="90%" />
 
 ## Showing intersection values
 
@@ -149,7 +149,7 @@ ggVennDiagram(y, show_intersect = TRUE)
 
 In web browser or RStudio, you will get:
 
-<img src="https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/typora-img/intersection.gif" width="70%" />
+<img src="https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/typora-img/intersection.gif" width="90%" />
 
 # Customizing your plot
 
@@ -225,7 +225,7 @@ ggVennDiagram(x[1:3])
 ggVennDiagram(x[1:2])
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="90%" />
 
 ## Native support of upset plot
 
@@ -241,7 +241,7 @@ ggVennDiagram(x)
 #> a plain upset plot instead.
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="90%" />
 
 Since upset plot is consisted with upper panel and lower panel, and left
 panel and right panel, the appearance should be adjusted with different
@@ -256,7 +256,7 @@ venn = Venn(x)
 upset_plot(venn, nintersects = 30, relative_height = 2, relative_width = 0.3)
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="70%" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="90%" />
 
 # Futher information
 
