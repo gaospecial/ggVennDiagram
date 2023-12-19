@@ -28,7 +28,7 @@ Imports:
     aplot,
     forcats,
     tidyr
-URL: https://github.com/gaospecial/ggVennDiagram
+URL: https://github.com/gaospecial/ggVennDiagram, https://gaospecial.github.io/ggVennDiagram/
 License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 7.2.3

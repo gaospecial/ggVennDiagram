@@ -1,47 +1,45 @@
+url: https://gaospecial.github.io/ggVennDiagram/
 home:
-    strip_header: true
-
+  strip_header: yes
 reference:
-    - title: Main wrapers
-      desc: Main functions of 'ggVennDiagram'
-      contents:
-      - ggVennDiagram
-      - plot_venn
-      - upset_plot
+- title: Main wrapers
+  desc: Main functions of 'ggVennDiagram'
+  contents:
+  - ggVennDiagram
+  - plot_venn
+  - upset_plot
+- title: Shape viewer
+  desc: methods used to get and view shape data
+  contents:
+  - plot_shapes
+  - plot_shape_edge
+  - get_shapes
+  - get_shape_data
+  - get_shape_by_id
+- title: VennPlotData object and methods
+  desc: a S3 class to store Venn sets and shape data
+  contents:
+  - process_data
+  - plotData_add_venn
+  - VennPlotData
+  - venn_plot_data
+  - print
+- title: Venn object and methods
+  desc: a S4 class to store Venn sets and calculate subsets
+  contents:
+  - Venn-class
+  - venn_region
+  - venn_regionedge
+  - venn_regionlabel
+  - venn_set
+  - venn_setedge
+  - venn_setlabel
+- title: subset processing
+  desc: helper functions to calculate subset members
+  contents:
+  - combinations
+  - all_identical
+  - discern_overlap
+  - overlap
+  - unite
 
-    - title: Shape viewer
-      desc: methods used to get and view shape data
-      contents:
-      - plot_shapes
-      - plot_shape_edge
-      - get_shapes
-      - get_shape_data
-      - get_shape_by_id
-
-    - title: VennPlotData object and methods
-      desc: a S3 class to store Venn sets and shape data
-      - process_data
-      - plotData_add_venn
-      - VennPlotData
-      - venn_plot_data
-      - print
-
-    - title: Venn object and methods
-      desc: a S4 class to store Venn sets and calculate subsets
-      contents:
-      - 'Venn-class'
-      - venn_region
-      - venn_regionedge
-      - venn_regionlabel
-      - venn_set
-      - venn_setedge
-      - venn_setlabel
-
-    - title: subset processing
-      desc: helper functions to calculate subset members
-      contents:
-      - combinations
-      - all_identical
-      - discern_overlap
-      - overlap
-      - unite

@@ -25,3 +25,4 @@
 ^less-dependency.Rmd$
 ^docs$
 ^roadmap\.md$
+^pkgdown$
