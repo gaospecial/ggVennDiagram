@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggVennDiagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.7</span>
       </span>
     </div>
 
@@ -107,51 +107,66 @@
 </h2>
 <p>The <strong>ggVennDiagram</strong> package has a set of built-in
 shapes that are used to plot Venn diagram. These internal data are
-stored as sys data as a tibble. It can be viewed with
-<code>ggVennDiagram:::shapes</code> and plotted with the function
+stored as sys data as a tibble. It can be accessed with
+<code>ggVennDiagram:::shapes</code> and viewed by the function
+<code><a href="../reference/get_shapes.html">get_shapes()</a></code>, and plotted with the function
 <code><a href="../reference/plot_shapes.html">plot_shapes()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">ggVennDiagram</span><span class="fu">:::</span><span class="va">shapes</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 104 × 6</span></span></span>
-<span><span class="co">#&gt;    nsets type    shape_id component id    xy             </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>         </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     4 ellipse 401f     setEdge   1     <span style="color: #949494;">&lt;dbl [101 × 2]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     4 ellipse 401f     setEdge   2     <span style="color: #949494;">&lt;dbl [101 × 2]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     4 ellipse 401f     setEdge   3     <span style="color: #949494;">&lt;dbl [101 × 2]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     4 ellipse 401f     setEdge   4     <span style="color: #949494;">&lt;dbl [101 × 2]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     4 ellipse 401f     setLabel  1     <span style="color: #949494;">&lt;dbl [1 × 2]&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     4 ellipse 401f     setLabel  2     <span style="color: #949494;">&lt;dbl [1 × 2]&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     4 ellipse 401f     setLabel  3     <span style="color: #949494;">&lt;dbl [1 × 2]&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     4 ellipse 401f     setLabel  4     <span style="color: #949494;">&lt;dbl [1 × 2]&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     1 polygon 101      setEdge   1     <span style="color: #949494;">&lt;dbl [194 × 2]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     2 polygon 201      setEdge   1     <span style="color: #949494;">&lt;dbl [194 × 2]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 94 more rows</span></span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
-<p>The format of these shapes data are defined as followings:</p>
-<p><strong>a tibble with 6 columns</strong></p>
-<ul>
-<li><p><code>nsets</code>: number of sets, from 1-7.</p></li>
-<li><p><code>type</code>: ellipse, circle or triangle</p></li>
-<li><p><code>shape_id</code>: to separate different shapes</p></li>
-<li><p><code>component</code>: each shape has two components, ‘setEdge’
-and ‘setLabel’</p></li>
-<li><p><code>id</code>: to separate edges/labels of a shape. For
-example, 4 sets shape will have ids of 1-4.</p></li>
-<li><p><code>xy</code>: coordinates</p></li>
-</ul>
+<code class="sourceCode R"><span><span class="va">shape1</span> <span class="op">=</span> <span class="fu">ggVennDiagram</span><span class="fu">:::</span><span class="va">shapes</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">shape1</span></span>
+<span><span class="co">#&gt; Class VennPlotData - '301f'</span></span>
+<span><span class="co">#&gt;   Type: circle; No. sets: 3; No. regions: 7.</span></span>
+<span><span class="co">#&gt;   To view this shape, use `plot_shape_edge()`.</span></span>
+<span><span class="co">#&gt;   To view its components, use `venn_setedge()`, `venn_setlabel()`, etc.</span></span></code></pre></div>
+<p>The format of these shapes data are defined in
+<code>VennPlotData</code> class. Use <code><a href="../reference/VennPlotData.html">?VennPlotData</a></code> to view
+the document.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_shapes.html">plot_shapes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_shape_edge.html">plot_shape_edge</a></span><span class="op">(</span><span class="va">shape1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="using-new-shapes_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p><code><a href="../reference/get_shapes.html">get_shapes()</a></code> will extract the meta features of these
+shapes and output a tibble. These information can be used for
+sepecifying a shape either by its id, or type.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/get_shapes.html">get_shapes</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 3</span></span></span>
+<span><span class="co">#&gt;    shape_id nsets type    </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 101          1 circle  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 201f         2 circle  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 201          2 circle  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 301f         3 circle  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 301          3 circle  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 401f         4 ellipse </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 402          4 polygon </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 501          5 polygon </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 502          5 polygon </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 601t         6 triangle</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 601          6 polygon </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 701          7 polygon</span></span></code></pre></div>
+<p>For example, if you want to extract the shape whose id is “401f”.
+This time we use <code>ggplot2</code> functions to plot the set edge of
+it.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="va">shape2</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_shape_by_id.html">get_shape_by_id</a></span><span class="op">(</span><span class="st">"401f"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_shape_edge.html">plot_shape_edge</a></span><span class="op">(</span><span class="va">shape2</span><span class="op">)</span></span></code></pre></div>
+<p><img src="using-new-shapes_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p>The <code><a href="../reference/plot_shapes.html">plot_shapes()</a></code> function can be used to plot all the
+available shapes stored in this package.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_shapes.html">plot_shapes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="using-new-shapes_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="using-alternative-internal-shapes">Using alternative internal shapes<a class="anchor" aria-label="anchor" href="#using-alternative-internal-shapes"></a>
 </h2>
 <p>By default, only the most appropriate shape is used when calling the
 main function <code><a href="../reference/ggVennDiagram.html">ggVennDiagram()</a></code>. However, it may be specified
-in step wise plot which has been described in <a href="https://gaospecial.github.io/ggVennDiagram/articles/fully-customed" class="external-link">fully
+in step wise plot which has been described in <a href="https://gaospecial.github.io/ggVennDiagram/articles/fully-customed">fully
 customed plot</a>.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate example data.</span></span>
 <span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"gene"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">20210701</span><span class="op">)</span></span>
@@ -161,82 +176,20 @@ customed plot</a>.</p>
 <span>                  D <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">200</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># construct a Venn object</span></span>
-<span><span class="va">venn</span> <span class="op">=</span> <span class="fu">Venn</span><span class="op">(</span><span class="va">gene_list</span><span class="op">)</span></span>
-<span><span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/process_data.html">process_data</a></span><span class="op">(</span><span class="va">venn</span>, <span class="va">shape_id</span> <span class="op">==</span> <span class="st">"401"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">count</span><span class="op">)</span>, data <span class="op">=</span> <span class="fu"><a href="../reference/venn_data.html">venn_region</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">id</span><span class="op">)</span>, data <span class="op">=</span> <span class="fu"><a href="../reference/venn_data.html">venn_setedge</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, data <span class="op">=</span> <span class="fu"><a href="../reference/venn_data.html">venn_setlabel</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf_label</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">count</span><span class="op">)</span>, data <span class="op">=</span> <span class="fu"><a href="../reference/venn_data.html">venn_region</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="using-new-shapes_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<span><span class="va">venn</span> <span class="op">=</span> <span class="fu"><a href="../reference/Venn-class.html">Venn</a></span><span class="op">(</span><span class="va">gene_list</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/process_data.html">process_data</a></span><span class="op">(</span><span class="va">venn</span>, shape_id <span class="op">=</span> <span class="st">"402"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_venn.html">plot_venn</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<p><img src="using-new-shapes_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="using-a-novel-shape">Using a novel shape<a class="anchor" aria-label="anchor" href="#using-a-novel-shape"></a>
 </h2>
-<p>Besides, user can use a novel shape when knows its coordinates. A
-possible start is from a SVG shape. Therefore, I would like to show the
-method of using a novel triangle shape to plot 6-sets Venn diagram in
-this section.</p>
-<p>The triangle is found in WiKi at <a href="https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg" class="external-link uri">https://upload.wikimedia.org/wikipedia/commons/5/56/6-set_Venn_diagram_SMIL.svg</a>.</p>
-<p><img src="https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/typora-img/triangles.svg"><!-- --></p>
-<p>Since SVG is a XML format file, the coordinates can be found in its
-content. For this figure, the definition of six triangles are stored in
-the six object, <code>object1b</code>, <code>object2b</code>, …,
-<code>object6b</code>. We just need to build set regions by closing the
-vertexes with the function <code><a href="../reference/triangle.html">triangle()</a></code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># the vertext coordinates of six triangles</span></span>
-<span><span class="va">vertex_coordinates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">69277</span>,<span class="op">-</span><span class="fl">32868</span>,<span class="fl">135580</span>,<span class="fl">121186</span>, <span class="fl">70900</span>,<span class="fl">199427</span><span class="op">)</span>,</span>
-<span>                   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span> <span class="fl">81988</span>,<span class="op">-</span><span class="fl">44426</span>, <span class="fl">38444</span>,<span class="fl">206222</span>,<span class="fl">121044</span>,<span class="fl">165111</span><span class="op">)</span>,</span>
-<span>                   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">203271</span>,  <span class="fl">9619</span>, <span class="fl">39604</span>, <span class="fl">82683</span>, <span class="fl">84652</span>,<span class="fl">206669</span><span class="op">)</span>,</span>
-<span>                   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">333561</span>,<span class="fl">225349</span>, <span class="fl">61764</span>, <span class="fl">76805</span>, <span class="fl">38980</span>,<span class="fl">182461</span><span class="op">)</span>,</span>
-<span>                   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">131886</span>,<span class="fl">385785</span>, <span class="fl">38136</span>,<span class="fl">111491</span>, <span class="fl">94208</span>, <span class="fl">24690</span><span class="op">)</span>,</span>
-<span>                   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">60184</span>,<span class="fl">274046</span>,<span class="fl">142476</span>, <span class="fl">39903</span>,<span class="fl">103276</span>,<span class="fl">183962</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">triangles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">vertex_coordinates</span>, <span class="va">triangle</span><span class="op">)</span></span></code></pre></div>
-<p>Likewise, <code><a href="../reference/label_position.html">label_position()</a></code> is used to setup the
-coordinates of set labels.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">position</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
-<span>      <span class="op">~</span><span class="va">x</span>,       <span class="op">~</span><span class="va">y</span>,</span>
-<span>      <span class="op">-</span><span class="fl">50000</span>,     <span class="fl">50000</span>,</span>
-<span>      <span class="fl">60000</span>,          <span class="fl">0</span>,</span>
-<span>      <span class="fl">160000</span>,     <span class="fl">20000</span>,</span>
-<span>      <span class="fl">280000</span>,    <span class="fl">170000</span>,</span>
-<span>      <span class="fl">140000</span>,    <span class="fl">300000</span>,</span>
-<span>      <span class="op">-</span><span class="fl">20000</span>,   <span class="fl">270000</span></span>
-<span>    <span class="op">)</span></span>
-<span><span class="va">label_position</span> <span class="op">=</span> <span class="fu"><a href="../reference/label_position.html">label_position</a></span><span class="op">(</span><span class="va">position</span><span class="op">)</span></span></code></pre></div>
-<p>Then construct a <code>VennPlotData</code> class object with shapes
-and labels.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">shape</span> <span class="op">=</span> <span class="fu"><a href="../reference/VennPlotData.html">VennPlotData</a></span><span class="op">(</span>setEdge <span class="op">=</span> <span class="va">triangles</span>,</span>
-<span>                     setLabel <span class="op">=</span> <span class="va">label_position</span><span class="op">)</span></span></code></pre></div>
-<p>Now we can join plot data with set and calculated region values with
-<code><a href="../reference/plotData_add_venn.html">plotData_add_venn()</a></code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"gene"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">20210701</span><span class="op">)</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">100</span><span class="op">)</span>,</span>
-<span>          B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">150</span><span class="op">)</span>,</span>
-<span>          C <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">200</span><span class="op">)</span>,</span>
-<span>          D <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">250</span><span class="op">)</span>,</span>
-<span>          E <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">300</span><span class="op">)</span>,</span>
-<span>          F <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">350</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">venn</span> <span class="op">=</span> <span class="fu">Venn</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/plotData_add_venn.html">plotData_add_venn</a></span><span class="op">(</span>plotData <span class="op">=</span> <span class="va">shape</span>, venn <span class="op">=</span> <span class="va">venn</span><span class="op">)</span></span></code></pre></div>
-<p>and plot Venn diagram with ggplot2.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">count</span><span class="op">)</span>, data <span class="op">=</span> <span class="fu"><a href="../reference/venn_data.html">venn_region</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">2</span>, data <span class="op">=</span> <span class="fu"><a href="../reference/venn_data.html">venn_setedge</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, data <span class="op">=</span> <span class="fu"><a href="../reference/venn_data.html">venn_setlabel</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"Set Name"</span>, fill <span class="op">=</span> <span class="st">"Count"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="using-new-shapes_files/figure-html/unnamed-chunk-10-1.png" width="960"></p>
+<p>If user knows the coordinates of a novel shape, it may also be used
+to draw in <code>ggVennDiagram</code>. The functions of this part have
+been transfered to a new R package <code>shapeMageR</code>, which can be
+found in <a href="https://github.com/gaospecial/shapeMageR" class="external-link uri">https://github.com/gaospecial/shapeMageR</a>. To do this,
+the dependency of <code>ggVennDiagram</code> is very light, thus
+increase the accessiblity of the package.</p>
 </div>
   </div>
 

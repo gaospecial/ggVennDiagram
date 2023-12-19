@@ -12,13 +12,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="A ggplot2 Implement of Venn Diagram">
-<meta property="og:description" content="Easy-to-use functions to generate 2-7 sets Venn plot in publication quality. 
-  ggVennDiagram plot Venn using well-defined geometry dataset and ggplot2. The shapes of 2-4 sets 
+<meta property="og:description" content="Easy-to-use functions to generate 2-7 sets Venn or upset plot in publication quality. 
+  ggVennDiagram plot Venn or upset using well-defined geometry dataset and ggplot2. The shapes of 2-4 sets 
   Venn use circles and ellipses, while the shapes of 4-7 sets Venn use irregular polygons (4 has both forms), which 
   are developed and imported from another package venn, authored by Adrian Dusa. We provided internal functions to 
   integrate shape data with user provided sets data, and calculated the geometry of every regions/intersections 
-  of them, then separately plot Venn in three components: set edges, set labels, and regions.
-  From version 1.0, it is possible to customize these components as you demand in ordinary ggplot2 grammar.">
+  of them, then separately plot Venn in four components: set edges/labels, and region edges/labels.
+  From version 1.0, it is possible to customize these components as you demand in ordinary ggplot2 grammar.
+  From version 1.4.4, it supports unlimited number of sets, as it can draw a plain upset plot automatically when
+  number of sets is more than 7.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -39,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ggVennDiagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.7</span>
       </span>
     </div>
 
@@ -124,9 +126,8 @@
 <p><code>ggVennDiagram</code> maps the fill color of each region to quantity, allowing us to visually observe the differences between different parts.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/gaospecial/ggVennDiagram" class="external-link">ggVennDiagram</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: package 'ggVennDiagram' was built under R version 4.2.3</span></span>
 <span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"gene"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">20210419</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">20231214</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>A<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">300</span><span class="op">)</span>,</span>
 <span>          B<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">525</span><span class="op">)</span>,</span>
 <span>          C<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">440</span><span class="op">)</span>,</span>
@@ -134,26 +135,25 @@
 <p><code>ggVennDiagram</code> return a <code>ggplot</code> object, the fill/edge colors can be further modified with <code>ggplot</code> functions.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: package 'ggplot2' was built under R version 4.2.3</span></span>
 <span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"blue"</span>,high <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="70%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="90%"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Paired"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-3-2.png" width="70%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-3-2.png" width="90%"></p>
 <p><code>ggVennDiagram</code> now support 2-7 dimension Venn plot. The generated figure is generally ready for publish. The main function <code><a href="reference/ggVennDiagram.html">ggVennDiagram()</a></code> will check how many items in the first parameter and call corresponding function automatically.</p>
 <p>The parameter <code>category.names</code> is set names. And the parameter <code>label</code> can label how many items are included in each parts.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span>,category.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stage 1"</span>,<span class="st">"Stage 2"</span>,<span class="st">"Stage 3"</span>, <span class="st">"Stage4"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="70%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="90%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span>,category.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stage 1"</span>,<span class="st">"Stage 2"</span>,<span class="st">"Stage 3"</span>, <span class="st">"Stage4"</span><span class="op">)</span>, label <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-2.png" width="70%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-4-2.png" width="90%"></p>
 <p>Set <code>label_alpha = 0</code> to remove label background</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span>, label_alpha<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="70%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="90%"></p>
 </div>
 <div class="section level2">
 <h2 id="showing-intersection-values">Showing intersection values<a class="anchor" aria-label="anchor" href="#showing-intersection-values"></a>
@@ -168,30 +168,30 @@
 <span>  D <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">letters</span>, <span class="fl">8</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/venn_data.html">process_region_data</a></span><span class="op">(</span><span class="fu">Venn</span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 15 × 5</span></span>
-<span><span class="co">#&gt;    component id    item      count name      </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt; &lt;list&gt;    &lt;int&gt; &lt;chr&gt;     </span></span>
-<span><span class="co">#&gt;  1 region    1     &lt;chr [1]&gt;     1 A         </span></span>
-<span><span class="co">#&gt;  2 region    2     &lt;chr [1]&gt;     1 B         </span></span>
-<span><span class="co">#&gt;  3 region    3     &lt;chr [3]&gt;     3 C         </span></span>
-<span><span class="co">#&gt;  4 region    4     &lt;chr [5]&gt;     5 D         </span></span>
-<span><span class="co">#&gt;  5 region    12    &lt;chr [3]&gt;     3 A..B      </span></span>
-<span><span class="co">#&gt;  6 region    13    &lt;chr [2]&gt;     2 A..C      </span></span>
-<span><span class="co">#&gt;  7 region    14    &lt;chr [0]&gt;     0 A..D      </span></span>
-<span><span class="co">#&gt;  8 region    23    &lt;chr [0]&gt;     0 B..C      </span></span>
-<span><span class="co">#&gt;  9 region    24    &lt;chr [0]&gt;     0 B..D      </span></span>
-<span><span class="co">#&gt; 10 region    34    &lt;chr [0]&gt;     0 C..D      </span></span>
-<span><span class="co">#&gt; 11 region    123   &lt;chr [1]&gt;     1 A..B..C   </span></span>
-<span><span class="co">#&gt; 12 region    124   &lt;chr [1]&gt;     1 A..B..D   </span></span>
-<span><span class="co">#&gt; 13 region    134   &lt;chr [0]&gt;     0 A..C..D   </span></span>
-<span><span class="co">#&gt; 14 region    234   &lt;chr [2]&gt;     2 B..C..D   </span></span>
-<span><span class="co">#&gt; 15 region    1234  &lt;chr [0]&gt;     0 A..B..C..D</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/venn_data.html">process_region_data</a></span><span class="op">(</span><span class="fu"><a href="reference/Venn-class.html">Venn</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 15 × 4</span></span>
+<span><span class="co">#&gt;    id      name    item      count</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;list&gt;    &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1 1       A       &lt;chr [3]&gt;     3</span></span>
+<span><span class="co">#&gt;  2 2       B       &lt;chr [1]&gt;     1</span></span>
+<span><span class="co">#&gt;  3 3       C       &lt;chr [3]&gt;     3</span></span>
+<span><span class="co">#&gt;  4 4       D       &lt;chr [0]&gt;     0</span></span>
+<span><span class="co">#&gt;  5 1/2     A/B     &lt;chr [0]&gt;     0</span></span>
+<span><span class="co">#&gt;  6 1/3     A/C     &lt;chr [1]&gt;     1</span></span>
+<span><span class="co">#&gt;  7 1/4     A/D     &lt;chr [2]&gt;     2</span></span>
+<span><span class="co">#&gt;  8 2/3     B/C     &lt;chr [1]&gt;     1</span></span>
+<span><span class="co">#&gt;  9 2/4     B/D     &lt;chr [3]&gt;     3</span></span>
+<span><span class="co">#&gt; 10 3/4     C/D     &lt;chr [1]&gt;     1</span></span>
+<span><span class="co">#&gt; 11 1/2/3   A/B/C   &lt;chr [1]&gt;     1</span></span>
+<span><span class="co">#&gt; 12 1/2/4   A/B/D   &lt;chr [1]&gt;     1</span></span>
+<span><span class="co">#&gt; 13 1/3/4   A/C/D   &lt;chr [0]&gt;     0</span></span>
+<span><span class="co">#&gt; 14 2/3/4   B/C/D   &lt;chr [1]&gt;     1</span></span>
+<span><span class="co">#&gt; 15 1/2/3/4 A/B/C/D &lt;chr [0]&gt;     0</span></span></code></pre></div>
 <p>If only several items were included, intersections may also be viewed interactively by <code>plotly</code> method (if you have two many items, this is useless).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">y</span>, show_intersect <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>In web browser or RStudio, you will get:</p>
-<p><img src="https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/typora-img/intersection.gif" width="70%"></p>
+<p><img src="https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/typora-img/intersection.gif" width="90%"></p>
 </div>
 </div>
 <div class="section level1">
@@ -205,80 +205,18 @@
 <li>calculate sub regions of sets, including both the shape regions and sets members, and return a <code>PlotDataVenn</code> object that includes all necessary definitions. We implement a number of set operations functions to do this job.</li>
 <li>plot using <code>ggplot2</code> functions.</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">venn</span> <span class="op">&lt;-</span> <span class="fu">Venn</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/process_data.html">process_data</a></span><span class="op">(</span><span class="va">venn</span><span class="op">)</span></span>
-<span><span class="va">data</span></span>
-<span><span class="co">#&gt; An object of class "VennPlotData"</span></span>
-<span><span class="co">#&gt; Slot "setEdge":</span></span>
-<span><span class="co">#&gt; Simple feature collection with 4 features and 5 fields</span></span>
-<span><span class="co">#&gt; Geometry type: LINESTRING</span></span>
-<span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534</span></span>
-<span><span class="co">#&gt; CRS:           NA</span></span>
-<span><span class="co">#&gt; # A tibble: 4 × 6</span></span>
-<span><span class="co">#&gt;   id                                        geometry component item  count name </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;                                 &lt;LINESTRING&gt; &lt;chr&gt;     &lt;nam&gt; &lt;int&gt; &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 1     (0.1025126 0.7174874, 0.09412107 0.7081191,… setEdge   &lt;chr&gt;   300 A    </span></span>
-<span><span class="co">#&gt; 2 2     (0.2525126 0.8174874, 0.246341 0.8103391, 0… setEdge   &lt;chr&gt;   525 B    </span></span>
-<span><span class="co">#&gt; 3 3     (0.7333452 0.8033452, 0.7262248 0.8095447, … setEdge   &lt;chr&gt;   440 C    </span></span>
-<span><span class="co">#&gt; 4 4     (0.8974874 0.7174874, 0.8881191 0.7258789, … setEdge   &lt;chr&gt;   350 D    </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Slot "setLabel":</span></span>
-<span><span class="co">#&gt; Simple feature collection with 4 features and 3 fields</span></span>
-<span><span class="co">#&gt; Geometry type: POINT</span></span>
-<span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: 0.08 ymin: 0.78 xmax: 0.93 ymax: 0.86</span></span>
-<span><span class="co">#&gt; CRS:           NA</span></span>
-<span><span class="co">#&gt; # A tibble: 4 × 4</span></span>
-<span><span class="co">#&gt;   id       geometry component name </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;     &lt;POINT&gt; &lt;chr&gt;     &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 1     (0.08 0.78) setLabel  A    </span></span>
-<span><span class="co">#&gt; 2 2     (0.26 0.86) setLabel  B    </span></span>
-<span><span class="co">#&gt; 3 3     (0.71 0.85) setLabel  C    </span></span>
-<span><span class="co">#&gt; 4 4     (0.93 0.78) setLabel  D    </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Slot "region":</span></span>
-<span><span class="co">#&gt; Simple feature collection with 15 features and 5 fields</span></span>
-<span><span class="co">#&gt; Geometry type: POLYGON</span></span>
-<span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: 0.0649949 ymin: 0.1849949 xmax: 0.9350051 ymax: 0.8391534</span></span>
-<span><span class="co">#&gt; CRS:           NA</span></span>
-<span><span class="co">#&gt; # A tibble: 15 × 6</span></span>
-<span><span class="co">#&gt;    id                                       geometry component item  count name </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                                   &lt;POLYGON&gt; &lt;chr&gt;     &lt;lis&gt; &lt;int&gt; &lt;chr&gt;</span></span>
-<span><span class="co">#&gt;  1 1     ((0.1025126 0.7174874, 0.1118809 0.7258789… region    &lt;chr&gt;    41 A    </span></span>
-<span><span class="co">#&gt;  2 2     ((0.2525126 0.8174874, 0.2596609 0.823659,… region    &lt;chr&gt;   151 B    </span></span>
-<span><span class="co">#&gt;  3 3     ((0.7333452 0.8033452, 0.7395447 0.7962248… region    &lt;chr&gt;    91 C    </span></span>
-<span><span class="co">#&gt;  4 4     ((0.8974874 0.7174874, 0.9058789 0.7081191… region    &lt;chr&gt;    75 D    </span></span>
-<span><span class="co">#&gt;  5 12    ((0.2494531 0.7508377, 0.266399 0.7472201,… region    &lt;chr&gt;    49 A..B </span></span>
-<span><span class="co">#&gt;  6 13    ((0.3598131 0.3161471, 0.3466157 0.3144203… region    &lt;chr&gt;    51 A..C </span></span>
-<span><span class="co">#&gt;  7 14    ((0.6341476 0.306281, 0.6321686 0.2919527,… region    &lt;chr&gt;    36 A..D </span></span>
-<span><span class="co">#&gt;  8 23    ((0.4087951 0.6905086, 0.4240163 0.7044756… region    &lt;chr&gt;   111 B..C </span></span>
-<span><span class="co">#&gt;  9 24    ((0.7013464 0.5605964, 0.7121743 0.5437184… region    &lt;chr&gt;    63 B..D </span></span>
-<span><span class="co">#&gt; 10 34    ((0.7562978 0.7359764, 0.7555797 0.7233843… region    &lt;chr&gt;    53 C..D </span></span>
-<span><span class="co">#&gt; 11 123   ((0.4254307 0.668526, 0.4425419 0.6552909,… region    &lt;chr&gt;    49 A..B…</span></span>
-<span><span class="co">#&gt; 12 124   ((0.6020164 0.4567956, 0.6098817 0.4389429… region    &lt;chr&gt;    38 A..B…</span></span>
-<span><span class="co">#&gt; 13 134   ((0.4966178 0.374675, 0.4805314 0.3646387,… region    &lt;chr&gt;    21 A..C…</span></span>
-<span><span class="co">#&gt; 14 234   ((0.5085786 0.6114214, 0.5243976 0.6266822… region    &lt;chr&gt;    49 B..C…</span></span>
-<span><span class="co">#&gt; 15 1234  ((0.5066822 0.5956024, 0.5213246 0.5792878… region    &lt;chr&gt;    15 A..B…</span></span></code></pre></div>
-<p>Now we can custom this figure.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">count</span><span class="op">)</span>, data <span class="op">=</span> <span class="fu"><a href="reference/venn_data.html">venn_region</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span>, lty <span class="op">=</span> <span class="st">"dashed"</span>, color <span class="op">=</span> <span class="st">"grey"</span>, data <span class="op">=</span> <span class="fu"><a href="reference/venn_data.html">venn_setedge</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, data <span class="op">=</span> <span class="fu"><a href="reference/venn_data.html">venn_setlabel</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf_label</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">id</span><span class="op">)</span>, fontface <span class="op">=</span> <span class="st">"bold"</span>, data <span class="op">=</span> <span class="fu"><a href="reference/venn_data.html">venn_region</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="70%"></p>
+<p>Please check <code><a href="articles/fully-customed.html">vignette("fully-customed", package = "ggVennDiagram")</a></code> for more information.</p>
 </div>
 <div class="section level1">
 <h1 id="venn-diagram-for-more-than-four-sets">Venn Diagram for more than four sets<a class="anchor" aria-label="anchor" href="#venn-diagram-for-more-than-four-sets"></a>
 </h1>
 <p>If you have reviewed my codes, you may find it is easy to support Venn Diagram for more than four sets, as soon as you find a ideal parameter to generate more circles or ellipses in the plot. The key point is to let the generated ellipses have exactly one intersection for each combination.</p>
+<div class="section level2">
+<h2 id="venn-diagram-of-up-to-seven-sets">Venn Diagram of up to seven sets<a class="anchor" aria-label="anchor" href="#venn-diagram-of-up-to-seven-sets"></a>
+</h2>
 <p>From v1.0, <code>ggVennDiagram</code> can plot up to seven dimension Venn plot. We would like to acknowledgment the author of package <code>venn</code>, for his kind help on sharing the required shape coordinates for this feature.</p>
 <p>However, Venn Diagram for more than four sets may be meaningless in some conditions, as some parts may be omitted in such ellipses. Therefore, it is only useful in specific conditions. For example, if the set intersection of all group are extremely large, you may use several ellipses to draw a “flower” to show that.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>A<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">300</span><span class="op">)</span>,</span>
 <span>          B<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">525</span><span class="op">)</span>,</span>
 <span>          C<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">440</span><span class="op">)</span>,</span>
@@ -304,7 +242,26 @@
 <span></span>
 <span><span class="co"># two dimension Venn plot</span></span>
 <span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="70%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="90%"></p>
+</div>
+<div class="section level2">
+<h2 id="native-support-of-upset-plot">Native support of upset plot<a class="anchor" aria-label="anchor" href="#native-support-of-upset-plot"></a>
+</h2>
+<p>From version 1.4.4, <code>ggVennDiagram</code> supports unlimited number of sets, as it can draw a plain upset plot automatically when number of sets is more than 7.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># add an extra member in list</span></span>
+<span><span class="va">x</span><span class="op">$</span><span class="va">H</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">500</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in ggVennDiagram(x): Only support 2-7 dimension Venn diagram. Will give</span></span>
+<span><span class="co">#&gt; a plain upset plot instead.</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-11-1.png" width="90%"></p>
+<p>Since upset plot is consisted with upper panel and lower panel, and left panel and right panel, the appearance should be adjusted with different conditions. We provide two parameters, which are <code>relative_height</code> and <code>relative_width</code> to do this.</p>
+<p>For example, if we want to give more space to lower panel, just change the <code>relative_height</code> from 3 (the default) to 2.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">venn</span> <span class="op">=</span> <span class="fu"><a href="reference/Venn-class.html">Venn</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu">upset_plot</span><span class="op">(</span><span class="va">venn</span>, nintersects <span class="op">=</span> <span class="fl">30</span>, relative_height <span class="op">=</span> <span class="fl">2</span>, relative_width <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="90%"></p>
+</div>
 </div>
 <div class="section level1">
 <h1 id="futher-information">Futher information<a class="anchor" aria-label="anchor" href="#futher-information"></a>
@@ -367,7 +324,7 @@
 <li><a href="https://cran.r-project.org/package=ggVennDiagram" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram"></a></li>
 <li><a href="https://cran.r-project.org/package=ggVennDiagram" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/last-week/ggVennDiagram"></a></li>
 <li><a href="https://cran.r-project.org/package=ggVennDiagram" class="external-link"><img src="https://www.r-pkg.org/badges/version/ggVennDiagram?color=green"></a></li>
-<li><a href="https://github.com/gaospecial/ggVennDiagram" class="external-link"><img src="https://img.shields.io/badge/devel%20version-1.2.3-green.svg"></a></li>
+<li><a href="https://github.com/gaospecial/ggVennDiagram" class="external-link"><img src="https://img.shields.io/badge/devel%20version-1.4.6-green.svg"></a></li>
 <li><a href="https://codecov.io/gh/gaospecial/ggVennDiagram" class="external-link"><img src="https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7"></a></li>
 </ul>
 </div>

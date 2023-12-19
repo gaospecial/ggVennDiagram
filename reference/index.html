@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggVennDiagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.7</span>
       </span>
     </div>
 
@@ -73,10 +73,6 @@
           <p class="section-desc"></p><p>Main functions of ‘ggVennDiagram’</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="ggVennDiagram-package.html">ggVennDiagram-package</a></code> </p>
-        </td>
-        <td><p>`ggVennDiagram`: an easy to use Venn diagram generator</p></td>
-      </tr><tr><td>
           <p><code><a href="ggVennDiagram.html">ggVennDiagram()</a></code> </p>
         </td>
         <td><p>ggVennDiagram main parser</p></td>
@@ -84,131 +80,110 @@
           <p><code><a href="plot_venn.html">plot_venn()</a></code> </p>
         </td>
         <td><p>plot codes</p></td>
+      </tr><tr><td>
+          <p><code><a href="plot_upset.html">plot_upset()</a></code> </p>
+        </td>
+        <td><p>Plot a upset plot</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="shape-generation">Shape generation <a href="#shape-generation" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>methods used to get shape data</p>
+          <h2 id="shape-viewer">Shape viewer <a href="#shape-viewer" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>methods used to get and view shape data</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="plot_shapes.html">plot_shapes()</a></code> </p>
         </td>
         <td><p>plot all shapes provided by internal dataset</p></td>
       </tr><tr><td>
+          <p><code><a href="plot_shape_edge.html">plot_shape_edge()</a></code> </p>
+        </td>
+        <td><p>Plot the set edge of a VennPlotData</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_shapes.html">get_shapes()</a></code> </p>
+        </td>
+        <td><p>Get all shapes</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_shape_data.html">get_shape_data()</a></code> </p>
+        </td>
+        <td><p>get applicable shape data for Venn object</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_shape_by_id.html">get_shape_by_id()</a></code> </p>
+        </td>
+        <td><p>Specifying a shape</p></td>
+      </tr><tr><td>
+          <p><code><a href="vennplot-shapes.html">vennplot-shapes</a></code> </p>
+        </td>
+        <td><p>shapes: shape data used to setup Venn plot</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="vennplotdata-object-and-methods">VennPlotData object and methods <a href="#vennplotdata-object-and-methods" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>a S3 class to store Venn sets and shape data</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
           <p><code><a href="process_data.html">process_data()</a></code> </p>
         </td>
         <td><p>get plot data</p></td>
-      </tr><tr><td>
-          <p><code><a href="venn_data.html">venn_region()</a></code> <code><a href="venn_data.html">venn_setedge()</a></code> <code><a href="venn_data.html">venn_setlabel()</a></code> <code><a href="venn_data.html">process_setEdge_data()</a></code> <code><a href="venn_data.html">process_setLabel_data()</a></code> <code><a href="venn_data.html">process_region_data()</a></code> </p>
-        </td>
-        <td><p>Get VennPlotData slot</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="data-structures">Data structures <a href="#data-structures" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>defined classes and methods</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="Venn-class.html">Venn-class</a></code> </p>
-        </td>
-        <td><p>An S4 class to represent multiple sets.</p></td>
-      </tr><tr><td>
-          <p><code><a href="discern-Polygon-method.html">discern(<i>&lt;Polygon&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>calculate the difference region of `Polygon` object</p></td>
-      </tr><tr><td>
-          <p><code><a href="overlap-Polygon-method.html">overlap(<i>&lt;Polygon&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>calculate the overlap region of `Polygon` object</p></td>
-      </tr><tr><td>
-          <p><code><a href="polygon-methods.html">Polygon()</a></code> </p>
-        </td>
-        <td><p>Polygon constructor</p></td>
-      </tr><tr><td>
-          <p><code><a href="discern_overlap.html">discern_overlap()</a></code> </p>
-        </td>
-        <td><p>calculate region of Venn</p></td>
-      </tr><tr><td>
-          <p><code><a href="VennPlotData.html">VennPlotData()</a></code> </p>
-        </td>
-        <td><p>VennPlotData constructor</p></td>
-      </tr><tr><td>
-          <p><code><a href="Polygon-class.html">Polygon-class</a></code> </p>
-        </td>
-        <td><p>An S4 class to represent multiple polygons.</p></td>
-      </tr><tr><td>
-          <p><code><a href="VennPlotData-class.html">VennPlotData-class</a></code> </p>
-        </td>
-        <td><p>An S4 class to represent Venn plot components.</p></td>
       </tr><tr><td>
           <p><code><a href="plotData_add_venn.html">plotData_add_venn()</a></code> </p>
         </td>
         <td><p>join the shape data with set data</p></td>
       </tr><tr><td>
-          <p><code><a href="venn_data.html">venn_region()</a></code> <code><a href="venn_data.html">venn_setedge()</a></code> <code><a href="venn_data.html">venn_setlabel()</a></code> <code><a href="venn_data.html">process_setEdge_data()</a></code> <code><a href="venn_data.html">process_setLabel_data()</a></code> <code><a href="venn_data.html">process_region_data()</a></code> </p>
+          <p><code><a href="VennPlotData.html">VennPlotData()</a></code> </p>
+        </td>
+        <td><p>An S3 class constructor of representing Venn plot components.</p></td>
+      </tr><tr><td>
+          <p><code><a href="venn_plot_data.html">venn_regionedge()</a></code> <code><a href="venn_plot_data.html">venn_regionlabel()</a></code> <code><a href="venn_plot_data.html">venn_setedge()</a></code> <code><a href="venn_plot_data.html">venn_setlabel()</a></code> <code><a href="venn_plot_data.html">venn_set()</a></code> <code><a href="venn_plot_data.html">venn_region()</a></code> </p>
+        </td>
+        <td><p>Get VennPlotData slot</p></td>
+      </tr><tr><td>
+          <p><code><a href="print.html">print(<i>&lt;upsetPlotData&gt;</i>)</a></code> <code><a href="print.html">print(<i>&lt;VennPlotData&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>S3 method for <code>upsetPlotData</code></p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="venn-object-and-methods">Venn object and methods <a href="#venn-object-and-methods" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>a S4 class to store Venn sets and calculate subsets</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="Venn-class.html">Venn()</a></code> <code><a href="Venn-class.html">show(<i>&lt;Venn&gt;</i>)</a></code> </p>
+        </td>
+        <td><p><em><code>Venn</code></em> is a S4 class to represent multiple sets.</p></td>
+      </tr><tr><td>
+          <p><code><a href="venn_data.html">process_set_data()</a></code> <code><a href="venn_data.html">process_region_data()</a></code> </p>
+        </td>
+        <td><p>Prepare Venn data</p></td>
+      </tr><tr><td>
+          <p><code><a href="venn_plot_data.html">venn_regionedge()</a></code> <code><a href="venn_plot_data.html">venn_regionlabel()</a></code> <code><a href="venn_plot_data.html">venn_setedge()</a></code> <code><a href="venn_plot_data.html">venn_setlabel()</a></code> <code><a href="venn_plot_data.html">venn_set()</a></code> <code><a href="venn_plot_data.html">venn_region()</a></code> </p>
         </td>
         <td><p>Get VennPlotData slot</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="helper-functions">helper functions <a href="#helper-functions" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>helper functions to generate shapes</p>
+          <h2 id="subset-processing">subset processing <a href="#subset-processing" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>helper functions to calculate subset members</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="shape_generator.html">shape_generator</a></code> </p>
-        </td>
-        <td><p>functions to generate ellipse, circle, triangle and other shapes,
- which will be used in Venn plot</p></td>
-      </tr><tr><td>
-          <p><code><a href="circle.html">circle()</a></code> </p>
-        </td>
-        <td><p>generating a circle</p></td>
-      </tr><tr><td>
-          <p><code><a href="ellipse.html">ellipse()</a></code> </p>
-        </td>
-        <td><p>generating a closed ellipse</p></td>
-      </tr><tr><td>
-          <p><code><a href="triangle.html">triangle()</a></code> </p>
-        </td>
-        <td><p>defined a triangle by three points</p></td>
-      </tr><tr><td>
-          <p><code><a href="fancy_6d_triangle.html">fancy_6d_triangle()</a></code> </p>
-        </td>
-        <td><p>Six dimension triangle</p></td>
-      </tr><tr><td>
-          <p><code><a href="fancy_4d_ellipse.html">fancy_4d_ellipse()</a></code> </p>
-        </td>
-        <td><p>fancy 4d ellipse from `VennDiagram`</p></td>
-      </tr><tr><td>
-          <p><code><a href="fancy_3d_circle.html">fancy_3d_circle()</a></code> </p>
-        </td>
-        <td><p>fancy 3d circle</p></td>
-      </tr><tr><td>
-          <p><code><a href="fancy_2d_circle.html">fancy_2d_circle()</a></code> </p>
-        </td>
-        <td><p>two dimension circle</p></td>
-      </tr><tr><td>
-          <p><code><a href="label_position.html">fancy_4d_ellipse_label()</a></code> <code><a href="label_position.html">fancy_3d_circle_label()</a></code> <code><a href="label_position.html">fancy_2d_circle_label()</a></code> <code><a href="label_position.html">fancy_6d_triangle_label()</a></code> <code><a href="label_position.html">label_position()</a></code> </p>
-        </td>
-        <td><p>helper function to set label position</p></td>
-      </tr><tr><td>
-          <p><code><a href="build_shape.html">build_shape()</a></code> </p>
-        </td>
-        <td><p>Helper function to add shape</p></td>
-      </tr><tr><td>
           <p><code><a href="combinations.html">combinations()</a></code> </p>
         </td>
         <td><p>all possible combinations of n sets</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="shapes">shapes <a href="#shapes" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>internal shapes</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="plot_shapes.html">plot_shapes()</a></code> </p>
-        </td>
-        <td><p>plot all shapes provided by internal dataset</p></td>
       </tr><tr><td>
-          <p><code><a href="vennplot-shapes.html">vennplot-shapes</a></code> </p>
+          <p><code><a href="all_identical.html">all_identical()</a></code> </p>
         </td>
-        <td><p>shapes: shape data used to setup Venn plot</p></td>
+        <td><p>All members of a list have the same elements</p></td>
       </tr><tr><td>
-          <p><code><a href="get_shape_data.html">get_shape_data()</a></code> </p>
+          <p><code><a href="discern_overlap.html">discern_overlap()</a></code> </p>
         </td>
-        <td><p>get applicable shape data for Venn object</p></td>
+        <td><p>Calculate region of sets</p></td>
+      </tr><tr><td>
+          <p><code><a href="discern.html">discern()</a></code> </p>
+        </td>
+        <td><p>Set difference.</p></td>
+      </tr><tr><td>
+          <p><code><a href="overlap.html">overlap()</a></code> </p>
+        </td>
+        <td><p>Intersection of many sets.</p></td>
+      </tr><tr><td>
+          <p><code><a href="unite.html">unite()</a></code> </p>
+        </td>
+        <td><p>Union of many sets.</p></td>
+      </tr><tr><td>
+          <p><code><a href="slice_idx.html">slice_idx()</a></code> </p>
+        </td>
+        <td><p>check and format slice name</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

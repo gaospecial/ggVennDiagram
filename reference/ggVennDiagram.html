@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggVennDiagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.7</span>
       </span>
     </div>
 
@@ -153,7 +153,7 @@
 
 
 <dt>...</dt>
-<dd><p>Other arguments passed on to downstream functions.</p></dd>
+<dd><p>useless</p></dd>
 
 </dl></div>
     <div id="value">
@@ -162,11 +162,17 @@
 
 <p>A ggplot object</p>
     </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>From version 1.4.4, `ggVennDiagram` will plot a upset plot when the number of sets
+is more than 7. Besides, user can switch to a upset plot with `upset_plot()` function.
+Please check the document of this function.</p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/gaospecial/ggVennDiagram" class="external-link">ggVennDiagram</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>A<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,B<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">7</span>,C<span class="op">=</span><span class="fl">3</span><span class="op">:</span><span class="fl">6</span>,D<span class="op">=</span><span class="fl">4</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>A<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,B<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">7</span>,C<span class="op">=</span><span class="fl">3</span><span class="op">:</span><span class="fl">6</span>,D<span class="op">=</span><span class="fl">4</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">ggVennDiagram</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>  <span class="co"># 4d venn</span></span></span>
 <span class="r-plt img"><img src="ggVennDiagram-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">ggVennDiagram</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>  <span class="co"># 3d venn</span></span></span>

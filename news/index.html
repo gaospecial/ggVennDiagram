@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggVennDiagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.7</span>
       </span>
     </div>
 
@@ -69,71 +69,6 @@
       <small>Source: <a href="https://github.com/gaospecial/ggVennDiagram/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.3" id="ggvenndiagram-123">ggVennDiagram 1.2.3<a class="anchor" aria-label="anchor" href="#ggvenndiagram-123"></a></h2>
-<ul><li>Minor fixing for ggplot 3.4</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.2" id="ggvenndiagram-122">ggVennDiagram 1.2.2<small>2022-09-08</small><a class="anchor" aria-label="anchor" href="#ggvenndiagram-122"></a></h2>
-<ul><li>I removed the package dependency to <code>stringr</code>
-</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2" id="ggvenndiagram-12">ggVennDiagram 1.2<a class="anchor" aria-label="anchor" href="#ggvenndiagram-12"></a></h2>
-<ul><li>Paper published. doi: 10.3389/fgene.2021.706907</li>
-<li>minor fixing of URL</li>
-<li>minor changes</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.1.4" id="ggvenndiagram-114">ggVennDiagram 1.1.4<small>2021-07-07</small><a class="anchor" aria-label="anchor" href="#ggvenndiagram-114"></a></h2>
-<ul><li>minor changes and bug fixing</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.1.3" id="ggvenndiagram-113">ggVennDiagram 1.1.3<a class="anchor" aria-label="anchor" href="#ggvenndiagram-113"></a></h2>
-<ul><li>we now export more internal functions which are used in internal data process, this allow the users to use novel shapes with there data.</li>
-<li>the vignette has benn split to three by topics, and a new vignette was added.</li>
-<li>document has been updated, including pkgdown settings.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.1.2" id="ggvenndiagram-112">ggVennDiagram 1.1.2<a class="anchor" aria-label="anchor" href="#ggvenndiagram-112"></a></h2>
-<ul><li>setup GitHub actions</li>
-<li>enable GitHub pages: <a href="https://gaospecial.github.io/ggVennDiagram/index.html" class="external-link uri">https://gaospecial.github.io/ggVennDiagram/index.html</a>
-</li>
-<li>setup Code Coverage analysis</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.1.1" id="ggvenndiagram-111">ggVennDiagram 1.1.1<a class="anchor" aria-label="anchor" href="#ggvenndiagram-111"></a></h2>
-<ul><li>add pkgdown docments</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.1" id="ggvenndiagram-11">ggVennDiagram 1.1<a class="anchor" aria-label="anchor" href="#ggvenndiagram-11"></a></h2>
-<ul><li>more handy parameters were added to <code><a href="../reference/ggVennDiagram.html">ggVennDiagram()</a></code>, make it much easier to set edge/setlabel/regionlabel color and size.</li>
-<li>some default parameter was reset to previous values in consideration of compatible.</li>
-<li>we released a online book to show detailed usage at <a href="https://venn.bio-spring.info" class="external-link uri">https://venn.bio-spring.info</a>.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.0" id="ggvenndiagram-10">ggVennDiagram 1.0<a class="anchor" aria-label="anchor" href="#ggvenndiagram-10"></a></h2>
-<ul><li>We completely rebuild <code>ggVennDiagram</code> in v1.0. It is now has well-defined data structure and maybe more elegant in coding.</li>
-<li>Although all of the main functions are retained, the usage of a few functions has been modified. This may cause capacity issues.</li>
-<li>If you find a bug or have questions, feel free to open a issue in <a href="https://github.com/gaospecial/ggVennDiagram/issues" class="external-link">GitHub</a>.</li>
-</ul><div class="section level3">
-<h3 id="features-1-0">Features<a class="anchor" aria-label="anchor" href="#features-1-0"></a></h3>
-<ul><li>user can modify the edge/label just use ordinary ggplot functions, without extra knowledge.</li>
-<li>support up to 7 sets Venn diagram, based on the polygon data imported from package <code>venn</code>, which is another Venn plot tool authored by Adrian Dusa.</li>
-<li>less memory usage and maybe more faster.</li>
-<li>a lot of helper functions.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="changes-1-0">Changes<a class="anchor" aria-label="anchor" href="#changes-1-0"></a></h3>
-<ul><li>if you set <code>show_intersect = TRUE</code> in the <code><a href="../reference/ggVennDiagram.html">ggVennDiagram()</a></code> function, it will now return a html widget directly by <code>plotly</code>.</li>
-<li>several parameters are removed from the main function <code><a href="../reference/ggVennDiagram.html">ggVennDiagram()</a></code>, including <code>lty</code>, <code>color</code>, and so on. But these settings can be easily accessed with ggplot functions. See <a href="./README.html">README</a>.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="0.5" id="ggvenndiagram-05">ggVennDiagram 0.5<a class="anchor" aria-label="anchor" href="#ggvenndiagram-05"></a></h2>
-<ul><li><p>Intersection values can be obtained and visualized now. See <a href="./README.html">README</a> for more information;</p></li>
-<li><p>Bug fixings.</p></li>
-</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

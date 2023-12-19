@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggVennDiagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.7</span>
       </span>
     </div>
 
@@ -75,10 +75,10 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">process_data</span><span class="op">(</span><span class="va">venn</span>, <span class="va">...</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">process_data</span><span class="op">(</span><span class="va">venn</span>, nsets <span class="op">=</span> <span class="cn">NULL</span>, shape_id <span class="op">=</span> <span class="cn">NULL</span>, type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for Venn</span></span>
-<span><span class="fu">process_data</span><span class="op">(</span><span class="va">venn</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">process_data</span><span class="op">(</span><span class="va">venn</span>, nsets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">venn</span><span class="op">@</span><span class="va">sets</span><span class="op">)</span>, shape_id <span class="op">=</span> <span class="cn">NULL</span>, type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -87,16 +87,31 @@
 <dd><p>a Venn object</p></dd>
 
 
-<dt>...</dt>
-<dd><p>apply filter to internal shapes. i.e. shape_id == "601", type == "polygon"</p></dd>
+<dt>nsets</dt>
+<dd><p>This parameter will be set automatically.</p></dd>
+
+
+<dt>shape_id</dt>
+<dd><p>apply filter to internal shapes. i.e. shape_id = "601"</p></dd>
+
+
+<dt>type</dt>
+<dd><p>apply filter to internal shapes. i.e. type = "polygon"</p></dd>
 
 </dl></div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>This function will conduct set operations and combine the outputs will
+stored shapes, thus produce a dataset for plot in next step.</p>
+<p>Run `get_shapes()` to show all the characteristics of available shapes.
+Run `plot_shapes()` to view those shapes.</p>
+    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span> <span class="va">venn</span> <span class="op">&lt;-</span> <span class="fu">Venn</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>A<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,B<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">5</span>,C<span class="op">=</span><span class="fl">4</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">process_data</span><span class="op">(</span><span class="va">venn</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">venn</span> <span class="op">=</span> <span class="fu"><a href="Venn-class.html">Venn</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>A<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,B<span class="op">=</span><span class="fl">2</span><span class="op">:</span><span class="fl">5</span>,C<span class="op">=</span><span class="fl">4</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="va">data</span> <span class="op">=</span> <span class="fu">process_data</span><span class="op">(</span><span class="va">venn</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
