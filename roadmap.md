@@ -6,4 +6,5 @@
   - [ ] `upset_boxplot`
   - [ ] `upset_dotplot`.
 - [ ] a shiny app
+  - [ ] disable auto update of plot (only plot after clicking Plot button)
 - [ ] a TBtools plugin
