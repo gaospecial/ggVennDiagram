@@ -70,5 +70,17 @@ list = as.list(args$set)
 
 #### output results ####
 ## plot a png/jpg/tiff, and can export as both PDF and PPTX
-p = ggVennDiagram(list)
+p = ggVennDiagram(list,
+                  category.names = args$name,
+                  set_color = args$set_label_color,
+                  set_size = args$set_label_size,
+                  label = args$label,
+                  label_alpha = args$label_alpha,
+                  label_geom = args$label_geom,
+                  label_color = args$label_color,
+                  label_size = args$label_size,
+                  label_percent_digit = args$label_percent_digit,
+                  label_txtWidth = args$label_txt_width,
+                  edge_lty = args$edge_lty,
+                  edge_size = args$edge_size)
 ggplot2::ggsave(args$out, p)
