@@ -52,7 +52,7 @@ ggVennDiagram(
 
 \item{edge_size}{line width of set edges (1)}
 
-\item{force_upset}{if TRUE, will always produce Upset plot no matter how many sets have}
+\item{force_upset}{if TRUE, will always produce Upset plot no matter how many sets have (FALSE)}
 
 \item{...}{useless}
 }
