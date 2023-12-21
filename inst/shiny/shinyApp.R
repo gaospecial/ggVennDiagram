@@ -104,7 +104,7 @@ server = function(input, output, session){
     output$plot = renderPlot({
       x = vector("list", length = input$nsets)
       for (i in 1:input$nsets){
-        x[[i]] = input[[paste0("set_", i)]]
+        x[[i]] = input[[paste0("set_", i)]] |> strsplit(split = ",") |> unlist()
       }
       (session$userData$plot = ggVennDiagram(x))
     })
