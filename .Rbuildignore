@@ -26,3 +26,4 @@
 ^docs$
 ^roadmap\.md$
 ^pkgdown$
+^inst/cli$

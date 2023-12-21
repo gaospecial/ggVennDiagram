@@ -1,6 +1,6 @@
 # Changelog of ggVennDiagram
 
-## ggVennDiagram 1.5
+## ggVennDiagram 1.4.8
 
 * add native support to upset plot. Upset plot will be automatically called when nsets > 7. Besides, it can be used by using `upset_plot()` function. See `?upset_plot` for more information.
 * a simple shiny app. Run `launch_app()` to use ggVennDiagram interactively.
