@@ -46,9 +46,9 @@ parser <- ArgumentParser(description='This is a ggVennDiagram wrapper,
                          Venn diagram (no more than 7 sets) and Upset plots
                          (unlimited No. of sets). For example: PROGRAM -s a,b,c b,c,d e,f')
 parser$add_argument('--set', '-s', nargs = '+', help='set members. must be comma separated string. at least one set is needed.')
-parser$add_argument('--type', choices = c("auto", "Venn", "Upset"), default = "auto", help = 'specifiy the type of plot')
+parser$add_argument('--force-upset', default = FALSE, help = 'specifiy the type of plot')
 parser$add_argument("--out", "-o", default = "plot.png",help = "specify the output file of plot. filetype (png/jpg/pdf) is determined by its suffix automatically.")
-parser$add_argument("--name", default = NULL, help = "specify the names of sets")
+parser$add_argument("--name", default = NULL, help = "specify the names of sets (Set_1, Set_2, ...)")
 parser$add_argument("--set-label-color", default = "black", help = 'color of set labels ("black")')
 parser$add_argument("--set-label-size", default = "NA", help = "size of set labels (NA)" )
 parser$add_argument("--label", choices = c("count","percent","both","none"), help = 'format of region labels')
@@ -82,5 +82,6 @@ p = ggVennDiagram(list,
                   label_percent_digit = args$label_percent_digit,
                   label_txtWidth = args$label_txt_width,
                   edge_lty = args$edge_lty,
-                  edge_size = args$edge_size)
+                  edge_size = args$edge_size,
+                  force_upset = args$force_upset)
 ggplot2::ggsave(args$out, p)
