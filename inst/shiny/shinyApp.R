@@ -1,6 +1,7 @@
 library(shiny)
 library(ggVennDiagram)
 library(ggplot2)
+library(shinyjs)
 
 ui = fluidPage(
   titlePanel("Draw a Venn diagram or Upset plot"),
@@ -35,20 +36,17 @@ ui = fluidPage(
       hr(),
 
       # type of plot
-      # radioButtons(
-      #   inputId = "plot_type",
-      #   label = "Plot type:",
-      #   choices = c("auto", "Venn", "Upset"),
-      #   selected = "auto",
-      #   inline = TRUE
-      # ),
+      checkboxInput(
+        inputId = "force_upset",
+        label = "Upset Plot"
+      ),
 
       # 画图按钮
-      actionButton("plot_btn", "Plot Now"),
+      actionButton("plot_btn", "Plot Now!"),
     ),
 
     mainPanel = mainPanel(
-      h3("This is the plot"),
+      uiOutput('plot_note'),
 
       # plot
       plotOutput("plot"),
@@ -89,17 +87,29 @@ server = function(input, output, session){
     do.call(tagList, text_inputs)
   })
 
+  # initialize plot note
+  output$plot_note = renderUI({
+    tagList(
+      h3("Steps"),
+      p("1. Use the button or slider to set the no. of sets."),
+      p("2. Specify set members using comma-sparated strings."),
+      p("3. Click the <Plot Now!> button."),
+      p("4. Enjoy and download your publication-quality figures.")
+    )
+  })
+
   # 监听画图按钮的点击事件
   observeEvent(input$plot_btn, {
-    x = vector("list", length = input$nsets)
-    for (i in 1:input$nsets){
-      x[[i]] = input[[paste0("set_", i)]]
-    }
-    p = ggVennDiagram(x)
-    session$userData$plot = p
     output$plot = renderPlot({
-      p
+      x = vector("list", length = input$nsets)
+      for (i in 1:input$nsets){
+        x[[i]] = input[[paste0("set_", i)]]
+      }
+      (session$userData$plot = ggVennDiagram(x))
     })
+    output$plot_note = renderUI(
+      NULL
+    )
   })
 
 
