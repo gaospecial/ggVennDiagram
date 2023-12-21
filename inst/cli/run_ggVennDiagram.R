@@ -45,33 +45,23 @@ parser <- ArgumentParser(description='This is a ggVennDiagram wrapper,
                          by which you can instantly create publication quality
                          Venn diagram (no more than 7 sets) and Upset plots
                          (unlimited No. of sets). For example: PROGRAM -s a,b,c b,c,d e,f')
-parser$add_argument('--set', '-s', nargs = '+',
-                    help='set members. must be comma separated string. at least one set is needed.')
-parser$add_argument('--type', choices = c("auto", "Venn", "Upset"),
-                    default = "auto",
-                    help = 'specifiy the type of plot')
-parser$add_argument("--out", "-o",
-                    default = "plot.png",
-                    help = "specify the output file of plot. filetype (png/jpg/pdf) is determined by its suffix automatically.")
-parser$add_argument("--name",
-                    default = NULL,
-                    help = "specify the names of sets")
+parser$add_argument('--set', '-s', nargs = '+', help='set members. must be comma separated string. at least one set is needed.')
+parser$add_argument('--type', choices = c("auto", "Venn", "Upset"), default = "auto", help = 'specifiy the type of plot')
+parser$add_argument("--out", "-o", default = "plot.png",help = "specify the output file of plot. filetype (png/jpg/pdf) is determined by its suffix automatically.")
+parser$add_argument("--name", default = NULL, help = "specify the names of sets")
 parser$add_argument("--set-label-color", default = "black", help = 'color of set labels ("black")')
 parser$add_argument("--set-label-size", default = "NA", help = "size of set labels (NA)" )
 parser$add_argument("--label", choices = c("count","percent","both","none"), help = 'format of region labels')
 parser$add_argument("--label-alpha", default = 0.5, help = "set 0 to remove the background of region labels")
-parser$add_argument('--label-geom', default = "label", choices = c("label", "text"), help = '
-layer of region labels, choose from c("label", "text")')
-parser$add_argument('--label-color', default = "black", help = '
-color of region labels ("black")')
+parser$add_argument('--label-geom', default = "label", choices = c("label", "text"), help = 'layer of region labels, choose from c("label", "text")')
+parser$add_argument('--label-color', default = "black", help = 'color of region labels ("black")')
 parser$add_argument('--label-size', default = "NA", help = 'size of region labels (NA)')
 parser$add_argument('--label-percent-digit', default = 0, help = 'number of digits when formatting percent label (0)')
 parser$add_argument('--label-txt-width', default = 40, help = 'width of text used in showing intersect members, will be ignored unless show_intersection is TRUE (40)')
 parser$add_argument('--edge-lty', default = "solid", help = 'line type of set edges ("solid")')
-parser$add_argument('--edge-size', default = 1, help = '
-line width of set edges (1)')
+parser$add_argument('--edge-size', default = 1, help = 'line width of set edges (1)')
 
-parser$print_help()
+# parser$print_help()
 
 args = parser$parse_args()
 args = lapply(args, function(x) ifelse(x == "NA", NA, x))
