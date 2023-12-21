@@ -26,7 +26,8 @@ ui = fluidPage(
       actionButton(
         inputId = "increase_btn",
         label = "increase the no. of set",
-        icon = icon("caret-up")
+        icon = icon("caret-up"),
+        align = "right"
       ),
 
       hr(),
@@ -90,11 +91,11 @@ server = function(input, output, session){
   # initialize plot note
   output$plot_note = renderUI({
     tagList(
-      h3("Steps"),
-      p("1. Use the button or slider to set the no. of sets."),
-      p("2. Specify set members using comma-sparated strings."),
-      p("3. Click the <Plot Now!> button."),
-      p("4. Enjoy and download your publication-quality figures.")
+      markdown("### Steps"),
+      markdown("1. Use the button or slider to specify the number of sets."),
+      markdown("2. Specify set members using comma-sparated strings (just follow the examples)."),
+      markdown("3. Click the **<Plot Now!>** button."),
+      markdown("4. Enjoy and download your publication-quality figures.")
     )
   })
 

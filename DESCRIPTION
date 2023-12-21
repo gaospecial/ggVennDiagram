@@ -27,8 +27,7 @@ Imports:
     tibble,
     aplot,
     forcats,
-    tidyr,
-    shiny
+    tidyr
 URL: https://github.com/gaospecial/ggVennDiagram, https://gaospecial.github.io/ggVennDiagram/
 License: GPL-3
 Encoding: UTF-8
@@ -40,6 +39,7 @@ Suggests:
     knitr,
     rmarkdown,
     venn,
-    RColorBrewer
+    RColorBrewer,
+    shiny
 VignetteBuilder: knitr
 LazyData: true

@@ -151,7 +151,7 @@ plot_venn = function(data,
 
   # use plotly to show intersect
   if (show_intersect){
-    check_plotly()
+    check_package("plotly")
     region_label = region_label |>
       dplyr::rowwise() |>
       dplyr::mutate(item = str_wrap(paste0(.data$item, collapse = " "),
@@ -201,17 +201,6 @@ plot_venn = function(data,
 
 
 }
-
-
-check_plotly = function(){
-  if (!requireNamespace("plotly", quietly = TRUE)){
-    stop(paste("The plotly package is not found in your library paths.",
-               "  It is required to show intersections interactively.",
-               "  Please run `install.packages('plotly')` and retry.",
-               collapse = "\n"))
-  }
-}
-
 
 # from yulab.utils::str_wrap
 str_wrap = function (string, width = getOption("width")){

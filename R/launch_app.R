@@ -3,11 +3,12 @@
 #' @return a shiny app
 #' @export
 launch_app = function(){
+  check_package("shiny")
   app = system.file(
     "shiny",
     "shinyApp.R",
     package = "ggVennDiagram",
     mustWork = TRUE
   )
-  shiny::runApp(app)
+  if(interactive()) shiny::runApp(app)
 }
