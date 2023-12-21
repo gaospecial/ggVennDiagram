@@ -106,7 +106,7 @@ server = function(input, output, session){
       for (i in 1:input$nsets){
         x[[i]] = input[[paste0("set_", i)]] |> strsplit(split = ",") |> unlist()
       }
-      (session$userData$plot = ggVennDiagram(x))
+      (session$userData$plot = ggVennDiagram(x, force_upset = input$force_upset))
     })
     output$plot_note = renderUI(
       NULL

@@ -37,6 +37,7 @@ NULL
 #' @param label_txtWidth width of text used in showing intersect members, will be ignored unless show_intersection is TRUE (40)
 #' @param edge_lty line type of set edges ("solid")
 #' @param edge_size line width of set edges (1)
+#' @param force_upset if TRUE, will always produce Upset plot no matter how many sets have (FALSE)
 #' @param ... useless
 #'
 #' @return A ggplot object
@@ -61,6 +62,7 @@ ggVennDiagram = function(x,
                           label_txtWidth = 40,
                           edge_lty = "solid",
                           edge_size = 1,
+                          force_upset = FALSE,
                           ...){
   if (!is.list(x)){
     stop(simpleError("ggVennDiagram() requires at least a list."))
@@ -71,7 +73,7 @@ ggVennDiagram = function(x,
 
   label = match.arg(label)
   label_geom = match.arg(label_geom)
-  if (dimension <= 7){
+  if (dimension <= 7 & !force_upset){
     data = process_data(venn)
     plot_venn(data,
               show_intersect = show_intersect,
@@ -89,7 +91,7 @@ ggVennDiagram = function(x,
               ...)
   }
   else{
-    warning("Only support 2-7 dimension Venn diagram. Will give a plain upset plot instead.")
+    if (!force_upset) warning("Only support 2-7 dimension Venn diagram. Will give a plain upset plot instead.")
     plot_upset(venn, nintersects = 30, order.intersect.by = "size", order.set.by = "name")
   }
 }

@@ -19,6 +19,7 @@ ggVennDiagram(
   label_txtWidth = 40,
   edge_lty = "solid",
   edge_size = 1,
+  force_upset = FALSE,
   ...
 )
 }
@@ -50,6 +51,8 @@ ggVennDiagram(
 \item{edge_lty}{line type of set edges ("solid")}
 
 \item{edge_size}{line width of set edges (1)}
+
+\item{force_upset}{if TRUE, will always produce Upset plot no matter how many sets have}
 
 \item{...}{useless}
 }
