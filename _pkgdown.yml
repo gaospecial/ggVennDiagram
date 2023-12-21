@@ -46,4 +46,7 @@ reference:
   - overlap
   - unite
   - slice_idx
-
+- title: Shiny app
+  desc: run a Shiny app to plot
+  contents:
+  - launch_app
