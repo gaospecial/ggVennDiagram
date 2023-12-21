@@ -74,14 +74,14 @@ upsetplot_main = function(data){
   ggplot2::ggplot(data, aes(.data$id, .data$set)) +
     ggplot2::geom_point(size = 4, color = "grey30", na.rm = FALSE) +
     ggplot2::geom_path(aes(group = .data$id), size = 1.5, color = "grey30", na.rm = FALSE) +
-    ggplot2::labs(x = "Set Intersection", y = "") +
+    ggplot2::labs(x = "Set Intersection", y = NULL) +
     theme_upset_main()
 }
 
 upsetplot_top = function(data){
   ggplot2::ggplot(data, aes(.data$id, .data$size)) +
     ggplot2::geom_col() +
-    ggplot2::labs(x = "", y = "Intersection Size") +
+    ggplot2::labs(x = NULL, y = "Intersection Size") +
     theme_upset_top()
 }
 
@@ -90,7 +90,7 @@ upsetplot_left = function(data){
     ggplot2::geom_col(orientation = "y") +
     ggplot2::scale_y_discrete(position = "right") +
     ggplot2::scale_x_reverse() +
-    ggplot2::labs(x = "Set Size") +
+    ggplot2::labs(x = "Set Size", y = NULL) +
     theme_upset_left()
 }
 
