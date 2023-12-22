@@ -215,7 +215,7 @@ For example, if we want to give more space to lower panel, just change the `rela
 
 ```{r}
 venn = Venn(x)
-upset_plot(venn, nintersects = 30, relative_height = 2, relative_width = 0.3)
+plot_upset(venn, nintersects = 30, relative_height = 2, relative_width = 0.3)
 ```
 
 
