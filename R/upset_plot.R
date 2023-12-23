@@ -157,8 +157,8 @@ process_upset_data = function(venn,
   main_data = data |>
     dplyr::select(c("id", "name", "size")) |>
     dplyr::mutate(set = .data$id,
-                  id = forcats::fct_reorder(.data$id, .data[[order.intersect.by]], .desc = TRUE)) |>
-    tidyr::separate_longer_delim(.data$set, delim = name_separator)
+                  id = forcats::fct_reorder(.data$id, .data[[order.intersect.by]], .desc = TRUE))
+  main_data = separate_longer_delim(main_data, "set", delim = name_separator)
   main_data$set = factor(set_name[as.integer(main_data$set)],
                          levels = levels(left_data$set))
 
@@ -195,3 +195,39 @@ print.upsetPlotData = function(x, ...){
   cat(sprintf("  To view the data interactively, use 'obj[[\"slotName\"]]'.\n"))
 }
 
+
+
+
+#' Implement of `tidyr::separate_longer_delim`
+#'
+#' @param df a data.frame
+#' @param col column
+#' @param delim delimeter
+#'
+#' @return a data.frame
+#' @md
+#' @examples
+#' # 定义模拟数据
+#' data = data.frame(
+#'   ID = c(1, 2, 3),
+#'   values = c("a,b,c", "d,e,f", "g,h,i,j")
+#' )
+#' separate_longer_delim(data, "values", ",)
+separate_longer_delim <- function(df, col, delim) {
+  # 将要拆分的列按照分隔符拆分成字符向量
+  split_values <- strsplit(df[[col]], delim)
+
+  # 计算拆分后的最大长度
+  max_length <- max(lengths(split_values))
+
+  # 扩展数据框
+  result <- df[rep(seq_len(nrow(df)), each = max_length), ]
+
+  # 将拆分后的值填充到新的列中
+  result$new_values <- unlist(lapply(split_values, function(x) c(x, rep(NA, max_length - length(x)))))
+
+  # 移除多余的行
+  result <- result[complete.cases(result), ]
+
+  return(result)
+}
