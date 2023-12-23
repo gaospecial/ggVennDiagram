@@ -26,8 +26,7 @@ Imports:
     methods,
     tibble,
     aplot,
-    forcats,
-    tidyr
+    forcats
 URL: https://github.com/gaospecial/ggVennDiagram, https://gaospecial.github.io/ggVennDiagram/
 License: GPL-3
 Encoding: UTF-8

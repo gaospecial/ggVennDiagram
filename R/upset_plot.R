@@ -205,14 +205,8 @@ print.upsetPlotData = function(x, ...){
 #' @param delim delimeter
 #'
 #' @return a data.frame
+#' @importFrom stats complete.cases
 #' @md
-#' @examples
-#' # 定义模拟数据
-#' data = data.frame(
-#'   ID = c(1, 2, 3),
-#'   values = c("a,b,c", "d,e,f", "g,h,i,j")
-#' )
-#' separate_longer_delim(data, "values", ",)
 separate_longer_delim <- function(df, col, delim) {
   # 将要拆分的列按照分隔符拆分成字符向量
   split_values <- strsplit(df[[col]], delim)
