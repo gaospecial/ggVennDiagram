@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(ggVennDiagram)
 library(dplyr)
+library(pak)
 ```
 
 ## Less dependency
@@ -43,18 +44,29 @@ Although we only import ten packages in the development, the dependence tree is 
 ```{r}
 (deps = pak::pkg_deps_tree("gaospecial/ggVennDiagram@V1.2.3"))
 ```
+```{r}
+deps |> select(package, filesize) |> 
+  arrange(desc(filesize))
+```
+
 
 ### Remove sf dependency
 
 Among them, `sf` is the heaviest package that `ggVennDiagram` depend on. 
 
 ```{r}
-deps %>%
+pak_dep = deps %>%
   select(package, sysreqs, filesize) %>%
   arrange(desc(filesize)) %>%
   filter(package %in% dependency)
+pak_dep
 ```
 
+
+```{r eval=FALSE}
+pak_dep |> 
+  write.csv("deps.csv")
+```
 
 
 `sf` not only have the largest size of package, but also depends on several system packages, such as `GDAL`, `GEOS`, `PROJ`, and so on. Furthermore, two of the `sf`-dependent packages, `s2` and `units` also have system requirements, especially `units`, whose system dependence `udunits-2` is an additional one that usually not installed by most of the `ggVennDiagram` users.
@@ -65,7 +77,7 @@ deps %>% filter(package %in% deps_sf$package, sysreqs != "") %>%
   select(package, sysreqs, filesize)
 ```
 
-However, `sf` is a necessary for the full functions of `ggVennDiagram` in shape generation. So it is difficult to remove it. Therefore, we decided to move the shape generation functions to a new package, namely `shape`. And only import this package as a "suggestion" in new version of `ggVennDiagram`.
+However, `sf` is a necessary for the full functions of `ggVennDiagram` in shape generation. So it is difficult to remove it. Therefore, we decided to move the shape generation functions to a new package, namely `shapeMageR`. And only import this package as a "suggestion" in new version of `ggVennDiagram`.
 
 ### Other dependencies
 
@@ -74,7 +86,8 @@ Besides, several other packages are removed from dependency list after considera
 ```{r}
 deps %>%
   select(package, sysreqs, filesize) %>%
-  filter(!package %in% pak::pkg_deps("sf")$package, !package %in% pak::pkg_deps("ggplot2")$package) %>% 
+  filter(!package %in% pak::pkg_deps("sf")$package, 
+         !package %in% pak::pkg_deps("ggplot2")$package) %>% 
   arrange(desc(filesize))
 ```
 
@@ -87,6 +100,120 @@ deps %>%
 - [RVenn](https://cran.r-project.org/web/packages/RVenn/vignettes/vignette.html)
 
 The author of RVenn agreed to reuse his code and is open for join in the further development of ggVennDiagram. I will also add him as a co-author of the new manuscript.
+
+## New dependency after version 1.4.9
+
+### Short dependency tree
+
+```{r}
+deps_new = pak::pkg_deps_tree(".")
+
+dependency_new = c(
+  "ggplot2",
+  "dplyr",
+  "methods",
+  "tibble",
+  "aplot",
+  "forcats")
+```
+
+
+```{r}
+primary_deps = deps_new %>%
+  select(package, sysreqs, filesize) %>%
+  arrange(desc(filesize)) %>%
+  filter(package %in% dependency_new)
+primary_deps
+write.csv(primary_deps, file = "deps_current.csv")
+```
+
+
+### Comparison of dependency
+
+```{r}
+#' Report package dependency
+#' 
+#' @param pkg 
+#' @param size_cutoff 
+#' @param n 
+#' @param exclude 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' report_package_dependency("ggplot2")
+report_package_dependency = function(pkg, size_cutoff = 1000000, n = 5, exclude = NULL){
+  # find deps of excluding package
+  if (!is.null(exclude)){
+    if (is.vector(exclude) & length(exclude) > 1){
+      exclude = lapply(exclude, function(x){
+        pak::pkg_deps(x) |> 
+          dplyr::pull(package)
+      }) |> 
+        unlist() |> 
+        unique()
+    } else {
+      exclude = pak::pkg_deps(exclude) |> pull(package)
+    }
+  }
+  
+  # find deps and format output
+  deps = pak::pkg_deps(pkg) |> 
+    dplyr::filter(!is.na(ref), !(package %in% exclude)) |> 
+    dplyr::arrange(desc(filesize)) |>
+    dplyr::rowwise() |> 
+    dplyr::mutate(package_size = paste0(package, " (", scales::number_bytes(filesize, units = "si"), ")"))
+  
+  # generating report
+  tot_filesize = sum(deps$filesize, na.rm = TRUE) |> scales::number_bytes(units = "si")
+  big_pkg = deps |> dplyr::filter(filesize > size_cutoff)
+  sys_pkg = deps |> dplyr::filter(sysreqs != "", !is.na(sysreqs))
+  glue::glue("Summary of '{pkg}' Dependency",
+             "",
+             "  Packages: {nrow(deps)}; Total size: {tot_filesize}; System requirements: {nrow(sys_pkg)}.",
+             "  Large deps [{nrow(big_pkg)}]: {paste(head(big_pkg$package_size,n), collapse = ', ')}{ifelse(nrow(big_pkg)>n, '...', '.')}",
+             "  System deps [{nrow(sys_pkg)}]: {paste(head(sys_pkg$package_size,n), collapse = ', ')}{ifelse(nrow(sys_pkg)>n, '...', '.')}",
+             .sep = "\n")
+}
+```
+
+
+```{r}
+report_package_dependency("gaospecial/ggVennDiagram@V1.2.3")
+```
+
+```{r}
+report_package_dependency("gaospecial/ggVennDiagram@V1.2.3", exclude = c("ggplot2","dplyr"))
+
+```
+
+
+```{r}
+report_package_dependency("gaospecial/ggVennDiagram@V1.4.9")
+```
+
+```{r}
+report_package_dependency("gaospecial/ggVennDiagram@V1.4.9", exclude = c("ggplot2","dplyr"))
+
+```
+
+
+```{r}
+report_package_dependency(".")
+```
+
+```{r}
+report_package_dependency(".", exclude = c("ggplot2","dplyr"))
+```
+
+
+### Current depdency
+
+
+```{r}
+pkg_deps_tree(".")
+```
 
 ## More optimizations
 
