@@ -22,14 +22,15 @@
 #'
 #' @param venn a class Venn object
 #' @param nintersects number of intersects. If NULL, all intersections will show.
-#' @param order.intersect.by one of 'size' or 'name'
-#' @param order.set.by one of 'size' or 'name'
+#' @param order.intersect.by 'size', 'name', or "none"
+#' @param order.set.by 'size', 'name', or "none"
 #' @param relative_height the relative height of top panel in upset plot
 #' @param relative_width the relative width of left panel in upset plot
+#' @param ... useless
 #' @return an upset plot
 #'
 #' @export
-#'
+#' @name upset-plot
 #' @examples
 #'  list = list(A = sample(LETTERS, 20),
 #'              B = sample(LETTERS, 22),
@@ -41,10 +42,11 @@
 #'  plot_upset(venn, nintersects = 6)
 plot_upset = function(venn,
                       nintersects = NULL,
-                      order.intersect.by = c("size", "name"),
-                      order.set.by = c("size", "name"),
+                      order.intersect.by = c("size","name","none"),
+                      order.set.by = c("size","name","none"),
                       relative_height = 3,
-                      relative_width = 0.2){
+                      relative_width = 0.3,
+                      ...){
   # process arguments
   order.intersect.by = match.arg(order.intersect.by)
   order.set.by = match.arg(order.set.by)
@@ -73,7 +75,7 @@ plot_upset = function(venn,
 upsetplot_main = function(data){
   ggplot2::ggplot(data, aes(.data$id, .data$set)) +
     ggplot2::geom_point(size = 4, color = "grey30", na.rm = FALSE) +
-    ggplot2::geom_path(aes(group = .data$id), size = 1.5, color = "grey30", na.rm = FALSE) +
+    ggplot2::geom_path(aes(group = .data$id), linewidth = 1.5, color = "grey30", na.rm = FALSE) +
     ggplot2::labs(x = "Set Intersection", y = NULL) +
     theme_upset_main()
 }
@@ -81,7 +83,7 @@ upsetplot_main = function(data){
 upsetplot_top = function(data){
   ggplot2::ggplot(data, aes(.data$id, .data$size)) +
     ggplot2::geom_col() +
-    ggplot2::labs(x = NULL, y = "Intersection Size") +
+    ggplot2::labs(x = NULL, y = NULL) +
     theme_upset_top()
 }
 
@@ -125,45 +127,59 @@ theme_upset_left = function(){
       axis.text.y = ggplot2::element_blank(),
       panel.border = ggplot2::element_blank(),
       panel.grid.major = ggplot2::element_blank(),
-      plot.margin = margin(r = -20)
+      plot.margin = margin(r = -60)
     )
 }
 
 
 ## (PART) retrieve tidy data from primary subset datasets
 
-##' @importFrom forcats as_factor
+
+#' process upset data
+#'
+#' @inheritParams upset-plot
+#' @param name_separator will be used to assign subset names
+#'
+#' @return a upsetPlotData object
 process_upset_data = function(venn,
-                             nintersects = NULL,
-                             order.intersect.by = "size",
-                             order.set.by = "name",
-                             name_separator = "/"){
+                              nintersects = 30,
+                              order.intersect.by = "size",
+                              order.set.by = "name",
+                              name_separator = "/"){
   data = process_region_data(venn, sep = name_separator)
   data$size = data$count
   set_name = venn@names
 
   # top data
-  top_data = data |>
-    dplyr::select(c('id','name', 'item','size')) |>
-    dplyr::mutate(id = forcats::fct_reorder(.data$id, .data[[order.intersect.by]], .desc = TRUE))
+  top_data = data |> dplyr::select(c('id', 'name', 'item', 'size'))
+  if (order.intersect.by %in% colnames(top_data)){
+    top_data = dplyr::mutate(top_data,
+                             id = forcats::fct_reorder(.data$id, .data[[order.intersect.by]], .desc = TRUE))
+  } else {
+    top_data$id = forcats::as_factor(top_data$id)
+  }
 
   # left data
   left_data = dplyr::tibble(set = set_name,
                             name = set_name,
-                            size = sapply(venn@sets, length)) |>
-    dplyr::mutate(set = forcats::fct_reorder(.data$set, .data[[order.set.by]], .desc = TRUE))
+                            size = lengths(venn@sets))
+  if (order.set.by %in% colnames(left_data)){
+    left_data = dplyr::mutate(left_data,
+                              set = forcats::fct_reorder(.data$set, .data[[order.set.by]], .desc = TRUE))
+  } else {
+    left_data$set = forcats::as_factor(left_data$set) |> forcats::fct_rev()
+  }
 
   # main data
-  main_data = data |>
-    dplyr::select(c("id", "name", "size")) |>
-    dplyr::mutate(set = .data$id,
-                  id = forcats::fct_reorder(.data$id, .data[[order.intersect.by]], .desc = TRUE))
-  main_data = separate_longer_delim(main_data, "set", delim = name_separator)
-  main_data$set = factor(set_name[as.integer(main_data$set)],
+  main_data = data |> dplyr::select(c("id", "name", "size"))
+  main_data$set_id = main_data$id
+  main_data = separate_longer_delim(main_data, "set_id", delim = name_separator)
+  main_data$set = factor(set_name[as.integer(main_data$set_id)],
                          levels = levels(left_data$set))
+  main_data$id = factor(main_data$id, levels = levels(top_data$id))
 
   # filter intersections
-  if (!is.null(nintersects)){
+  if (is.numeric(nintersects)){
     keep_id = utils::head(levels(top_data$id), nintersects)
     main_data = main_data |> dplyr::filter(.data$id %in% keep_id)
     top_data = top_data |> dplyr::filter(.data$id %in% keep_id)
@@ -205,23 +221,16 @@ print.upsetPlotData = function(x, ...){
 #' @param delim delimeter
 #'
 #' @return a data.frame
-#' @importFrom stats complete.cases
 #' @md
 separate_longer_delim <- function(df, col, delim) {
   # 将要拆分的列按照分隔符拆分成字符向量
   split_values <- strsplit(df[[col]], delim)
 
-  # 计算拆分后的最大长度
-  max_length <- max(lengths(split_values))
-
   # 扩展数据框
-  result <- df[rep(seq_len(nrow(df)), each = max_length), ]
+  result <- df[rep(seq_len(nrow(df)), times = lengths(split_values)), ]
 
   # 将拆分后的值填充到新的列中
-  result$new_values <- unlist(lapply(split_values, function(x) c(x, rep(NA, max_length - length(x)))))
-
-  # 移除多余的行
-  result <- result[complete.cases(result), ]
+  result[[col]] <- unlist(split_values)
 
   return(result)
 }

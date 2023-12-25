@@ -20,6 +20,11 @@ ggVennDiagram(
   edge_lty = "solid",
   edge_size = 1,
   force_upset = FALSE,
+  nintersects = NULL,
+  order.intersect.by = c("size", "name", "none"),
+  order.set.by = c("size", "name", "none"),
+  relative_height = 3,
+  relative_width = 0.3,
   ...
 )
 }
@@ -53,6 +58,16 @@ ggVennDiagram(
 \item{edge_size}{line width of set edges (1)}
 
 \item{force_upset}{if TRUE, will always produce Upset plot no matter how many sets have (FALSE)}
+
+\item{nintersects}{number of intersects. If NULL, all intersections will show.}
+
+\item{order.intersect.by}{'size', 'name', or "none"}
+
+\item{order.set.by}{'size', 'name', or "none"}
+
+\item{relative_height}{the relative height of top panel in upset plot}
+
+\item{relative_width}{the relative width of left panel in upset plot}
 
 \item{...}{useless}
 }

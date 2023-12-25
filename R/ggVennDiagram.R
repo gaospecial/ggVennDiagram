@@ -23,6 +23,7 @@
 #' @param edge_lty line type of set edges ("solid")
 #' @param edge_size line width of set edges (1)
 #' @param force_upset if TRUE, will always produce Upset plot no matter how many sets have (FALSE)
+#' @inheritParams upset-plot
 #' @param ... useless
 #'
 #' @return A ggplot object
@@ -34,20 +35,25 @@
 #' ggVennDiagram(x[1:3])  # 3d venn
 #' ggVennDiagram(x[1:2])  # 2d venn
 ggVennDiagram = function(x,
-                          category.names = names(x),
-                          show_intersect = FALSE,
-                          set_color = "black",
-                          set_size = NA,
-                          label = c("both","count","percent","none"),
-                          label_alpha = 0.5,
-                          label_geom = c("label","text"),
-                          label_color = "black",
-                          label_size = NA,
-                          label_percent_digit = 0,
-                          label_txtWidth = 40,
-                          edge_lty = "solid",
-                          edge_size = 1,
-                          force_upset = FALSE,
+                         category.names = names(x),
+                         show_intersect = FALSE,
+                         set_color = "black",
+                         set_size = NA,
+                         label = c("both","count","percent","none"),
+                         label_alpha = 0.5,
+                         label_geom = c("label","text"),
+                         label_color = "black",
+                         label_size = NA,
+                         label_percent_digit = 0,
+                         label_txtWidth = 40,
+                         edge_lty = "solid",
+                         edge_size = 1,
+                         force_upset = FALSE,
+                         nintersects = NULL,
+                         order.intersect.by = c("size","name","none"),
+                         order.set.by = c("size","name","none"),
+                         relative_height = 3,
+                         relative_width = 0.3,
                           ...){
   if (!is.list(x)){
     stop(simpleError("ggVennDiagram() requires at least a list."))
@@ -77,7 +83,13 @@ ggVennDiagram = function(x,
   }
   else{
     if (!force_upset) warning("Only support 2-7 dimension Venn diagram. Will give a plain upset plot instead.")
-    plot_upset(venn, nintersects = 30, order.intersect.by = "size", order.set.by = "name")
+    plot_upset(venn,
+               nintersects = nintersects,
+               order.intersect.by = order.intersect.by,
+               order.set.by = order.set.by,
+               relative_height = relative_height,
+               relative_width = relative_width,
+               ...)
   }
 }
 
