@@ -1,6 +1,7 @@
 # The future of ggVennDiagram development
 
 - [x] less dependency
+- [ ] class methods
 - [ ] support of upset plot, and more...
   - [ ] add additional upset plot parameters into `ggVennDiagram()`
   - [ ] add a independent Upset plot function `ggUpset()`

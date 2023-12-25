@@ -1,24 +1,35 @@
 ---
 title: "Update of ggVennDiagram 1.5"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Update of ggVennDiagram 1.5}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: rmarkdown::html_document
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width = 7
 )
 ```
 
 ```{r setup}
-library(ggVennDiagram)
+devtools::load_all()
 library(dplyr)
 library(pak)
 ```
+
+```{r}
+genes <- paste("gene",1:1000,sep="")
+set.seed(20231214)
+x <- list(A=sample(genes,300),
+          B=sample(genes,525),
+          C=sample(genes,440),
+          D=sample(genes,350),
+          E=sample(genes,400),
+          F=sample(genes,300),
+          G=sample(genes,200),
+          H=sample(genes,450))
+```
+
 
 ## Less dependency
 
@@ -124,7 +135,7 @@ primary_deps = deps_new %>%
   arrange(desc(filesize)) %>%
   filter(package %in% dependency_new)
 primary_deps
-write.csv(primary_deps, file = "deps_current.csv")
+# write.csv(primary_deps, file = "deps_current.csv")
 ```
 
 
@@ -143,7 +154,7 @@ write.csv(primary_deps, file = "deps_current.csv")
 #'
 #' @examples
 #' report_package_dependency("ggplot2")
-report_package_dependency = function(pkg, size_cutoff = 1000000, n = 5, exclude = NULL){
+report_package_dependency = function(pkg, size_cutoff = 2^20, n = 3, exclude = NULL){
   # find deps of excluding package
   if (!is.null(exclude)){
     if (is.vector(exclude) & length(exclude) > 1){
@@ -168,12 +179,13 @@ report_package_dependency = function(pkg, size_cutoff = 1000000, n = 5, exclude 
   # generating report
   tot_filesize = sum(deps$filesize, na.rm = TRUE) |> scales::number_bytes(units = "si")
   big_pkg = deps |> dplyr::filter(filesize > size_cutoff)
-  sys_pkg = deps |> dplyr::filter(sysreqs != "", !is.na(sysreqs))
+  sys_pkg = deps |> dplyr::filter(sysreqs != "", !is.na(sysreqs),
+                                  !package %in% big_pkg$package)
   glue::glue("Summary of '{pkg}' Dependency",
              "",
-             "  Packages: {nrow(deps)}; Total size: {tot_filesize}; System requirements: {nrow(sys_pkg)}.",
-             "  Large deps [{nrow(big_pkg)}]: {paste(head(big_pkg$package_size,n), collapse = ', ')}{ifelse(nrow(big_pkg)>n, '...', '.')}",
-             "  System deps [{nrow(sys_pkg)}]: {paste(head(sys_pkg$package_size,n), collapse = ', ')}{ifelse(nrow(sys_pkg)>n, '...', '.')}",
+             "  Total size: {tot_filesize}; {nrow(deps)} package(s), and {nrow(sys_pkg)} system requirement(s).",
+             "  Package(s) larger than {scales::number_bytes(size_cutoff, units = 'si')} ({nrow(big_pkg)}): {paste(head(big_pkg$package_size,n), collapse = ', ')}{ifelse(nrow(big_pkg)>n, '...', '.')}",
+             "  Additional system dependency ({nrow(sys_pkg)}): {paste(head(sys_pkg$package,n), collapse = ', ')}{ifelse(nrow(sys_pkg)>n, '...', '.')}",
              .sep = "\n")
 }
 ```
@@ -255,6 +267,15 @@ As been stated in our previous publication, Venn Diagram is not suitable for ana
 
 This function will be provided on base of aplot.
 
+```{r}
+ggVennDiagram(x[1:5], label="none")
+ggVennDiagram(x[1:5], force_upset = TRUE, order.intersect.by = "none", order.set.by = "size", nintersects = 15)
+ggVennDiagram(x, nintersects = 30, order.set.by = "none", order.intersect.by = "size")
+```
+
+
+
+
 **Read more**:
 
 - [about Upset](https://upset.app/)
@@ -276,4 +297,16 @@ Transforming coordination.
 
 ### Work with TBtools
 
-Provide an official TBtools plugin.
+Provide an official TBtools plugin. 
+
+TBtools refers to a bioinformatics software tool designed for the analysis and visualization of genomic data. TBtools is often used in genomics and molecular biology research to handle and analyze large-scale biological data. In ggVennDiagram 1.5, we provided an official TBtools plugin in the plugin store of TBtools.
+
+
+### Provided as Shiny app
+
+Shiny provide a web interface to access the core functions of ggVennDiagram. For those light users, it is not a necessary to install ggVennDiagram, as the Shiny app would give publication quality figures with optimized parameters. In addition to bitmap figures (png/jpg/tiff), the Shiny app can also export figure as vector graphics such as PDF, and PPTX. Therefore, the figures can be substantially polished with hands-on software by users.
+
+```{r eval=FALSE}
+launch_app()
+```
+
