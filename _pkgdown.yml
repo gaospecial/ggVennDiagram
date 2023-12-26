@@ -48,6 +48,7 @@ reference:
   - slice_idx
 - title: Upset plot utility
   desc: helper function for upset plot
+  contents:
   - process_upset_data
   - separate_longer_delim
 - title: Shiny app
