@@ -78,12 +78,20 @@ get_shape_nsets = function(x){
   x$nsets
 }
 
-get_shape_setedge = function(x){
-  x$setEdge
+get_shape_setedge = function(x, ...){
+  df = x$setEdge
+  extra = list(...)
+  extra$id = as.character(seq_len(x$nsets))
+  extra = as.data.frame(extra)
+  df |> dplyr::left_join(extra, by = "id")
 }
 
-get_shape_setlabel = function(x){
-  x$setLabel
+get_shape_setlabel = function(x, ...){
+  df = x$setLabel
+  extra = list(...)
+  extra$id = as.character(seq_len(x$nsets))
+  extra = as.data.frame(extra)
+  df |> dplyr::left_join(extra, by = "id")
 }
 
 get_shape_regionedge = function(x){
