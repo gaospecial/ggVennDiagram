@@ -16,7 +16,7 @@ reference:
   - get_shapes
   - get_shape_data
   - get_shape_by_id
-  - vennplot-shapes
+  - shapes
 - title: VennPlotData object and methods
   desc: a S3 class to store Venn sets and shape data
   contents:
