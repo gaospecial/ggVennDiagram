@@ -17,7 +17,7 @@
   Venn use circles and ellipses, while the shapes of 4-7 sets Venn use irregular polygons (4 has both forms), which 
   are developed and imported from another package venn, authored by Adrian Dusa. We provided internal functions to 
   integrate shape data with user provided sets data, and calculated the geometry of every regions/intersections 
-  of them, then separately plot Venn in four components: set edges/labels, and region edges/labels.
+  of them, then separately plot Venn in four components, set edges/labels, and region edges/labels.
   From version 1.0, it is possible to customize these components as you demand in ordinary ggplot2 grammar.
   From version 1.4.4, it supports unlimited number of sets, as it can draw a plain upset plot automatically when
   number of sets is more than 7.">
@@ -135,25 +135,25 @@
 <p><code>ggVennDiagram</code> return a <code>ggplot</code> object, the fill/edge colors can be further modified with <code>ggplot</code> functions.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"blue"</span>,high <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="90%"></p>
+<span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"grey90"</span>,high <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="90%"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Paired"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-3-2.png" width="90%"></p>
+<span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span>, set_color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>,<span class="st">"red"</span>,<span class="st">"green"</span>,<span class="st">"purple"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-2.png" width="90%"></p>
 <p><code>ggVennDiagram</code> support 2-7 dimension Venn plot. The generated figure is generally ready for publish. The main function <code><a href="reference/ggVennDiagram.html">ggVennDiagram()</a></code> will check how many items in the first parameter and call corresponding function automatically.</p>
 <p>The parameter <code>category.names</code> is set names. And the parameter <code>label</code> can label how many items are included in each parts.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span>,category.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stage 1"</span>,<span class="st">"Stage 2"</span>,<span class="st">"Stage 3"</span>, <span class="st">"Stage4"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="90%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="90%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span>,category.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Stage 1"</span>,<span class="st">"Stage 2"</span>,<span class="st">"Stage 3"</span>, <span class="st">"Stage4"</span><span class="op">)</span>, label <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-2.png" width="90%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-5-2.png" width="90%"></p>
 <p>Set <code>label_alpha = 0</code> to remove label background.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span>, label_alpha<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="90%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="90%"></p>
 </div>
 <div class="section level2">
 <h2 id="showing-intersection-values">Showing intersection values<a class="anchor" aria-label="anchor" href="#showing-intersection-values"></a>
@@ -213,7 +213,7 @@
 <div class="section level2">
 <h2 id="venn-diagram-of-up-to-seven-sets">Venn Diagram of up to seven sets<a class="anchor" aria-label="anchor" href="#venn-diagram-of-up-to-seven-sets"></a>
 </h2>
-<p>From v1.0, <code>ggVennDiagram</code> can plot up to seven dimension Venn plot. We would like to acknowledgment the author of package <code>venn</code>, for his kind help on sharing the required shape coordinates for this feature.</p>
+<p>From v1.0, <code>ggVennDiagram</code> can plot up to seven dimension Venn plot. We would like to acknowledgment Adrian Dusa, the author of package <code>venn</code> (<a href="https://CRAN.R-project.org/package=venn" class="external-link uri">https://CRAN.R-project.org/package=venn</a>), for his kind help on sharing the required shape coordinates for this feature.</p>
 <p>However, Venn Diagram for more than four sets may be meaningless in some conditions, as some parts may be omitted in such ellipses. Therefore, it is only useful in specific conditions. For example, if the set intersection of all group are extremely large, you may use several ellipses to draw a “flower” to show that.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>A<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">300</span><span class="op">)</span>,</span>
@@ -241,7 +241,7 @@
 <span></span>
 <span><span class="co"># two dimension Venn plot</span></span>
 <span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="90%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-11-1.png" width="90%"></p>
 </div>
 <div class="section level2">
 <h2 id="native-support-of-upset-plot">Native support of upset plot<a class="anchor" aria-label="anchor" href="#native-support-of-upset-plot"></a>
@@ -252,14 +252,15 @@
 <span><span class="va">x</span><span class="op">$</span><span class="va">H</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">genes</span>,<span class="fl">500</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/ggVennDiagram.html">ggVennDiagram</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in ggVennDiagram(x): Only support 2-7 dimension Venn diagram. Will give</span></span>
-<span><span class="co">#&gt; a plain upset plot instead.</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-11-1.png" width="90%"></p>
+<span><span class="co">#&gt; a plain upset plot instead.</span></span>
+<span><span class="co">#&gt; Warning: Removed 1 rows containing missing values (`position_stack()`).</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="90%"></p>
 <p>Since upset plot is consisted with upper panel and lower panel, and left panel and right panel, the appearance should be adjusted with different conditions. We provide two parameters, which are <code>relative_height</code> and <code>relative_width</code> to do this.</p>
 <p>For example, if we want to give more space to lower panel, just change the <code>relative_height</code> from 3 (the default) to 2.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">venn</span> <span class="op">=</span> <span class="fu"><a href="reference/Venn-class.html">Venn</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/plot_upset.html">plot_upset</a></span><span class="op">(</span><span class="va">venn</span>, nintersects <span class="op">=</span> <span class="fl">30</span>, relative_height <span class="op">=</span> <span class="fl">2</span>, relative_width <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="90%"></p>
+<span><span class="fu"><a href="reference/upset-plot.html">plot_upset</a></span><span class="op">(</span><span class="va">venn</span>, nintersects <span class="op">=</span> <span class="fl">30</span>, relative_height <span class="op">=</span> <span class="fl">2</span>, relative_width <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-13-1.png" width="90%"></p>
 </div>
 </div>
 <div class="section level1">
@@ -307,6 +308,7 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Chun-Hui Gao <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1445-7939" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Adrian Dusa <br><small class="roles"> Contributor, author, copyright holder </small> <a href="https://orcid.org/0000-0002-3525-9253" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -329,7 +331,7 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Chun-Hui Gao.</p>
+<p>Developed by Chun-Hui Gao, Adrian Dusa.</p>
 </div>
 
 <div class="pkgdown">

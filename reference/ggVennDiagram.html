@@ -91,6 +91,11 @@
 <span>  edge_lty <span class="op">=</span> <span class="st">"solid"</span>,</span>
 <span>  edge_size <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  force_upset <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  nintersects <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  order.intersect.by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"size"</span>, <span class="st">"name"</span>, <span class="st">"none"</span><span class="op">)</span>,</span>
+<span>  order.set.by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"size"</span>, <span class="st">"name"</span>, <span class="st">"none"</span><span class="op">)</span>,</span>
+<span>  relative_height <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  relative_width <span class="op">=</span> <span class="fl">0.3</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -157,6 +162,26 @@
 <dd><p>if TRUE, will always produce Upset plot no matter how many sets have (FALSE)</p></dd>
 
 
+<dt>nintersects</dt>
+<dd><p>number of intersects. If NULL, all intersections will show.</p></dd>
+
+
+<dt>order.intersect.by</dt>
+<dd><p>'size', 'name', or "none"</p></dd>
+
+
+<dt>order.set.by</dt>
+<dd><p>'size', 'name', or "none"</p></dd>
+
+
+<dt>relative_height</dt>
+<dd><p>the relative height of top panel in upset plot</p></dd>
+
+
+<dt>relative_width</dt>
+<dd><p>the relative width of left panel in upset plot</p></dd>
+
+
 <dt>...</dt>
 <dd><p>useless</p></dd>
 
@@ -194,7 +219,7 @@ Please check the document of this function.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Chun-Hui Gao.</p>
+  <p></p><p>Developed by Chun-Hui Gao, Adrian Dusa.</p>
 </div>
 
 <div class="pkgdown">

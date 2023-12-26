@@ -112,11 +112,11 @@ stored as sys data as a tibble. It can be accessed with
 <code><a href="../reference/get_shapes.html">get_shapes()</a></code>, and plotted with the function
 <code><a href="../reference/plot_shapes.html">plot_shapes()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">shape1</span> <span class="op">=</span> <span class="fu">ggVennDiagram</span><span class="fu">:::</span><span class="va">shapes</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></span>
+<code class="sourceCode R"><span><span class="va">shape1</span> <span class="op">=</span> <span class="fu">ggVennDiagram</span><span class="fu">:::</span><span class="va"><a href="../reference/shapes.html">shapes</a></span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="va">shape1</span></span>
 <span><span class="co">#&gt; Class VennPlotData - '301f'</span></span>
 <span><span class="co">#&gt;   Type: circle; No. sets: 3; No. regions: 7.</span></span>
-<span><span class="co">#&gt;   To view this shape, use `plot_shape_edge()`.</span></span>
+<span><span class="co">#&gt;   To view this shape, use `plot_shape_edge(get_shape_by_id('301f'))`.</span></span>
 <span><span class="co">#&gt;   To view its components, use `venn_setedge()`, `venn_setlabel()`, etc.</span></span></code></pre></div>
 <p>The format of these shapes data are defined in
 <code>VennPlotData</code> class. Use <code><a href="../reference/VennPlotData.html">?VennPlotData</a></code> to view
@@ -157,6 +157,13 @@ available shapes stored in this package.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_shapes.html">plot_shapes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="using-new-shapes_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p>Among them, the shapes with less than four sets can be generated with
+circle or ellipses. For example, the parameters used to generate
+four-set ellipses were adopted from <code>VennDiagram</code> (<a href="https://CRAN.R-project.org/package=VennDiagram" class="external-link uri">https://CRAN.R-project.org/package=VennDiagram</a>).
+Notably, those shapes of five or more sets, including 501, 502, 601, and
+701, are collected by Adrian Dusa and provided in his <code>venn</code>
+package (<a href="https://CRAN.R-project.org/package=venn" class="external-link uri">https://CRAN.R-project.org/package=venn</a>). Besides, the
+601t shape is imported from a WiKi entry (<a href="https://en.wikipedia.org/wiki/Venn_diagram" class="external-link uri">https://en.wikipedia.org/wiki/Venn_diagram</a>).</p>
 </div>
 <div class="section level2">
 <h2 id="using-alternative-internal-shapes">Using alternative internal shapes<a class="anchor" aria-label="anchor" href="#using-alternative-internal-shapes"></a>
@@ -205,7 +212,7 @@ increase the accessiblity of the package.</p>
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Chun-Hui Gao.</p>
+<p>Developed by Chun-Hui Gao, Adrian Dusa.</p>
 </div>
 
 <div class="pkgdown">

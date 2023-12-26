@@ -82,9 +82,6 @@
     <loc>https://gaospecial.github.io/ggVennDiagram/reference/plot_shapes.html</loc>
   </url>
   <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/plot_upset.html</loc>
-  </url>
-  <url>
     <loc>https://gaospecial.github.io/ggVennDiagram/reference/plot_venn.html</loc>
   </url>
   <url>
@@ -94,19 +91,28 @@
     <loc>https://gaospecial.github.io/ggVennDiagram/reference/process_data.html</loc>
   </url>
   <url>
+    <loc>https://gaospecial.github.io/ggVennDiagram/reference/process_upset_data.html</loc>
+  </url>
+  <url>
+    <loc>https://gaospecial.github.io/ggVennDiagram/reference/separate_longer_delim.html</loc>
+  </url>
+  <url>
+    <loc>https://gaospecial.github.io/ggVennDiagram/reference/shapes.html</loc>
+  </url>
+  <url>
     <loc>https://gaospecial.github.io/ggVennDiagram/reference/slice_idx.html</loc>
   </url>
   <url>
     <loc>https://gaospecial.github.io/ggVennDiagram/reference/unite.html</loc>
   </url>
   <url>
+    <loc>https://gaospecial.github.io/ggVennDiagram/reference/upset-plot.html</loc>
+  </url>
+  <url>
     <loc>https://gaospecial.github.io/ggVennDiagram/reference/venn_data.html</loc>
   </url>
   <url>
     <loc>https://gaospecial.github.io/ggVennDiagram/reference/venn_plot_data.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/vennplot-shapes.html</loc>
   </url>
   <url>
     <loc>https://gaospecial.github.io/ggVennDiagram/roadmap.html</loc>
