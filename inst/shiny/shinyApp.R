@@ -12,7 +12,7 @@ ui = fluidPage(
         inputId = 'nsets',
         label = "No. of Sets:",
         value = 4,
-        min = 1,
+        min = 2,
         max = 10,
         step = 1
       ),
@@ -99,18 +99,21 @@ server = function(input, output, session){
     )
   })
 
+  # 绘图的逻辑
+  drawPlot <- function(){
+    x = vector("list", length = input$nsets)
+    for (i in 1:input$nsets){
+      x[[i]] = input[[paste0("set_", i)]] |> strsplit(split = ",") |> unlist()
+    }
+    return(ggVennDiagram(x, force_upset = input$force_upset))
+  }
+
   # 监听画图按钮的点击事件
   observeEvent(input$plot_btn, {
-    output$plot = renderPlot({
-      x = vector("list", length = input$nsets)
-      for (i in 1:input$nsets){
-        x[[i]] = input[[paste0("set_", i)]] |> strsplit(split = ",") |> unlist()
-      }
-      (session$userData$plot = ggVennDiagram(x, force_upset = input$force_upset))
-    })
-    output$plot_note = renderUI(
-      NULL
-    )
+    p = drawPlot()
+    output$plot = renderPlot(p)
+    output$plot_note = NULL
+    session$userData$plot = p
   })
 
 
