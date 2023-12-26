@@ -31,7 +31,7 @@ VennPlotData = function(x){
 print.VennPlotData = function(x, ...){
   cat(sprintf("Class VennPlotData - '%s'\n", x$shapeId))
   cat(sprintf("  Type: %s; No. sets: %d; No. regions: %d.\n", x$type, x$nsets, length(unique(x$regionEdge$id))))
-  cat(sprintf("  To view this shape, use `plot_shape_edge()`.\n"))
+  cat(sprintf("  To view this shape, use `plot_shape_edge(get_shape_by_id('%s'))`.\n", x$shapeId))
   cat(sprintf("  To view its components, use `venn_setedge()`, `venn_setlabel()`, etc.\n"))
 }
 

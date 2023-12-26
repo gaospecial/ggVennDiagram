@@ -57,7 +57,7 @@ setMethod("process_data", signature = c(venn = "Venn"),
 venn_regionedge = function(obj){
   if (!inherits(obj, "VennPlotData")) stop("obj should be a VennPlotData object.")
   obj$regionEdge |>
-    dplyr::left_join(venn_region(obj)) |>
+    dplyr::left_join(venn_region(obj), by = "id") |>
     dplyr::as_tibble()
 }
 
@@ -145,9 +145,9 @@ process_set_data = function(venn){
   if(!inherits(venn, "Venn")) stop("venn is not a S4 class 'Venn' object.")
   tibble::tibble(
     id = as.character(seq_along(venn@sets)),
+    name = venn@names,
     item = venn@sets,
-    count = sapply(venn@sets, length),
-    name = venn@names
+    count = sapply(venn@sets, length)
   )
 }
 

@@ -119,11 +119,10 @@ plot_venn = function(data,
                      edge_lty = "solid",
                      edge_size = 1,
                      ...){
-  p = ggplot(mapping = aes(.data$X, .data$Y))
   setedge.params = list(data = get_shape_setedge(data, color = set_color,
                                                  linetype = edge_lty,
                                                  linewidth = as.numeric(edge_size)),
-                         mapping = aes(color = ifelse(is.character(set_color), I(.data$color), .data$id),
+                         mapping = aes(color = I(.data$color),
                                        group = .data$id,
                                        linetype = I(.data$linetype),
                                        linewidth = I(.data$linewidth)),
@@ -131,7 +130,7 @@ plot_venn = function(data,
   setlabel.params = list(data = get_shape_setlabel(data, size = as.numeric(set_size), color = set_color),
                           mapping = aes(label = .data$name,
                                         size = I(.data$size),
-                                        color = ifelse(is.character(set_color), I(.data$color), .data$id)),
+                                        color = I(.data$color)),
                           show.legend = FALSE)
   region.params = list(data = get_shape_regionedge(data) |> dplyr::left_join(venn_region(data), by = "id"),
                         mapping = aes(fill = .data$count,
@@ -141,10 +140,11 @@ plot_venn = function(data,
   setlabel.layer = do.call('geom_text', setlabel.params)
   region.layer = do.call('geom_polygon', region.params)
 
-  p = p + region.layer + setedge.layer + setlabel.layer + theme_void() + coord_equal()
+  p = ggplot(mapping = aes(.data$X, .data$Y))
+  p_nonlabel = p + region.layer + setedge.layer + setlabel.layer + theme_void() + coord_equal()
 
   if (label == "none"){
-    return(p)
+    return(p_nonlabel)
   }
 
   # process data for plotting region labels
@@ -157,15 +157,16 @@ plot_venn = function(data,
       dplyr::rowwise() |>
       dplyr::mutate(item = str_wrap(paste0(.data$item, collapse = " "),
                                                  width = label_txtWidth))
-    p = p + geom_text(aes(label = .data$count, text = .data$item),
-                      data = region_label) +
+    p_plotly = p_nonlabel +
+      geom_text(aes(label = .data$count, text = .data$item),
+                    data = region_label) +
       theme(legend.position = "none")
     ax = list(
       showline = FALSE
     )
-    p = plotly::ggplotly(p, tooltip = c("text")) |>
+    p_plotly = plotly::ggplotly(p_plotly, tooltip = c("text")) |>
       plotly::layout(xaxis = ax, yaxis = ax)
-    return(p)
+    return(p_plotly)
   }
 
   # calculate labels, which are 'percent', 'count', or 'both'
@@ -176,7 +177,7 @@ plot_venn = function(data,
 
   # if label != "none" & show_intersect == FALSE
   if (label_geom == "label"){
-    p = p + geom_label(
+    p_label = p_nonlabel + geom_label(
       aes(label = .data[[label]]),
       data = region_label,
       alpha = label_alpha,
@@ -185,11 +186,11 @@ plot_venn = function(data,
       lineheight = 0.85,
       label.size = NA
     )
-    return(p)
+    return(p_label)
   }
 
   if (label_geom == "text"){
-    p = p + geom_text(
+    p_label = p_nonlabel + geom_text(
       aes(label = .data[[label]]),
       data = region_label,
       alpha = label_alpha,
@@ -197,7 +198,7 @@ plot_venn = function(data,
       size = label_size,
       lineheight = 0.85
     )
-    return(p)
+    return(p_label)
   }
 
 
