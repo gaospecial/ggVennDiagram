@@ -76,8 +76,8 @@ small_list <- lapply(sample(6:10, size = 4), function(x){
 })
 
 ggVennDiagram(small_list, 
-                    category.names = LETTERS[1:4], 
-                    show_intersect = TRUE)
+              category.names = LETTERS[1:4], 
+              show_intersect = TRUE)
 ```
 
 

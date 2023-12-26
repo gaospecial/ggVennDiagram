@@ -65,14 +65,18 @@ x <- list(A=sample(genes,300),
           D=sample(genes,350))
 ```
 
+```{r include=FALSE}
+devtools::load_all()
+```
+
 
 `ggVennDiagram` return a `ggplot` object, the fill/edge colors can be further modified with `ggplot` functions.
 
 ```{r}
 library(ggplot2)
-ggVennDiagram(x) + scale_fill_gradient(low="blue",high = "red")
+ggVennDiagram(x) + scale_fill_gradient(low="grey90",high = "red")
 
-ggVennDiagram(x) + scale_color_brewer(palette = "Paired")
+ggVennDiagram(x, set_color = c("blue","red","green","purple"))
 ```
 
 `ggVennDiagram` support 2-7 dimension Venn plot. The generated figure is generally ready for publish. The main function `ggVennDiagram()` will check how many items in the first parameter and call corresponding function automatically.
@@ -145,7 +149,7 @@ The key point is to let the generated ellipses have exactly one intersection for
 ## Venn Diagram of up to seven sets
 
 From v1.0, `ggVennDiagram` can plot up to seven dimension Venn plot. 
-We would like to acknowledgment the author of package `venn`, for his kind help on
+We would like to acknowledgment Adrian Dusa, the author of package `venn` (<https://CRAN.R-project.org/package=venn>), for his kind help on
 sharing the required shape coordinates for this feature.
 
 However, Venn Diagram for more than four sets may be meaningless in some conditions, 
@@ -191,7 +195,7 @@ x <- list(A = sample(genes,100),
           E = sample(genes,300),
           F = sample(genes,350),
           G = sample(genes,400))
-plots <- lapply(2:7, function(i) ggVennDiagram(x[1:i],label = "none",edge_size = 2) + 
+plots <- lapply(2:7, function(i) ggVennDiagram(x[1:i],label = "none",edge_size = 0.5) + 
                   labs(title = paste("sets = ", i)) + 
                   scale_fill_distiller(palette = "RdBu") +
                   theme(legend.position = "none",

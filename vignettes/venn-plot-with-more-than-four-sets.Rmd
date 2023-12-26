@@ -22,7 +22,7 @@ library(ggplot2)
 ## Venn Diagram for more than four sets
 
 With **ggVennDiagram** version less than 1.0, it only support 2-4 set Venn.
-By importing the polygon from `venn` , `ggVennDiagram` now supports 5-7 sets Venn.
+By importing the polygon from `venn` (<https://CRAN.R-project.org/package=venn>), `ggVennDiagram` now supports 5-7 sets Venn.
 
 ```{r}
 genes <- paste0("gene",1:1000)

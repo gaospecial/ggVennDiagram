@@ -20,7 +20,7 @@ ggVennDiagram(
   edge_lty = "solid",
   edge_size = 1,
   force_upset = FALSE,
-  nintersects = NULL,
+  nintersects = 20,
   order.intersect.by = c("size", "name", "none"),
   order.set.by = c("size", "name", "none"),
   relative_height = 3,

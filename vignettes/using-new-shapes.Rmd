@@ -57,6 +57,9 @@ The `plot_shapes()` function can be used to plot all the available shapes stored
 plot_shapes()
 ```
 
+Among them, the shapes with less than four sets can be generated with circle or ellipses. For example, the parameters used to generate four-set ellipses were adopted from `VennDiagram` (<https://CRAN.R-project.org/package=VennDiagram>). Notably, those shapes of five or more sets, including 501, 502, 601, and 701, are collected by Adrian Dusa and provided in his `venn` package (<https://CRAN.R-project.org/package=venn>). Besides, the 601t shape is imported from a WiKi entry (<https://en.wikipedia.org/wiki/Venn_diagram>).
+
+
 ## Using alternative internal shapes
 
 By default, only the most appropriate shape is used when calling the main function
@@ -88,3 +91,6 @@ If user knows the coordinates of a novel shape, it may also be used to draw in
 `shapeMageR`, which can be found in <https://github.com/gaospecial/shapeMageR>.
 To do this, the dependency of `ggVennDiagram` is very light, thus increase the 
 accessiblity of the package.
+
+
+
