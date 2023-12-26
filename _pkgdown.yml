@@ -46,6 +46,10 @@ reference:
   - overlap
   - unite
   - slice_idx
+- title: Upset plot utility
+  desc: helper function for upset plot
+  - process_upset_data
+  - separate_longer_delim
 - title: Shiny app
   desc: run a Shiny app to plot
   contents:
