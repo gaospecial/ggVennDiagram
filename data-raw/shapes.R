@@ -54,7 +54,7 @@ colnames(sets) = c("nsets", "shapeId", "id", "x", "y")
 sets = sets |>
   dplyr::mutate(shapeId = paste(nsets, shapeId + 1, sep = "0"))
 
-# label position indicated by venn::venn()
+# label position indicated by venn:::scoords
 scoords = venn:::scoords
 colnames(scoords) = c("nsets", "shapeId", "x", "y")
 scoords = scoords |> dplyr::mutate(shapeId = paste(nsets, shapeId + 1, sep = "0"),
