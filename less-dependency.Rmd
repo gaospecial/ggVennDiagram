@@ -192,12 +192,18 @@ report_package_dependency = function(pkg, size_cutoff = 2^20, n = 3, exclude = N
 
 
 ```{r}
+for (tag in c("V0.5.0","V1.0.7","V1.1","V1.2","V1.2.2","V1.4.9")){
+  report_package_dependency(paste0("gaospecial/ggVennDiagram@", tag)) |> print()
+}
+```
+
+
+```{r}
 report_package_dependency("gaospecial/ggVennDiagram@V1.2.3")
 ```
 
 ```{r}
 report_package_dependency("gaospecial/ggVennDiagram@V1.2.3", exclude = c("ggplot2","dplyr"))
-
 ```
 
 
@@ -253,7 +259,7 @@ pkg_deps_tree(".")
   
 
 
-### Ready-to-use new shapes
+## Ready-to-use new shapes
 
 
 
@@ -261,15 +267,21 @@ pkg_deps_tree(".")
 
 ![](https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/20231112002411.png)
 
-### Native support for Upset plot
+## Native support for Upset plot
 
 As been stated in our previous publication, Venn Diagram is not suitable for analyzing more than seven sets. In that case we recommend the Upset plot as an alternative method, which is supported by `UpsetR` in R platform. We add native support for Upset plot.
 
 This function will be provided on base of aplot.
 
 ```{r}
-ggVennDiagram(x[1:5], label="none")
-ggVennDiagram(x[1:5], force_upset = TRUE, order.intersect.by = "none", order.set.by = "size", nintersects = 15)
+p1 = ggVennDiagram(x[1:5], label="none", set_color = rainbow(5)) + scale_fill_gradient(low = "grey90", high = "red")
+p2 = ggVennDiagram(x[1:5], force_upset = TRUE, order.intersect.by = "none", order.set.by = "none", nintersects = 15)
+
+aplot::plot_list(p1,p2, labels = c("A","B"), widths = c(0.8, 1))
+```
+
+
+```{r}
 ggVennDiagram(x, nintersects = 30, order.set.by = "none", order.intersect.by = "size")
 ```
 
@@ -280,7 +292,7 @@ ggVennDiagram(x, nintersects = 30, order.set.by = "none", order.intersect.by = "
 
 - [about Upset](https://upset.app/)
 
-### Optimization of default settings
+## Optimization of default settings
 
 **Transparent background of labels**
 
@@ -291,18 +303,99 @@ ggVennDiagram(x, nintersects = 30, order.set.by = "none", order.intersect.by = "
 **Region fill colors pallete**
 
 
-### Unified coordinations
+## Access to classes
+
+```{r}
+set.seed(20231225)
+y = list(
+  A = sample(letters, 8) |> sort(),
+  B = sample(letters, 8) |> sort(),
+  C = sample(letters, 8) |> sort(),
+  D = sample(letters, 8) |> sort())
+
+# view the list
+y
+```
+
+### Access to subset items
+
+To view subset itmes interactively, set `show_intersect = TRUE`.
+
+```{r}
+ggVennDiagram(y, show_intersect = TRUE, set_color = "black")
+```
+
+
+```{r}
+venn_y = Venn(y)
+
+venn_y
+```
+
+
+
+```{r}
+# find the overlaping members of two or more sets
+overlap(venn_y, 1:2) # members in both the first two sets
+overlap(venn_y) # members in all the sets
+
+# find the different members between sets and set unions
+discern(venn_y, 1)  # members in set 1, but not in all the resting sets by default
+discern(venn_y, c("A","B"), 3) # members in set A & B, but not in the third set
+
+# find the specific members in one or more sets
+discern_overlap(venn_y, 1)  # specific items in set 1, equals to `discern(venn_y, 1)`. Those members are not shared by all the other sets.
+discern_overlap(venn_y, 1:2)  # specific items in set 1 and set 2
+```
+
+
+### Access to plot data
+
+```{r}
+venn_plot_data = process_data(venn_y)
+
+# summary of VennPlotData object
+venn_plot_data
+```
+
+Sets and labels
+
+```{r}
+# get the set data
+venn_set(venn_plot_data)
+
+# get subsets, i.e., regions
+venn_region(venn_plot_data)
+```
+
+Polygons.
+
+```{r}
+# get set edge
+venn_setedge(venn_plot_data)
+
+# get region edge
+venn_regionedge(venn_plot_data)
+```
+
+```{r}
+df = venn_setedge(venn_plot_data)
+plot(df$X, df$Y, asp = 1)
+```
+
+
+## Unified coordinations
 
 Transforming coordination.
 
-### Work with TBtools
+## Work with TBtools
 
 Provide an official TBtools plugin. 
 
 TBtools refers to a bioinformatics software tool designed for the analysis and visualization of genomic data. TBtools is often used in genomics and molecular biology research to handle and analyze large-scale biological data. In ggVennDiagram 1.5, we provided an official TBtools plugin in the plugin store of TBtools.
 
 
-### Provided as Shiny app
+## Provided as Shiny app
 
 Shiny provide a web interface to access the core functions of ggVennDiagram. For those light users, it is not a necessary to install ggVennDiagram, as the Shiny app would give publication quality figures with optimized parameters. In addition to bitmap figures (png/jpg/tiff), the Shiny app can also export figure as vector graphics such as PDF, and PPTX. Therefore, the figures can be substantially polished with hands-on software by users.
 
