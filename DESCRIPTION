@@ -1,11 +1,11 @@
 Package: ggVennDiagram
 Type: Package
 Title: A 'ggplot2' Implement of Venn Diagram
-Version: 1.4.9
+Version: 1.4.10
 Authors@R: c(
-  person("Chun-Hui","Gao", email="gaospecial@gmail.com",role=c("aut","cre"), comment=c(ORCID = "0000-0002-1445-7939")),
+  person("Chun-Hui","Gao", email="gaospecial@gmail.com", role=c("aut","cre"), comment=c(ORCID = "0000-0002-1445-7939")),
   person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("ctb"), comment = c(ORCID = "0000-0002-6485-8781")),
-  person("Adrian", "Dusa",  email = "dusa.adrian@unibuc.ro", role = c("ctb","aut","cph"), 
+  person("Adrian", "Dusa",  email = "dusa.adrian@unibuc.ro", role = c("aut","cph"), 
     comment = c(ORCID = "0000-0002-3525-9253", 
     note = "Adrian Dusa is the author and copyright holder of venn, where ggVennDiagram import polygon coordinates to enabling 5 - 7 sets Venn diagram.")),
   person("Turgut Yigit", "Akyol", email = "tyakyol@gmail.com", role = c("ctb"), comment=c(ORCID = "0000-0003-0897-7716"))
