@@ -68,11 +68,12 @@ ui = page_sidebar(
 
     fluidRow(
       # type of plot
-      column(4,
+      # column(4,
              checkboxInput(
                inputId = "force_upset",
                label = "Upset"
-             )),
+             )
+             # ),
       # column(8,
       #   checkboxInput(
       #   "show_intersect",
@@ -94,7 +95,7 @@ ui = page_sidebar(
     # download button
     conditionalPanel(
       condition = "output.plot",
-      p("Download thi plot in bitmap or vector files:"),
+      p("Download this plot in different formats:"),
       uiOutput("download_btns")
 
     )
@@ -141,11 +142,12 @@ server = function(input, output, session) {
   # initialize plot note
   output$plot_note = renderUI({
     tagList(
-      markdown("### Steps"),
+      h2("Steps", class = "my-4"),
       markdown("1. Use the button or slider to specify the number of sets."),
       markdown("2. Specify set members using comma-sparated strings (just follow the examples)."),
-      markdown("3. Click the **<Plot Now!>** button."),
-      markdown("4. Enjoy and download your publication-quality figures.")
+      markdown("3. Configure addtional parameters if you want."),
+      markdown("4. Click the **<Plot Now!>** button."),
+      markdown("5. Enjoy and download your publication-quality figures.")
     )
   })
 
