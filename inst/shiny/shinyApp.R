@@ -77,14 +77,14 @@ bs_theme = bs_theme |>
 
 # NATIVE SHINY UI ------------------------------------------------------------------
 
-ui = fluidPage(
+ui = page_sidebar(
   theme = bs_theme(version = 5),
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "shinyApp.css")
   ),
-  titlePanel("ggVennDiagram Shiny App"),
-  sidebarLayout(
-    sidebarPanel(
+  title = "ggVennDiagram Shiny App",
+  sidebar = sidebar(
+    width = "30%",
       # Set number
       sliderInput(
         inputId = 'nsets',
@@ -103,29 +103,29 @@ ui = fluidPage(
       accordion(
         open = FALSE,
         accordion_panel(
-        "Label Controls",
-        numericInput("set_size", "size of set label", 5, min = 0, max = 10, step = 1),
-        selectInput("label", "mode",c("both", "count", "percent", "none"), selected = "both"),
-        selectInput("label_geom", 'geom', c("text", "label"), selected = "label"),
-        numericInput("label_alpha", "alpha", 0.5, min = 0, max = 1, step = 0.1),
-        colourInput("label_color", "color", value = "white"),
-        numericInput("label_size", "size", 3),
-        numericInput("label_percent_digit", "digit", 0, step = 1, min = 0, max = 3),
-        numericInput("label_txtWidth", 'text width', 40, step = 1, min = 1, max = 100)
-      ),
-      accordion_panel(
-        "Edge Controls",
-        selectInput("edge_lty", "line type", c("solid", "dashed", "dotted", "dotdash", "longdash", "twodash"), selected = "solid"),
-        numericInput("edge_size", 'size', 1, step = 1, min = 0, max = 10)
-      ),
-      accordion_panel(
-        "Upset Controls",
-        numericInput("nintersects", "nintersects", 20, min = 1, max = 100, step = 1),
-        selectInput("order.intersect.by", "order of intersect",c("size", "name", "none"), selected = "none"),
-        selectInput("order.set.by", 'order of set', c("size", "name", "none"), selected = 'none'),
-        numericInput("relative_height", 'relative height', 3, min = 2, max = 6, step = 0.1),
-        numericInput('relative_width', 'relative width', 0.3, min = 0.1, max = 1, step = 0.1)
-      ),
+          "Label Controls",
+          numericInput("set_size", "size of set label", 5, min = 0, max = 10, step = 1),
+          selectInput("label", "mode",c("both", "count", "percent", "none"), selected = "both"),
+          selectInput("label_geom", 'geom', c("text", "label"), selected = "label"),
+          numericInput("label_alpha", "alpha", 0.5, min = 0, max = 1, step = 0.1),
+          colourInput("label_color", "color", value = "white"),
+          numericInput("label_size", "size", 3),
+          numericInput("label_percent_digit", "digit", 0, step = 1, min = 0, max = 3),
+          numericInput("label_txtWidth", 'text width', 40, step = 1, min = 1, max = 100)
+        ),
+        accordion_panel(
+          "Edge Controls",
+          selectInput("edge_lty", "line type", c("solid", "dashed", "dotted", "dotdash", "longdash", "twodash"), selected = "solid"),
+          numericInput("edge_size", 'size', 1, step = 1, min = 0, max = 10)
+        ),
+        accordion_panel(
+          "Upset Controls",
+          numericInput("nintersects", "nintersects", 20, min = 1, max = 100, step = 1),
+          selectInput("order.intersect.by", "order of intersect",c("size", "name", "none"), selected = "none"),
+          selectInput("order.set.by", 'order of set', c("size", "name", "none"), selected = 'none'),
+          numericInput("relative_height", 'relative height', 3, min = 2, max = 6, step = 0.1),
+          numericInput('relative_width', 'relative width', 0.3, min = 0.1, max = 1, step = 0.1)
+        ),
       ),
 
 
@@ -147,7 +147,7 @@ ui = fluidPage(
       actionButton("plot_btn", "Plot Now!"),
     ),
 
-    mainPanel = mainPanel(
+    card(
       uiOutput('plot_note'),
 
       # plot
@@ -156,14 +156,13 @@ ui = fluidPage(
       # download button
       conditionalPanel(
         condition = "output.plot",
-        downloadButton("download_png", "Download as PNG"),
-        downloadButton("download_pdf", "Download as PDF")
+        uiOutput("download_btns")
+
       )
 
     )
-  )
-
 )
+
 
 
 
@@ -171,6 +170,12 @@ ui = fluidPage(
 
 
 server = function(input, output, session) {
+
+  output$download_btns = renderUI({
+    # list = lapply(c())
+    tagList(downloadButton("download_png", "Download as PNG"),
+    downloadButton("download_pdf", "Download as PDF"))
+  })
 
   # 动态生成文本输入框的UI
   output$text_inputs = renderUI({
