@@ -1,117 +1,87 @@
 library(shiny)
 library(ggVennDiagram)
-devtools::load_all(path = rprojroot::find_root("DESCRIPTION"))
+# devtools::load_all(path = rprojroot::find_root("DESCRIPTION"))
 library(ggplot2)
 library(bslib)
 library(htmltools)
 
 # SMALL HTML ELEMENTS -------------------------------------------------------------
 
-
 ## Basic Elements of Sidebar ---------------------------------------------
 
 ### Venn plot primary control --------
-venn_plot_primary_ctrl = accordion_panel(
-  "Primary controls",
-  # Set number
-  sliderInput(
-    inputId = 'nsets',
-    label = "No. of Sets:",
-    value = 4,
-    min = 2,
-    max = 10,
-    step = 1
-  ),
-
-  hr(),
-
-  # dynamic inputs
-  uiOutput("text_inputs")
-)
-
-venn_plot_other_ctrl = accordion_panel(
-  "Other controls",
-  "Other controls go here"
-)
 
 # PAGE COMPONENTS ------
 
-## Venn plot sidebar -----
-
-venn_plot_card_sidebar = sidebar(
-  width = "25em",
-  accordion(
-    venn_plot_primary_ctrl,
-    venn_plot_other_ctrl
-  ),
-  actionButton("plot_btn", "Plot Now!")
-)
 
 # PAGE LAYOUT-----
 
 ## Navset card UI
-ui_navset_card_tab = navset_card_tab(
-  height = 700,
-  full_screen = TRUE,
-  title = "Draw a Venn diagram or Upset plot",
-
-  # Venn plot card
-  nav_panel(  # for Venn plot
-    "Venn Diagram",
-    card_title("A plotly plot"),
-    layout_sidebar(
-      sidebar = venn_plot_card_sidebar,
-
-      # others
-      uiOutput('plot_note'),
-
-      # plot
-      plotOutput("plot"),
-
-      # download button
-      conditionalPanel(
-        condition = "output.plot",
-        downloadButton("download_png", "Download as PNG"),
-        downloadButton("download_pdf", "Download as PDF")
-      )
-    )
-  ),
-
-  # Upset plot card
-  nav_panel(  # for Upset plot
-    "Upset Plot",
-    card_title("A leaflet plot"),
-    markdown("leaflet_widget")
-  ),
-
-  # Help card
-  nav_panel(  # for help
-    shiny::icon("circle-info"),
-    markdown("Learn more about [htmlwidgets](http://www.htmlwidgets.org/)")
-  )
-)
-
-
-ui_page_sidebar = page_sidebar(
-  title = "Penguins dashboard",
-  sidebar = venn_plot_card_sidebar,
-  navset_card_underline(
-    title = "Histograms by species",
-    nav_panel("Bill Length", plotOutput("bill_length")),
-    nav_panel("Bill Depth", plotOutput("bill_depth")),
-    nav_panel("Body Mass", plotOutput("body_mass"))
-  )
-)
+# ui_navset_card_tab = navset_card_tab(
+#   height = 700,
+#   full_screen = TRUE,
+#   title = "Draw a Venn diagram or Upset plot",
+#
+#   # Venn plot card
+#   nav_panel(  # for Venn plot
+#     "Venn Diagram",
+#     card_title("A plotly plot"),
+#     layout_sidebar(
+#       sidebar = sidebar("Just a sidebar"),
+#
+#       # others
+#       uiOutput('plot_note'),
+#
+#       # plot
+#       plotOutput("plot"),
+#
+#       # download button
+#       conditionalPanel(
+#         condition = "output.plot",
+#         downloadButton("download_png", "Download as PNG"),
+#         downloadButton("download_pdf", "Download as PDF")
+#       )
+#     )
+#   ),
+#
+#   # Upset plot card
+#   nav_panel(  # for Upset plot
+#     "Upset Plot",
+#     card_title("A leaflet plot"),
+#     markdown("leaflet_widget")
+#   ),
+#
+#   # Help card
+#   nav_panel(  # for help
+#     shiny::icon("circle-info"),
+#     markdown("Learn more about [htmlwidgets](http://www.htmlwidgets.org/)")
+#   )
+# )
+#
+#
+# ui_page_sidebar = page_sidebar(
+#   title = "Penguins dashboard",
+#   sidebar = sidebar("Just a sidebar"),
+#   navset_card_underline(
+#     title = "Histograms by species",
+#     nav_panel("Bill Length", plotOutput("bill_length")),
+#     nav_panel("Bill Depth", plotOutput("bill_depth")),
+#     nav_panel("Body Mass", plotOutput("body_mass"))
+#   )
+# )
 
 # THEME -----
 bs_theme = bs_theme(version = 5)
 bs_theme = bs_theme |>
-  bs_add_rules(xfun::read_utf8(xfun::magic_path("shinyApp.css")) |> paste(collapse = "\n"))
+  bs_add_rules(".class {display: block;}")
 
 # NATIVE SHINY UI ------------------------------------------------------------------
 
 ui = fluidPage(
-  theme = bs_theme,
+  theme = bs_theme(version = 5),
+  tags$head(
+    tags$link(rel = "stylesheet", type = "text/css", href = "shinyApp.css")
+  ),
   titlePanel("ggVennDiagram Shiny App"),
   sidebarLayout(
     sidebarPanel(
@@ -133,9 +103,30 @@ ui = fluidPage(
       accordion(
         open = FALSE,
         accordion_panel(
-        "Other Controls",
-        selectInput("label-geom", 'label-geom', c("text", "label"))
-      )),
+        "Label Controls",
+        numericInput("set_size", "size of set label", 5, min = 0, max = 10, step = 1),
+        selectInput("label", "mode",c("both", "count", "percent", "none"), selected = "both"),
+        selectInput("label_geom", 'geom', c("text", "label"), selected = "label"),
+        numericInput("label_alpha", "alpha", 0.5, min = 0, max = 1, step = 0.1),
+        colourInput("label_color", "color", value = "white"),
+        numericInput("label_size", "size", 3),
+        numericInput("label_percent_digit", "digit", 0, step = 1, min = 0, max = 3),
+        numericInput("label_txtWidth", 'text width', 40, step = 1, min = 1, max = 100)
+      ),
+      accordion_panel(
+        "Edge Controls",
+        selectInput("edge_lty", "line type", c("solid", "dashed", "dotted", "dotdash", "longdash", "twodash"), selected = "solid"),
+        numericInput("edge_size", 'size', 1, step = 1, min = 0, max = 10)
+      ),
+      accordion_panel(
+        "Upset Controls",
+        numericInput("nintersects", "nintersects", 20, min = 1, max = 100, step = 1),
+        selectInput("order.intersect.by", "order of intersect",c("size", "name", "none"), selected = "none"),
+        selectInput("order.set.by", 'order of set', c("size", "name", "none"), selected = 'none'),
+        numericInput("relative_height", 'relative height', 3, min = 2, max = 6, step = 0.1),
+        numericInput('relative_width', 'relative width', 0.3, min = 0.1, max = 1, step = 0.1)
+      ),
+      ),
 
 
       fluidRow(
@@ -145,11 +136,11 @@ ui = fluidPage(
             inputId = "force_upset",
             label = "Upset"
           )),
-        column(8,
-          checkboxInput(
-          "show_intersect",
-          "Show Intersects"
-        ))
+        # column(8,
+        #   checkboxInput(
+        #   "show_intersect",
+        #   "Show Intersects"
+        # ))
       ),
 
       # 画图按钮
@@ -180,14 +171,6 @@ ui = fluidPage(
 
 
 server = function(input, output, session) {
-  # 监听按钮的点击事件，更新 slider 的值
-  observeEvent(input$increase_btn, {
-    updateSliderInput(session, "nsets", value = input$nsets + 1)
-  })
-
-  observeEvent(input$decrease_btn, {
-    updateSliderInput(session, "nsets", value = input$nsets - 1)
-  })
 
   # 动态生成文本输入框的UI
   output$text_inputs = renderUI({
@@ -229,10 +212,25 @@ server = function(input, output, session) {
       category_names[[i]] = input[[paste0("setname_",i)]]
       set_color[[i]] = input[[paste0("setcolor_", i)]]
     }
+    set_color = unlist(set_color)
     return(ggVennDiagram(x,
                          category.names = category_names,
-                         set_color = unlist(set_color),
-                         force_upset = input$force_upset))
+                         # show_intersect = input$show_intersect,
+                         set_color = set_color,
+                         set_size = input$set_size,
+                         label = input$label,
+                         label_alpha = input$label_alpha,
+                         label_size = input$label_size,
+                         label_percent_digit = input$label_percent_digit,
+                         label_txtWidth = input$label_txtWidth,
+                         edge_lty = input$edge_lty,
+                         edge_size = input$edge_size,
+                         force_upset = input$force_upset,
+                         nintersects = input$nintersects,
+                         order.intersect.by = input$order.intersect.by,
+                         order.set.by = input$order.set.by,
+                         relative_height = input$relative_height,
+                         relative_width = input$relative_width))
   }
 
   # 监听画图按钮的点击事件
