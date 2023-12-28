@@ -1,81 +1,13 @@
+library(tidyr)
 library(shiny)
 library(ggVennDiagram)
 # devtools::load_all(path = rprojroot::find_root("DESCRIPTION"))
 library(ggplot2)
 library(bslib)
-library(htmltools)
+library(colourpicker)
+library(export)
 
-# SMALL HTML ELEMENTS -------------------------------------------------------------
-
-## Basic Elements of Sidebar ---------------------------------------------
-
-### Venn plot primary control --------
-
-# PAGE COMPONENTS ------
-
-
-# PAGE LAYOUT-----
-
-## Navset card UI
-# ui_navset_card_tab = navset_card_tab(
-#   height = 700,
-#   full_screen = TRUE,
-#   title = "Draw a Venn diagram or Upset plot",
-#
-#   # Venn plot card
-#   nav_panel(  # for Venn plot
-#     "Venn Diagram",
-#     card_title("A plotly plot"),
-#     layout_sidebar(
-#       sidebar = sidebar("Just a sidebar"),
-#
-#       # others
-#       uiOutput('plot_note'),
-#
-#       # plot
-#       plotOutput("plot"),
-#
-#       # download button
-#       conditionalPanel(
-#         condition = "output.plot",
-#         downloadButton("download_png", "Download as PNG"),
-#         downloadButton("download_pdf", "Download as PDF")
-#       )
-#     )
-#   ),
-#
-#   # Upset plot card
-#   nav_panel(  # for Upset plot
-#     "Upset Plot",
-#     card_title("A leaflet plot"),
-#     markdown("leaflet_widget")
-#   ),
-#
-#   # Help card
-#   nav_panel(  # for help
-#     shiny::icon("circle-info"),
-#     markdown("Learn more about [htmlwidgets](http://www.htmlwidgets.org/)")
-#   )
-# )
-#
-#
-# ui_page_sidebar = page_sidebar(
-#   title = "Penguins dashboard",
-#   sidebar = sidebar("Just a sidebar"),
-#   navset_card_underline(
-#     title = "Histograms by species",
-#     nav_panel("Bill Length", plotOutput("bill_length")),
-#     nav_panel("Bill Depth", plotOutput("bill_depth")),
-#     nav_panel("Body Mass", plotOutput("body_mass"))
-#   )
-# )
-
-# THEME -----
-bs_theme = bs_theme(version = 5)
-bs_theme = bs_theme |>
-  bs_add_rules(".class {display: block;}")
-
-# NATIVE SHINY UI ------------------------------------------------------------------
+# SHINY UI ------------------------------------------------------------------
 
 ui = page_sidebar(
   theme = bs_theme(version = 5),
@@ -85,82 +17,89 @@ ui = page_sidebar(
   title = "ggVennDiagram Shiny App",
   sidebar = sidebar(
     width = "30%",
-      # Set number
-      sliderInput(
-        inputId = 'nsets',
-        label = "Number of Sets: ",
-        value = 4,
-        min = 2,
-        max = 8,
-        step = 1
-      ),
-
-      p("Set name and members:"),
-
-      # dynamic inputs
-      uiOutput("text_inputs"),
-
-      accordion(
-        open = FALSE,
-        accordion_panel(
-          "Label Controls",
-          numericInput("set_size", "size of set label", 5, min = 0, max = 10, step = 1),
-          selectInput("label", "mode",c("both", "count", "percent", "none"), selected = "both"),
-          selectInput("label_geom", 'geom', c("text", "label"), selected = "label"),
-          numericInput("label_alpha", "alpha", 0.5, min = 0, max = 1, step = 0.1),
-          colourInput("label_color", "color", value = "white"),
-          numericInput("label_size", "size", 3),
-          numericInput("label_percent_digit", "digit", 0, step = 1, min = 0, max = 3),
-          numericInput("label_txtWidth", 'text width', 40, step = 1, min = 1, max = 100)
-        ),
-        accordion_panel(
-          "Edge Controls",
-          selectInput("edge_lty", "line type", c("solid", "dashed", "dotted", "dotdash", "longdash", "twodash"), selected = "solid"),
-          numericInput("edge_size", 'size', 1, step = 1, min = 0, max = 10)
-        ),
-        accordion_panel(
-          "Upset Controls",
-          numericInput("nintersects", "nintersects", 20, min = 1, max = 100, step = 1),
-          selectInput("order.intersect.by", "order of intersect",c("size", "name", "none"), selected = "none"),
-          selectInput("order.set.by", 'order of set', c("size", "name", "none"), selected = 'none'),
-          numericInput("relative_height", 'relative height', 3, min = 2, max = 6, step = 0.1),
-          numericInput('relative_width', 'relative width', 0.3, min = 0.1, max = 1, step = 0.1)
-        ),
-      ),
-
-
-      fluidRow(
-        # type of plot
-        column(4,
-          checkboxInput(
-            inputId = "force_upset",
-            label = "Upset"
-          )),
-        # column(8,
-        #   checkboxInput(
-        #   "show_intersect",
-        #   "Show Intersects"
-        # ))
-      ),
-
-      # 画图按钮
-      actionButton("plot_btn", "Plot Now!"),
+    # Set number
+    sliderInput(
+      inputId = 'nsets',
+      label = "Number of Sets: ",
+      value = 3,
+      min = 2,
+      max = 8,
+      step = 1
     ),
 
-    card(
-      uiOutput('plot_note'),
+    p("Set name and members:"),
 
-      # plot
-      plotOutput("plot"),
+    # dynamic inputs
+    uiOutput("text_inputs"),
 
-      # download button
-      conditionalPanel(
-        condition = "output.plot",
-        uiOutput("download_btns")
+    accordion(
+      open = FALSE,
+      accordion_panel(
+        "Label Controls",
+        numericInput("set_size", "size of set label", 5, min = 0, max = 10, step = 1),
+        selectInput("label", "mode",c("both", "count", "percent", "none"), selected = "both"),
+        selectInput("label_geom", 'geom', c("text", "label"), selected = "label"),
+        numericInput("label_alpha", "alpha", 0.5, min = 0, max = 1, step = 0.1),
+        colourInput("label_color", "color", value = "white"),
+        numericInput("label_size", "size", 3),
+        numericInput("label_percent_digit", "digit", 0, step = 1, min = 0, max = 3),
+        numericInput("label_txtWidth", 'text width', 40, step = 1, min = 1, max = 100)
+      ),
+      accordion_panel(
+        "Edge Controls",
+        selectInput("edge_lty", "line type", c("solid", "dashed", "dotted", "dotdash", "longdash", "twodash"), selected = "solid"),
+        numericInput("edge_size", 'size', 1, step = 1, min = 0, max = 10)
+      ),
+      accordion_panel(
+        "Filling Controls",
+        colourInput("low", "low value color", value = "white", showColour = "both", palette = "limited", closeOnClick = TRUE),
+        colourInput("high", "high value color", value = "red",showColour = "both", palette = "limited", closeOnClick = TRUE),
+      ),
+      accordion_panel(
+        "Upset Controls",
+        numericInput("nintersects", "nintersects", 20, min = 1, max = 100, step = 1),
+        selectInput("order.intersect.by", "order of intersect",c("size", "name", "none"), selected = "none"),
+        selectInput("order.set.by", 'order of set', c("size", "name", "none"), selected = 'none'),
+        numericInput("relative_height", 'relative height', 3, min = 2, max = 6, step = 0.1),
+        numericInput('relative_width', 'relative width', 0.3, min = 0.1, max = 1, step = 0.1)
+      ),
+    ),
 
-      )
+
+    fluidRow(
+      # type of plot
+      column(4,
+             checkboxInput(
+               inputId = "force_upset",
+               label = "Upset"
+             )),
+      # column(8,
+      #   checkboxInput(
+      #   "show_intersect",
+      #   "Show Intersects"
+      # ))
+    ),
+
+    # 画图按钮
+    actionButton("plot_btn", "Plot Now!"),
+  ),
+
+  card(
+    style = "overflow: visible;",
+    uiOutput('plot_note'),
+
+    # plot
+    plotOutput("plot"),
+
+    # download button
+    conditionalPanel(
+      condition = "output.plot",
+      p("Download thi plot in bitmap or vector files:"),
+      uiOutput("download_btns")
 
     )
+
+  )
 )
 
 
@@ -170,11 +109,13 @@ ui = page_sidebar(
 
 
 server = function(input, output, session) {
-
+  # output format
+  format = c("png","jpg","tiff","svg","pdf","pptx")
   output$download_btns = renderUI({
-    # list = lapply(c())
-    tagList(downloadButton("download_png", "Download as PNG"),
-    downloadButton("download_pdf", "Download as PDF"))
+    dl_list = lapply(format, function(x){
+      downloadButton(paste0("download_",x), toupper(x))
+    })
+    do.call(tagList, dl_list)
   })
 
   # 动态生成文本输入框的UI
@@ -183,9 +124,10 @@ server = function(input, output, session) {
     text_inputs = lapply(1:input$nsets, function(i) {
       div(
         class = "form-control my-2 p-2",
-        fluidRow(
-          column(textInput(paste0("setname_",i), NULL, paste("Set", i, sep = "_")), width = 10),
-          column(colourInput(paste0("setcolor_",i), NULL, value = "black", showColour = "background"), width = 2),
+        div(
+          class = "inline",
+          textInput(paste0("setname_",i), NULL, paste("Set", i, sep = "_"), width = "60%"),
+          colourInput(paste0("setcolor_",i), NULL, value = "black", showColour = "both", palette = "limited", closeOnClick = TRUE, width = "40%"),
         ),
         textAreaInput(paste0("set_", i),
                       label = "",
@@ -218,24 +160,30 @@ server = function(input, output, session) {
       set_color[[i]] = input[[paste0("setcolor_", i)]]
     }
     set_color = unlist(set_color)
-    return(ggVennDiagram(x,
-                         category.names = category_names,
-                         # show_intersect = input$show_intersect,
-                         set_color = set_color,
-                         set_size = input$set_size,
-                         label = input$label,
-                         label_alpha = input$label_alpha,
-                         label_size = input$label_size,
-                         label_percent_digit = input$label_percent_digit,
-                         label_txtWidth = input$label_txtWidth,
-                         edge_lty = input$edge_lty,
-                         edge_size = input$edge_size,
-                         force_upset = input$force_upset,
-                         nintersects = input$nintersects,
-                         order.intersect.by = input$order.intersect.by,
-                         order.set.by = input$order.set.by,
-                         relative_height = input$relative_height,
-                         relative_width = input$relative_width))
+    p = ggVennDiagram(x,
+                      category.names = category_names,
+                      # show_intersect = input$show_intersect,
+                      set_color = set_color,
+                      set_size = input$set_size,
+                      label = input$label,
+                      label_alpha = input$label_alpha,
+                      label_size = input$label_size,
+                      label_percent_digit = input$label_percent_digit,
+                      label_txtWidth = input$label_txtWidth,
+                      edge_lty = input$edge_lty,
+                      edge_size = input$edge_size,
+                      force_upset = input$force_upset,
+                      nintersects = input$nintersects,
+                      order.intersect.by = input$order.intersect.by,
+                      order.set.by = input$order.set.by,
+                      relative_height = input$relative_height,
+                      relative_width = input$relative_width)
+    if (inherits(p, "upset_plot")){
+      return(p)
+    } else {
+      return( p + scale_fill_gradient(low = input$low, high = input$high))
+    }
+
   }
 
   # 监听画图按钮的点击事件
@@ -246,22 +194,40 @@ server = function(input, output, session) {
     session$userData$plot = p
   })
 
+  download_filename = function(format){
+    # 获取当前时间
+    current_time <- Sys.time()
+
+    # 将时间格式化为字符串，例如"2023-12-26_14-30-00"
+    formatted_time <- format(current_time, format = "%Y-%m-%d_%H-%M-%S")
+
+    # 生成文件名
+    file_name <- paste0("ggVennDiagram_", formatted_time, ".", format)
+
+    # 打印生成的文件名
+    return(file_name)
+
+  }
+
 
   # 下载按钮的回调函数
-  output$download_png <- downloadHandler(
-    filename = function() { "plot.png" },
-    content = function(file) {
-      ggsave(file, session$userData$plot, device = "png", width = 10, height = 6, units = "in", dpi = 300)
+  lapply(format, function(x) {
+    if (x == "pptx"){
+      output[[paste0("download_", x)]] = downloadHandler(
+        filename = download_filename(x),
+        content = function(file){
+          export::graph2ppt(file = file, x = session$userData$plot)
+        }
+      )
+    } else {
+      output[[paste0("download_", x)]] = downloadHandler(
+        filename = download_filename(x),
+        content = function(file){
+          ggsave(file, session$userData$plot, device = x)
+        }
+      )
     }
-  )
-
-  output$download_pdf <- downloadHandler(
-    filename = function() { "plot.pdf" },
-    content = function(file) {
-      ggsave(file, session$userData$plot, device = "pdf", width = 10, height = 6, units = "in")
-    }
-  )
-
+  })
 
 }
 

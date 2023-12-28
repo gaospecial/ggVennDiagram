@@ -21,9 +21,7 @@
 }
 
 /* move button to right */
-form {
-  overflow: hidden;
-}
+
 
 .action-button {
   float: right;
@@ -32,6 +30,7 @@ form {
 /* move button to right */
 
 
-.inline .form-group {
-  display: table-row;
+
+div.inline {
+  display: flex;
 }
