@@ -144,7 +144,7 @@ server = function(input, output, session) {
     tagList(
       h2("Steps", class = "my-4"),
       markdown("1. Use the button or slider to specify the number of sets."),
-      markdown("2. Specify set members using comma-sparated strings (just follow the examples)."),
+      markdown("2. Specify set members using comma-sparated strings (accept separators are ',;\t\n\r'."),
       markdown("3. Configure addtional parameters if you want."),
       markdown("4. Click the **<Plot Now!>** button."),
       markdown("5. Enjoy and download your publication-quality figures.")
@@ -157,7 +157,7 @@ server = function(input, output, session) {
     category_names = vector("list", length = input$nsets)
     set_color = vector("list", length = input$nsets)
     for (i in 1:input$nsets) {
-      x[[i]] = input[[paste0("set_", i)]] |> strsplit(split = ",") |> unlist()
+      x[[i]] = input[[paste0("set_", i)]] |> strsplit(split = "[,;\t\n\r]+") |> unlist()
       category_names[[i]] = input[[paste0("setname_",i)]]
       set_color[[i]] = input[[paste0("setcolor_", i)]]
     }
