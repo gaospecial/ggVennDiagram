@@ -65,7 +65,6 @@ ui = page_sidebar(
       ),
     ),
 
-
     fluidRow(
       # type of plot
       # column(4,
