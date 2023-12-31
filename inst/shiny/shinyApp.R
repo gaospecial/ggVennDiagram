@@ -143,7 +143,7 @@ server = function(input, output, session) {
     tagList(
       h2("Steps", class = "my-4"),
       markdown("1. Use the button or slider to specify the number of sets."),
-      markdown("2. Specify set members using comma-sparated strings (accept separators are ',;\t\n\r'."),
+      markdown("2. Specify set members using comma-sparated strings (accept separators are `,`, `;`, `\\t`, `\\n`, or `\\r`)."),
       markdown("3. Configure addtional parameters if you want."),
       markdown("4. Click the **<Plot Now!>** button."),
       markdown("5. Enjoy and download your publication-quality figures.")
