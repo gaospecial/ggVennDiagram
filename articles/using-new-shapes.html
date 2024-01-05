@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggVennDiagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.12</span>
       </span>
     </div>
 
@@ -53,16 +53,10 @@
       <a href="../articles/fully-customed.html">Fully Customed Venn Diagram</a>
     </li>
     <li>
-      <a href="../articles/using-ggVennDiagram-cn.html">ggVennDiagram 使用说明</a>
-    </li>
-    <li>
       <a href="../articles/using-ggVennDiagram.html">Tutorial: Using ggVennDiagram</a>
     </li>
     <li>
       <a href="../articles/using-new-shapes.html">Using New Shapes in Venn Diagram</a>
-    </li>
-    <li>
-      <a href="../articles/venn-plot-with-more-than-four-sets.html">Venn Plot with More Than Four Sets</a>
     </li>
   </ul>
 </li>
@@ -153,7 +147,9 @@ it.</p>
 <span><span class="fu"><a href="../reference/plot_shape_edge.html">plot_shape_edge</a></span><span class="op">(</span><span class="va">shape2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="using-new-shapes_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>The <code><a href="../reference/plot_shapes.html">plot_shapes()</a></code> function can be used to plot all the
-available shapes stored in this package.</p>
+available shapes stored in this package. Please note that the shapes for
+this five sets diagram, as well as those for six and seven sets, are
+copied from the original package “venn”, authored by Adrian Dușa.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_shapes.html">plot_shapes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="using-new-shapes_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
@@ -196,7 +192,13 @@ to draw in <code>ggVennDiagram</code>. The functions of this part have
 been transfered to a new R package <code>shapeMageR</code>, which can be
 found in <a href="https://github.com/gaospecial/shapeMageR" class="external-link uri">https://github.com/gaospecial/shapeMageR</a>. To do this,
 the dependency of <code>ggVennDiagram</code> is very light, thus
-increase the accessiblity of the package.</p>
+increase the accessibility of the package.</p>
+</div>
+<div class="section level2">
+<h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a>
+</h2>
+<p>Adrian Dusa (2024) <em>venn: Draw Venn Diagrams</em>, R package
+version 1.12. <a href="https://CRAN.R-project.org/package=venn" class="external-link uri">https://CRAN.R-project.org/package=venn</a>.</p>
 </div>
   </div>
 
