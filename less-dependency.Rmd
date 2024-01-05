@@ -37,23 +37,25 @@ x <- list(A=sample(genes,300),
 
 ```{r}
 dependency = c(
-  "sf",
-  "ggplot2",
-  "dplyr",
-  "magrittr",
-  "methods",
-  "purrr",
-  "tibble",
-  "plotly",
-  "RVenn",
-  "yulab.utils"
+     "sf",
+    "ggplot2",
+    "dplyr",
+    "stringr",
+    "magrittr",
+    "methods",
+    "purrr",
+    "tibble",
+    "plotly",
+    "RVenn",
+    "tidyr",
+    "venn"
 )
 ```
 
 Although we only import ten packages in the development, the dependence tree is huge.
 
 ```{r}
-(deps = pak::pkg_deps_tree("gaospecial/ggVennDiagram@V1.2.3"))
+(deps = pak::pkg_deps_tree("gaospecial/ggVennDiagram@V1.1"))
 ```
 ```{r}
 deps |> select(package, filesize) |> 
@@ -199,32 +201,12 @@ for (tag in c("V0.5.0","V1.0.7","V1.1","V1.2","V1.2.2","V1.4.9")){
 
 
 ```{r}
-report_package_dependency("gaospecial/ggVennDiagram@V1.2.3")
-```
-
-```{r}
-report_package_dependency("gaospecial/ggVennDiagram@V1.2.3", exclude = c("ggplot2","dplyr"))
-```
-
-
-```{r}
-report_package_dependency("gaospecial/ggVennDiagram@V1.4.9")
-```
-
-```{r}
-report_package_dependency("gaospecial/ggVennDiagram@V1.4.9", exclude = c("ggplot2","dplyr"))
-
-```
-
-
-```{r}
 report_package_dependency(".")
 ```
 
 ```{r}
 report_package_dependency(".", exclude = c("ggplot2","dplyr"))
 ```
-
 
 ### Current depdency
 
