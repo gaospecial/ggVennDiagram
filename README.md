@@ -9,7 +9,7 @@
 [![](http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
 [![](https://img.shields.io/badge/doi-10.3389/fgene.2021.706907-blue.svg)](https://doi.org/10.3389/fgene.2021.706907)
 [![](https://www.r-pkg.org/badges/version/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
-[![](https://img.shields.io/badge/devel%20version-1.4.9-green.svg)](https://github.com/gaospecial/ggVennDiagram)
+[![](https://img.shields.io/badge/devel%20version-1.4.12-green.svg)](https://github.com/gaospecial/ggVennDiagram)
 [![](https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://app.codecov.io/gh/gaospecial/ggVennDiagram)
 <!-- badges: end -->
 
@@ -182,10 +182,10 @@ combination.
 
 ## Venn Diagram of up to seven sets
 
-From v1.0, `ggVennDiagram` can plot up to seven dimension Venn plot. We
-would like to acknowledgment Adrian Dusa, the author of package `venn`
-(<https://CRAN.R-project.org/package=venn>), for his kind help on
-sharing the required shape coordinates for this feature.
+From v1.0, `ggVennDiagram` can plot up to seven dimension Venn plot.
+Please note that the shapes for this five sets diagram, as well as those
+for six and seven sets, are copied from the original package “venn”,
+authored by Adrian Dușa.
 
 However, Venn Diagram for more than four sets may be meaningless in some
 conditions, as some parts may be omitted in such ellipses. Therefore, it
@@ -202,23 +202,23 @@ x <- list(A=sample(genes,300),
           F=sample(genes,150),
           G=sample(genes,100))
 
-# seven dimension Venn plot
-ggVennDiagram(x)
-
-# six dimension Venn plot
-ggVennDiagram(x[1:6])
-
-# five dimension Venn plot
-ggVennDiagram(x[1:5])
-
-# four dimension Venn plot
-ggVennDiagram(x[1:4])
+# two dimension Venn plot
+ggVennDiagram(x[1:2])
 
 # three dimension Venn plot
 ggVennDiagram(x[1:3])
 
-# two dimension Venn plot
-ggVennDiagram(x[1:2])
+# four dimension Venn plot
+ggVennDiagram(x[1:4])
+
+# five dimension Venn plot
+ggVennDiagram(x[1:5])
+
+# six dimension Venn plot
+ggVennDiagram(x[1:6])
+
+# seven dimension Venn plot
+ggVennDiagram(x)
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="90%" />
@@ -240,6 +240,14 @@ ggVennDiagram(x)
 
 <img src="man/figures/README-unnamed-chunk-12-1.png" width="90%" />
 
+Upset plot can also be used by setting `force_upset = TRUE`.
+
+``` r
+ggVennDiagram(x[1:4], force_upset = TRUE, order.set.by = "name", order.intersect.by = "none")
+```
+
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="90%" />
+
 Since upset plot is consisted with upper panel and lower panel, and left
 panel and right panel, the appearance should be adjusted with different
 conditions. We provide two parameters, which are `relative_height` and
@@ -253,16 +261,9 @@ venn = Venn(x)
 plot_upset(venn, nintersects = 30, relative_height = 2, relative_width = 0.3)
 ```
 
-<img src="man/figures/README-unnamed-chunk-13-1.png" width="90%" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="90%" />
 
-# Futher information
+# Reference
 
-## 公众号文章
-
-在 *@GuangchuangYu* 的公众号下面，我投稿了两篇文章，介绍了
-“`ggVennDiagram`” 包开发的始末。
-
-- [“`ggVennDiagram`”
-  诞生记](https://mp.weixin.qq.com/s/peNWKC5m7EWEv6w3m4rsIA)
-- [“`ggVennDiagram`”
-  的重构](https://mp.weixin.qq.com/s/6kDXPrJRyXab6HpVjq6JBw)
+Adrian Dusa (2024) *venn: Draw Venn Diagrams*, R package version 1.12.
+<https://CRAN.R-project.org/package=venn>.

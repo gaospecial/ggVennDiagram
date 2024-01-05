@@ -1,7 +1,7 @@
 Package: ggVennDiagram
 Type: Package
 Title: A 'ggplot2' Implement of Venn Diagram
-Version: 1.4.11
+Version: 1.4.12
 Authors@R: c(
   person("Chun-Hui","Gao", email="gaospecial@gmail.com", role=c("aut","cre"), comment=c(ORCID = "0000-0002-1445-7939")),
   person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("ctb"), comment = c(ORCID = "0000-0002-6485-8781")),
@@ -36,10 +36,9 @@ Encoding: UTF-8
 RoxygenNote: 7.2.3
 Suggests: 
     testthat (>= 2.1.0),
-    plotly,
-    knitr,
-    rmarkdown,
     venn,
+    knitr,
+    plotly,
     RColorBrewer,
     shiny
 VignetteBuilder: knitr

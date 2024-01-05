@@ -50,7 +50,7 @@ shape2 = get_shape_by_id("401f")
 plot_shape_edge(shape2)
 ```
 
-The `plot_shapes()` function can be used to plot all the available shapes stored in this package.
+The `plot_shapes()` function can be used to plot all the available shapes stored in this package. Please note that the shapes for this five sets diagram, as well as those for six and seven sets, are copied from the original package “venn”, authored by Adrian Dușa.
 
 
 ```{r}
@@ -90,7 +90,10 @@ If user knows the coordinates of a novel shape, it may also be used to draw in
 `ggVennDiagram`. The functions of this part have been transfered to a new R package 
 `shapeMageR`, which can be found in <https://github.com/gaospecial/shapeMageR>.
 To do this, the dependency of `ggVennDiagram` is very light, thus increase the 
-accessiblity of the package.
+accessibility of the package.
 
 
+## Reference
+
+Adrian Dusa (2024) _venn: Draw Venn Diagrams_, R package version 1.12. <https://CRAN.R-project.org/package=venn>.
 
