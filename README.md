@@ -203,22 +203,22 @@ x <- list(A=sample(genes,300),
           G=sample(genes,100))
 
 # two dimension Venn plot
-ggVennDiagram(x[1:2])
+ggVennDiagram(x[1:2],label = "none")
 
 # three dimension Venn plot
-ggVennDiagram(x[1:3])
+ggVennDiagram(x[1:3],label = "none")
 
 # four dimension Venn plot
-ggVennDiagram(x[1:4])
+ggVennDiagram(x[1:4],label = "none")
 
 # five dimension Venn plot
-ggVennDiagram(x[1:5])
+ggVennDiagram(x[1:5],label = "none")
 
 # six dimension Venn plot
-ggVennDiagram(x[1:6])
+ggVennDiagram(x[1:6],label = "none")
 
 # seven dimension Venn plot
-ggVennDiagram(x)
+ggVennDiagram(x,label = "none")
 ```
 
 <img src="man/figures/README-unnamed-chunk-11-1.png" width="90%" />
