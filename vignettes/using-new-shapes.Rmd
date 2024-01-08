@@ -50,14 +50,14 @@ shape2 = get_shape_by_id("401f")
 plot_shape_edge(shape2)
 ```
 
-The `plot_shapes()` function can be used to plot all the available shapes stored in this package. Please note that the shapes for this five sets diagram, as well as those for six and seven sets, are imported from the original package “venn”, authored by Adrian Dușa.
+The `plot_shapes()` function can be used to plot all the available shapes stored in this package. Please note that the shapes for this five sets diagram, as well as those for six and seven sets, are imported from the original package [`venn`](https://CRAN.R-project.org/package=venn), authored by Adrian Dușa.
 
 
 ```{r}
 plot_shapes()
 ```
 
-Among them, the shapes with less than four sets can be generated with circle or ellipses. For example, the parameters used to generate four-set ellipses were adopted from `VennDiagram` (<https://CRAN.R-project.org/package=VennDiagram>). Notably, those shapes of five or more sets, including 501, 502, 601, and 701, are collected by Adrian Dusa and provided in his `venn` package (<https://CRAN.R-project.org/package=venn>). Besides, the 601t shape is imported from a WiKi entry (<https://en.wikipedia.org/wiki/Venn_diagram>).
+Among them, the shapes with less than four sets can be generated with circle or ellipses. For example, the parameters used to generate four-set ellipses were adopted from `VennDiagram` (<https://CRAN.R-project.org/package=VennDiagram>). Notably, those shapes of five or more sets, including 501, 502, 601, and 701, are created by Adrian Dușa and provided in his `venn` package (<https://CRAN.R-project.org/package=venn>). Besides, the 601t shape is imported from a WiKi entry (<https://en.wikipedia.org/wiki/Venn_diagram>).
 
 
 ## Using alternative internal shapes

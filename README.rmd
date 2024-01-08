@@ -148,7 +148,7 @@ The key point is to let the generated ellipses have exactly one intersection for
 
 ## Venn Diagram of up to seven sets
 
-From v1.0, `ggVennDiagram` can plot up to seven dimension Venn plot. Please note that the shapes for this five sets diagram, as well as those for six and seven sets, are imported from the original package “venn”, authored by Adrian Dușa.
+From v1.0, `ggVennDiagram` can plot up to seven dimension Venn plot. Please note that the shapes for this five sets diagram, as well as those for six and seven sets, are imported from the original package [`venn`](https://CRAN.R-project.org/package=venn) authored by Adrian Dușa.
 
 However, Venn Diagram for more than four sets may be meaningless in some conditions, 
 as some parts may be omitted in such ellipses. Therefore, it is only useful in specific conditions. 

@@ -37,7 +37,7 @@ x <- list(A=sample(genes,300),
 
 ```{r}
 dependency = c(
-     "sf",
+    "sf",
     "ggplot2",
     "dplyr",
     "stringr",
@@ -68,9 +68,9 @@ deps |> select(package, filesize) |>
 Among them, `sf` is the heaviest package that `ggVennDiagram` depend on. 
 
 ```{r}
-pak_dep = deps %>%
-  select(package, sysreqs, filesize) %>%
-  arrange(desc(filesize)) %>%
+pak_dep = deps |>
+  select(package, sysreqs, filesize) |>
+  arrange(desc(filesize)) |>
   filter(package %in% dependency)
 pak_dep
 ```
@@ -82,11 +82,11 @@ pak_dep |>
 ```
 
 
-`sf` not only have the largest size of package, but also depends on several system packages, such as `GDAL`, `GEOS`, `PROJ`, and so on. Furthermore, two of the `sf`-dependent packages, `s2` and `units` also have system requirements, especially `units`, whose system dependence `udunits-2` is an additional one that usually not installed by most of the `ggVennDiagram` users.
+Package `sf` not only has the largest size, but also depends on several system packages, such as `GDAL`, `GEOS`, `PROJ`, and so on. Furthermore, two of the `sf`-dependent packages, `s2` and `units` also have system requirements, especially `units`, whose system dependence `udunits-2` is an additional one that usually not installed by most of the `ggVennDiagram` users.
 
 ```{r}
 deps_sf = pak::pkg_deps("sf")
-deps %>% filter(package %in% deps_sf$package, sysreqs != "") %>% 
+deps |> filter(package %in% deps_sf$package, sysreqs != "") |> 
   select(package, sysreqs, filesize)
 ```
 
@@ -97,10 +97,10 @@ However, `sf` is a necessary for the full functions of `ggVennDiagram` in shape 
 Besides, several other packages are removed from dependency list after considerations.
 
 ```{r}
-deps %>%
-  select(package, sysreqs, filesize) %>%
+deps |>
+  select(package, sysreqs, filesize) |>
   filter(!package %in% pak::pkg_deps("sf")$package, 
-         !package %in% pak::pkg_deps("ggplot2")$package) %>% 
+         !package %in% pak::pkg_deps("ggplot2")$package) |> 
   arrange(desc(filesize))
 ```
 
@@ -127,14 +127,15 @@ dependency_new = c(
   "methods",
   "tibble",
   "aplot",
-  "forcats")
+  "forcats",
+  "venn")
 ```
 
 
 ```{r}
-primary_deps = deps_new %>%
-  select(package, sysreqs, filesize) %>%
-  arrange(desc(filesize)) %>%
+primary_deps = deps_new |>
+  select(package, sysreqs, filesize) |>
+  arrange(desc(filesize)) |>
   filter(package %in% dependency_new)
 primary_deps
 # write.csv(primary_deps, file = "deps_current.csv")
