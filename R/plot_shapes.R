@@ -33,6 +33,7 @@ NULL
 #' @import ggplot2
 #' @export
 #' @examples
+#' @md
 #' plot_shapes()
 plot_shapes <- function(){
   plots = lapply(shapes, plot_shape_edge)
