@@ -33,8 +33,8 @@ NULL
 #' @import ggplot2
 #' @export
 #' @examples
-#' @md
 #' plot_shapes()
+#' @md
 plot_shapes <- function(){
   plots = lapply(shapes, plot_shape_edge)
   aplot::plot_list(gglist = plots, widths = 1)
