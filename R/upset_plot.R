@@ -26,6 +26,13 @@
 #' @param order.set.by 'size', 'name', or "none"
 #' @param relative_height the relative height of top panel in upset plot
 #' @param relative_width the relative width of left panel in upset plot
+#' @param top.bar.color default is "grey30",
+#' @param top.bar.y.label default is "Intersection Size",
+#' @param top.bar.show.numbers default is TRUE,
+#' @param sets.bar.color default is "grey30",
+#' @param sets.bar.show.numbers default is FALSE,
+#' @param sets.bar.x.label default is "Set Size",
+#' @param intersection.matrix.color default is "grey30"
 #' @param ... useless
 #' @return an upset plot
 #'
@@ -46,6 +53,13 @@ plot_upset = function(venn,
                       order.set.by = c("size","name","none"),
                       relative_height = 3,
                       relative_width = 0.3,
+                      top.bar.color = "grey30",
+                      top.bar.y.label = "Intersection Size",
+                      top.bar.show.numbers = TRUE,
+                      sets.bar.color = "grey30",
+                      sets.bar.show.numbers = FALSE,
+                      sets.bar.x.label = "Set Size",
+                      intersection.matrix.color = "grey30",
                       ...){
   # process arguments
   order.intersect.by = match.arg(order.intersect.by)
@@ -56,13 +70,20 @@ plot_upset = function(venn,
                            nintersects = nintersects,
                            order.intersect.by = order.intersect.by,
                            order.set.by = order.set.by)
-  p_main = upsetplot_main(data$main_data)
+  p_main = upsetplot_main(data$main_data,
+                          intersection.matrix.color = intersection.matrix.color)
 
   # subplot top
-  p_top = upsetplot_top(data$top_data)
+  p_top = upsetplot_top(data$top_data,
+                        top.bar.color = top.bar.color,
+                        top.bar.y.label = top.bar.y.label,
+                        top.bar.show.numbers = top.bar.show.numbers)
 
   # subplot left
-  p_left = upsetplot_left(data$left_data)
+  p_left = upsetplot_left(data$left_data,
+                          sets.bar.color = sets.bar.color,
+                          sets.bar.x.label = sets.bar.x.label,
+                          sets.bar.show.numbers = sets.bar.show.numbers)
 
   # combine into a plot
   pp = aplot::insert_top(p_main, p_top, height = relative_height) |>
@@ -72,28 +93,45 @@ plot_upset = function(venn,
   return(pp)
 }
 
-upsetplot_main = function(data){
+upsetplot_main = function(data, ...){
+  param = list(...)
   ggplot2::ggplot(data, aes(.data$id, .data$set)) +
-    ggplot2::geom_point(size = 4, color = "grey30", na.rm = FALSE) +
-    ggplot2::geom_path(aes(group = .data$id), linewidth = 1.5, color = "grey30", na.rm = FALSE) +
+    ggplot2::geom_point(size = 4, color = param$intersection.matrix.color, na.rm = FALSE) +
+    ggplot2::geom_path(aes(group = .data$id), linewidth = 1.5, color = param$intersection.matrix.color, na.rm = FALSE) +
     ggplot2::labs(x = "Set Intersection", y = NULL) +
     theme_upset_main()
 }
 
-upsetplot_top = function(data){
-  ggplot2::ggplot(data, aes(.data$id, .data$size)) +
-    ggplot2::geom_col() +
-    ggplot2::labs(x = NULL, y = NULL) +
+upsetplot_top = function(data, ...){
+  param = list(...)
+  p = ggplot2::ggplot(data, aes(.data$id, .data$size)) +
+    ggplot2::geom_col(color = param$top.bar.color) +
+    ggplot2::labs(x = NULL, y = param$top.bar.y.label) +
     theme_upset_top()
+  if (param$top.bar.show.numbers) p = show_numbers_y(p, value = "size")
+  return(p)
 }
 
-upsetplot_left = function(data){
-  ggplot2::ggplot(data, aes(x = .data$size, y = .data$set)) +
-    ggplot2::geom_col(orientation = "y") +
+upsetplot_left = function(data, ...){
+  param = list(...)
+  p = ggplot2::ggplot(data, aes(x = .data$size, y = .data$set)) +
+    ggplot2::geom_col(orientation = "y", color = param$sets.bar.color) +
     ggplot2::scale_y_discrete(position = "right") +
     ggplot2::scale_x_reverse() +
-    ggplot2::labs(x = "Set Size", y = NULL) +
+    ggplot2::labs(x = param$sets.bar.x.label, y = NULL) +
     theme_upset_left()
+  if (param$sets.bar.show.numbers) p = show_numbers_x(p, value = "size")
+  return(p)
+}
+
+show_numbers_y = function(p, value){
+  p + ggplot2::geom_text(aes(label = .data[[value]],
+                             y = .data[[value]] + diff(range(.data[[value]])) * 0.03))
+}
+
+show_numbers_x = function(p, value){
+  p + ggplot2::geom_text(aes(label = .data[[value]],
+                             x = .data[[value]] + diff(range(.data[[value]])) * 0.2))
 }
 
 ## (PART) Theme
