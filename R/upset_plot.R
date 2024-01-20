@@ -26,12 +26,13 @@
 #' @param order.set.by 'size', 'name', or "none"
 #' @param relative_height the relative height of top panel in upset plot
 #' @param relative_width the relative width of left panel in upset plot
-#' @param top.bar.color default is "grey30",
-#' @param top.bar.y.label default is "Intersection Size",
-#' @param top.bar.show.numbers default is TRUE,
-#' @param sets.bar.color default is "grey30",
-#' @param sets.bar.show.numbers default is FALSE,
-#' @param sets.bar.x.label default is "Set Size",
+#' @param top.bar.color default is "grey30"
+#' @param top.bar.y.label default is NULL
+#' @param top.bar.show.numbers default is TRUE
+#' @param top.bar.numbers.size text size of numbers
+#' @param sets.bar.color default is "grey30"
+#' @param sets.bar.show.numbers default is FALSE
+#' @param sets.bar.x.label default is "Set Size"
 #' @param intersection.matrix.color default is "grey30"
 #' @param ... useless
 #' @return an upset plot
@@ -54,8 +55,9 @@ plot_upset = function(venn,
                       relative_height = 3,
                       relative_width = 0.3,
                       top.bar.color = "grey30",
-                      top.bar.y.label = "Intersection Size",
+                      top.bar.y.label = NULL,
                       top.bar.show.numbers = TRUE,
+                      top.bar.numbers.size = 3,
                       sets.bar.color = "grey30",
                       sets.bar.show.numbers = FALSE,
                       sets.bar.x.label = "Set Size",
@@ -77,7 +79,8 @@ plot_upset = function(venn,
   p_top = upsetplot_top(data$top_data,
                         top.bar.color = top.bar.color,
                         top.bar.y.label = top.bar.y.label,
-                        top.bar.show.numbers = top.bar.show.numbers)
+                        top.bar.show.numbers = top.bar.show.numbers,
+                        top.bar.numbers.size = top.bar.numbers.size)
 
   # subplot left
   p_left = upsetplot_left(data$left_data,
@@ -105,17 +108,22 @@ upsetplot_main = function(data, ...){
 upsetplot_top = function(data, ...){
   param = list(...)
   p = ggplot2::ggplot(data, aes(.data$id, .data$size)) +
-    ggplot2::geom_col(color = param$top.bar.color) +
+    ggplot2::geom_col(fill = param$top.bar.color) +
     ggplot2::labs(x = NULL, y = param$top.bar.y.label) +
+    scale_y_continuous(expand = ggplot2::expansion(mult = c(0.01, 0.05))) +
     theme_upset_top()
-  if (param$top.bar.show.numbers) p = show_numbers_y(p, value = "size")
+  if (param$top.bar.show.numbers) {
+    p = p + ggplot2::geom_text(aes(label = .data$size,
+                               y = .data$size + diff(range(.data$size)) * 0.03),
+                               size = param$top.bar.numbers.size)
+  }
   return(p)
 }
 
 upsetplot_left = function(data, ...){
   param = list(...)
   p = ggplot2::ggplot(data, aes(x = .data$size, y = .data$set)) +
-    ggplot2::geom_col(orientation = "y", color = param$sets.bar.color) +
+    ggplot2::geom_col(orientation = "y", fill = param$sets.bar.color) +
     ggplot2::scale_y_discrete(position = "right") +
     ggplot2::scale_x_reverse() +
     ggplot2::labs(x = param$sets.bar.x.label, y = NULL) +
@@ -125,13 +133,12 @@ upsetplot_left = function(data, ...){
 }
 
 show_numbers_y = function(p, value){
-  p + ggplot2::geom_text(aes(label = .data[[value]],
-                             y = .data[[value]] + diff(range(.data[[value]])) * 0.03))
+
 }
 
 show_numbers_x = function(p, value){
-  p + ggplot2::geom_text(aes(label = .data[[value]],
-                             x = .data[[value]] + diff(range(.data[[value]])) * 0.2))
+  p + ggplot2::geom_text(aes(label = .data[[value]]),
+                         vjust = 0.5)
 }
 
 ## (PART) Theme

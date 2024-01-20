@@ -13,8 +13,9 @@ plot_upset(
   relative_height = 3,
   relative_width = 0.3,
   top.bar.color = "grey30",
-  top.bar.y.label = "Intersection Size",
+  top.bar.y.label = NULL,
   top.bar.show.numbers = TRUE,
+  top.bar.numbers.size = 3,
   sets.bar.color = "grey30",
   sets.bar.show.numbers = FALSE,
   sets.bar.x.label = "Set Size",
@@ -35,17 +36,19 @@ plot_upset(
 
 \item{relative_width}{the relative width of left panel in upset plot}
 
-\item{top.bar.color}{default is "grey30",}
+\item{top.bar.color}{default is "grey30"}
 
-\item{top.bar.y.label}{default is "Intersection Size",}
+\item{top.bar.y.label}{default is NULL}
 
-\item{top.bar.show.numbers}{default is TRUE,}
+\item{top.bar.show.numbers}{default is TRUE}
 
-\item{sets.bar.color}{default is "grey30",}
+\item{top.bar.numbers.size}{text size of numbers}
 
-\item{sets.bar.show.numbers}{default is FALSE,}
+\item{sets.bar.color}{default is "grey30"}
 
-\item{sets.bar.x.label}{default is "Set Size",}
+\item{sets.bar.show.numbers}{default is FALSE}
+
+\item{sets.bar.x.label}{default is "Set Size"}
 
 \item{intersection.matrix.color}{default is "grey30"}
 
