@@ -1,6 +1,6 @@
 ---
 title: "Update of ggVennDiagram 1.5"
-output: rmarkdown::html_document
+output: word_document
 ---
 
 ```{r, include = FALSE}
@@ -55,7 +55,7 @@ dependency = c(
 Although we only import ten packages in the development, the dependence tree is huge.
 
 ```{r}
-(deps = pak::pkg_deps_tree("gaospecial/ggVennDiagram@V1.1"))
+deps = pak::pkg_deps_tree("gaospecial/ggVennDiagram@V1.1")
 ```
 ```{r}
 deps |> select(package, filesize) |> 
@@ -120,7 +120,10 @@ The author of RVenn agreed to reuse his code and is open for join in the further
 
 ```{r}
 deps_new = pak::pkg_deps_tree(".")
+```
 
+
+```{r}
 dependency_new = c(
   "ggplot2",
   "dplyr",
@@ -128,11 +131,8 @@ dependency_new = c(
   "tibble",
   "aplot",
   "forcats",
-  "venn")
-```
-
-
-```{r}
+  "venn",
+  "yulab.utils")
 primary_deps = deps_new |>
   select(package, sysreqs, filesize) |>
   arrange(desc(filesize)) |>
@@ -211,7 +211,6 @@ report_package_dependency(".", exclude = c("ggplot2","dplyr"))
 
 ### Current depdency
 
-
 ```{r}
 pkg_deps_tree(".")
 ```
@@ -257,10 +256,10 @@ As been stated in our previous publication, Venn Diagram is not suitable for ana
 This function will be provided on base of aplot.
 
 ```{r}
-p1 = ggVennDiagram(x[1:5], label="none", set_color = rainbow(5)) + scale_fill_gradient(low = "grey90", high = "red")
+p1 = ggVennDiagram(x[1:5], label="none", set_color = rainbow(5)) + scale_fill_distiller(palette = "Reds", direction = 1)
 p2 = ggVennDiagram(x[1:5], force_upset = TRUE, order.intersect.by = "none", order.set.by = "none", nintersects = 15)
 
-aplot::plot_list(p1,p2, labels = c("A","B"), widths = c(0.8, 1))
+aplot::plot_list(p1,p2, widths = c(0.6, 1))
 ```
 
 
@@ -305,7 +304,7 @@ y
 To view subset itmes interactively, set `show_intersect = TRUE`.
 
 ```{r}
-ggVennDiagram(y, show_intersect = TRUE, set_color = "black")
+if (knitr::is_html_output()) ggVennDiagram(y, show_intersect = TRUE, set_color = "black")
 ```
 
 
@@ -323,11 +322,11 @@ overlap(venn_y, 1:2) # members in both the first two sets
 overlap(venn_y) # members in all the sets
 
 # find the different members between sets and set unions
-discern(venn_y, 1)  # members in set 1, but not in all the resting sets by default
-discern(venn_y, c("A","B"), 3) # members in set A & B, but not in the third set
+discern(venn_y, 1)  # members in set 1, but not in the resting sets
+discern(venn_y, c("A","B"), 3) # members in set A & B, but not in the 3rd set
 
 # find the specific members in one or more sets
-discern_overlap(venn_y, 1)  # specific items in set 1, equals to `discern(venn_y, 1)`. Those members are not shared by all the other sets.
+discern_overlap(venn_y, 1)  # specific items in set 1
 discern_overlap(venn_y, 1:2)  # specific items in set 1 and set 2
 ```
 
@@ -363,7 +362,18 @@ venn_regionedge(venn_plot_data)
 
 ```{r}
 df = venn_setedge(venn_plot_data)
-plot(df$X, df$Y, asp = 1)
+ggplot(df, aes(X, Y, group = id, color = id)) +
+  geom_path() +
+  coord_equal()
+```
+```{r}
+df = venn_regionedge(venn_plot_data)
+ggplot(df, aes(X, Y, group = id, fill = count)) +
+  geom_polygon() +
+  geom_path(color = "white", size = 5) +
+  scale_fill_distiller(palette = "Reds") +
+  coord_equal() +
+  theme_void()
 ```
 
 
