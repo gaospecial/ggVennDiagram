@@ -1,0 +1,109 @@
+---
+title: "Venn Calculator"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{VennCalculator}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## How to use Venn Calculator?
+
+`ggVennDiagram` has a series of set operation functions, and this can be used as the Venn calculator.
+
+```{r setup}
+library(ggVennDiagram)
+set.seed(20231225)
+y = list(
+  A = sample(letters, 8) |> sort(),
+  B = sample(letters, 8) |> sort(),
+  C = sample(letters, 8) |> sort(),
+  D = sample(letters, 8) |> sort())
+
+y
+```
+
+First of all, we need to construct a `Venn` class object with this list. If you print this object, it will give meta information of the object.
+
+```{r}
+venn_y = Venn(y)
+
+venn_y
+```
+
+* Find the overlapping members of two or more sets.
+
+  ```{r}
+  overlap(venn_y, 1:2) # members in both the first two sets
+  overlap(venn_y) # members in all the sets
+  ```
+
+* Find the different members between sets and set unions
+
+  ```{r}
+  discern(venn_y, 1)  # members in set 1, but not in the resting sets
+  discern(venn_y, c("A","B"), 3) # members in set A & B, but not in the 3rd set
+  ```
+
+* Find the specific members in one or more sets
+
+  ```{r}
+  discern_overlap(venn_y, 1)  # specific items in set 1
+  discern_overlap(venn_y, 1:2)  # specific items in set 1 and set 2
+  ```
+
+* Find the union of two or more sets
+
+  ```{r}
+  unite(venn_y, 1:2) # union of set 1 and 2
+  unite(venn_y, "all") # union of all four sets
+  unite(venn_y, c("A", "B", "C"))
+  ```
+
+Combined results were provided as VennPlotData object.
+
+  ```{r}
+  pd = process_data(venn_y)
+  pd
+  ```
+
+* `venn_set()`: get set data from the object. 
+
+  ```{r}
+  venn_set(pd)
+  ```
+
+* `venn_region()`: get subsets data from the object.
+
+  ```{r}
+  venn_region(pd)
+  ```
+
+Please note in order to keep the result concise, the containing items are nested. You may use the following methods to further process it.
+
+* Method 1
+
+  ```{r}
+  venn_region(pd) |> tidyr::unnest(item)
+  ```
+
+* Method 2
+
+  ```{r}
+  venn_region(pd) |> dplyr::rowwise() |> dplyr::mutate(item = paste0(item, collapse = ", "))
+  ```
+
+
+## Reference
+
+Some of these above-mentioned functions are originally developed by Turgut Yigit Akyol in `RVenn`.
+
+*  Akyol T (2019). _RVenn: Set Operations for Many Sets_. R package version 1.1.0,
+  <https://CRAN.R-project.org/package=RVenn>.
