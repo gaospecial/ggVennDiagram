@@ -9,7 +9,7 @@
 [![](http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
 [![](https://img.shields.io/badge/doi-10.3389/fgene.2021.706907-blue.svg)](https://doi.org/10.3389/fgene.2021.706907)
 [![](https://www.r-pkg.org/badges/version/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
-[![](https://img.shields.io/badge/devel%20version-1.5.0-green.svg)](https://github.com/gaospecial/ggVennDiagram)
+[![](https://img.shields.io/badge/devel%20version-1.5.2-green.svg)](https://github.com/gaospecial/ggVennDiagram)
 [![](https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://codecov.io/gh/gaospecial/ggVennDiagram)
 <!-- badges: end -->
 
@@ -38,10 +38,14 @@ devtools::install_github("gaospecial/ggVennDiagram")
 If you find **ggVennDiagram** is useful and used it in academic papers,
 you may cite this package as:
 
-Gao, C.-H., Yu, G., and Cai, P. (2021). ggVennDiagram: An Intuitive,
-Easy-to-Use, and Highly Customizable R Package to Generate Venn Diagram.
-Frontiers in Genetics 12, 1598. doi:
-[10.3389/fgene.2021.706907](https://www.frontiersin.org/articles/10.3389/fgene.2021.706907/full).
+1.  Gao, C.-H., Chen, C., Akyol, T., Dușa, A., Yu, G., Cao, B., and
+    Cai, P. (2024). ggVennDiagram: intuitive Venn diagram software
+    extended. [iMeta](https://onlinelibrary.wiley.com/journal/2770596x)
+    3, 69. (in production)
+2.  Gao, C.-H., Yu, G., and Cai, P. (2021). ggVennDiagram: An Intuitive,
+    Easy-to-Use, and Highly Customizable R Package to Generate Venn
+    Diagram. Frontiers in Genetics 12, 1598. doi:
+    [10.3389/fgene.2021.706907](https://www.frontiersin.org/articles/10.3389/fgene.2021.706907/full).
 
 ## Example
 
