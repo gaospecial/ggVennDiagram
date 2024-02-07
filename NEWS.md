@@ -1,5 +1,9 @@
 # Changelog of ggVennDiagram
 
+## ggVennDiagram 1.5.2
+
+* Add a switch to show non-specific items in `plot_upset`. See #64.
+
 ## ggVennDiagram 1.5.1
 
 * Add more param to `plot_upset()` function

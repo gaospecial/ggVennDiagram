@@ -34,6 +34,7 @@
 #' @param sets.bar.show.numbers default is FALSE
 #' @param sets.bar.x.label default is "Set Size"
 #' @param intersection.matrix.color default is "grey30"
+#' @param specific whether only include specific items in subsets, default is TRUE.
 #' @param ... useless
 #' @return an upset plot
 #'
@@ -62,6 +63,7 @@ plot_upset = function(venn,
                       sets.bar.show.numbers = FALSE,
                       sets.bar.x.label = "Set Size",
                       intersection.matrix.color = "grey30",
+                      specific = TRUE,
                       ...){
   # process arguments
   order.intersect.by = match.arg(order.intersect.by)
@@ -71,7 +73,8 @@ plot_upset = function(venn,
   data = process_upset_data(venn,
                            nintersects = nintersects,
                            order.intersect.by = order.intersect.by,
-                           order.set.by = order.set.by)
+                           order.set.by = order.set.by,
+                           specific = specific)
   p_main = upsetplot_main(data$main_data,
                           intersection.matrix.color = intersection.matrix.color)
 
@@ -183,21 +186,31 @@ theme_upset_left = function(){
 #' process upset data
 #'
 #' @inheritParams upset-plot
-#' @param name_separator will be used to assign subset names
+#' @param specific whether return ONLY specific items for a subset, default is TRUE
+#' @details
+#'  ggVennDiagram, by default, only return the specific subsets of a region.
+#'  However, sometimes, we want to show all the overlapping items for two or more sets.
+#'  For example: https://github.com/gaospecial/ggVennDiagram/issues/64
+#'  Therefore, we add a 'specific' switch to this function. While 'specific = FALSE',
+#'  the seperator will be changed from "/" to "~", and all the overlapping items
+#'  will be returned. This feature is useful in plotting upset plot.
 #'
 #' @return a upsetPlotData object
 process_upset_data = function(venn,
                               nintersects = 30,
                               order.intersect.by = "size",
                               order.set.by = "name",
-                              name_separator = "/"){
-  data = process_region_data(venn, sep = name_separator)
-  data$size = data$count
+                              specific = TRUE){
   set_name = venn@names
+  name_separator = ifelse(specific, "/", "~")
+
+  # region data
+  data = process_region_data(venn, sep = name_separator, specific = specific)
+  data$size = data$count
 
   # top data
   top_data = data |> dplyr::select(c('id', 'name', 'item', 'size'))
-  if (order.intersect.by %in% colnames(top_data)){
+  if (order.intersect.by %in% colnames(top_data)) {
     top_data = dplyr::mutate(top_data,
                              id = forcats::fct_reorder(.data$id, .data[[order.intersect.by]], .desc = TRUE))
   } else {
@@ -208,7 +221,7 @@ process_upset_data = function(venn,
   left_data = dplyr::tibble(set = set_name,
                             name = set_name,
                             size = lengths(venn@sets))
-  if (order.set.by %in% colnames(left_data)){
+  if (order.set.by %in% colnames(left_data)) {
     left_data = dplyr::mutate(left_data,
                               set = forcats::fct_reorder(.data$set, .data[[order.set.by]], .desc = TRUE))
   } else {
@@ -224,7 +237,7 @@ process_upset_data = function(venn,
   main_data$id = factor(main_data$id, levels = levels(top_data$id))
 
   # filter intersections
-  if (is.numeric(nintersects)){
+  if (is.numeric(nintersects)) {
     keep_id = utils::head(levels(top_data$id), nintersects)
     main_data = main_data |> dplyr::filter(.data$id %in% keep_id)
     top_data = top_data |> dplyr::filter(.data$id %in% keep_id)

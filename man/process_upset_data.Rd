@@ -9,7 +9,7 @@ process_upset_data(
   nintersects = 30,
   order.intersect.by = "size",
   order.set.by = "name",
-  name_separator = "/"
+  specific = TRUE
 )
 }
 \arguments{
@@ -21,11 +21,19 @@ process_upset_data(
 
 \item{order.set.by}{'size', 'name', or "none"}
 
-\item{name_separator}{will be used to assign subset names}
+\item{specific}{whether return ONLY specific items for a subset, default is TRUE}
 }
 \value{
 a upsetPlotData object
 }
 \description{
 process upset data
+}
+\details{
+ggVennDiagram, by default, only return the specific subsets of a region.
+ However, sometimes, we want to show all the overlapping items for two or more sets.
+ For example: https://github.com/gaospecial/ggVennDiagram/issues/64
+ Therefore, we add a 'specific' switch to this function. While 'specific = FALSE',
+ the seperator will be changed from "/" to "~", and all the overlapping items
+ will be returned. This feature is useful in plotting upset plot.
 }

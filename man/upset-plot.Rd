@@ -20,6 +20,7 @@ plot_upset(
   sets.bar.show.numbers = FALSE,
   sets.bar.x.label = "Set Size",
   intersection.matrix.color = "grey30",
+  specific = TRUE,
   ...
 )
 }
@@ -51,6 +52,8 @@ plot_upset(
 \item{sets.bar.x.label}{default is "Set Size"}
 
 \item{intersection.matrix.color}{default is "grey30"}
+
+\item{specific}{whether only include specific items in subsets, default is TRUE.}
 
 \item{...}{useless}
 }

@@ -104,7 +104,7 @@ venn_region = function(obj){
 #' @export
 #'
 plotData_add_venn = function(plotData, venn){
-  if (!all(c("setLabel","setEdge","regionLabel", "regionEdge") %in% names(plotData))){
+  if (!all(c("setLabel","setEdge","regionLabel", "regionEdge") %in% names(plotData))) {
     stop("Invalid shape data.")
   }
   if (!inherits(venn, "Venn")) stop("venn should be a S4 Venn object.")
@@ -142,7 +142,7 @@ plotData_add_venn = function(plotData, venn){
 #' process_set_data(venn)
 #' process_region_data(venn)
 process_set_data = function(venn){
-  if(!inherits(venn, "Venn")) stop("venn is not a S4 class 'Venn' object.")
+  if (!inherits(venn, "Venn")) stop("venn is not a S4 class 'Venn' object.")
   tibble::tibble(
     id = as.character(seq_along(venn@sets)),
     name = venn@names,
@@ -152,10 +152,18 @@ process_set_data = function(venn){
 }
 
 #' @rdname venn_data
+#' @param specific whether return ONLY specific items for a subset, default is TRUE
+#' @details
+#'  ggVennDiagram, by default, only return the specific subsets of a region.
+#'  However, sometimes, we want to show all the overlapping items for two or more sets.
+#'  For example: https://github.com/gaospecial/ggVennDiagram/issues/64
+#'  Therefore, we add a 'specific' switch to this function. While 'specific = FALSE',
+#'  the seperator will be changed from "/" to "~", and all the overlapping items
+#'  will be returned. This feature is useful in plotting upset plot.
 #' @export
-process_region_data = function(venn, sep = "/"){
-  if(!inherits(venn, "Venn")) stop("venn is not a S4 class 'Venn' object.")
-  region_items = get_subset_items(venn)
+process_region_data = function(venn, sep = "/", specific = TRUE) {
+  if (!inherits(venn, "Venn")) stop("venn is not a S4 class 'Venn' object.")
+  region_items = get_subset_items(venn, specific = specific)
   counts = sapply(region_items, length)
   region_ids = get_subset_ids(venn, sep = sep)
   region_names = get_subset_names(venn, sep = sep)

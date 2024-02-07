@@ -17,10 +17,11 @@ matrix2list <- function(matrix){
   lapply(seq_len(ncol(matrix)), function(i) matrix[,i])
 }
 
-get_subset_items <- function(venn){
+get_subset_items <- function(venn, specific = TRUE){
   n = length(venn@sets)
   c = combinations(n)
-  lapply(c, function(i) discern_overlap(venn,i))
+  fun = ifelse(specific, "discern_overlap", "overlap")
+  lapply(c, fun, venn = venn)
 }
 
 get_subset_names <- function(venn, sep = "/"){

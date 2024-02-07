@@ -8,18 +8,28 @@
 \usage{
 process_set_data(venn)
 
-process_region_data(venn, sep = "/")
+process_region_data(venn, sep = "/", specific = TRUE)
 }
 \arguments{
 \item{venn}{a Venn object}
 
 \item{sep}{name and id separator for intersections}
+
+\item{specific}{whether return ONLY specific items for a subset, default is TRUE}
 }
 \value{
 a tibble
 }
 \description{
 Prepare Venn data
+}
+\details{
+ggVennDiagram, by default, only return the specific subsets of a region.
+ However, sometimes, we want to show all the overlapping items for two or more sets.
+ For example: https://github.com/gaospecial/ggVennDiagram/issues/64
+ Therefore, we add a 'specific' switch to this function. While 'specific = FALSE',
+ the seperator will be changed from "/" to "~", and all the overlapping items
+ will be returned. This feature is useful in plotting upset plot.
 }
 \examples{
 x = list(
