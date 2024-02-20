@@ -41,7 +41,8 @@ you may cite this package as:
 1.  Gao, C.-H., Chen, C., Akyol, T., Dușa, A., Yu, G., Cao, B., and
     Cai, P. (2024). ggVennDiagram: intuitive Venn diagram software
     extended. [iMeta](https://onlinelibrary.wiley.com/journal/2770596x)
-    3, 69. (in production)
+    3, 69. doi:
+    [10.1002/imt2.177](https://onlinelibrary.wiley.com/doi/full/10.1002/imt2.177).
 2.  Gao, C.-H., Yu, G., and Cai, P. (2021). ggVennDiagram: An Intuitive,
     Easy-to-Use, and Highly Customizable R Package to Generate Venn
     Diagram. Frontiers in Genetics 12, 1598. doi:
