@@ -1,4 +1,4 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
@@ -6,7 +6,7 @@ articles:
   fully-customed: fully-customed.html
   using-ggVennDiagram: using-ggVennDiagram.html
   using-new-shapes: using-new-shapes.html
-last_built: 2024-02-20T03:27Z
+last_built: 2024-03-14T02:18Z
 urls:
   reference: https://gaospecial.github.io/ggVennDiagram/reference
   article: https://gaospecial.github.io/ggVennDiagram/articles
