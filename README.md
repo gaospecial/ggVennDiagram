@@ -7,7 +7,7 @@
 
 [![](http://cranlogs.r-pkg.org/badges/grand-total/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
 [![](http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
-[![](https://img.shields.io/badge/doi-10.3389/fgene.2021.706907-blue.svg)](https://doi.org/10.3389/fgene.2021.706907)
+[![](https://img.shields.io/badge/doi-10.1002/imt2.177-blue.svg)](https://doi.org/10.1002/imt2.177)
 [![](https://www.r-pkg.org/badges/version/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
 [![](https://img.shields.io/badge/devel%20version-1.5.2-green.svg)](https://github.com/gaospecial/ggVennDiagram)
 [![](https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://app.codecov.io/gh/gaospecial/ggVennDiagram)
@@ -47,6 +47,19 @@ you may cite this package as:
     Easy-to-Use, and Highly Customizable R Package to Generate Venn
     Diagram. Frontiers in Genetics 12, 1598. doi:
     [10.3389/fgene.2021.706907](https://www.frontiersin.org/articles/10.3389/fgene.2021.706907/full).
+
+## Features
+
+![](https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/picgo/202403141008626.png)
+
+**Notes**
+
+The ggVennDiagram Shiny app can be accessed at Shinyapps.io
+(<https://bio-spring.shinyapps.io/ggVennDiagram>), or
+`ggVennDiagram::launch_app()` in local machine.
+
+The [TBtools](https://github.com/CJ-Chen/TBtools-II) plugin can be
+accessed through its plugin store.
 
 ## Example
 

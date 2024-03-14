@@ -19,7 +19,7 @@ library("badger")
 <!-- badges: start -->
 `r badge_cran_download("ggVennDiagram", type = "grand-total")`
 `r badge_cran_download("ggVennDiagram", type = "last-month")`
-`r badge_doi("10.3389/fgene.2021.706907", "blue")`
+`r badge_doi("10.1002/imt2.177", "blue")`
 `r badge_cran_release("ggVennDiagram","green")`
 `r badge_devel(color = "green")`
 `r badge_codecov(token = "c365345d-e34c-40f6-b2c0-881b5b2841e7")`
@@ -50,7 +50,15 @@ If you find **ggVennDiagram** is useful and used it in academic papers, you may 
 1. Gao, C.-H., Chen, C., Akyol, T., Dușa, A., Yu, G., Cao, B., and Cai, P. (2024). ggVennDiagram: intuitive Venn diagram software extended. [iMeta](https://onlinelibrary.wiley.com/journal/2770596x) 3, 69. doi: [10.1002/imt2.177](https://onlinelibrary.wiley.com/doi/full/10.1002/imt2.177).
 2. Gao, C.-H., Yu, G., and Cai, P. (2021). ggVennDiagram: An Intuitive, Easy-to-Use, and Highly Customizable R Package to Generate Venn Diagram. Frontiers in Genetics 12, 1598. doi: [10.3389/fgene.2021.706907](https://www.frontiersin.org/articles/10.3389/fgene.2021.706907/full).
 
+## Features
 
+![](https://vnote-1251564393.cos.ap-chengdu.myqcloud.com/picgo/202403141008626.png)
+
+**Notes**
+
+The ggVennDiagram Shiny app can be accessed at Shinyapps.io (https://bio-spring.shinyapps.io/ggVennDiagram), or `ggVennDiagram::launch_app()` in local machine.
+
+The [TBtools](https://github.com/CJ-Chen/TBtools-II) plugin can be accessed through its plugin store. 
 
 ## Example
 
