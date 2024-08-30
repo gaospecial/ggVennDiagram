@@ -1,120 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/404.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/articles/VennCalculator.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/articles/fully-customed.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/articles/using-ggVennDiagram.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/articles/using-new-shapes.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/index.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/Venn-class.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/VennPlotData.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/all_identical.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/combinations.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/discern.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/discern_overlap.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/get_shape_by_id.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/get_shape_data.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/get_shapes.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/ggVennDiagram.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/launch_app.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/overlap.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/plotData_add_venn.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/plot_shape_edge.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/plot_shapes.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/plot_venn.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/print.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/process_data.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/process_upset_data.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/separate_longer_delim.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/shapes.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/slice_idx.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/unite.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/upset-plot.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/venn_data.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/venn_plot_data.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/reference/vensets.html</loc>
-  </url>
-  <url>
-    <loc>https://gaospecial.github.io/ggVennDiagram/roadmap.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/404.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/LICENSE.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/articles/VennCalculator.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/articles/fully-customed.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/articles/index.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/articles/using-ggVennDiagram.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/articles/using-new-shapes.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/authors.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/index.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/news/index.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/Venn-class.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/VennPlotData.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/all_identical.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/combinations.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/discern.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/discern_overlap.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/get_shape_by_id.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/get_shape_data.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/get_shapes.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/ggVennDiagram.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/index.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/launch_app.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/overlap.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/plotData_add_venn.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/plot_shape_edge.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/plot_shapes.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/plot_venn.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/print.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/process_data.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/process_upset_data.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/separate_longer_delim.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/shapes.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/slice_idx.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/unite.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/upset-plot.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/venn_data.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/venn_plot_data.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/reference/vensets.html</loc></url>
+<url><loc>https://gaospecial.github.io/ggVennDiagram/roadmap.html</loc></url>
 </urlset>
+
