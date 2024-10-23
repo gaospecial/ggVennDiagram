@@ -23,6 +23,7 @@
 #' @param edge_lty line type of set edges ("solid")
 #' @param edge_size line width of set edges (1)
 #' @param force_upset if TRUE, will always produce Upset plot no matter how many sets have (FALSE)
+#' @param shape_id specify a shape by id, run `plot_shapes()` to see available shapes (NULL)
 #' @inheritParams upset-plot
 #' @param ... useless
 #'
@@ -54,6 +55,7 @@ ggVennDiagram = function(x,
                          order.set.by = c("size","name","none"),
                          relative_height = 3,
                          relative_width = 0.3,
+                         shape_id = NULL,
                           ...){
   if (!is.list(x)){
     stop(simpleError("ggVennDiagram() requires at least a list."))
@@ -65,7 +67,7 @@ ggVennDiagram = function(x,
   label = match.arg(label)
   label_geom = match.arg(label_geom)
   if (dimension <= 7 & !force_upset){
-    data = process_data(venn)
+    data = process_data(venn, shape_id = shape_id)
     plot_venn(data,
               show_intersect = show_intersect,
               set_color = set_color,

@@ -1,5 +1,9 @@
 # Changelog of ggVennDiagram
 
+## ggVennDiagram 1.5.3
+
+* Add a param to allow user specifying shape by id. See #60.
+
 ## ggVennDiagram 1.5.2
 
 * Add a switch to show non-specific items in `plot_upset`. See #64.
