@@ -9,7 +9,7 @@
 [![](http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
 [![](https://img.shields.io/badge/doi-10.1002/imt2.177-blue.svg)](https://doi.org/10.1002/imt2.177)
 [![](https://www.r-pkg.org/badges/version/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
-[![](https://img.shields.io/badge/devel%20version-1.5.2-green.svg)](https://github.com/gaospecial/ggVennDiagram)
+[![](https://img.shields.io/badge/devel%20version-1.5.3-green.svg)](https://github.com/gaospecial/ggVennDiagram)
 [![](https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://app.codecov.io/gh/gaospecial/ggVennDiagram)
 <!-- badges: end -->
 
@@ -254,7 +254,8 @@ x$H = sample(genes,500)
 ggVennDiagram(x)
 #> Warning in ggVennDiagram(x): Only support 2-7 dimension Venn diagram. Will give
 #> a plain upset plot instead.
-#> Warning: Removed 1 rows containing missing values (`position_stack()`).
+#> Warning: Removed 1 row containing missing values or values outside the scale range
+#> (`geom_col()`).
 ```
 
 <img src="man/figures/README-unnamed-chunk-12-1.png" width="90%" />
