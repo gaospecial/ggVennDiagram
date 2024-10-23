@@ -36,13 +36,12 @@ devtools::install_github("gaospecial/ggVennDiagram")
 ## Citation
 
 If you find **ggVennDiagram** is useful and used it in academic papers,
-you may cite the recent publication of this package as:
+you may cite this package as:
 
-Gao, C.-H., Chen, C., Akyol, T., Dușa, A., Yu, G., Cao, B., and
-    Cai, P. (2024). ggVennDiagram: intuitive Venn diagram software
-    extended. [iMeta](https://onlinelibrary.wiley.com/journal/2770596x)
-    3, 69. doi:
-    [10.1002/imt2.177](https://onlinelibrary.wiley.com/doi/full/10.1002/imt2.177).
+Gao, C.-H., Chen, C., Akyol, T., Dușa, A., Yu, G., Cao, B., and Cai, P.
+(2024). ggVennDiagram: intuitive Venn diagram software extended.
+[iMeta](https://onlinelibrary.wiley.com/journal/2770596x) 3, 69. doi:
+[10.1002/imt2.177](https://onlinelibrary.wiley.com/doi/full/10.1002/imt2.177).
 
 ## Features
 
