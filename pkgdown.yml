@@ -1,12 +1,12 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   fully-customed: fully-customed.html
   using-ggVennDiagram: using-ggVennDiagram.html
   using-new-shapes: using-new-shapes.html
   VennCalculator: VennCalculator.html
-last_built: 2024-08-30T02:19Z
+last_built: 2024-10-23T02:34Z
 urls:
   reference: https://gaospecial.github.io/ggVennDiagram/reference
   article: https://gaospecial.github.io/ggVennDiagram/articles
