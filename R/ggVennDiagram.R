@@ -18,6 +18,9 @@
 #' @param label_alpha set 0 to remove the background of region labels
 #' @param label_color color of region labels ("black")
 #' @param label_size size of region labels (NA)
+#' @param label_font font name of labels
+#' @param label_bigMark Type of thousand separator
+#' @param label_bigInterval Position of thousand separator
 #' @param label_percent_digit number of digits when formatting percent label (0)
 #' @param label_txtWidth width of text used in showing intersect members, will be ignored unless show_intersection is TRUE (40)
 #' @param edge_lty line type of set edges ("solid")
@@ -43,6 +46,8 @@ ggVennDiagram = function(x,
                          label = c("both","count","percent","none"),
                          label_alpha = 0.5,
                          label_font = "sans",
+                         label_bigInterval = 3L,
+                         label_bigMark = ",",
                          label_geom = c("label","text"),
                          label_color = "black",
                          label_size = NA,
@@ -79,6 +84,8 @@ ggVennDiagram = function(x,
               label_geom = label_geom,
               label_color = label_color,
               label_size = label_size,
+              label_bigMark = label_bigMark,
+              label_bigInterval = label_bigInterval,
               label_percent_digit = label_percent_digit,
               label_txtWidth = label_txtWidth,
               edge_lty = edge_lty,
@@ -120,6 +127,8 @@ plot_venn = function(data,
                      label_color = "black",
                      label_size = NA,
                      label_percent_digit = 0,
+                     label_bigMark = ",",
+                     label_bigInterval = 3L,
                      label_txtWidth = 40,
                      edge_lty = "solid",
                      edge_size = 1,
@@ -180,7 +189,7 @@ plot_venn = function(data,
   region_label = region_label |>
     dplyr::mutate(percent = paste(round(.data$count*100/sum(.data$count),
                                         digits = label_percent_digit),"%", sep=""),
-                  both = paste(.data$count,paste0("(",.data$percent,")"),sep = "\n"))
+                  both = paste(format(.data$count, big.mark = label_bigMark, big.interval = label_bigInterval),paste0("(",.data$percent,")"),sep = "\n"))
 
   # if label != "none" & show_intersect == FALSE
   if (label_geom == "label"){
