@@ -135,7 +135,9 @@ plot_venn = function(data,
   setlabel.params = list(data = get_shape_setlabel(data, size = as.numeric(set_size), color = set_color),
                           mapping = aes(label = .data$name,
                                         size = I(.data$size),
-                                        color = I(.data$color)),
+                                        color = I(.data$color)
+                                      ),
+                         family = label_font,
                           show.legend = FALSE)
   region.params = list(data = get_shape_regionedge(data) |> dplyr::left_join(venn_region(data), by = "id"),
                         mapping = aes(fill = .data$count,
