@@ -12,6 +12,9 @@ ggVennDiagram(
   set_size = NA,
   label = c("both", "count", "percent", "none"),
   label_alpha = 0.5,
+  label_font = "sans",
+  label_bigInterval = 3L,
+  label_bigMark = ",",
   label_geom = c("label", "text"),
   label_color = "black",
   label_size = NA,
@@ -25,6 +28,7 @@ ggVennDiagram(
   order.set.by = c("size", "name", "none"),
   relative_height = 3,
   relative_width = 0.3,
+  shape_id = NULL,
   ...
 )
 }
@@ -42,6 +46,12 @@ ggVennDiagram(
 \item{label}{format of region labels, select one from c("count","percent","both","none")}
 
 \item{label_alpha}{set 0 to remove the background of region labels}
+
+\item{label_font}{font name of labels}
+
+\item{label_bigInterval}{Position of thousand separator}
+
+\item{label_bigMark}{Type of thousand separator}
 
 \item{label_geom}{layer of region labels, choose from c("label", "text")}
 
@@ -68,6 +78,8 @@ ggVennDiagram(
 \item{relative_height}{the relative height of top panel in upset plot}
 
 \item{relative_width}{the relative width of left panel in upset plot}
+
+\item{shape_id}{specify a shape by id, run `plot_shapes()` to see available shapes (NULL)}
 
 \item{...}{useless}
 }

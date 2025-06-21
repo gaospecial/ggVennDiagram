@@ -12,9 +12,12 @@ plot_venn(
   label = "both",
   label_geom = "label",
   label_alpha = 0.5,
+  label_font = "sans",
   label_color = "black",
   label_size = NA,
   label_percent_digit = 0,
+  label_bigMark = ",",
+  label_bigInterval = 3L,
   label_txtWidth = 40,
   edge_lty = "solid",
   edge_size = 1,
@@ -36,11 +39,17 @@ plot_venn(
 
 \item{label_alpha}{set 0 to remove the background of region labels}
 
+\item{label_font}{font name of labels}
+
 \item{label_color}{color of region labels ("black")}
 
 \item{label_size}{size of region labels (NA)}
 
 \item{label_percent_digit}{number of digits when formatting percent label (0)}
+
+\item{label_bigMark}{Type of thousand separator}
+
+\item{label_bigInterval}{Position of thousand separator}
 
 \item{label_txtWidth}{width of text used in showing intersect members, will be ignored unless show_intersection is TRUE (40)}
 
