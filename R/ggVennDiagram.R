@@ -201,7 +201,9 @@ plot_venn = function(data,
       color = label_color,
       size = label_size,
       lineheight = 0.85,
-      label.size = NA
+      label.size = NA,
+      linewidth = 0,
+      fill = "white"
     )
     return(p_label)
   }
