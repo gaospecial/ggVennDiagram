@@ -9,7 +9,7 @@
 [![](http://cranlogs.r-pkg.org/badges/last-month/ggVennDiagram)](https://cran.r-project.org/package=ggVennDiagram)
 [![](https://img.shields.io/badge/doi-10.1002/imt2.177-blue.svg)](https://doi.org/10.1002/imt2.177)
 [![](https://www.r-pkg.org/badges/version/ggVennDiagram?color=green)](https://cran.r-project.org/package=ggVennDiagram)
-[![](https://img.shields.io/badge/devel%20version-1.5.5-green.svg)](https://github.com/gaospecial/ggVennDiagram)
+[![](https://img.shields.io/badge/devel%20version-1.5.6-green.svg)](https://github.com/gaospecial/ggVennDiagram)
 [![](https://codecov.io/gh/gaospecial/ggVennDiagram/branch/master/graph/badge.svg?token=c365345d-e34c-40f6-b2c0-881b5b2841e7)](https://app.codecov.io/gh/gaospecial/ggVennDiagram)
 <!-- badges: end -->
 
@@ -247,12 +247,8 @@ more than 7.
 # add an extra member in list
 x$H = sample(genes,500)
 ggVennDiagram(x)
-#> Warning in ggVennDiagram(x): Only support 2-7 dimension Venn diagram. Will give
-#> a plain upset plot instead.
-#> Warning: Removed 1 row containing missing values or values outside the scale
-#> range (`geom_col()`).
-#> Warning: annotation$theme is not a valid theme.
-#> Please use `theme()` to construct themes.
+#> Warning in ggVennDiagram(x): Only support 2-7 dimension Venn diagram. Will give a plain upset plot instead.
+#> Warning: Removed 1 row containing missing values or values outside the scale range (`geom_col()`).
 ```
 
 <img src="man/figures/README-unnamed-chunk-12-1.png" width="90%" />
@@ -261,8 +257,6 @@ Upset plot can also be used by setting `force_upset = TRUE`.
 
 ``` r
 ggVennDiagram(x[1:4], force_upset = TRUE, order.set.by = "name", order.intersect.by = "none")
-#> Warning: annotation$theme is not a valid theme.
-#> Please use `theme()` to construct themes.
 ```
 
 <img src="man/figures/README-unnamed-chunk-13-1.png" width="90%" />
@@ -278,8 +272,6 @@ the `relative_height` from 3 (the default) to 2.
 ``` r
 venn = Venn(x)
 plot_upset(venn, nintersects = 30, relative_height = 2, relative_width = 0.3)
-#> Warning: annotation$theme is not a valid theme.
-#> Please use `theme()` to construct themes.
 ```
 
 <img src="man/figures/README-unnamed-chunk-14-1.png" width="90%" />
