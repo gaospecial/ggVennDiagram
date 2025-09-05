@@ -33,6 +33,7 @@
 #' @param sets.bar.color default is "grey30"
 #' @param sets.bar.show.numbers default is FALSE
 #' @param sets.bar.x.label default is "Set Size"
+#' @param sets.bar.position the bar plot position of sets ["left"]
 #' @param intersection.matrix.color default is "grey30"
 #' @param specific whether only include specific items in subsets, default is TRUE.
 #' @param ... useless
@@ -62,12 +63,14 @@ plot_upset = function(venn,
                       sets.bar.color = "grey30",
                       sets.bar.show.numbers = FALSE,
                       sets.bar.x.label = "Set Size",
+                      sets.bar.position = c("left", "right"),
                       intersection.matrix.color = "grey30",
                       specific = TRUE,
                       ...){
   # process arguments
   order.intersect.by = match.arg(order.intersect.by)
   order.set.by = match.arg(order.set.by)
+  sets.bar.position = match.arg(sets.bar.position)
 
   # subplot main
   data = process_upset_data(venn,
@@ -92,8 +95,16 @@ plot_upset = function(venn,
                           sets.bar.show.numbers = sets.bar.show.numbers)
 
   # combine into a plot
-  pp = aplot::insert_top(p_main, p_top, height = relative_height) |>
-    aplot::insert_left(p_left, width = relative_width)
+  pp = aplot::insert_top(p_main, p_top, height = relative_height)
+  if (sets.bar.position == "right"){
+    p_right = p_left + ggplot2::scale_x_continuous()
+    pp = pp |>
+      aplot::insert_right(p_right, width = relative_width)
+  } else {
+    pp = pp |>
+      aplot::insert_left(p_left, width = relative_width)
+  }
+
   class(pp) = c("upset_plot", class(pp))
 
   return(pp)

@@ -1,5 +1,9 @@
 # Changelog of ggVennDiagram
 
+## ggVennDiagram 1.5.6
+
+* Add a param `sets.bar.position` (default is "left", can be set to "right") to allow left side layout of barplot in `plot_upset()`. See [#78](https://github.com/gaospecial/ggVennDiagram/issues/78).
+
 ## ggVennDiagram 1.5.3
 
 * Add a param to allow user specifying shape by id. See #60.

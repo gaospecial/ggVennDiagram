@@ -19,6 +19,7 @@ plot_upset(
   sets.bar.color = "grey30",
   sets.bar.show.numbers = FALSE,
   sets.bar.x.label = "Set Size",
+  sets.bar.position = c("left", "right"),
   intersection.matrix.color = "grey30",
   specific = TRUE,
   ...
@@ -50,6 +51,8 @@ plot_upset(
 \item{sets.bar.show.numbers}{default is FALSE}
 
 \item{sets.bar.x.label}{default is "Set Size"}
+
+\item{sets.bar.position}{the bar plot position of sets ["left"]}
 
 \item{intersection.matrix.color}{default is "grey30"}
 
