@@ -18,6 +18,8 @@ plot_upset(
   top.bar.numbers.size = 3,
   sets.bar.color = "grey30",
   sets.bar.show.numbers = FALSE,
+  sets.bar.numbers.size = 3,
+  sets.bar.numbers.hjust = 1.2,
   sets.bar.x.label = "Set Size",
   sets.bar.position = c("left", "right"),
   intersection.matrix.color = "grey30",
@@ -50,6 +52,12 @@ plot_upset(
 
 \item{sets.bar.show.numbers}{default is FALSE}
 
+\item{sets.bar.numbers.size}{text size of set bar numbers, default is 3}
+
+\item{sets.bar.numbers.hjust}{horizontal justification for set bar numbers.
+Values > 1 position numbers outside the bars (to the left), values < 1
+position numbers inside the bars. Default is 1.2 (outside).}
+
 \item{sets.bar.x.label}{default is "Set Size"}
 
 \item{sets.bar.position}{the bar plot position of sets ["left"]}
@@ -75,4 +83,6 @@ This function generate a upset plot by creating a composite plot which contains 
  plot_upset(venn)
  plot_upset(venn, order.intersect.by = "name")
  plot_upset(venn, nintersects = 6)
+ # Show set bar numbers outside the bars
+ plot_upset(venn, sets.bar.show.numbers = TRUE, sets.bar.numbers.hjust = 1.2)
 }

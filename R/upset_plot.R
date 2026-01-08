@@ -32,6 +32,10 @@
 #' @param top.bar.numbers.size text size of numbers
 #' @param sets.bar.color default is "grey30"
 #' @param sets.bar.show.numbers default is FALSE
+#' @param sets.bar.numbers.size text size of set bar numbers, default is 3
+#' @param sets.bar.numbers.hjust horizontal justification for set bar numbers.
+#'   Values > 1 position numbers outside the bars (to the left), values < 1
+#'   position numbers inside the bars. Default is 1.2 (outside).
 #' @param sets.bar.x.label default is "Set Size"
 #' @param sets.bar.position the bar plot position of sets ["left"]
 #' @param intersection.matrix.color default is "grey30"
@@ -50,6 +54,8 @@
 #'  plot_upset(venn)
 #'  plot_upset(venn, order.intersect.by = "name")
 #'  plot_upset(venn, nintersects = 6)
+#'  # Show set bar numbers outside the bars
+#'  plot_upset(venn, sets.bar.show.numbers = TRUE, sets.bar.numbers.hjust = 1.2)
 plot_upset = function(venn,
                       nintersects = NULL,
                       order.intersect.by = c("size","name","none"),
@@ -62,6 +68,8 @@ plot_upset = function(venn,
                       top.bar.numbers.size = 3,
                       sets.bar.color = "grey30",
                       sets.bar.show.numbers = FALSE,
+                      sets.bar.numbers.size = 3,
+                      sets.bar.numbers.hjust = 1.2,
                       sets.bar.x.label = "Set Size",
                       sets.bar.position = c("left", "right"),
                       intersection.matrix.color = "grey30",
@@ -92,7 +100,9 @@ plot_upset = function(venn,
   p_left = upsetplot_left(data$left_data,
                           sets.bar.color = sets.bar.color,
                           sets.bar.x.label = sets.bar.x.label,
-                          sets.bar.show.numbers = sets.bar.show.numbers)
+                          sets.bar.show.numbers = sets.bar.show.numbers,
+                          sets.bar.numbers.size = sets.bar.numbers.size,
+                          sets.bar.numbers.hjust = sets.bar.numbers.hjust)
 
   # combine into a plot
   pp = aplot::insert_top(p_main, p_top, height = relative_height)
@@ -136,13 +146,24 @@ upsetplot_top = function(data, ...){
 
 upsetplot_left = function(data, ...){
   param = list(...)
+  # When showing numbers outside bars (hjust > 1), expand the left margin
+  x_expand <- if (isTRUE(param$sets.bar.show.numbers) && param$sets.bar.numbers.hjust > 1) {
+    ggplot2::expansion(mult = c(0.15, 0.05))
+  } else {
+    ggplot2::expansion(mult = c(0.01, 0.05))
+  }
   p = ggplot2::ggplot(data, aes(x = .data$size, y = .data$set)) +
     ggplot2::geom_col(orientation = "y", fill = param$sets.bar.color) +
     ggplot2::scale_y_discrete(position = "right") +
-    ggplot2::scale_x_reverse() +
+    ggplot2::scale_x_reverse(expand = x_expand) +
     ggplot2::labs(x = param$sets.bar.x.label, y = NULL) +
     theme_upset_left()
-  if (param$sets.bar.show.numbers) p = show_numbers_x(p, value = "size")
+  if (param$sets.bar.show.numbers) {
+    p = show_numbers_x(p,
+                       value = "size",
+                       hjust = param$sets.bar.numbers.hjust,
+                       size = param$sets.bar.numbers.size)
+  }
   return(p)
 }
 
@@ -150,9 +171,11 @@ show_numbers_y = function(p, value){
 
 }
 
-show_numbers_x = function(p, value){
+show_numbers_x = function(p, value, hjust = 1.2, size = 3){
   p + ggplot2::geom_text(aes(label = .data[[value]]),
-                         vjust = 0.5)
+                         hjust = hjust,
+                         vjust = 0.5,
+                         size = size)
 }
 
 ## (PART) Theme
