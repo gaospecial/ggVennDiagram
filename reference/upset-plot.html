@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggVennDiagram</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.7</span>
       </span>
     </div>
 
@@ -85,6 +85,8 @@
 <span>  top.bar.numbers.size <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  sets.bar.color <span class="op">=</span> <span class="st">"grey30"</span>,</span>
 <span>  sets.bar.show.numbers <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  sets.bar.numbers.size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  sets.bar.numbers.hjust <span class="op">=</span> <span class="fl">1.2</span>,</span>
 <span>  sets.bar.x.label <span class="op">=</span> <span class="st">"Set Size"</span>,</span>
 <span>  sets.bar.position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"left"</span>, <span class="st">"right"</span><span class="op">)</span>,</span>
 <span>  intersection.matrix.color <span class="op">=</span> <span class="st">"grey30"</span>,</span>
@@ -145,6 +147,16 @@
 <dd><p>default is FALSE</p></dd>
 
 
+<dt id="arg-sets-bar-numbers-size">sets.bar.numbers.size<a class="anchor" aria-label="anchor" href="#arg-sets-bar-numbers-size"></a></dt>
+<dd><p>text size of set bar numbers, default is 3</p></dd>
+
+
+<dt id="arg-sets-bar-numbers-hjust">sets.bar.numbers.hjust<a class="anchor" aria-label="anchor" href="#arg-sets-bar-numbers-hjust"></a></dt>
+<dd><p>horizontal justification for set bar numbers.
+Values &gt; 1 position numbers outside the bars (to the left), values &lt; 1
+position numbers inside the bars. Default is 1.2 (outside).</p></dd>
+
+
 <dt id="arg-sets-bar-x-label">sets.bar.x.label<a class="anchor" aria-label="anchor" href="#arg-sets-bar-x-label"></a></dt>
 <dd><p>default is "Set Size"</p></dd>
 
@@ -183,6 +195,9 @@
 <span class="r-plt img"><img src="upset-plot-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span> <span class="fu">plot_upset</span><span class="op">(</span><span class="va">venn</span>, nintersects <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="upset-plot-3.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span> <span class="co"># Show set bar numbers outside the bars</span></span></span>
+<span class="r-in"><span> <span class="fu">plot_upset</span><span class="op">(</span><span class="va">venn</span>, sets.bar.show.numbers <span class="op">=</span> <span class="cn">TRUE</span>, sets.bar.numbers.hjust <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="upset-plot-4.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
@@ -197,7 +212,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>
