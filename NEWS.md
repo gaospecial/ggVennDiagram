@@ -1,5 +1,9 @@
 # Changelog of ggVennDiagram
 
+## ggVennDiagram 1.5.7
+
+* Add `sets.bar.numbers.size` and `sets.bar.numbers.hjust` params to `plot_upset()`. See [#81](https://github.com/gaospecial/ggVennDiagram/pull/81). Thanks to Prof. Nikolaos Korfiatis [@nkorf](https://github.com/nkorf).
+
 ## ggVennDiagram 1.5.6
 
 * Add a param `sets.bar.position` (default is "left", can be set to "right") to allow left side layout of barplot in `plot_upset()`. See [#78](https://github.com/gaospecial/ggVennDiagram/issues/78).
